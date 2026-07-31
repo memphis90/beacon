@@ -1,0 +1,218 @@
+import DestinationImage from './DestinationImage.jsx'
+import DetailMap from './DetailMap.jsx'
+import ScoreBreakdown from './ScoreBreakdown.jsx'
+import { DESTINATION_TYPES, MONTHS } from '../lib/axes.js'
+import { climateSummary } from '../lib/scoring.js'
+import { countryFlag, countryName, eurRange, monthName, temp } from '../lib/format.js'
+
+const typeLabel = (key) => DESTINATION_TYPES.find((t) => t.key === key)?.label || key
+
+const COST_ROWS = [
+  ['accommodation', 'Alloggio', 'a notte'],
+  ['food_per_day', 'Cibo', 'al giorno'],
+  ['transport_local_day', 'Trasporti locali', 'al giorno'],
+]
+
+export default function DetailPanel({ entry, criteria, onClose, onEdit, onCompare, inCompare, closing = false }) {
+  const { destination, scoring, cost } = entry
+  const monthClimate = climateSummary(destination, criteria.month)
+  const isApprox = destination.climate_source === 'seed_approx'
+
+  return (
+    <div
+      className={`overlay overlay--sheet${closing ? ' overlay--closing' : ''}`}
+      onClick={onClose}
+      role="presentation"
+    >
+      <section
+        className="panel"
+        role="dialog"
+        aria-modal="true"
+        aria-label={`Dettaglio di ${destination.name}`}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <header className="panel__head">
+          <div>
+            <h2>{destination.name}</h2>
+            <p>
+              {countryFlag(destination.country)} {countryName(destination.country)} ·{' '}
+              {typeLabel(destination.type)} · raggio {destination.radius_km} km
+            </p>
+          </div>
+          <button type="button" className="panel__close" onClick={onClose} aria-label="Chiudi">×</button>
+        </header>
+
+        <div className="panel__body">
+          <div className="card__media" style={{ height: 220, borderRadius: 'var(--radius)', overflow: 'hidden' }}>
+            <DestinationImage destination={destination} />
+            <span className="card__type">{typeLabel(destination.type)}</span>
+          </div>
+          {/* Le licenze CC-BY richiedono l'attribuzione: non è un dettaglio
+              facoltativo, è la condizione per poter usare la foto. */}
+          {destination.image_credit && destination.image_url && (
+            <p className="imagecredit">Foto: {destination.image_credit} — Wikimedia Commons</p>
+          )}
+
+          <div className="section">
+            <h3>Punteggio</h3>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 12 }}>
+              <div style={{ fontSize: 32, fontWeight: 700, letterSpacing: '-0.03em' }}>
+                {scoring.total == null ? '—' : scoring.total.toFixed(1)}
+              </div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <ScoreBreakdown scoring={scoring} tall showLegend={false} />
+              </div>
+            </div>
+
+            {/* L'aritmetica per esteso. Da quando la barra segmentata usa tre
+                soli colori, questa tabella è l'UNICO posto in cui si vede quale
+                asse ha prodotto il totale — cioè ciò che il §9 del planning
+                chiede di poter correggere. Lo swatch colorato porta l'identità
+                dell'asse; il colore non codifica mai il valore. */}
+            <div className="scorecard">
+              <div className="scorecard__head">Come nasce questo punteggio</div>
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>Asse</th>
+                    <th className="num">Peso</th>
+                    <th className="num">Punteggio</th>
+                    <th className="num">Contributo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {scoring.contributions.map((c) => (
+                    <tr key={c.key} className={c.weight === 0 ? 'is-muted' : undefined}>
+                      <td>
+                        <span className="table__swatch" style={{ background: c.color }} />
+                        {c.label}
+                      </td>
+                      <td className="num">{c.weight}</td>
+                      <td className="num">{c.score}</td>
+                      <td className="num">{c.weight === 0 ? '—' : c.contribution.toFixed(1)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+                <tfoot>
+                  <tr className="scorecard__total">
+                    <td>Totale</td>
+                    <td className="num">{scoring.weightSum}</td>
+                    <td className="num" />
+                    <td className="num">
+                      <span className="scorecard__totalvalue">
+                        {scoring.total == null ? '—' : scoring.total.toFixed(1)}
+                      </span>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+
+          <div className="section">
+            <h3>Costi stimati <span className="badge badge--warn">stime, non dati</span></h3>
+            <table className="table">
+              <thead>
+                <tr><th>Voce</th><th className="num">Fascia</th><th>Unità</th></tr>
+              </thead>
+              <tbody>
+                {COST_ROWS.map(([key, label, unit]) => (
+                  <tr key={key}>
+                    <td>{label}</td>
+                    <td className="num">{eurRange(destination.costs[key].low, destination.costs[key].high)}</td>
+                    <td style={{ color: 'var(--ink-3)' }}>{unit}, a persona</td>
+                  </tr>
+                ))}
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td>{criteria.nights} notti</td>
+                  <td className="num">{eurRange(cost.low, cost.high)}</td>
+                  <td style={{ color: 'var(--ink-3)', fontWeight: 400 }}>volo escluso</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+
+          <div className="section">
+            <h3>
+              Clima mensile{' '}
+              {isApprox && <span className="badge badge--warn">stime del seed, non Open-Meteo</span>}
+            </h3>
+            <div className="climate">
+              {MONTHS.map((name, index) => {
+                const m = destination.climate?.[String(index + 1)] || {}
+                const active = criteria.month === index + 1
+                const seaCold = m.sea_temp != null && m.sea_temp < criteria.seaTempMin
+                return (
+                  <div key={name} className={`climate__cell${active ? ' climate__cell--active' : ''}`}>
+                    <b>{name.slice(0, 3).toUpperCase()}</b>
+                    {m.temp_avg ?? '—'}°
+                    <div className={m.sea_temp == null || seaCold ? 'climate__sea--cold' : 'climate__sea'}>
+                      {m.sea_temp == null ? '–' : `${m.sea_temp}°`}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+            <p style={{ margin: '8px 0 0', fontSize: 12, color: 'var(--ink-2)' }}>
+              Riga alta: temperatura media dell’aria. Riga bassa: temperatura del mare.{' '}
+              {criteria.month ? (
+                <>
+                  A {monthName(criteria.month).toLowerCase()} il mare è a{' '}
+                  <strong>{temp(monthClimate.sea_temp)}</strong>, con{' '}
+                  {monthClimate.rain_days ?? '—'} giorni di pioggia attesi.
+                </>
+              ) : (
+                <>
+                  Senza un mese scelto: il mare arriva al massimo a{' '}
+                  <strong>{temp(monthClimate.sea_temp)}</strong>, e la media annua è di{' '}
+                  {monthClimate.rain_days ?? '—'} giorni di pioggia al mese.
+                </>
+              )}
+            </p>
+          </div>
+
+          {destination.pois?.length > 0 && (
+            <div className="section">
+              <h3>Punti di interesse <span className="badge">curati a mano</span></h3>
+              <DetailMap destination={destination} />
+              <ol className="poilist">
+                {destination.pois.map((poi, index) => (
+                  <li key={poi.name}>
+                    <span className="poi__n">{index + 1}</span>
+                    {poi.name}
+                    <span className="poi__kind">{poi.kind}</span>
+                  </li>
+                ))}
+              </ol>
+              <p style={{ margin: '10px 0 0', fontSize: 12, color: 'var(--ink-3)' }}>
+                Elenco editoriale, non un itinerario generato: la generazione di itinerari è
+                prevista in Fase 3 e non è implementata.
+              </p>
+            </div>
+          )}
+
+          {destination.notes && (
+            <div className="section">
+              <h3>Note</h3>
+              <p style={{ margin: 0, color: 'var(--ink-2)' }}>{destination.notes}</p>
+            </div>
+          )}
+        </div>
+
+        <footer className="panel__foot">
+          <button type="button" className="btn btn--primary" onClick={onEdit}>
+            Modifica punteggi
+          </button>
+          <button type="button" className="btn" aria-pressed={inCompare} onClick={onCompare}>
+            {inCompare ? 'Nel confronto' : 'Aggiungi al confronto'}
+          </button>
+          <button type="button" className="btn" style={{ marginLeft: 'auto' }} onClick={onClose}>
+            Chiudi
+          </button>
+        </footer>
+      </section>
+    </div>
+  )
+}

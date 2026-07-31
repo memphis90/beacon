@@ -1,0 +1,30 @@
+# Dipendenze e build: rigenerabili da package-lock.json e da `npm run build`.
+node_modules/
+dist/
+
+# Chiavi. Non esiste un backend: quello che finisce qui è in chiaro nel client
+# se lo committi. Vale per ogni variante, comprese quelle per ambiente.
+.env
+.env.*
+!.env.example
+
+# Output degli script di ingestione. Non è il seed e non va confuso con esso:
+# `data/destinations.json` è la sola fonte versionata, lo staging è materiale
+# intermedio da rivedere a mano e poi buttare. La cartella la ricrea da sé
+# `scripts/resolve-images.mjs`.
+data/staging/
+
+# Report di copertura dei test.
+coverage/
+
+# Editor e sistema operativo: roba di chi scrive, non del progetto.
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Log e file locali.
+*.log
+npm-debug.log*
+*.local

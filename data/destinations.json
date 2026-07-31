@@ -1,0 +1,3364 @@
+{
+  "$comment": "Seed di Fase 0. Punteggi, costi e clima sono STIME iniziali destinate a essere corrette dall'utente tramite l'editor. Vedi docs/superpowers/specs per la provenienza. wikidata_id resta null: verra' risolto dagli script di ingestione di Fase 1, che interrogano Wikidata per nome. Inventarlo qui avvelenerebbe silenziosamente quell'import.",
+  "schema_version": 1,
+  "destinations": [
+    {
+      "id": "algarve",
+      "name": "Algarve",
+      "country": "PT",
+      "type": "area",
+      "coords": {
+        "lat": 37.08,
+        "lon": -8.2
+      },
+      "radius_km": 60,
+      "wikidata_id": null,
+      "wikipedia_title": "Algarve",
+      "wikipedia_title_en": "Algarve",
+      "airports": [
+        "FAO"
+      ],
+      "scores": {
+        "nature": 62,
+        "culture": 42,
+        "sea": 85,
+        "food": 70,
+        "nightlife": 55,
+        "outdoor": 68,
+        "family": 85,
+        "offbeat": 22
+      },
+      "scores_source": "manual",
+      "climate_source": "seed_approx",
+      "climate": {
+        "1": {
+          "temp_avg": 12,
+          "temp_max": 16,
+          "sea_temp": 16,
+          "rain_days": 7
+        },
+        "2": {
+          "temp_avg": 13,
+          "temp_max": 16,
+          "sea_temp": 15,
+          "rain_days": 6
+        },
+        "3": {
+          "temp_avg": 15,
+          "temp_max": 18,
+          "sea_temp": 16,
+          "rain_days": 6
+        },
+        "4": {
+          "temp_avg": 16,
+          "temp_max": 20,
+          "sea_temp": 16,
+          "rain_days": 5
+        },
+        "5": {
+          "temp_avg": 18,
+          "temp_max": 22,
+          "sea_temp": 17,
+          "rain_days": 4
+        },
+        "6": {
+          "temp_avg": 21,
+          "temp_max": 25,
+          "sea_temp": 19,
+          "rain_days": 2
+        },
+        "7": {
+          "temp_avg": 24,
+          "temp_max": 28,
+          "sea_temp": 20,
+          "rain_days": 0
+        },
+        "8": {
+          "temp_avg": 24,
+          "temp_max": 28,
+          "sea_temp": 21,
+          "rain_days": 0
+        },
+        "9": {
+          "temp_avg": 22,
+          "temp_max": 26,
+          "sea_temp": 21,
+          "rain_days": 2
+        },
+        "10": {
+          "temp_avg": 19,
+          "temp_max": 22,
+          "sea_temp": 20,
+          "rain_days": 5
+        },
+        "11": {
+          "temp_avg": 16,
+          "temp_max": 19,
+          "sea_temp": 18,
+          "rain_days": 7
+        },
+        "12": {
+          "temp_avg": 13,
+          "temp_max": 16,
+          "sea_temp": 17,
+          "rain_days": 8
+        }
+      },
+      "costs": {
+        "accommodation": {
+          "low": 50,
+          "mid": 85,
+          "high": 145
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 60
+        },
+        "transport_local_day": {
+          "low": 6,
+          "mid": 12,
+          "high": 20
+        },
+        "currency": "EUR"
+      },
+      "pois": [
+        {
+          "name": "Ponta da Piedade",
+          "lat": 37.079,
+          "lon": -8.669,
+          "kind": "panorama"
+        },
+        {
+          "name": "Benagil",
+          "lat": 37.087,
+          "lon": -8.425,
+          "kind": "spiaggia"
+        },
+        {
+          "name": "Tavira",
+          "lat": 37.125,
+          "lon": -7.65,
+          "kind": "borgo"
+        },
+        {
+          "name": "Sagres",
+          "lat": 37.009,
+          "lon": -8.945,
+          "kind": "panorama"
+        },
+        {
+          "name": "Ria Formosa",
+          "lat": 37.02,
+          "lon": -7.85,
+          "kind": "natura"
+        },
+        {
+          "name": "Praia da Marinha",
+          "lat": 37.09,
+          "lon": -8.412,
+          "kind": "spiaggia"
+        }
+      ],
+      "notes": "Famiglia a 85, il valore più alto del seed. Il mare è oceano: non supera i 21 °C nemmeno ad agosto, quindi con soglia a 24 °C esce anche in piena estate. È il caso che rende visibile la differenza fra Atlantico e Mediterraneo.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ponta_da_Piedade_aerial_view.jpg/1280px-Ponta_da_Piedade_aerial_view.jpg",
+      "image_credit": "Arne Müseler · CC BY-SA 3.0 de"
+    },
+    {
+      "id": "amsterdam",
+      "name": "Amsterdam",
+      "country": "NL",
+      "type": "city",
+      "coords": {
+        "lat": 52.3676,
+        "lon": 4.9041
+      },
+      "radius_km": 25,
+      "wikidata_id": null,
+      "wikipedia_title": "Amsterdam",
+      "wikipedia_title_en": "Amsterdam",
+      "airports": [
+        "AMS"
+      ],
+      "scores": {
+        "nature": 40,
+        "culture": 85,
+        "sea": 15,
+        "food": 62,
+        "nightlife": 88,
+        "outdoor": 45,
+        "family": 62,
+        "offbeat": 10
+      },
+      "scores_source": "manual",
+      "climate_source": "seed_approx",
+      "climate": {
+        "1": {
+          "temp_avg": 3,
+          "temp_max": 6,
+          "sea_temp": 6,
+          "rain_days": 12
+        },
+        "2": {
+          "temp_avg": 3,
+          "temp_max": 7,
+          "sea_temp": 5,
+          "rain_days": 10
+        },
+        "3": {
+          "temp_avg": 6,
+          "temp_max": 10,
+          "sea_temp": 6,
+          "rain_days": 11
+        },
+        "4": {
+          "temp_avg": 9,
+          "temp_max": 14,
+          "sea_temp": 8,
+          "rain_days": 9
+        },
+        "5": {
+          "temp_avg": 13,
+          "temp_max": 18,
+          "sea_temp": 12,
+          "rain_days": 10
+        },
+        "6": {
+          "temp_avg": 16,
+          "temp_max": 20,
+          "sea_temp": 15,
+          "rain_days": 10
+        },
+        "7": {
+          "temp_avg": 18,
+          "temp_max": 22,
+          "sea_temp": 18,
+          "rain_days": 11
+        },
+        "8": {
+          "temp_avg": 18,
+          "temp_max": 22,
+          "sea_temp": 19,
+          "rain_days": 11
+        },
+        "9": {
+          "temp_avg": 15,
+          "temp_max": 19,
+          "sea_temp": 17,
+          "rain_days": 11
+        },
+        "10": {
+          "temp_avg": 11,
+          "temp_max": 14,
+          "sea_temp": 14,
+          "rain_days": 12
+        },
+        "11": {
+          "temp_avg": 7,
+          "temp_max": 10,
+          "sea_temp": 11,
+          "rain_days": 13
+        },
+        "12": {
+          "temp_avg": 4,
+          "temp_max": 7,
+          "sea_temp": 8,
+          "rain_days": 12
+        }
+      },
+      "costs": {
+        "accommodation": {
+          "low": 90,
+          "mid": 145,
+          "high": 240
+        },
+        "food_per_day": {
+          "low": 28,
+          "mid": 48,
+          "high": 82
+        },
+        "transport_local_day": {
+          "low": 5,
+          "mid": 9,
+          "high": 16
+        },
+        "currency": "EUR"
+      },
+      "pois": [
+        {
+          "name": "Jordaan",
+          "lat": 52.374,
+          "lon": 4.883,
+          "kind": "quartiere"
+        },
+        {
+          "name": "Rijksmuseum",
+          "lat": 52.36,
+          "lon": 4.8852,
+          "kind": "monumento"
+        },
+        {
+          "name": "Vondelpark",
+          "lat": 52.358,
+          "lon": 4.8686,
+          "kind": "natura"
+        },
+        {
+          "name": "Canali",
+          "lat": 52.37,
+          "lon": 4.89,
+          "kind": "quartiere"
+        },
+        {
+          "name": "De Pijp",
+          "lat": 52.355,
+          "lon": 4.893,
+          "kind": "gastronomia"
+        }
+      ],
+      "notes": "Il mare c’è — Zandvoort è a 25 km — ma il Mare del Nord tocca i 19 °C solo ad agosto. È il caso che distingue “ha accesso al mare” da “è una destinazione di mare”.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Imagen_de_los_canales_conc%C3%A9ntricos_en_%C3%81msterdam.png/1280px-Imagen_de_los_canales_conc%C3%A9ntricos_en_%C3%81msterdam.png",
+      "image_credit": "Andrés Barrios · CC BY-SA 4.0"
+    },
+    {
+      "id": "baia-di-kotor",
+      "name": "Baia di Kotor",
+      "country": "ME",
+      "type": "area",
+      "coords": {
+        "lat": 42.4247,
+        "lon": 18.7712
+      },
+      "radius_km": 30,
+      "wikidata_id": null,
+      "wikipedia_title": "Bocche di Cattaro",
+      "wikipedia_title_en": "Bay of Kotor",
+      "airports": [
+        "TIV",
+        "DBV"
+      ],
+      "scores": {
+        "nature": 82,
+        "culture": 62,
+        "sea": 72,
+        "food": 58,
+        "nightlife": 35,
+        "outdoor": 72,
+        "family": 55,
+        "offbeat": 72
+      },
+      "scores_source": "manual",
+      "climate_source": "seed_approx",
+      "climate": {
+        "1": {
+          "temp_avg": 7,
+          "temp_max": 10,
+          "sea_temp": 14,
+          "rain_days": 13
+        },
+        "2": {
+          "temp_avg": 8,
+          "temp_max": 11,
+          "sea_temp": 13,
+          "rain_days": 12
+        },
+        "3": {
+          "temp_avg": 10,
+          "temp_max": 14,
+          "sea_temp": 14,
+          "rain_days": 12
+        },
+        "4": {
+          "temp_avg": 13,
+          "temp_max": 17,
+          "sea_temp": 16,
+          "rain_days": 12
+        },
+        "5": {
+          "temp_avg": 18,
+          "temp_max": 22,
+          "sea_temp": 19,
+          "rain_days": 10
+        },
+        "6": {
+          "temp_avg": 22,
+          "temp_max": 26,
+          "sea_temp": 23,
+          "rain_days": 7
+        },
+        "7": {
+          "temp_avg": 25,
+          "temp_max": 29,
+          "sea_temp": 25,
+          "rain_days": 4
+        },
+        "8": {
+          "temp_avg": 25,
+          "temp_max": 29,
+          "sea_temp": 26,
+          "rain_days": 5
+        },
+        "9": {
+          "temp_avg": 21,
+          "temp_max": 25,
+          "sea_temp": 24,
+          "rain_days": 8
+        },
+        "10": {
+          "temp_avg": 17,
+          "temp_max": 21,
+          "sea_temp": 21,
+          "rain_days": 10
+        },
+        "11": {
+          "temp_avg": 12,
+          "temp_max": 16,
+          "sea_temp": 18,
+          "rain_days": 14
+        },
+        "12": {
+          "temp_avg": 9,
+          "temp_max": 12,
+          "sea_temp": 16,
+          "rain_days": 14
+        }
+      },
+      "costs": {
+        "accommodation": {
+          "low": 35,
+          "mid": 60,
+          "high": 100
+        },
+        "food_per_day": {
+          "low": 15,
+          "mid": 26,
+          "high": 45
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 15
+        },
+        "currency": "EUR"
+      },
+      "pois": [
+        {
+          "name": "Kotor (città vecchia)",
+          "lat": 42.4247,
+          "lon": 18.7712,
+          "kind": "borgo"
+        },
+        {
+          "name": "Perast",
+          "lat": 42.487,
+          "lon": 18.699,
+          "kind": "borgo"
+        },
+        {
+          "name": "Madonna dello Scarpello",
+          "lat": 42.487,
+          "lon": 18.689,
+          "kind": "monumento"
+        },
+        {
+          "name": "Lovćen",
+          "lat": 42.401,
+          "lon": 18.838,
+          "kind": "panorama"
+        },
+        {
+          "name": "Herceg Novi",
+          "lat": 42.453,
+          "lon": 18.538,
+          "kind": "borgo"
+        }
+      ],
+      "notes": "Candidata principale al criterio §9.3 del planning: costi bassi, offbeat alto, mare caldo. Se il ranking non la fa mai emergere, il modello premia troppo la notorietà. Molta pioggia in inverno.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Kotor_aerial_1.jpg/1280px-Kotor_aerial_1.jpg",
+      "image_credit": "kallerna · CC BY-SA 4.0"
+    },
+    {
+      "id": "barcellona",
+      "name": "Barcellona",
+      "country": "ES",
+      "type": "city",
+      "coords": {
+        "lat": 41.3874,
+        "lon": 2.1686
+      },
+      "radius_km": 30,
+      "wikidata_id": null,
+      "wikipedia_title": "Barcellona",
+      "wikipedia_title_en": "Barcelona",
+      "airports": [
+        "BCN"
+      ],
+      "scores": {
+        "nature": 35,
+        "culture": 88,
+        "sea": 72,
+        "food": 85,
+        "nightlife": 90,
+        "outdoor": 45,
+        "family": 65,
+        "offbeat": 12
+      },
+      "scores_source": "manual",
+      "climate_source": "seed_approx",
+      "climate": {
+        "1": {
+          "temp_avg": 10,
+          "temp_max": 14,
+          "sea_temp": 14,
+          "rain_days": 5
+        },
+        "2": {
+          "temp_avg": 11,
+          "temp_max": 15,
+          "sea_temp": 13,
+          "rain_days": 5
+        },
+        "3": {
+          "temp_avg": 13,
+          "temp_max": 17,
+          "sea_temp": 14,
+          "rain_days": 5
+        },
+        "4": {
+          "temp_avg": 15,
+          "temp_max": 19,
+          "sea_temp": 15,
+          "rain_days": 5
+        },
+        "5": {
+          "temp_avg": 18,
+          "temp_max": 22,
+          "sea_temp": 17,
+          "rain_days": 5
+        },
+        "6": {
+          "temp_avg": 22,
+          "temp_max": 26,
+          "sea_temp": 21,
+          "rain_days": 4
+        },
+        "7": {
+          "temp_avg": 25,
+          "temp_max": 29,
+          "sea_temp": 24,
+          "rain_days": 2
+        },
+        "8": {
+          "temp_avg": 25,
+          "temp_max": 29,
+          "sea_temp": 25,
+          "rain_days": 3
+        },
+        "9": {
+          "temp_avg": 22,
+          "temp_max": 26,
+          "sea_temp": 24,
+          "rain_days": 5
+        },
+        "10": {
+          "temp_avg": 18,
+          "temp_max": 22,
+          "sea_temp": 22,
+          "rain_days": 6
+        },
+        "11": {
+          "temp_avg": 14,
+          "temp_max": 17,
+          "sea_temp": 19,
+          "rain_days": 5
+        },
+        "12": {
+          "temp_avg": 11,
+          "temp_max": 15,
+          "sea_temp": 16,
+          "rain_days": 5
+        }
+      },
+      "costs": {
+        "accommodation": {
+          "low": 70,
+          "mid": 115,
+          "high": 190
+        },
+        "food_per_day": {
+          "low": 25,
+          "mid": 42,
+          "high": 70
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "pois": [
+        {
+          "name": "Sagrada Família",
+          "lat": 41.4036,
+          "lon": 2.1744,
+          "kind": "monumento"
+        },
+        {
+          "name": "Park Güell",
+          "lat": 41.4145,
+          "lon": 2.1527,
+          "kind": "panorama"
+        },
+        {
+          "name": "Barrio Gótico",
+          "lat": 41.3833,
+          "lon": 2.177,
+          "kind": "quartiere"
+        },
+        {
+          "name": "Barceloneta",
+          "lat": 41.3785,
+          "lon": 2.1925,
+          "kind": "spiaggia"
+        },
+        {
+          "name": "Montjuïc",
+          "lat": 41.364,
+          "lon": 2.158,
+          "kind": "panorama"
+        },
+        {
+          "name": "Mercat de la Boqueria",
+          "lat": 41.3817,
+          "lon": 2.1717,
+          "kind": "gastronomia"
+        }
+      ],
+      "notes": "Vita notturna a 90 e fuori rotta a 12 sono la stessa informazione vista da due lati. Il rapporto della città col turismo di massa è teso, e in alta stagione si sente.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Evening_light_over_Barcelona.jpg/1280px-Evening_light_over_Barcelona.jpg",
+      "image_credit": "M McBey · CC BY 2.0"
+    },
+    {
+      "id": "costiera-amalfitana",
+      "name": "Costiera Amalfitana",
+      "country": "IT",
+      "type": "area",
+      "coords": {
+        "lat": 40.634,
+        "lon": 14.6027
+      },
+      "radius_km": 25,
+      "wikidata_id": null,
+      "wikipedia_title": "Costiera amalfitana",
+      "wikipedia_title_en": "Amalfi Coast",
+      "airports": [
+        "NAP"
+      ],
+      "scores": {
+        "nature": 72,
+        "culture": 70,
+        "sea": 88,
+        "food": 85,
+        "nightlife": 40,
+        "outdoor": 65,
+        "family": 45,
+        "offbeat": 20
+      },
+      "scores_source": "manual",
+      "climate_source": "seed_approx",
+      "climate": {
+        "1": {
+          "temp_avg": 10,
+          "temp_max": 13,
+          "sea_temp": 15,
+          "rain_days": 9
+        },
+        "2": {
+          "temp_avg": 10,
+          "temp_max": 14,
+          "sea_temp": 14,
+          "rain_days": 8
+        },
+        "3": {
+          "temp_avg": 12,
+          "temp_max": 16,
+          "sea_temp": 14,
+          "rain_days": 8
+        },
+        "4": {
+          "temp_avg": 15,
+          "temp_max": 18,
+          "sea_temp": 15,
+          "rain_days": 8
+        },
+        "5": {
+          "temp_avg": 18,
+          "temp_max": 22,
+          "sea_temp": 18,
+          "rain_days": 6
+        },
+        "6": {
+          "temp_avg": 22,
+          "temp_max": 26,
+          "sea_temp": 22,
+          "rain_days": 4
+        },
+        "7": {
+          "temp_avg": 25,
+          "temp_max": 29,
+          "sea_temp": 25,
+          "rain_days": 2
+        },
+        "8": {
+          "temp_avg": 25,
+          "temp_max": 29,
+          "sea_temp": 26,
+          "rain_days": 2
+        },
+        "9": {
+          "temp_avg": 22,
+          "temp_max": 26,
+          "sea_temp": 25,
+          "rain_days": 5
+        },
+        "10": {
+          "temp_avg": 18,
+          "temp_max": 22,
+          "sea_temp": 23,
+          "rain_days": 8
+        },
+        "11": {
+          "temp_avg": 14,
+          "temp_max": 18,
+          "sea_temp": 20,
+          "rain_days": 10
+        },
+        "12": {
+          "temp_avg": 11,
+          "temp_max": 15,
+          "sea_temp": 17,
+          "rain_days": 10
+        }
+      },
+      "costs": {
+        "accommodation": {
+          "low": 85,
+          "mid": 140,
+          "high": 230
+        },
+        "food_per_day": {
+          "low": 30,
+          "mid": 48,
+          "high": 80
+        },
+        "transport_local_day": {
+          "low": 6,
+          "mid": 12,
+          "high": 22
+        },
+        "currency": "EUR"
+      },
+      "pois": [
+        {
+          "name": "Positano",
+          "lat": 40.628,
+          "lon": 14.485,
+          "kind": "borgo"
+        },
+        {
+          "name": "Amalfi",
+          "lat": 40.634,
+          "lon": 14.603,
+          "kind": "borgo"
+        },
+        {
+          "name": "Ravello",
+          "lat": 40.649,
+          "lon": 14.612,
+          "kind": "borgo"
+        },
+        {
+          "name": "Sentiero degli Dei",
+          "lat": 40.642,
+          "lon": 14.515,
+          "kind": "sentiero"
+        },
+        {
+          "name": "Furore",
+          "lat": 40.618,
+          "lon": 14.549,
+          "kind": "borgo"
+        },
+        {
+          "name": "Baia di Ieranto",
+          "lat": 40.582,
+          "lon": 14.36,
+          "kind": "spiaggia"
+        }
+      ],
+      "notes": "family basso non per ostilità ai bambini ma per la logistica: scale ovunque, strade strette, spostamenti lenti. Costi alti e in aumento a luglio-agosto.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Amalfi_Coast_%28Italy%2C_October_2020%29_-_75_%2850558355441%29.jpg/1280px-Amalfi_Coast_%28Italy%2C_October_2020%29_-_75_%2850558355441%29.jpg",
+      "image_credit": "Bruno Rijsman · CC BY-SA 2.0"
+    },
+    {
+      "id": "creta",
+      "name": "Creta",
+      "country": "GR",
+      "type": "island",
+      "coords": {
+        "lat": 35.2401,
+        "lon": 24.8093
+      },
+      "radius_km": 120,
+      "wikidata_id": null,
+      "wikipedia_title": "Creta",
+      "wikipedia_title_en": "Crete",
+      "airports": [
+        "HER",
+        "CHQ"
+      ],
+      "scores": {
+        "nature": 70,
+        "culture": 75,
+        "sea": 90,
+        "food": 80,
+        "nightlife": 60,
+        "outdoor": 68,
+        "family": 75,
+        "offbeat": 35
+      },
+      "scores_source": "manual",
+      "climate_source": "seed_approx",
+      "climate": {
+        "1": {
+          "temp_avg": 12,
+          "temp_max": 15,
+          "sea_temp": 17,
+          "rain_days": 12
+        },
+        "2": {
+          "temp_avg": 12,
+          "temp_max": 15,
+          "sea_temp": 16,
+          "rain_days": 9
+        },
+        "3": {
+          "temp_avg": 14,
+          "temp_max": 17,
+          "sea_temp": 16,
+          "rain_days": 7
+        },
+        "4": {
+          "temp_avg": 17,
+          "temp_max": 20,
+          "sea_temp": 17,
+          "rain_days": 4
+        },
+        "5": {
+          "temp_avg": 20,
+          "temp_max": 24,
+          "sea_temp": 20,
+          "rain_days": 3
+        },
+        "6": {
+          "temp_avg": 24,
+          "temp_max": 28,
+          "sea_temp": 23,
+          "rain_days": 1
+        },
+        "7": {
+          "temp_avg": 27,
+          "temp_max": 30,
+          "sea_temp": 25,
+          "rain_days": 0
+        },
+        "8": {
+          "temp_avg": 27,
+          "temp_max": 30,
+          "sea_temp": 26,
+          "rain_days": 0
+        },
+        "9": {
+          "temp_avg": 24,
+          "temp_max": 27,
+          "sea_temp": 25,
+          "rain_days": 2
+        },
+        "10": {
+          "temp_avg": 20,
+          "temp_max": 24,
+          "sea_temp": 24,
+          "rain_days": 6
+        },
+        "11": {
+          "temp_avg": 17,
+          "temp_max": 20,
+          "sea_temp": 21,
+          "rain_days": 8
+        },
+        "12": {
+          "temp_avg": 14,
+          "temp_max": 17,
+          "sea_temp": 19,
+          "rain_days": 12
+        }
+      },
+      "costs": {
+        "accommodation": {
+          "low": 45,
+          "mid": 75,
+          "high": 125
+        },
+        "food_per_day": {
+          "low": 18,
+          "mid": 32,
+          "high": 55
+        },
+        "transport_local_day": {
+          "low": 6,
+          "mid": 12,
+          "high": 22
+        },
+        "currency": "EUR"
+      },
+      "pois": [
+        {
+          "name": "Chania",
+          "lat": 35.5138,
+          "lon": 24.018,
+          "kind": "borgo"
+        },
+        {
+          "name": "Balos",
+          "lat": 35.578,
+          "lon": 23.586,
+          "kind": "spiaggia"
+        },
+        {
+          "name": "Elafonissi",
+          "lat": 35.272,
+          "lon": 23.54,
+          "kind": "spiaggia"
+        },
+        {
+          "name": "Palazzo di Cnosso",
+          "lat": 35.298,
+          "lon": 25.163,
+          "kind": "monumento"
+        },
+        {
+          "name": "Gola di Samaria",
+          "lat": 35.268,
+          "lon": 23.956,
+          "kind": "sentiero"
+        },
+        {
+          "name": "Rethymno",
+          "lat": 35.366,
+          "lon": 24.482,
+          "kind": "borgo"
+        }
+      ],
+      "notes": "Raggio 120 km: l'isola è lunga 260 km e le due estremità non sono la stessa vacanza. transport_local_day alto perché senza auto a noleggio l'isola è quasi inaccessibile.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Aerial_view_of_the_Old_Venetian_Harbour_in_Chania%2C_Greece.jpg/1280px-Aerial_view_of_the_Old_Venetian_Harbour_in_Chania%2C_Greece.jpg",
+      "image_credit": "dronepicr · CC BY 2.0"
+    },
+    {
+      "id": "dolomiti",
+      "name": "Dolomiti",
+      "country": "IT",
+      "type": "area",
+      "coords": {
+        "lat": 46.4102,
+        "lon": 11.8447
+      },
+      "radius_km": 60,
+      "wikidata_id": null,
+      "wikipedia_title": "Dolomiti",
+      "wikipedia_title_en": "Dolomites",
+      "airports": [
+        "VRN",
+        "TSF",
+        "INN"
+      ],
+      "scores": {
+        "nature": 95,
+        "culture": 35,
+        "sea": 0,
+        "food": 70,
+        "nightlife": 20,
+        "outdoor": 97,
+        "family": 78,
+        "offbeat": 40
+      },
+      "scores_source": "manual",
+      "climate_source": "seed_approx",
+      "climate": {
+        "1": {
+          "temp_avg": -4,
+          "temp_max": 1,
+          "sea_temp": null,
+          "rain_days": 6
+        },
+        "2": {
+          "temp_avg": -3,
+          "temp_max": 3,
+          "sea_temp": null,
+          "rain_days": 6
+        },
+        "3": {
+          "temp_avg": 1,
+          "temp_max": 8,
+          "sea_temp": null,
+          "rain_days": 7
+        },
+        "4": {
+          "temp_avg": 5,
+          "temp_max": 12,
+          "sea_temp": null,
+          "rain_days": 9
+        },
+        "5": {
+          "temp_avg": 10,
+          "temp_max": 17,
+          "sea_temp": null,
+          "rain_days": 11
+        },
+        "6": {
+          "temp_avg": 13,
+          "temp_max": 20,
+          "sea_temp": null,
+          "rain_days": 11
+        },
+        "7": {
+          "temp_avg": 15,
+          "temp_max": 23,
+          "sea_temp": null,
+          "rain_days": 10
+        },
+        "8": {
+          "temp_avg": 15,
+          "temp_max": 22,
+          "sea_temp": null,
+          "rain_days": 10
+        },
+        "9": {
+          "temp_avg": 11,
+          "temp_max": 18,
+          "sea_temp": null,
+          "rain_days": 7
+        },
+        "10": {
+          "temp_avg": 7,
+          "temp_max": 13,
+          "sea_temp": null,
+          "rain_days": 7
+        },
+        "11": {
+          "temp_avg": 1,
+          "temp_max": 6,
+          "sea_temp": null,
+          "rain_days": 8
+        },
+        "12": {
+          "temp_avg": -3,
+          "temp_max": 2,
+          "sea_temp": null,
+          "rain_days": 7
+        }
+      },
+      "costs": {
+        "accommodation": {
+          "low": 70,
+          "mid": 110,
+          "high": 180
+        },
+        "food_per_day": {
+          "low": 28,
+          "mid": 45,
+          "high": 72
+        },
+        "transport_local_day": {
+          "low": 5,
+          "mid": 10,
+          "high": 18
+        },
+        "currency": "EUR"
+      },
+      "pois": [
+        {
+          "name": "Lago di Braies",
+          "lat": 46.694,
+          "lon": 12.085,
+          "kind": "natura"
+        },
+        {
+          "name": "Tre Cime di Lavaredo",
+          "lat": 46.618,
+          "lon": 12.305,
+          "kind": "sentiero"
+        },
+        {
+          "name": "Alpe di Siusi",
+          "lat": 46.539,
+          "lon": 11.63,
+          "kind": "natura"
+        },
+        {
+          "name": "Val Gardena",
+          "lat": 46.558,
+          "lon": 11.675,
+          "kind": "valle"
+        },
+        {
+          "name": "Passo Giau",
+          "lat": 46.483,
+          "lon": 12.056,
+          "kind": "panorama"
+        },
+        {
+          "name": "Cortina d'Ampezzo",
+          "lat": 46.54,
+          "lon": 12.136,
+          "kind": "borgo"
+        }
+      ],
+      "notes": "Il raggio di 60 km è largo: l'area copre valli molto diverse tra loro per costi e affollamento. Candidata a essere spezzata in più voci quando il dataset cresce.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Faloria_Cortina_d%27Ampezzo_10.jpg/1280px-Faloria_Cortina_d%27Ampezzo_10.jpg",
+      "image_credit": "kallerna · CC BY-SA 4.0"
+    },
+    {
+      "id": "dubrovnik",
+      "name": "Dubrovnik",
+      "country": "HR",
+      "type": "city",
+      "coords": {
+        "lat": 42.6507,
+        "lon": 18.0944
+      },
+      "radius_km": 25,
+      "wikidata_id": null,
+      "wikipedia_title": "Dubrovnik",
+      "wikipedia_title_en": "Dubrovnik",
+      "airports": [
+        "DBV"
+      ],
+      "scores": {
+        "nature": 55,
+        "culture": 88,
+        "sea": 82,
+        "food": 68,
+        "nightlife": 55,
+        "outdoor": 55,
+        "family": 55,
+        "offbeat": 8
+      },
+      "scores_source": "manual",
+      "climate_source": "seed_approx",
+      "climate": {
+        "1": {
+          "temp_avg": 9,
+          "temp_max": 12,
+          "sea_temp": 15,
+          "rain_days": 12
+        },
+        "2": {
+          "temp_avg": 9,
+          "temp_max": 12,
+          "sea_temp": 14,
+          "rain_days": 11
+        },
+        "3": {
+          "temp_avg": 11,
+          "temp_max": 14,
+          "sea_temp": 14,
+          "rain_days": 11
+        },
+        "4": {
+          "temp_avg": 14,
+          "temp_max": 18,
+          "sea_temp": 16,
+          "rain_days": 11
+        },
+        "5": {
+          "temp_avg": 18,
+          "temp_max": 22,
+          "sea_temp": 19,
+          "rain_days": 9
+        },
+        "6": {
+          "temp_avg": 22,
+          "temp_max": 26,
+          "sea_temp": 23,
+          "rain_days": 6
+        },
+        "7": {
+          "temp_avg": 25,
+          "temp_max": 29,
+          "sea_temp": 25,
+          "rain_days": 3
+        },
+        "8": {
+          "temp_avg": 25,
+          "temp_max": 29,
+          "sea_temp": 26,
+          "rain_days": 4
+        },
+        "9": {
+          "temp_avg": 21,
+          "temp_max": 25,
+          "sea_temp": 24,
+          "rain_days": 7
+        },
+        "10": {
+          "temp_avg": 18,
+          "temp_max": 21,
+          "sea_temp": 21,
+          "rain_days": 10
+        },
+        "11": {
+          "temp_avg": 14,
+          "temp_max": 17,
+          "sea_temp": 18,
+          "rain_days": 13
+        },
+        "12": {
+          "temp_avg": 11,
+          "temp_max": 13,
+          "sea_temp": 16,
+          "rain_days": 13
+        }
+      },
+      "costs": {
+        "accommodation": {
+          "low": 75,
+          "mid": 125,
+          "high": 210
+        },
+        "food_per_day": {
+          "low": 25,
+          "mid": 45,
+          "high": 75
+        },
+        "transport_local_day": {
+          "low": 5,
+          "mid": 10,
+          "high": 18
+        },
+        "currency": "EUR"
+      },
+      "pois": [
+        {
+          "name": "Stradun",
+          "lat": 42.6413,
+          "lon": 18.1077,
+          "kind": "quartiere"
+        },
+        {
+          "name": "Mura di Dubrovnik",
+          "lat": 42.642,
+          "lon": 18.11,
+          "kind": "monumento"
+        },
+        {
+          "name": "Monte Srđ",
+          "lat": 42.6489,
+          "lon": 18.1108,
+          "kind": "panorama"
+        },
+        {
+          "name": "Lokrum",
+          "lat": 42.627,
+          "lon": 18.12,
+          "kind": "natura"
+        },
+        {
+          "name": "Cavtat",
+          "lat": 42.58,
+          "lon": 18.22,
+          "kind": "borgo"
+        }
+      ],
+      "notes": "offbeat a 8 non è un giudizio sulla città ma sulla sua notorietà: è fra le mete più affollate del Mediterraneo, con navi da crociera che ne moltiplicano le presenze in poche ore. Il centro storico è pedonale e tutto in salita.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/The_walls_of_the_fortress_and_View_of_the_old_city._panorama.jpg/1280px-The_walls_of_the_fortress_and_View_of_the_old_city._panorama.jpg",
+      "image_credit": "Zysko serhii · CC BY-SA 4.0"
+    },
+    {
+      "id": "islanda-sud",
+      "name": "Islanda del Sud",
+      "country": "IS",
+      "type": "area",
+      "coords": {
+        "lat": 63.8,
+        "lon": -19.5
+      },
+      "radius_km": 120,
+      "wikidata_id": null,
+      "wikipedia_title": "Islanda",
+      "wikipedia_title_en": "Iceland",
+      "airports": [
+        "KEF"
+      ],
+      "scores": {
+        "nature": 99,
+        "culture": 30,
+        "sea": 10,
+        "food": 45,
+        "nightlife": 15,
+        "outdoor": 92,
+        "family": 55,
+        "offbeat": 55
+      },
+      "scores_source": "manual",
+      "climate_source": "seed_approx",
+      "climate": {
+        "1": {
+          "temp_avg": 0,
+          "temp_max": 2,
+          "sea_temp": 7,
+          "rain_days": 15
+        },
+        "2": {
+          "temp_avg": 0,
+          "temp_max": 3,
+          "sea_temp": 6,
+          "rain_days": 14
+        },
+        "3": {
+          "temp_avg": 1,
+          "temp_max": 4,
+          "sea_temp": 6,
+          "rain_days": 14
+        },
+        "4": {
+          "temp_avg": 4,
+          "temp_max": 7,
+          "sea_temp": 7,
+          "rain_days": 12
+        },
+        "5": {
+          "temp_avg": 7,
+          "temp_max": 10,
+          "sea_temp": 8,
+          "rain_days": 10
+        },
+        "6": {
+          "temp_avg": 10,
+          "temp_max": 13,
+          "sea_temp": 10,
+          "rain_days": 10
+        },
+        "7": {
+          "temp_avg": 12,
+          "temp_max": 15,
+          "sea_temp": 11,
+          "rain_days": 11
+        },
+        "8": {
+          "temp_avg": 11,
+          "temp_max": 14,
+          "sea_temp": 11,
+          "rain_days": 11
+        },
+        "9": {
+          "temp_avg": 8,
+          "temp_max": 11,
+          "sea_temp": 10,
+          "rain_days": 12
+        },
+        "10": {
+          "temp_avg": 5,
+          "temp_max": 7,
+          "sea_temp": 9,
+          "rain_days": 14
+        },
+        "11": {
+          "temp_avg": 2,
+          "temp_max": 4,
+          "sea_temp": 8,
+          "rain_days": 14
+        },
+        "12": {
+          "temp_avg": 0,
+          "temp_max": 2,
+          "sea_temp": 7,
+          "rain_days": 15
+        }
+      },
+      "costs": {
+        "accommodation": {
+          "low": 100,
+          "mid": 165,
+          "high": 260
+        },
+        "food_per_day": {
+          "low": 40,
+          "mid": 68,
+          "high": 110
+        },
+        "transport_local_day": {
+          "low": 12,
+          "mid": 24,
+          "high": 42
+        },
+        "currency": "EUR"
+      },
+      "pois": [
+        {
+          "name": "Seljalandsfoss",
+          "lat": 63.6156,
+          "lon": -19.9886,
+          "kind": "natura"
+        },
+        {
+          "name": "Skógafoss",
+          "lat": 63.5321,
+          "lon": -19.5114,
+          "kind": "natura"
+        },
+        {
+          "name": "Reynisfjara",
+          "lat": 63.403,
+          "lon": -19.045,
+          "kind": "spiaggia"
+        },
+        {
+          "name": "Jökulsárlón",
+          "lat": 64.0784,
+          "lon": -16.2306,
+          "kind": "natura"
+        },
+        {
+          "name": "Þingvellir",
+          "lat": 64.2559,
+          "lon": -21.13,
+          "kind": "monumento"
+        },
+        {
+          "name": "Landmannalaugar",
+          "lat": 63.99,
+          "lon": -19.06,
+          "kind": "sentiero"
+        }
+      ],
+      "notes": "Natura a 99, il massimo del seed. Costo dei trasporti locali a 24 €/giorno perché senza auto a noleggio l’area è inaccessibile. Piove o nevica praticamente sempre.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/2008-05-24_35_Sk%C3%B3gafoss.jpg/1280px-2008-05-24_35_Sk%C3%B3gafoss.jpg",
+      "image_credit": "Hansueli Krapf · CC BY-SA 3.0"
+    },
+    {
+      "id": "istanbul",
+      "name": "Istanbul",
+      "country": "TR",
+      "type": "city",
+      "coords": {
+        "lat": 41.0082,
+        "lon": 28.9784
+      },
+      "radius_km": 40,
+      "wikidata_id": null,
+      "wikipedia_title": "Istanbul",
+      "wikipedia_title_en": "Istanbul",
+      "airports": [
+        "IST",
+        "SAW"
+      ],
+      "scores": {
+        "nature": 35,
+        "culture": 95,
+        "sea": 45,
+        "food": 90,
+        "nightlife": 70,
+        "outdoor": 35,
+        "family": 55,
+        "offbeat": 40
+      },
+      "scores_source": "manual",
+      "climate_source": "seed_approx",
+      "climate": {
+        "1": {
+          "temp_avg": 6,
+          "temp_max": 9,
+          "sea_temp": 9,
+          "rain_days": 12
+        },
+        "2": {
+          "temp_avg": 6,
+          "temp_max": 9,
+          "sea_temp": 8,
+          "rain_days": 11
+        },
+        "3": {
+          "temp_avg": 8,
+          "temp_max": 11,
+          "sea_temp": 9,
+          "rain_days": 10
+        },
+        "4": {
+          "temp_avg": 12,
+          "temp_max": 16,
+          "sea_temp": 11,
+          "rain_days": 8
+        },
+        "5": {
+          "temp_avg": 17,
+          "temp_max": 21,
+          "sea_temp": 15,
+          "rain_days": 6
+        },
+        "6": {
+          "temp_avg": 21,
+          "temp_max": 26,
+          "sea_temp": 20,
+          "rain_days": 5
+        },
+        "7": {
+          "temp_avg": 24,
+          "temp_max": 29,
+          "sea_temp": 23,
+          "rain_days": 3
+        },
+        "8": {
+          "temp_avg": 24,
+          "temp_max": 29,
+          "sea_temp": 24,
+          "rain_days": 3
+        },
+        "9": {
+          "temp_avg": 20,
+          "temp_max": 25,
+          "sea_temp": 22,
+          "rain_days": 5
+        },
+        "10": {
+          "temp_avg": 16,
+          "temp_max": 20,
+          "sea_temp": 19,
+          "rain_days": 8
+        },
+        "11": {
+          "temp_avg": 12,
+          "temp_max": 15,
+          "sea_temp": 15,
+          "rain_days": 10
+        },
+        "12": {
+          "temp_avg": 8,
+          "temp_max": 11,
+          "sea_temp": 12,
+          "rain_days": 12
+        }
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 70,
+          "high": 125
+        },
+        "food_per_day": {
+          "low": 15,
+          "mid": 28,
+          "high": 50
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 6,
+          "high": 11
+        },
+        "currency": "EUR"
+      },
+      "pois": [
+        {
+          "name": "Santa Sofia",
+          "lat": 41.0086,
+          "lon": 28.9802,
+          "kind": "monumento"
+        },
+        {
+          "name": "Moschea Blu",
+          "lat": 41.0054,
+          "lon": 28.9768,
+          "kind": "monumento"
+        },
+        {
+          "name": "Gran Bazar",
+          "lat": 41.0108,
+          "lon": 28.968,
+          "kind": "quartiere"
+        },
+        {
+          "name": "Bosforo",
+          "lat": 41.12,
+          "lon": 29.06,
+          "kind": "panorama"
+        },
+        {
+          "name": "Kadıköy",
+          "lat": 40.99,
+          "lon": 29.025,
+          "kind": "gastronomia"
+        },
+        {
+          "name": "Cisterna Basilica",
+          "lat": 41.0084,
+          "lon": 28.9779,
+          "kind": "monumento"
+        }
+      ],
+      "notes": "Cultura e cibo altissimi a costi bassissimi: è la destinazione che più spesso sorprenderà il ranking. Fuori rotta a 40 perché è notissima ma poco battuta dal turismo europeo rispetto alle capitali dell’Ovest.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Historical_peninsula_and_modern_skyline_of_Istanbul.jpg/1280px-Historical_peninsula_and_modern_skyline_of_Istanbul.jpg",
+      "image_credit": "Hunanuk · CC0"
+    },
+    {
+      "id": "lisbona",
+      "name": "Lisbona",
+      "country": "PT",
+      "type": "city",
+      "coords": {
+        "lat": 38.7223,
+        "lon": -9.1393
+      },
+      "radius_km": 40,
+      "wikidata_id": null,
+      "wikipedia_title": "Lisbona",
+      "wikipedia_title_en": "Lisbon",
+      "airports": [
+        "LIS"
+      ],
+      "scores": {
+        "nature": 40,
+        "culture": 85,
+        "sea": 65,
+        "food": 88,
+        "nightlife": 85,
+        "outdoor": 45,
+        "family": 65,
+        "offbeat": 25
+      },
+      "scores_source": "manual",
+      "climate_source": "seed_approx",
+      "climate": {
+        "1": {
+          "temp_avg": 11,
+          "temp_max": 15,
+          "sea_temp": 15,
+          "rain_days": 11
+        },
+        "2": {
+          "temp_avg": 12,
+          "temp_max": 16,
+          "sea_temp": 15,
+          "rain_days": 9
+        },
+        "3": {
+          "temp_avg": 14,
+          "temp_max": 18,
+          "sea_temp": 15,
+          "rain_days": 9
+        },
+        "4": {
+          "temp_avg": 15,
+          "temp_max": 19,
+          "sea_temp": 16,
+          "rain_days": 9
+        },
+        "5": {
+          "temp_avg": 17,
+          "temp_max": 21,
+          "sea_temp": 17,
+          "rain_days": 7
+        },
+        "6": {
+          "temp_avg": 20,
+          "temp_max": 25,
+          "sea_temp": 19,
+          "rain_days": 3
+        },
+        "7": {
+          "temp_avg": 22,
+          "temp_max": 28,
+          "sea_temp": 20,
+          "rain_days": 1
+        },
+        "8": {
+          "temp_avg": 23,
+          "temp_max": 28,
+          "sea_temp": 21,
+          "rain_days": 1
+        },
+        "9": {
+          "temp_avg": 21,
+          "temp_max": 26,
+          "sea_temp": 21,
+          "rain_days": 4
+        },
+        "10": {
+          "temp_avg": 18,
+          "temp_max": 22,
+          "sea_temp": 20,
+          "rain_days": 9
+        },
+        "11": {
+          "temp_avg": 14,
+          "temp_max": 18,
+          "sea_temp": 18,
+          "rain_days": 10
+        },
+        "12": {
+          "temp_avg": 12,
+          "temp_max": 16,
+          "sea_temp": 16,
+          "rain_days": 11
+        }
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 85,
+          "high": 135
+        },
+        "food_per_day": {
+          "low": 22,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 7,
+          "high": 12
+        },
+        "currency": "EUR"
+      },
+      "pois": [
+        {
+          "name": "Alfama",
+          "lat": 38.7118,
+          "lon": -9.13,
+          "kind": "quartiere"
+        },
+        {
+          "name": "Torre di Belém",
+          "lat": 38.6916,
+          "lon": -9.216,
+          "kind": "monumento"
+        },
+        {
+          "name": "Miradouro da Senhora do Monte",
+          "lat": 38.7175,
+          "lon": -9.133,
+          "kind": "panorama"
+        },
+        {
+          "name": "Time Out Market",
+          "lat": 38.7071,
+          "lon": -9.1459,
+          "kind": "gastronomia"
+        },
+        {
+          "name": "Mosteiro dos Jerónimos",
+          "lat": 38.6979,
+          "lon": -9.2065,
+          "kind": "monumento"
+        }
+      ],
+      "notes": "Trasporto pubblico ottimo, molte salite. Alfama pedonale. Il mare è oceano: bello ma freddo e ventoso rispetto al Mediterraneo.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Lisboa_-_Portugal_%2852597836992%29.jpg/1280px-Lisboa_-_Portugal_%2852597836992%29.jpg",
+      "image_credit": "Vitor Oliveira from Torres Vedras, PORTUGAL · CC BY-SA 2.0"
+    },
+    {
+      "id": "lofoten",
+      "name": "Lofoten",
+      "country": "NO",
+      "type": "island",
+      "coords": {
+        "lat": 68.2,
+        "lon": 13.75
+      },
+      "radius_km": 90,
+      "wikidata_id": null,
+      "wikipedia_title": "Isole Lofoten",
+      "wikipedia_title_en": "Lofoten",
+      "airports": [
+        "SVJ",
+        "LKN",
+        "EVE"
+      ],
+      "scores": {
+        "nature": 98,
+        "culture": 30,
+        "sea": 20,
+        "food": 48,
+        "nightlife": 12,
+        "outdoor": 90,
+        "family": 42,
+        "offbeat": 85
+      },
+      "scores_source": "manual",
+      "climate_source": "seed_approx",
+      "climate": {
+        "1": {
+          "temp_avg": -1,
+          "temp_max": 1,
+          "sea_temp": 5,
+          "rain_days": 16
+        },
+        "2": {
+          "temp_avg": -1,
+          "temp_max": 1,
+          "sea_temp": 4,
+          "rain_days": 14
+        },
+        "3": {
+          "temp_avg": 0,
+          "temp_max": 3,
+          "sea_temp": 4,
+          "rain_days": 14
+        },
+        "4": {
+          "temp_avg": 3,
+          "temp_max": 6,
+          "sea_temp": 5,
+          "rain_days": 11
+        },
+        "5": {
+          "temp_avg": 7,
+          "temp_max": 10,
+          "sea_temp": 7,
+          "rain_days": 9
+        },
+        "6": {
+          "temp_avg": 10,
+          "temp_max": 13,
+          "sea_temp": 9,
+          "rain_days": 9
+        },
+        "7": {
+          "temp_avg": 13,
+          "temp_max": 16,
+          "sea_temp": 11,
+          "rain_days": 10
+        },
+        "8": {
+          "temp_avg": 12,
+          "temp_max": 15,
+          "sea_temp": 12,
+          "rain_days": 11
+        },
+        "9": {
+          "temp_avg": 9,
+          "temp_max": 11,
+          "sea_temp": 11,
+          "rain_days": 13
+        },
+        "10": {
+          "temp_avg": 5,
+          "temp_max": 7,
+          "sea_temp": 9,
+          "rain_days": 16
+        },
+        "11": {
+          "temp_avg": 2,
+          "temp_max": 4,
+          "sea_temp": 7,
+          "rain_days": 16
+        },
+        "12": {
+          "temp_avg": 0,
+          "temp_max": 2,
+          "sea_temp": 6,
+          "rain_days": 17
+        }
+      },
+      "costs": {
+        "accommodation": {
+          "low": 90,
+          "mid": 140,
+          "high": 220
+        },
+        "food_per_day": {
+          "low": 35,
+          "mid": 58,
+          "high": 95
+        },
+        "transport_local_day": {
+          "low": 10,
+          "mid": 20,
+          "high": 35
+        },
+        "currency": "EUR"
+      },
+      "pois": [
+        {
+          "name": "Reine",
+          "lat": 67.933,
+          "lon": 13.089,
+          "kind": "borgo"
+        },
+        {
+          "name": "Haukland",
+          "lat": 68.16,
+          "lon": 13.546,
+          "kind": "spiaggia"
+        },
+        {
+          "name": "Reinebringen",
+          "lat": 67.937,
+          "lon": 13.079,
+          "kind": "sentiero"
+        },
+        {
+          "name": "Henningsvær",
+          "lat": 68.154,
+          "lon": 14.203,
+          "kind": "borgo"
+        },
+        {
+          "name": "Nusfjord",
+          "lat": 67.93,
+          "lon": 13.351,
+          "kind": "borgo"
+        },
+        {
+          "name": "Kvalvika",
+          "lat": 68.115,
+          "lon": 13.352,
+          "kind": "spiaggia"
+        }
+      ],
+      "notes": "sea a 20 e non 0: le spiagge sono spettacolari ma l'acqua non supera i 12 °C. È il caso che dimostra perché il filtro di stagionalità deve escludere e non penalizzare.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Moskenes_Reinebringen_lub_2025-07-21_img09_Aussicht.jpg/1280px-Moskenes_Reinebringen_lub_2025-07-21_img09_Aussicht.jpg",
+      "image_credit": "Lukas Beck · CC BY 4.0"
+    },
+    {
+      "id": "madeira",
+      "name": "Madeira",
+      "country": "PT",
+      "type": "island",
+      "coords": {
+        "lat": 32.7607,
+        "lon": -16.9595
+      },
+      "radius_km": 40,
+      "wikidata_id": null,
+      "wikipedia_title": "Madera",
+      "wikipedia_title_en": "Madeira Island",
+      "airports": [
+        "FNC"
+      ],
+      "scores": {
+        "nature": 90,
+        "culture": 45,
+        "sea": 62,
+        "food": 62,
+        "nightlife": 40,
+        "outdoor": 92,
+        "family": 68,
+        "offbeat": 55
+      },
+      "scores_source": "manual",
+      "climate_source": "seed_approx",
+      "climate": {
+        "1": {
+          "temp_avg": 16,
+          "temp_max": 19,
+          "sea_temp": 19,
+          "rain_days": 8
+        },
+        "2": {
+          "temp_avg": 16,
+          "temp_max": 19,
+          "sea_temp": 18,
+          "rain_days": 7
+        },
+        "3": {
+          "temp_avg": 17,
+          "temp_max": 20,
+          "sea_temp": 18,
+          "rain_days": 7
+        },
+        "4": {
+          "temp_avg": 17,
+          "temp_max": 20,
+          "sea_temp": 18,
+          "rain_days": 6
+        },
+        "5": {
+          "temp_avg": 18,
+          "temp_max": 21,
+          "sea_temp": 19,
+          "rain_days": 5
+        },
+        "6": {
+          "temp_avg": 20,
+          "temp_max": 23,
+          "sea_temp": 20,
+          "rain_days": 3
+        },
+        "7": {
+          "temp_avg": 22,
+          "temp_max": 25,
+          "sea_temp": 22,
+          "rain_days": 1
+        },
+        "8": {
+          "temp_avg": 23,
+          "temp_max": 26,
+          "sea_temp": 23,
+          "rain_days": 1
+        },
+        "9": {
+          "temp_avg": 23,
+          "temp_max": 26,
+          "sea_temp": 24,
+          "rain_days": 4
+        },
+        "10": {
+          "temp_avg": 21,
+          "temp_max": 24,
+          "sea_temp": 23,
+          "rain_days": 7
+        },
+        "11": {
+          "temp_avg": 19,
+          "temp_max": 22,
+          "sea_temp": 22,
+          "rain_days": 8
+        },
+        "12": {
+          "temp_avg": 17,
+          "temp_max": 20,
+          "sea_temp": 20,
+          "rain_days": 8
+        }
+      },
+      "costs": {
+        "accommodation": {
+          "low": 50,
+          "mid": 80,
+          "high": 130
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 33,
+          "high": 55
+        },
+        "transport_local_day": {
+          "low": 6,
+          "mid": 12,
+          "high": 20
+        },
+        "currency": "EUR"
+      },
+      "pois": [
+        {
+          "name": "Pico do Arieiro",
+          "lat": 32.735,
+          "lon": -16.928,
+          "kind": "panorama"
+        },
+        {
+          "name": "Levada do Caldeirão Verde",
+          "lat": 32.783,
+          "lon": -16.902,
+          "kind": "sentiero"
+        },
+        {
+          "name": "Funchal",
+          "lat": 32.65,
+          "lon": -16.908,
+          "kind": "borgo"
+        },
+        {
+          "name": "Ponta de São Lourenço",
+          "lat": 32.744,
+          "lon": -16.69,
+          "kind": "sentiero"
+        },
+        {
+          "name": "Porto Moniz",
+          "lat": 32.867,
+          "lon": -17.173,
+          "kind": "spiaggia"
+        },
+        {
+          "name": "Foresta di Fanal",
+          "lat": 32.809,
+          "lon": -17.147,
+          "kind": "natura"
+        }
+      ],
+      "notes": "Clima piatto tutto l'anno: è l'unica del seed senza vera stagionalità. sea a 62 e non più alto perché le spiagge sono poche e per lo più di ciottoli o piscine naturali.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Funchal%2C_Jardins_da_Quinta_Vigia_%28lookout%29.jpg/1280px-Funchal%2C_Jardins_da_Quinta_Vigia_%28lookout%29.jpg",
+      "image_credit": "Dr. Thomas Liptak · CC BY-SA 4.0"
+    },
+    {
+      "id": "maiorca",
+      "name": "Maiorca",
+      "country": "ES",
+      "type": "island",
+      "coords": {
+        "lat": 39.6953,
+        "lon": 2.9712
+      },
+      "radius_km": 60,
+      "wikidata_id": null,
+      "wikipedia_title": "Maiorca",
+      "wikipedia_title_en": "Mallorca",
+      "airports": [
+        "PMI"
+      ],
+      "scores": {
+        "nature": 68,
+        "culture": 55,
+        "sea": 85,
+        "food": 72,
+        "nightlife": 62,
+        "outdoor": 72,
+        "family": 80,
+        "offbeat": 20
+      },
+      "scores_source": "manual",
+      "climate_source": "seed_approx",
+      "climate": {
+        "1": {
+          "temp_avg": 11,
+          "temp_max": 15,
+          "sea_temp": 15,
+          "rain_days": 6
+        },
+        "2": {
+          "temp_avg": 11,
+          "temp_max": 15,
+          "sea_temp": 14,
+          "rain_days": 6
+        },
+        "3": {
+          "temp_avg": 13,
+          "temp_max": 17,
+          "sea_temp": 14,
+          "rain_days": 6
+        },
+        "4": {
+          "temp_avg": 15,
+          "temp_max": 19,
+          "sea_temp": 15,
+          "rain_days": 6
+        },
+        "5": {
+          "temp_avg": 18,
+          "temp_max": 22,
+          "sea_temp": 18,
+          "rain_days": 5
+        },
+        "6": {
+          "temp_avg": 22,
+          "temp_max": 26,
+          "sea_temp": 22,
+          "rain_days": 3
+        },
+        "7": {
+          "temp_avg": 25,
+          "temp_max": 29,
+          "sea_temp": 25,
+          "rain_days": 1
+        },
+        "8": {
+          "temp_avg": 26,
+          "temp_max": 30,
+          "sea_temp": 26,
+          "rain_days": 2
+        },
+        "9": {
+          "temp_avg": 23,
+          "temp_max": 27,
+          "sea_temp": 25,
+          "rain_days": 5
+        },
+        "10": {
+          "temp_avg": 19,
+          "temp_max": 23,
+          "sea_temp": 23,
+          "rain_days": 7
+        },
+        "11": {
+          "temp_avg": 15,
+          "temp_max": 19,
+          "sea_temp": 20,
+          "rain_days": 7
+        },
+        "12": {
+          "temp_avg": 12,
+          "temp_max": 16,
+          "sea_temp": 17,
+          "rain_days": 7
+        }
+      },
+      "costs": {
+        "accommodation": {
+          "low": 60,
+          "mid": 100,
+          "high": 170
+        },
+        "food_per_day": {
+          "low": 22,
+          "mid": 38,
+          "high": 65
+        },
+        "transport_local_day": {
+          "low": 6,
+          "mid": 12,
+          "high": 22
+        },
+        "currency": "EUR"
+      },
+      "pois": [
+        {
+          "name": "Serra de Tramuntana",
+          "lat": 39.75,
+          "lon": 2.75,
+          "kind": "sentiero"
+        },
+        {
+          "name": "Palma",
+          "lat": 39.5696,
+          "lon": 2.6502,
+          "kind": "borgo"
+        },
+        {
+          "name": "Cala Deià",
+          "lat": 39.748,
+          "lon": 2.642,
+          "kind": "spiaggia"
+        },
+        {
+          "name": "Sóller",
+          "lat": 39.767,
+          "lon": 2.715,
+          "kind": "borgo"
+        },
+        {
+          "name": "Es Trenc",
+          "lat": 39.35,
+          "lon": 3,
+          "kind": "spiaggia"
+        },
+        {
+          "name": "Cap de Formentor",
+          "lat": 39.96,
+          "lon": 3.21,
+          "kind": "panorama"
+        }
+      ],
+      "notes": "Il raggio di 60 km copre due isole diverse: la costa turistica del sud e la Serra de Tramuntana a nord, che è patrimonio UNESCO e trekking vero. Candidata a essere spezzata quando il dataset cresce.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Vall_de_Soller.jpg/1280px-Vall_de_Soller.jpg",
+      "image_credit": "Top Cat 14 · Public domain"
+    },
+    {
+      "id": "parigi",
+      "name": "Parigi",
+      "country": "FR",
+      "type": "city",
+      "coords": {
+        "lat": 48.8566,
+        "lon": 2.3522
+      },
+      "radius_km": 30,
+      "wikidata_id": null,
+      "wikipedia_title": "Parigi",
+      "wikipedia_title_en": "Paris",
+      "airports": [
+        "CDG",
+        "ORY"
+      ],
+      "scores": {
+        "nature": 35,
+        "culture": 97,
+        "sea": 0,
+        "food": 92,
+        "nightlife": 78,
+        "outdoor": 30,
+        "family": 68,
+        "offbeat": 5
+      },
+      "scores_source": "manual",
+      "climate_source": "seed_approx",
+      "climate": {
+        "1": {
+          "temp_avg": 5,
+          "temp_max": 7,
+          "sea_temp": null,
+          "rain_days": 10
+        },
+        "2": {
+          "temp_avg": 6,
+          "temp_max": 8,
+          "sea_temp": null,
+          "rain_days": 9
+        },
+        "3": {
+          "temp_avg": 9,
+          "temp_max": 13,
+          "sea_temp": null,
+          "rain_days": 9
+        },
+        "4": {
+          "temp_avg": 11,
+          "temp_max": 16,
+          "sea_temp": null,
+          "rain_days": 9
+        },
+        "5": {
+          "temp_avg": 15,
+          "temp_max": 20,
+          "sea_temp": null,
+          "rain_days": 10
+        },
+        "6": {
+          "temp_avg": 18,
+          "temp_max": 23,
+          "sea_temp": null,
+          "rain_days": 8
+        },
+        "7": {
+          "temp_avg": 20,
+          "temp_max": 25,
+          "sea_temp": null,
+          "rain_days": 7
+        },
+        "8": {
+          "temp_avg": 20,
+          "temp_max": 25,
+          "sea_temp": null,
+          "rain_days": 7
+        },
+        "9": {
+          "temp_avg": 17,
+          "temp_max": 21,
+          "sea_temp": null,
+          "rain_days": 7
+        },
+        "10": {
+          "temp_avg": 13,
+          "temp_max": 16,
+          "sea_temp": null,
+          "rain_days": 9
+        },
+        "11": {
+          "temp_avg": 8,
+          "temp_max": 11,
+          "sea_temp": null,
+          "rain_days": 10
+        },
+        "12": {
+          "temp_avg": 6,
+          "temp_max": 8,
+          "sea_temp": null,
+          "rain_days": 11
+        }
+      },
+      "costs": {
+        "accommodation": {
+          "low": 95,
+          "mid": 155,
+          "high": 260
+        },
+        "food_per_day": {
+          "low": 30,
+          "mid": 55,
+          "high": 95
+        },
+        "transport_local_day": {
+          "low": 5,
+          "mid": 9,
+          "high": 16
+        },
+        "currency": "EUR"
+      },
+      "pois": [
+        {
+          "name": "Louvre",
+          "lat": 48.8606,
+          "lon": 2.3376,
+          "kind": "monumento"
+        },
+        {
+          "name": "Marais",
+          "lat": 48.857,
+          "lon": 2.36,
+          "kind": "quartiere"
+        },
+        {
+          "name": "Montmartre",
+          "lat": 48.8867,
+          "lon": 2.3431,
+          "kind": "quartiere"
+        },
+        {
+          "name": "Torre Eiffel",
+          "lat": 48.8584,
+          "lon": 2.2945,
+          "kind": "monumento"
+        },
+        {
+          "name": "Père-Lachaise",
+          "lat": 48.8614,
+          "lon": 2.3933,
+          "kind": "natura"
+        },
+        {
+          "name": "Canal Saint-Martin",
+          "lat": 48.871,
+          "lon": 2.366,
+          "kind": "quartiere"
+        }
+      ],
+      "notes": "La più cara del seed insieme a Santorini e alle Lofoten. Fuori rotta a 5: se il tuo peso su quell’asse è alto e Parigi resta in cima, il modello ha un problema.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/La_Tour_Eiffel_vue_de_la_Tour_Saint-Jacques%2C_Paris_ao%C3%BBt_2014_%282%29.jpg/1280px-La_Tour_Eiffel_vue_de_la_Tour_Saint-Jacques%2C_Paris_ao%C3%BBt_2014_%282%29.jpg",
+      "image_credit": "Yann Caradec from Paris, France · CC BY-SA 2.0"
+    },
+    {
+      "id": "praga",
+      "name": "Praga",
+      "country": "CZ",
+      "type": "city",
+      "coords": {
+        "lat": 50.0755,
+        "lon": 14.4378
+      },
+      "radius_km": 30,
+      "wikidata_id": null,
+      "wikipedia_title": "Praga",
+      "wikipedia_title_en": "Prague",
+      "airports": [
+        "PRG"
+      ],
+      "scores": {
+        "nature": 35,
+        "culture": 92,
+        "sea": 0,
+        "food": 70,
+        "nightlife": 82,
+        "outdoor": 30,
+        "family": 62,
+        "offbeat": 20
+      },
+      "scores_source": "manual",
+      "climate_source": "seed_approx",
+      "climate": {
+        "1": {
+          "temp_avg": -1,
+          "temp_max": 2,
+          "sea_temp": null,
+          "rain_days": 8
+        },
+        "2": {
+          "temp_avg": 0,
+          "temp_max": 4,
+          "sea_temp": null,
+          "rain_days": 7
+        },
+        "3": {
+          "temp_avg": 4,
+          "temp_max": 9,
+          "sea_temp": null,
+          "rain_days": 7
+        },
+        "4": {
+          "temp_avg": 9,
+          "temp_max": 15,
+          "sea_temp": null,
+          "rain_days": 7
+        },
+        "5": {
+          "temp_avg": 14,
+          "temp_max": 20,
+          "sea_temp": null,
+          "rain_days": 9
+        },
+        "6": {
+          "temp_avg": 17,
+          "temp_max": 23,
+          "sea_temp": null,
+          "rain_days": 10
+        },
+        "7": {
+          "temp_avg": 19,
+          "temp_max": 25,
+          "sea_temp": null,
+          "rain_days": 10
+        },
+        "8": {
+          "temp_avg": 18,
+          "temp_max": 24,
+          "sea_temp": null,
+          "rain_days": 9
+        },
+        "9": {
+          "temp_avg": 14,
+          "temp_max": 19,
+          "sea_temp": null,
+          "rain_days": 7
+        },
+        "10": {
+          "temp_avg": 9,
+          "temp_max": 13,
+          "sea_temp": null,
+          "rain_days": 7
+        },
+        "11": {
+          "temp_avg": 4,
+          "temp_max": 7,
+          "sea_temp": null,
+          "rain_days": 8
+        },
+        "12": {
+          "temp_avg": 0,
+          "temp_max": 3,
+          "sea_temp": null,
+          "rain_days": 9
+        }
+      },
+      "costs": {
+        "accommodation": {
+          "low": 45,
+          "mid": 70,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 18,
+          "mid": 28,
+          "high": 48
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 5,
+          "high": 9
+        },
+        "currency": "EUR"
+      },
+      "pois": [
+        {
+          "name": "Ponte Carlo",
+          "lat": 50.0865,
+          "lon": 14.4114,
+          "kind": "monumento"
+        },
+        {
+          "name": "Castello di Praga",
+          "lat": 50.09,
+          "lon": 14.4004,
+          "kind": "monumento"
+        },
+        {
+          "name": "Piazza della Città Vecchia",
+          "lat": 50.087,
+          "lon": 14.4208,
+          "kind": "quartiere"
+        },
+        {
+          "name": "Collina di Petřín",
+          "lat": 50.0836,
+          "lon": 14.3953,
+          "kind": "panorama"
+        },
+        {
+          "name": "Vyšehrad",
+          "lat": 50.0642,
+          "lon": 14.4188,
+          "kind": "monumento"
+        }
+      ],
+      "notes": "Centro molto affollato da maggio a settembre. Birra economica ovunque. Nessun accesso al mare: sea = 0 per costruzione, non per giudizio.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Prague_%286365119737%29.jpg/1280px-Prague_%286365119737%29.jpg",
+      "image_credit": "Moyan Brenn from Italy · CC BY 2.0"
+    },
+    {
+      "id": "roma",
+      "name": "Roma",
+      "country": "IT",
+      "type": "city",
+      "coords": {
+        "lat": 41.9028,
+        "lon": 12.4964
+      },
+      "radius_km": 30,
+      "wikidata_id": null,
+      "wikipedia_title": "Roma",
+      "wikipedia_title_en": "Rome",
+      "airports": [
+        "FCO",
+        "CIA"
+      ],
+      "scores": {
+        "nature": 30,
+        "culture": 98,
+        "sea": 0,
+        "food": 88,
+        "nightlife": 70,
+        "outdoor": 30,
+        "family": 60,
+        "offbeat": 6
+      },
+      "scores_source": "manual",
+      "climate_source": "seed_approx",
+      "climate": {
+        "1": {
+          "temp_avg": 8,
+          "temp_max": 12,
+          "sea_temp": null,
+          "rain_days": 8
+        },
+        "2": {
+          "temp_avg": 9,
+          "temp_max": 13,
+          "sea_temp": null,
+          "rain_days": 8
+        },
+        "3": {
+          "temp_avg": 11,
+          "temp_max": 16,
+          "sea_temp": null,
+          "rain_days": 8
+        },
+        "4": {
+          "temp_avg": 14,
+          "temp_max": 19,
+          "sea_temp": null,
+          "rain_days": 8
+        },
+        "5": {
+          "temp_avg": 18,
+          "temp_max": 24,
+          "sea_temp": null,
+          "rain_days": 6
+        },
+        "6": {
+          "temp_avg": 22,
+          "temp_max": 28,
+          "sea_temp": null,
+          "rain_days": 4
+        },
+        "7": {
+          "temp_avg": 25,
+          "temp_max": 31,
+          "sea_temp": null,
+          "rain_days": 2
+        },
+        "8": {
+          "temp_avg": 25,
+          "temp_max": 31,
+          "sea_temp": null,
+          "rain_days": 3
+        },
+        "9": {
+          "temp_avg": 22,
+          "temp_max": 27,
+          "sea_temp": null,
+          "rain_days": 6
+        },
+        "10": {
+          "temp_avg": 18,
+          "temp_max": 23,
+          "sea_temp": null,
+          "rain_days": 8
+        },
+        "11": {
+          "temp_avg": 13,
+          "temp_max": 17,
+          "sea_temp": null,
+          "rain_days": 10
+        },
+        "12": {
+          "temp_avg": 9,
+          "temp_max": 13,
+          "sea_temp": null,
+          "rain_days": 9
+        }
+      },
+      "costs": {
+        "accommodation": {
+          "low": 75,
+          "mid": 125,
+          "high": 210
+        },
+        "food_per_day": {
+          "low": 25,
+          "mid": 45,
+          "high": 78
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "pois": [
+        {
+          "name": "Colosseo",
+          "lat": 41.8902,
+          "lon": 12.4922,
+          "kind": "monumento"
+        },
+        {
+          "name": "Pantheon",
+          "lat": 41.8986,
+          "lon": 12.4769,
+          "kind": "monumento"
+        },
+        {
+          "name": "Musei Vaticani",
+          "lat": 41.9065,
+          "lon": 12.4536,
+          "kind": "monumento"
+        },
+        {
+          "name": "Trastevere",
+          "lat": 41.889,
+          "lon": 12.47,
+          "kind": "quartiere"
+        },
+        {
+          "name": "Villa Borghese",
+          "lat": 41.914,
+          "lon": 12.4922,
+          "kind": "natura"
+        },
+        {
+          "name": "Testaccio",
+          "lat": 41.876,
+          "lon": 12.475,
+          "kind": "gastronomia"
+        }
+      ],
+      "notes": "Il litorale di Ostia è a 25 km, ma Roma non è una destinazione di mare ed è modellata come tale: con il filtro mare attivo esce, che è il comportamento giusto. Cultura a 98: è il massimo del seed, e serve da riferimento.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Trevi_Fountain%2C_Rome%2C_Italy_2_-_May_2007.jpg/1280px-Trevi_Fountain%2C_Rome%2C_Italy_2_-_May_2007.jpg",
+      "image_credit": "Diliff · CC BY 3.0"
+    },
+    {
+      "id": "san-sebastian",
+      "name": "San Sebastián",
+      "country": "ES",
+      "type": "city",
+      "coords": {
+        "lat": 43.3183,
+        "lon": -1.9812
+      },
+      "radius_km": 30,
+      "wikidata_id": null,
+      "wikipedia_title": "San Sebastián",
+      "wikipedia_title_en": "San Sebastián",
+      "airports": [
+        "EAS",
+        "BIO"
+      ],
+      "scores": {
+        "nature": 55,
+        "culture": 65,
+        "sea": 72,
+        "food": 97,
+        "nightlife": 70,
+        "outdoor": 60,
+        "family": 72,
+        "offbeat": 45
+      },
+      "scores_source": "manual",
+      "climate_source": "seed_approx",
+      "climate": {
+        "1": {
+          "temp_avg": 8,
+          "temp_max": 12,
+          "sea_temp": 13,
+          "rain_days": 13
+        },
+        "2": {
+          "temp_avg": 9,
+          "temp_max": 13,
+          "sea_temp": 12,
+          "rain_days": 11
+        },
+        "3": {
+          "temp_avg": 11,
+          "temp_max": 15,
+          "sea_temp": 12,
+          "rain_days": 11
+        },
+        "4": {
+          "temp_avg": 12,
+          "temp_max": 16,
+          "sea_temp": 13,
+          "rain_days": 12
+        },
+        "5": {
+          "temp_avg": 15,
+          "temp_max": 19,
+          "sea_temp": 15,
+          "rain_days": 11
+        },
+        "6": {
+          "temp_avg": 18,
+          "temp_max": 22,
+          "sea_temp": 18,
+          "rain_days": 8
+        },
+        "7": {
+          "temp_avg": 20,
+          "temp_max": 24,
+          "sea_temp": 20,
+          "rain_days": 7
+        },
+        "8": {
+          "temp_avg": 20,
+          "temp_max": 24,
+          "sea_temp": 21,
+          "rain_days": 8
+        },
+        "9": {
+          "temp_avg": 18,
+          "temp_max": 22,
+          "sea_temp": 21,
+          "rain_days": 9
+        },
+        "10": {
+          "temp_avg": 15,
+          "temp_max": 19,
+          "sea_temp": 19,
+          "rain_days": 11
+        },
+        "11": {
+          "temp_avg": 11,
+          "temp_max": 15,
+          "sea_temp": 17,
+          "rain_days": 13
+        },
+        "12": {
+          "temp_avg": 9,
+          "temp_max": 13,
+          "sea_temp": 15,
+          "rain_days": 13
+        }
+      },
+      "costs": {
+        "accommodation": {
+          "low": 70,
+          "mid": 110,
+          "high": 175
+        },
+        "food_per_day": {
+          "low": 30,
+          "mid": 50,
+          "high": 85
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 6,
+          "high": 10
+        },
+        "currency": "EUR"
+      },
+      "pois": [
+        {
+          "name": "Playa de la Concha",
+          "lat": 43.3175,
+          "lon": -1.988,
+          "kind": "spiaggia"
+        },
+        {
+          "name": "Parte Vieja",
+          "lat": 43.3235,
+          "lon": -1.984,
+          "kind": "quartiere"
+        },
+        {
+          "name": "Monte Igueldo",
+          "lat": 43.321,
+          "lon": -2.01,
+          "kind": "panorama"
+        },
+        {
+          "name": "Monte Urgull",
+          "lat": 43.326,
+          "lon": -1.988,
+          "kind": "natura"
+        },
+        {
+          "name": "Playa de la Zurriola",
+          "lat": 43.323,
+          "lon": -1.974,
+          "kind": "spiaggia"
+        }
+      ],
+      "notes": "Il punteggio food a 97 è deliberatamente estremo: se il ranking non la porta in cima con food al massimo, il modello è rotto. Piove spesso anche d'estate.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/San_Sebasti%C3%A1n_-_Ayuntamiento_10.jpg/1280px-San_Sebasti%C3%A1n_-_Ayuntamiento_10.jpg",
+      "image_credit": "Zarateman · CC0"
+    },
+    {
+      "id": "santorini",
+      "name": "Santorini",
+      "country": "GR",
+      "type": "island",
+      "coords": {
+        "lat": 36.3932,
+        "lon": 25.4615
+      },
+      "radius_km": 20,
+      "wikidata_id": null,
+      "wikipedia_title": "Santorini",
+      "wikipedia_title_en": "Santorini",
+      "airports": [
+        "JTR"
+      ],
+      "scores": {
+        "nature": 62,
+        "culture": 55,
+        "sea": 78,
+        "food": 68,
+        "nightlife": 58,
+        "outdoor": 45,
+        "family": 40,
+        "offbeat": 6
+      },
+      "scores_source": "manual",
+      "climate_source": "seed_approx",
+      "climate": {
+        "1": {
+          "temp_avg": 12,
+          "temp_max": 14,
+          "sea_temp": 17,
+          "rain_days": 10
+        },
+        "2": {
+          "temp_avg": 12,
+          "temp_max": 14,
+          "sea_temp": 16,
+          "rain_days": 8
+        },
+        "3": {
+          "temp_avg": 14,
+          "temp_max": 16,
+          "sea_temp": 16,
+          "rain_days": 6
+        },
+        "4": {
+          "temp_avg": 16,
+          "temp_max": 19,
+          "sea_temp": 17,
+          "rain_days": 4
+        },
+        "5": {
+          "temp_avg": 20,
+          "temp_max": 23,
+          "sea_temp": 19,
+          "rain_days": 2
+        },
+        "6": {
+          "temp_avg": 24,
+          "temp_max": 27,
+          "sea_temp": 22,
+          "rain_days": 1
+        },
+        "7": {
+          "temp_avg": 26,
+          "temp_max": 29,
+          "sea_temp": 24,
+          "rain_days": 0
+        },
+        "8": {
+          "temp_avg": 26,
+          "temp_max": 29,
+          "sea_temp": 25,
+          "rain_days": 0
+        },
+        "9": {
+          "temp_avg": 23,
+          "temp_max": 26,
+          "sea_temp": 25,
+          "rain_days": 2
+        },
+        "10": {
+          "temp_avg": 20,
+          "temp_max": 23,
+          "sea_temp": 23,
+          "rain_days": 5
+        },
+        "11": {
+          "temp_avg": 16,
+          "temp_max": 19,
+          "sea_temp": 21,
+          "rain_days": 8
+        },
+        "12": {
+          "temp_avg": 14,
+          "temp_max": 16,
+          "sea_temp": 19,
+          "rain_days": 11
+        }
+      },
+      "costs": {
+        "accommodation": {
+          "low": 100,
+          "mid": 175,
+          "high": 300
+        },
+        "food_per_day": {
+          "low": 30,
+          "mid": 52,
+          "high": 90
+        },
+        "transport_local_day": {
+          "low": 8,
+          "mid": 15,
+          "high": 26
+        },
+        "currency": "EUR"
+      },
+      "pois": [
+        {
+          "name": "Oia",
+          "lat": 36.4618,
+          "lon": 25.3753,
+          "kind": "borgo"
+        },
+        {
+          "name": "Fira",
+          "lat": 36.4167,
+          "lon": 25.4333,
+          "kind": "borgo"
+        },
+        {
+          "name": "Caldera",
+          "lat": 36.4,
+          "lon": 25.4,
+          "kind": "panorama"
+        },
+        {
+          "name": "Red Beach",
+          "lat": 36.348,
+          "lon": 25.394,
+          "kind": "spiaggia"
+        },
+        {
+          "name": "Akrotiri",
+          "lat": 36.352,
+          "lon": 25.403,
+          "kind": "monumento"
+        }
+      ],
+      "notes": "La più cara per notte del seed. Mare a 78 e non di più: le spiagge sono di sabbia vulcanica scura e poche, il richiamo è la caldera, non il bagno.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Oia_sunset_-_panoramio_%282%29.jpg/1280px-Oia_sunset_-_panoramio_%282%29.jpg",
+      "image_credit": "TomasEE · CC BY 3.0"
+    },
+    {
+      "id": "tallinn",
+      "name": "Tallinn",
+      "country": "EE",
+      "type": "city",
+      "coords": {
+        "lat": 59.437,
+        "lon": 24.7536
+      },
+      "radius_km": 30,
+      "wikidata_id": null,
+      "wikipedia_title": "Tallinn",
+      "wikipedia_title_en": "Tallinn",
+      "airports": [
+        "TLL"
+      ],
+      "scores": {
+        "nature": 50,
+        "culture": 78,
+        "sea": 35,
+        "food": 62,
+        "nightlife": 58,
+        "outdoor": 45,
+        "family": 60,
+        "offbeat": 55
+      },
+      "scores_source": "manual",
+      "climate_source": "seed_approx",
+      "climate": {
+        "1": {
+          "temp_avg": -4,
+          "temp_max": -1,
+          "sea_temp": 1,
+          "rain_days": 10
+        },
+        "2": {
+          "temp_avg": -5,
+          "temp_max": -2,
+          "sea_temp": 1,
+          "rain_days": 8
+        },
+        "3": {
+          "temp_avg": -1,
+          "temp_max": 3,
+          "sea_temp": 1,
+          "rain_days": 8
+        },
+        "4": {
+          "temp_avg": 5,
+          "temp_max": 9,
+          "sea_temp": 3,
+          "rain_days": 7
+        },
+        "5": {
+          "temp_avg": 11,
+          "temp_max": 15,
+          "sea_temp": 8,
+          "rain_days": 6
+        },
+        "6": {
+          "temp_avg": 15,
+          "temp_max": 19,
+          "sea_temp": 14,
+          "rain_days": 7
+        },
+        "7": {
+          "temp_avg": 18,
+          "temp_max": 22,
+          "sea_temp": 18,
+          "rain_days": 9
+        },
+        "8": {
+          "temp_avg": 17,
+          "temp_max": 21,
+          "sea_temp": 18,
+          "rain_days": 9
+        },
+        "9": {
+          "temp_avg": 12,
+          "temp_max": 16,
+          "sea_temp": 15,
+          "rain_days": 10
+        },
+        "10": {
+          "temp_avg": 7,
+          "temp_max": 10,
+          "sea_temp": 11,
+          "rain_days": 11
+        },
+        "11": {
+          "temp_avg": 2,
+          "temp_max": 4,
+          "sea_temp": 6,
+          "rain_days": 12
+        },
+        "12": {
+          "temp_avg": -2,
+          "temp_max": 1,
+          "sea_temp": 3,
+          "rain_days": 11
+        }
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 65,
+          "high": 105
+        },
+        "food_per_day": {
+          "low": 18,
+          "mid": 30,
+          "high": 50
+        },
+        "transport_local_day": {
+          "low": 2,
+          "mid": 4,
+          "high": 8
+        },
+        "currency": "EUR"
+      },
+      "pois": [
+        {
+          "name": "Vanalinn (Città Vecchia)",
+          "lat": 59.437,
+          "lon": 24.745,
+          "kind": "quartiere"
+        },
+        {
+          "name": "Toompea",
+          "lat": 59.436,
+          "lon": 24.739,
+          "kind": "panorama"
+        },
+        {
+          "name": "Kadriorg",
+          "lat": 59.439,
+          "lon": 24.79,
+          "kind": "natura"
+        },
+        {
+          "name": "Telliskivi",
+          "lat": 59.443,
+          "lon": 24.729,
+          "kind": "quartiere"
+        },
+        {
+          "name": "Pirita",
+          "lat": 59.469,
+          "lon": 24.83,
+          "kind": "spiaggia"
+        }
+      ],
+      "notes": "Il Baltico raggiunge i 18 °C solo a luglio-agosto: con il filtro mare attivo esce da tutto il resto dell'anno. È il caso di test del filtro di stagionalità.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Raekoja_plats_at_night.jpg/1280px-Raekoja_plats_at_night.jpg",
+      "image_credit": "Jorge Franganillo · CC BY 2.0"
+    },
+    {
+      "id": "vienna",
+      "name": "Vienna",
+      "country": "AT",
+      "type": "city",
+      "coords": {
+        "lat": 48.2082,
+        "lon": 16.3738
+      },
+      "radius_km": 25,
+      "wikidata_id": null,
+      "wikipedia_title": "Vienna",
+      "wikipedia_title_en": "Vienna",
+      "airports": [
+        "VIE"
+      ],
+      "scores": {
+        "nature": 42,
+        "culture": 92,
+        "sea": 0,
+        "food": 72,
+        "nightlife": 60,
+        "outdoor": 38,
+        "family": 78,
+        "offbeat": 22
+      },
+      "scores_source": "manual",
+      "climate_source": "seed_approx",
+      "climate": {
+        "1": {
+          "temp_avg": 0,
+          "temp_max": 3,
+          "sea_temp": null,
+          "rain_days": 8
+        },
+        "2": {
+          "temp_avg": 1,
+          "temp_max": 5,
+          "sea_temp": null,
+          "rain_days": 7
+        },
+        "3": {
+          "temp_avg": 5,
+          "temp_max": 10,
+          "sea_temp": null,
+          "rain_days": 8
+        },
+        "4": {
+          "temp_avg": 10,
+          "temp_max": 16,
+          "sea_temp": null,
+          "rain_days": 7
+        },
+        "5": {
+          "temp_avg": 15,
+          "temp_max": 21,
+          "sea_temp": null,
+          "rain_days": 9
+        },
+        "6": {
+          "temp_avg": 18,
+          "temp_max": 24,
+          "sea_temp": null,
+          "rain_days": 9
+        },
+        "7": {
+          "temp_avg": 20,
+          "temp_max": 26,
+          "sea_temp": null,
+          "rain_days": 9
+        },
+        "8": {
+          "temp_avg": 20,
+          "temp_max": 26,
+          "sea_temp": null,
+          "rain_days": 8
+        },
+        "9": {
+          "temp_avg": 15,
+          "temp_max": 20,
+          "sea_temp": null,
+          "rain_days": 7
+        },
+        "10": {
+          "temp_avg": 10,
+          "temp_max": 14,
+          "sea_temp": null,
+          "rain_days": 7
+        },
+        "11": {
+          "temp_avg": 5,
+          "temp_max": 8,
+          "sea_temp": null,
+          "rain_days": 8
+        },
+        "12": {
+          "temp_avg": 1,
+          "temp_max": 4,
+          "sea_temp": null,
+          "rain_days": 9
+        }
+      },
+      "costs": {
+        "accommodation": {
+          "low": 65,
+          "mid": 105,
+          "high": 175
+        },
+        "food_per_day": {
+          "low": 22,
+          "mid": 40,
+          "high": 68
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "pois": [
+        {
+          "name": "Schönbrunn",
+          "lat": 48.1849,
+          "lon": 16.3122,
+          "kind": "monumento"
+        },
+        {
+          "name": "Ringstraße",
+          "lat": 48.208,
+          "lon": 16.37,
+          "kind": "quartiere"
+        },
+        {
+          "name": "Prater",
+          "lat": 48.2167,
+          "lon": 16.396,
+          "kind": "natura"
+        },
+        {
+          "name": "Naschmarkt",
+          "lat": 48.1985,
+          "lon": 16.363,
+          "kind": "gastronomia"
+        },
+        {
+          "name": "MuseumsQuartier",
+          "lat": 48.203,
+          "lon": 16.359,
+          "kind": "quartiere"
+        }
+      ],
+      "notes": "Famiglia a 78, il valore più alto fra le città: distanze brevi, trasporto pubblico eccellente, molto verde. È il contraltare della Costiera Amalfitana, che su quell’asse sta a 45.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Schoenbrunn_philharmoniker_2012.jpg/1280px-Schoenbrunn_philharmoniker_2012.jpg",
+      "image_credit": "Superbass · CC BY-SA 3.0"
+    }
+  ]
+}

@@ -1,0 +1,448 @@
+import { useRef, useState } from 'react'
+import { AXES, DESTINATION_TYPES, MONTHS, emptyScores } from '../lib/axes.js'
+import {
+  clearDestinationOverrides,
+  clearOverride,
+  countOverriddenDestinations,
+  downloadOverrides,
+  isOverridden,
+  parseOverridesFile,
+  seedById,
+  setOverride,
+} from '../lib/store.js'
+
+const slugify = (text) =>
+  text
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+
+function blankDestination(name) {
+  return {
+    __new: true,
+    name,
+    country: 'IT',
+    type: 'city',
+    coords: { lat: 41.9, lon: 12.5 },
+    radius_km: 30,
+    wikidata_id: null,
+    wikipedia_title: name,
+    wikipedia_title_en: '',
+    airports: [],
+    scores: emptyScores(50),
+    scores_source: 'manual',
+    climate_source: 'manual',
+    climate: Object.fromEntries(
+      MONTHS.map((_, i) => [String(i + 1), { temp_avg: null, temp_max: null, sea_temp: null, rain_days: null }])
+    ),
+    costs: {
+      accommodation: { low: 50, mid: 80, high: 130 },
+      food_per_day: { low: 20, mid: 32, high: 55 },
+      transport_local_day: { low: 4, mid: 8, high: 15 },
+      currency: 'EUR',
+    },
+    pois: [],
+    notes: '',
+  }
+}
+
+/**
+ * Campo con stato di override.
+ *
+ * Il ripristino sta DENTRO il riquadro insieme al controllo, non accanto
+ * all'etichetta: il riquadro accento è ciò che segnala "questo valore non è più
+ * quello del seed", e l'azione per annullarlo deve stare dove si vede il
+ * problema.
+ */
+function OField({ label, changed, onReset, children }) {
+  return (
+    <div className={`ofield${changed ? ' ofield--changed' : ''}`}>
+      <span className="ofield__label">{label}</span>
+      <div className="ofield__box">
+        {children}
+        {changed && (
+          <button
+            type="button"
+            className="ofield__reset"
+            onClick={onReset}
+            title="Riporta questo campo al valore del seed"
+          >
+            ripristina
+          </button>
+        )}
+      </div>
+    </div>
+  )
+}
+
+const COST_ROWS = [
+  ['accommodation', 'Alloggio, a notte'],
+  ['food_per_day', 'Cibo, al giorno'],
+  ['transport_local_day', 'Trasporti locali, al giorno'],
+]
+
+export default function EditorPanel({ merged, overrides, onOverridesChange, initialId, onClose }) {
+  const [id, setId] = useState(initialId || merged[0]?.id)
+  const [newName, setNewName] = useState('')
+  const [message, setMessage] = useState(null)
+  const fileInput = useRef(null)
+
+  const destination = merged.find((d) => d.id === id) || merged[0]
+  if (!destination) return null
+
+  const fromSeed = Boolean(seedById(destination.id))
+  const read = (path) => path.reduce((node, key) => (node == null ? undefined : node[key]), destination)
+  // Per una destinazione creata ex novo tutto vive nell'override: marcare ogni
+  // campo come "modificato" sarebbe rumore senza informazione.
+  const changed = (path) => fromSeed && isOverridden(overrides, destination.id, path)
+  const write = (path, value) => onOverridesChange(setOverride(overrides, destination.id, path, value))
+  const reset = (path) => onOverridesChange(clearOverride(overrides, destination.id, path))
+
+  const numberOrNull = (raw) => (raw === '' ? null : Number(raw))
+
+  const createDestination = (event) => {
+    event.preventDefault()
+    const name = newName.trim()
+    if (!name) return
+    const slug = slugify(name)
+    if (!slug) return
+    if (merged.some((d) => d.id === slug)) {
+      setMessage({ tone: 'warn', text: `Esiste già una destinazione con id "${slug}".` })
+      return
+    }
+    onOverridesChange({
+      ...overrides,
+      destinations: { ...overrides.destinations, [slug]: blankDestination(name) },
+    })
+    setId(slug)
+    setNewName('')
+    setMessage({ tone: 'info', text: `Creata "${name}". Compila punteggi, costi e clima.` })
+  }
+
+  const importFile = async (event) => {
+    const file = event.target.files?.[0]
+    if (!file) return
+    try {
+      const parsed = parseOverridesFile(await file.text())
+      onOverridesChange(parsed)
+      setMessage({
+        tone: 'info',
+        text: `Importate le modifiche di ${countOverriddenDestinations(parsed)} destinazioni.`,
+      })
+    } catch (error) {
+      setMessage({ tone: 'warn', text: `Import fallito: ${error.message}` })
+    }
+    event.target.value = ''
+  }
+
+  return (
+    <div className="overlay overlay--center" onClick={onClose} role="presentation">
+      <section
+        className="panel panel--modal"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Editor destinazioni"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <header className="panel__head">
+          <div>
+            <h2>Editor</h2>
+            <p>
+              Le modifiche restano in un layer separato: <code>data/destinations.json</code> non
+              viene mai riscritto dall’app.
+            </p>
+          </div>
+          <button type="button" className="panel__close" onClick={onClose} aria-label="Chiudi">×</button>
+        </header>
+
+        <div className="panel__body">
+          {message && (
+            <div className={`notice${message.tone === 'warn' ? ' notice--warn' : ''}`}>{message.text}</div>
+          )}
+
+          <div className="section">
+            <div className="inline inline--wrap" style={{ marginBottom: 12 }}>
+              <label htmlFor="ed-dest" className="visually-hidden">Destinazione</label>
+              <select
+                id="ed-dest"
+                className="control"
+                style={{ width: 'auto', minWidth: 240 }}
+                value={destination.id}
+                onChange={(e) => { setId(e.target.value); setMessage(null) }}
+              >
+                {merged.map((d) => (
+                  <option key={d.id} value={d.id}>
+                    {d.name}
+                    {overrides.destinations[d.id] ? ' •' : ''}
+                  </option>
+                ))}
+              </select>
+              {!fromSeed && <span className="badge badge--edit">creata da te</span>}
+              {fromSeed && overrides.destinations[destination.id] && (
+                <span className="badge badge--edit">modificata</span>
+              )}
+              <form onSubmit={createDestination} className="inline" style={{ marginLeft: 'auto' }}>
+                <label htmlFor="ed-new" className="visually-hidden">Nome nuova destinazione</label>
+                <input
+                  id="ed-new"
+                  className="control"
+                  style={{ width: 200 }}
+                  placeholder="Nome nuova destinazione"
+                  value={newName}
+                  onChange={(e) => setNewName(e.target.value)}
+                />
+                <button type="submit" className="btn btn--accent" disabled={!newName.trim()}>
+                  Aggiungi
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <div className="section">
+            <h3>Anagrafica</h3>
+            <div className="editor__grid">
+              <OField label="Nome" changed={changed(['name'])} onReset={() => reset(['name'])}>
+                <input className="control" value={read(['name']) ?? ''} onChange={(e) => write(['name'], e.target.value)} />
+              </OField>
+              <OField label="Paese (ISO 2)" changed={changed(['country'])} onReset={() => reset(['country'])}>
+                <input
+                  className="control"
+                  maxLength={2}
+                  value={read(['country']) ?? ''}
+                  onChange={(e) => write(['country'], e.target.value.toUpperCase())}
+                />
+              </OField>
+              <OField label="Tipo" changed={changed(['type'])} onReset={() => reset(['type'])}>
+                <select className="control" value={read(['type'])} onChange={(e) => write(['type'], e.target.value)}>
+                  {DESTINATION_TYPES.map((t) => (
+                    <option key={t.key} value={t.key}>{t.label}</option>
+                  ))}
+                </select>
+              </OField>
+              <OField label="Raggio (km)" changed={changed(['radius_km'])} onReset={() => reset(['radius_km'])}>
+                <input
+                  type="number" className="control" min="1"
+                  value={read(['radius_km']) ?? ''}
+                  onChange={(e) => write(['radius_km'], Number(e.target.value) || 1)}
+                />
+              </OField>
+              <OField label="Latitudine" changed={changed(['coords', 'lat'])} onReset={() => reset(['coords', 'lat'])}>
+                <input
+                  type="number" step="0.0001" className="control"
+                  value={read(['coords', 'lat']) ?? ''}
+                  onChange={(e) => write(['coords', 'lat'], Number(e.target.value))}
+                />
+              </OField>
+              <OField label="Longitudine" changed={changed(['coords', 'lon'])} onReset={() => reset(['coords', 'lon'])}>
+                <input
+                  type="number" step="0.0001" className="control"
+                  value={read(['coords', 'lon']) ?? ''}
+                  onChange={(e) => write(['coords', 'lon'], Number(e.target.value))}
+                />
+              </OField>
+              <OField label="Titolo Wikipedia (it)" changed={changed(['wikipedia_title'])} onReset={() => reset(['wikipedia_title'])}>
+                <input
+                  className="control"
+                  value={read(['wikipedia_title']) ?? ''}
+                  onChange={(e) => write(['wikipedia_title'], e.target.value)}
+                />
+              </OField>
+              <OField label="Titolo Wikipedia (en)" changed={changed(['wikipedia_title_en'])} onReset={() => reset(['wikipedia_title_en'])}>
+                <input
+                  className="control"
+                  value={read(['wikipedia_title_en']) ?? ''}
+                  onChange={(e) => write(['wikipedia_title_en'], e.target.value)}
+                />
+              </OField>
+              <OField label="Aeroporti (separati da virgola)" changed={changed(['airports'])} onReset={() => reset(['airports'])}>
+                <input
+                  className="control"
+                  value={(read(['airports']) || []).join(', ')}
+                  onChange={(e) =>
+                    write(['airports'], e.target.value.split(',').map((s) => s.trim().toUpperCase()).filter(Boolean))
+                  }
+                />
+              </OField>
+            </div>
+          </div>
+
+          <div className="section">
+            <h3>Punteggi (0–100)</h3>
+            {AXES.map((axis) => {
+              const path = ['scores', axis.key]
+              const value = read(path) ?? 0
+              const isChanged = changed(path)
+              return (
+                <div className={`scorerow${isChanged ? ' scorerow--changed' : ''}`} key={axis.key}>
+                  <span className="scorerow__dot" style={{ background: axis.color }} />
+                  <label className="scorerow__name" htmlFor={`s-${axis.key}`}>
+                    {axis.label}
+                    {isChanged && (
+                      <button type="button" className="ofield__reset" style={{ marginLeft: 8 }} onClick={() => reset(path)}>
+                        ripristina
+                      </button>
+                    )}
+                  </label>
+                  <input
+                    id={`s-${axis.key}`}
+                    type="range" min="0" max="100" step="1"
+                    value={value}
+                    onChange={(e) => write(path, Number(e.target.value))}
+                  />
+                  <input
+                    type="number" className="control" min="0" max="100"
+                    aria-label={`${axis.label}, valore numerico`}
+                    value={value}
+                    onChange={(e) => write(path, Math.min(100, Math.max(0, Number(e.target.value) || 0)))}
+                  />
+                </div>
+              )
+            })}
+            <OField
+              label="Origine dei punteggi"
+              changed={changed(['scores_source'])}
+              onReset={() => reset(['scores_source'])}
+            >
+              <select
+                className="control"
+                style={{ maxWidth: 260 }}
+                value={read(['scores_source']) ?? 'manual'}
+                onChange={(e) => write(['scores_source'], e.target.value)}
+              >
+                <option value="manual">manual — non sovrascrivibile dagli import</option>
+                <option value="derived">derived — rigenerabile dagli script</option>
+              </select>
+            </OField>
+          </div>
+
+          <div className="section">
+            <h3>Costi, per persona <span className="badge badge--warn">sempre una fascia</span></h3>
+            <table className="table">
+              <thead>
+                <tr><th>Voce</th><th className="num">Bassa</th><th className="num">Media</th><th className="num">Alta</th></tr>
+              </thead>
+              <tbody>
+                {COST_ROWS.map(([key, label]) => (
+                  <tr key={key}>
+                    <td>{label}</td>
+                    {['low', 'mid', 'high'].map((band) => {
+                      const path = ['costs', key, band]
+                      return (
+                        <td className={`num numcell${changed(path) ? ' numcell--changed' : ''}`} key={band}>
+                          <input
+                            type="number" min="0" className="control"
+                            style={{ width: 90, textAlign: 'right' }}
+                            aria-label={`${label}, fascia ${band}`}
+                            value={read(path) ?? ''}
+                            onChange={(e) => write(path, Number(e.target.value) || 0)}
+                          />
+                        </td>
+                      )
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="section">
+            <h3>
+              Clima mensile
+              {read(['climate_source']) === 'seed_approx' && (
+                <span className="badge badge--warn" style={{ marginLeft: 8 }}>stime del seed</span>
+              )}
+            </h3>
+            <div className="table--scroll">
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>Mese</th>
+                    <th className="num">T. media</th>
+                    <th className="num">T. max</th>
+                    <th className="num">Mare</th>
+                    <th className="num">Gg pioggia</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {MONTHS.map((name, index) => {
+                    const month = String(index + 1)
+                    return (
+                      <tr key={name}>
+                        <td>{name}</td>
+                        {['temp_avg', 'temp_max', 'sea_temp', 'rain_days'].map((field) => {
+                          const path = ['climate', month, field]
+                          return (
+                            <td className={`num numcell${changed(path) ? ' numcell--changed' : ''}`} key={field}>
+                              <input
+                                type="number" className="control"
+                                style={{ width: 78, textAlign: 'right' }}
+                                aria-label={`${name}, ${field}`}
+                                value={read(path) ?? ''}
+                                placeholder={field === 'sea_temp' ? 'no mare' : '—'}
+                                onChange={(e) => write(path, numberOrNull(e.target.value))}
+                              />
+                            </td>
+                          )
+                        })}
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+            </div>
+            <p style={{ margin: '8px 0 0', fontSize: 12, color: 'var(--ink-2)' }}>
+              Lasciare vuoto il campo <strong>Mare</strong> significa “non ha accesso al mare”, non
+              “acqua a 0 °C”: con il filtro mare attivo la destinazione viene esclusa in ogni mese.
+            </p>
+          </div>
+
+          <div className="section">
+            <h3>Note</h3>
+            <OField label="Testo libero" changed={changed(['notes'])} onReset={() => reset(['notes'])}>
+              <textarea
+                className="control"
+                rows={3}
+                value={read(['notes']) ?? ''}
+                onChange={(e) => write(['notes'], e.target.value)}
+              />
+            </OField>
+          </div>
+        </div>
+
+        <footer className="panel__foot">
+          <button type="button" className="btn btn--primary" onClick={() => downloadOverrides(overrides)}>
+            Esporta overrides.json
+          </button>
+          <button type="button" className="btn" onClick={() => fileInput.current?.click()}>
+            Importa…
+          </button>
+          <input
+            ref={fileInput}
+            type="file"
+            accept="application/json,.json"
+            hidden
+            onChange={importFile}
+          />
+          <button
+            type="button"
+            className="btn"
+            disabled={!overrides.destinations[destination.id]}
+            onClick={() => {
+              const wasNew = !fromSeed
+              onOverridesChange(clearDestinationOverrides(overrides, destination.id))
+              if (wasNew) setId(merged.find((d) => d.id !== destination.id)?.id)
+              setMessage({ tone: 'info', text: wasNew ? 'Destinazione eliminata.' : 'Valori riportati al seed.' })
+            }}
+          >
+            {fromSeed ? 'Ripristina dal seed' : 'Elimina destinazione'}
+          </button>
+          <button type="button" className="btn" style={{ marginLeft: 'auto' }} onClick={onClose}>
+            Chiudi
+          </button>
+        </footer>
+      </section>
+    </div>
+  )
+}

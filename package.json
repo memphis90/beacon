@@ -1,0 +1,25 @@
+{
+  "name": "destination-finder",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Fase 0 — strumento personale per scegliere una destinazione di viaggio",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "images": "node scripts/resolve-images.mjs"
+  },
+  "dependencies": {
+    "leaflet": "^1.9.4",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.0.0",
+    "vite": "^7.0.0",
+    "vitest": "^3.2.0"
+  }
+}

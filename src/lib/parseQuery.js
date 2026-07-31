@@ -1,0 +1,217 @@
+/**
+ * Traduce una frase in italiano nei criteri di ricerca.
+ *
+ * Deterministico di proposito. Il §5 del planning stabilisce che il principio
+ * guida è "trasparente e debuggabile, non accurato": un modello che imposta
+ * otto pesi senza mostrare come ci è arrivato reintrodurrebbe la scatola nera
+ * che questo progetto esiste per evitare — e non si saprebbe più se un
+ * risultato strano viene dallo scoring o dall'interpretazione della frase.
+ *
+ * Qui ogni traduzione è ispezionabile: `understood` dice cosa ha agganciato e
+ * grazie a quale parola, `ignored` dice cosa ha riconosciuto ma non sa fare.
+ *
+ * Il modulo è PURO e non importa React: se un giorno si volesse provare un
+ * modello, basta che produca lo stesso oggetto `patch` e il resto dell'app non
+ * cambia di una riga.
+ */
+
+const MONTHS = [
+  ['gennaio', 1], ['febbraio', 2], ['marzo', 3], ['aprile', 4],
+  ['maggio', 5], ['giugno', 6], ['luglio', 7], ['agosto', 8],
+  ['settembre', 9], ['ottobre', 10], ['novembre', 11], ['dicembre', 12],
+]
+
+const SEASONS = [
+  ['primavera', 4], ['estate', 7], ['autunno', 10], ['inverno', 1],
+]
+
+/** Espressioni di durata che non sono un numero esplicito. */
+const DURATIONS = [
+  [/\bweekend lung[oh]\b|\bponte\b/, 3],
+  [/\bweekend\b|\bfine settimana\b/, 2],
+  [/\bdue settimane\b|\bquindici giorni\b/, 14],
+  [/\buna settimana\b|\bsette giorni\b/, 7],
+  [/\bdieci giorni\b/, 10],
+]
+
+/**
+ * Parole per asse. L'ordine conta: la prima che combacia vince, quindi le
+ * espressioni composte vanno prima delle singole ("vita notturna" prima di
+ * "notte").
+ */
+const AXIS_WORDS = [
+  ['nightlife', /\bvita notturna\b|\bmovida\b|\bdiscotech\w*\b|\bnightlife\b|\blocali notturni\b|\bserate\b/],
+  ['offbeat', /\bfuori rotta\b|\bpoco turistic\w+\b|\bnon turistic\w+\b|\bnon affollat\w+\b|\blontano dalla folla\b|\balternativ\w+\b|\binsolit\w+\b|\bautentic\w+\b|\bfuori dai circuiti\b/],
+  ['outdoor', /\btrekking\b|\bescursion\w+\b|\bcammin\w+\b|\bsentier\w+\b|\bsci\b|\bsciare\b|\bbici\b|\bciclismo\b|\bkayak\b|\bsurf\b|\bimmersion\w+\b|\bsport\w*\b|\bavventura\b|\barrampic\w+\b/],
+  ['family', /\bfamigl\w+\b|\bbambin\w+\b|\bfigli\b|\bbimb\w+\b/],
+  ['nature', /\bnatur\w+\b|\bpaesagg\w+\b|\bpanoram\w+\b|\bmontagn\w+\b|\bparch\w+\b|\bverde\b|\bfiord\w+\b|\blagh\w+\b|\blago\b/],
+  ['culture', /\bcultur\w+\b|\bmuse\w+\b|\bstoria\b|\bstoric\w+\b|\barte\b|\bmonument\w+\b|\barcheolog\w+\b|\bchies\w+\b|\bpatrimonio\b/],
+  ['food', /\bcibo\b|\bmangiare\b|\bgastronom\w+\b|\bcucina\b|\bristorant\w+\b|\bvino\b|\bvini\b|\benogastronom\w+\b|\bmercati\b/],
+  ['sea', /\bmare\b|\bspiagg\w+\b|\bbalnear\w+\b|\bbalneabil\w+\b|\bcosta\b|\bbagno\b|\bmarittim\w+\b/],
+]
+
+const AXIS_LABELS = {
+  nature: 'Natura', culture: 'Cultura', sea: 'Mare', food: 'Cibo',
+  nightlife: 'Vita notturna', outdoor: 'Outdoor', family: 'Famiglia', offbeat: 'Fuori rotta',
+}
+
+/** Modificatori d'intensità cercati nelle vicinanze della parola dell'asse. */
+const STRONG = /\bsoprattutto\b|\bprincipalmente\b|\bmolt[oa]\b|\btant[oa]\b|\bmassim\w+\b|\bsolo\b|\bsopra ?tutto\b/
+const WEAK = /\bun po'? di\b|\bun poco di\b|\banche\b|\bqualche\b|\bleggerment\w+\b|\bmagari\b/
+const NEGATED = /\bsenza\b|\bniente\b|\bnessun\w*\b|\bno\b|\bevitare\b|\bnon voglio\b/
+
+/** Cose che il parser riconosce ma l'app non sa ancora fare. */
+const OUT_OF_SCOPE = [
+  [/\bore di volo\b|\bvolo dirett\w+\b|\baeroporto di partenza\b|\bscal[oi]\b/, 'il filtro sul tempo di volo è previsto in Fase 2 e non è implementato'],
+  [/\bhotel\b|\bprenot\w+\b|\bdisponibilit\w+\b/, 'non è un motore di prenotazione: nessuna disponibilità, nessun acquisto'],
+  [/\bprezzo del volo\b|\bcosto del volo\b|\bvoli\b/, 'il costo del volo non è modellato: il budget copre solo alloggio, cibo e trasporti locali'],
+  [/\bitinerari\w*\b|\btappe\b/, 'la generazione di itinerari è Fase 3 e non è implementata'],
+]
+
+/**
+ * Gli accenti NON vengono rimossi: le espressioni cercano già entrambe le
+ * forme dove serve (`citt[àa]`), e togliere gli accenti spezzerebbe i nomi
+ * delle destinazioni ("San Sebastián") nel confronto finale.
+ */
+const normalise = (text) =>
+  String(text || '')
+    .toLowerCase()
+    .replace(/[’`´]/g, "'")
+    .replace(/\s+/g, ' ')
+    .trim()
+
+/**
+ * Intensità di un asse: guarda le 30 battute che precedono la parola trovata,
+ * dove in italiano stanno quasi sempre i modificatori ("soprattutto natura",
+ * "un po' di cultura", "senza vita notturna").
+ */
+function intensity(text, index) {
+  const before = text.slice(Math.max(0, index - 40), index)
+
+  // Vince il modificatore PIÙ VICINO, non il primo che si trova. In
+  // "soprattutto cibo e un po' di vita notturna" entrambi cadono nella
+  // finestra, ma "un po' di" è quello che riguarda la vita notturna.
+  const kinds = [
+    { re: NEGATED, weight: 0, hint: 'escluso' },
+    { re: STRONG, weight: 9, hint: 'molto' },
+    { re: WEAK, weight: 3, hint: 'un po’' },
+  ]
+
+  let nearest = null
+  for (const kind of kinds) {
+    const last = [...before.matchAll(new RegExp(kind.re.source, 'g'))].pop()
+    if (last && (nearest === null || last.index > nearest.at)) {
+      nearest = { at: last.index, weight: kind.weight, hint: kind.hint }
+    }
+  }
+
+  return nearest
+    ? { weight: nearest.weight, hint: nearest.hint }
+    : { weight: 7, hint: 'richiesto' }
+}
+
+export function parseQuery(input, { destinations = [] } = {}) {
+  const text = normalise(input || '')
+  const understood = []
+  const ignored = []
+  const patch = {}
+
+  if (!text) return { patch, understood, ignored, empty: true }
+
+  // ---- periodo -------------------------------------------------------
+  if (/\btutto l'anno\b|\bsempre\b|\bqualsiasi mese\b|\bquando capita\b/.test(text)) {
+    patch.month = null
+    understood.push({ key: 'month', label: 'Periodo', value: 'tutto l’anno', from: 'tutto l’anno' })
+  } else {
+    const month = MONTHS.find(([name]) => new RegExp(`\\b${name}\\b`).test(text))
+    const season = month ? null : SEASONS.find(([name]) => new RegExp(`\\b${name}\\b`).test(text))
+    if (month) {
+      patch.month = month[1]
+      understood.push({ key: 'month', label: 'Mese', value: month[0], from: month[0] })
+    } else if (season) {
+      patch.month = season[1]
+      understood.push({
+        key: 'month', label: 'Mese', value: MONTHS[season[1] - 1][0],
+        from: season[0], note: `"${season[0]}" non è un mese: uso ${MONTHS[season[1] - 1][0]} come rappresentativo`,
+      })
+    }
+  }
+
+  // ---- durata --------------------------------------------------------
+  const explicitNights = text.match(/(\d+)\s*(nott[ei]|giorn[oi])/)
+  const phrase = DURATIONS.find(([re]) => re.test(text))
+  if (explicitNights) {
+    const value = Math.max(1, Number(explicitNights[1]))
+    const isDays = /giorn/.test(explicitNights[2])
+    patch.nights = value
+    understood.push({
+      key: 'nights', label: 'Notti', value: String(value), from: explicitNights[0],
+      note: isDays ? `“${explicitNights[0]}” inteso come ${value} notti` : undefined,
+    })
+  } else if (phrase) {
+    const [re, nights] = phrase
+    patch.nights = nights
+    understood.push({
+      key: 'nights', label: 'Notti', value: String(nights),
+      from: re.exec(text)?.[0] || '',
+    })
+  }
+
+  // ---- budget --------------------------------------------------------
+  const budget = text.match(/(\d[\d.]*)\s*(?:€|eur\b|euro\b)|(?:budget|max|massimo|entro|sotto i?)\s*(\d[\d.]*)/)
+  if (budget) {
+    const raw = (budget[1] || budget[2] || '').replace(/\./g, '')
+    const value = Number(raw)
+    if (Number.isFinite(value) && value > 0) {
+      patch.budgetMax = value
+      understood.push({ key: 'budget', label: 'Budget', value: `${value} €`, from: budget[0].trim() })
+    }
+  }
+
+  // ---- tipo ----------------------------------------------------------
+  if (/\bisol[ae]\b/.test(text)) {
+    patch.allowedTypes = ['island']
+    understood.push({ key: 'types', label: 'Solo', value: 'isole', from: 'isola' })
+  } else if (/\bcitt[àa]\b/.test(text)) {
+    patch.allowedTypes = ['city']
+    understood.push({ key: 'types', label: 'Solo', value: 'città', from: 'città' })
+  }
+
+  // ---- assi ----------------------------------------------------------
+  const weights = {}
+  for (const [axis, re] of AXIS_WORDS) {
+    const match = re.exec(text)
+    if (!match) continue
+    const { weight, hint } = intensity(text, match.index)
+    weights[axis] = weight
+    understood.push({
+      key: `axis:${axis}`, label: AXIS_LABELS[axis],
+      value: weight === 0 ? 'escluso' : `peso ${weight}`,
+      from: match[0], hint,
+    })
+  }
+  if (Object.keys(weights).length) patch.weights = weights
+
+  // ---- il mare come requisito, non come interesse ---------------------
+  // Solo con formule esplicite: "un po' di mare" resta un gusto, non un veto.
+  if (/\b(voglio|cerco|serve|deve esserci|solo)\b[^.]{0,20}\bmare\b|\bbalneabil\w+\b|\bfare il bagno\b|\bmare calda?\b|\bacqua calda\b/.test(text)) {
+    patch.seaRequired = true
+    understood.push({ key: 'seaRequired', label: 'Requisito', value: 'mare balneabile', from: 'mare' })
+  }
+
+  // ---- nomi di destinazione o paese -----------------------------------
+  const names = destinations.flatMap((d) => [d.name, d.countryName].filter(Boolean))
+  const hit = names.find((name) => name && new RegExp(`\\b${normalise(name)}\\b`).test(text))
+  if (hit) {
+    patch.query = hit
+    understood.push({ key: 'query', label: 'Ricerca', value: hit, from: hit.toLowerCase() })
+  }
+
+  // ---- fuori portata ---------------------------------------------------
+  for (const [re, reason] of OUT_OF_SCOPE) {
+    const match = re.exec(text)
+    if (match) ignored.push({ from: match[0], reason })
+  }
+
+  return { patch, understood, ignored, empty: understood.length === 0 }
+}

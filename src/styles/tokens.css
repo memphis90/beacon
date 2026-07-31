@@ -1,0 +1,126 @@
+/* Hanken Grotesk, variabile 400–800, self-hosted.
+   Nessuna richiesta a Google Fonts: l'app non contatta host esterni per i font. */
+@font-face {
+  font-family: 'Hanken Grotesk';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('../assets/fonts/hanken-grotesk-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Hanken Grotesk';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('../assets/fonts/hanken-grotesk-latin-ext.woff2') format('woff2');
+  /* Serve per Petřín, Henningsvær, Vyšehrad e simili. */
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+:root {
+  /* ---- Design system "Data-Centric Travel Navigator" (Stitch) ---- */
+  --primary: #00162a;
+  --on-primary: #ffffff;
+  --primary-container: #0d2b45;
+  --on-primary-container: #7893b2;
+  --primary-fixed-dim: #aec9ea;
+  --secondary: #47617a;
+  --secondary-container: #c4e0fd;
+  --on-secondary-container: #49637c;
+  --tertiary-container: #003116;
+  --on-tertiary-container: #00a658;
+  --tertiary-fixed-dim: #4fe086;
+
+  --surface: #faf9fb;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f4f3f6;
+  --surface-container: #efedf0;
+  --surface-container-high: #e9e8ea;
+  --surface-container-highest: #e3e2e4;
+  --surface-dim: #dad9dc;
+  --on-surface: #1a1c1e;
+  --on-surface-variant: #43474d;
+  --outline: #73777e;
+  --outline-variant: #c3c6ce;
+
+  /* ---- Alias applicativi: i componenti parlano per ruolo, non per hex ---- */
+  --brand-900: var(--primary);
+  --brand-800: var(--primary-container);
+  --brand-700: #203b52;
+  --brand-600: var(--secondary);
+  --brand-tint: var(--secondary-container);
+
+  --accent: #f59e0b;
+  --accent-dark: #b97708;
+  --accent-tint: #fdf3e0;
+  --fav: #ba1a1a;
+
+  --page: var(--surface);
+  --surface-2: var(--surface-container-low);
+  --surface-3: var(--surface-container-high);
+  --border: #e2e5ea;
+  --border-strong: var(--outline-variant);
+
+  --ink: var(--on-surface);
+  --ink-2: var(--on-surface-variant);
+  --ink-3: var(--outline);
+
+  --ok: #00a658;
+  --warn: #f59e0b;
+  --crit: #ba1a1a;
+
+  /* --crit coincide già con l'"error" del mockup (#ba1a1a): non duplicarlo.
+     Serve solo la coppia container, che il resto della palette non copriva. */
+  --error-container: #ffdad6;
+  --on-error-container: #93000a;
+
+  /* Barra segmentata: colore = livello del punteggio, posizione = asse.
+     Con 8 assi il colore non può portare l'identità, quindi la porta la
+     posizione (ordine fisso) e, per esteso, la tabella del dettaglio. */
+  --seg-empty: var(--surface-container-highest);
+  --seg-high: #00a658;
+  --seg-mid: #47617a;
+  --seg-low: #f59e0b;
+
+  /* Palette categorica validata per daltonismo. Non più nella barra, ma
+     ancora sui pallini di legenda e sugli swatch delle tabelle, dove
+     l'identità dell'asse conta davvero. */
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --series-4: #eda100;
+  --series-5: #e87ba4;
+  --series-6: #008300;
+  --series-7: #4a3aa7;
+  --series-8: #e34948;
+
+  /* Raggi stretti: il design system è "soft ma professionale", non morbido */
+  --radius: 0.5rem;
+  --radius-sm: 0.25rem;
+  --radius-xs: 0.125rem;
+  --radius-pill: 999px;
+
+  --shadow-1: 0 1px 2px rgba(26, 28, 30, 0.05), 0 1px 3px rgba(26, 28, 30, 0.07);
+  --shadow-2: 0 4px 12px rgba(26, 28, 30, 0.10);
+  --shadow-3: 0 12px 32px rgba(26, 28, 30, 0.18);
+
+  --container-margin: 1rem;
+  --stack-gap: 0.75rem;
+  --inline-gap: 0.5rem;
+  --card-inset: 1rem;
+
+  --sidebar-w: 320px;
+  --header-h: 56px;
+  /* Il mockup desktop alza la topbar a 64px. Sotto i 900px l'app non è quel
+     mockup (è il portale con bottom nav) e resta su --header-h: token
+     separato apposta, non un cambio del valore condiviso. */
+  --header-h-desktop: 64px;
+  --bottomnav-h: 64px;
+
+  --font: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
