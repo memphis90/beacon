@@ -79,6 +79,67 @@ contraddice il suo giudizio, il problema è nel modello di scoring, non nei dati
 
 ---
 
+## 3-bis. Eventi in corso — opzione VERIFICATA, non pianificata
+
+Idea: una destinazione può essere una pessima risposta *oggi* per ragioni che il seed non
+può contenere — un incendio, un'alluvione. Verificato con chiamate reali il **31/07/2026**;
+non è programmata per nessuna fase, è depositata qui perché il lavoro di verifica non vada
+perso. **Non aprirla prima che la Fase 0 sia validata** (§9).
+
+### Cosa è stato provato davvero
+
+| Fonte | Esito |
+|---|---|
+| **NASA EONET v3** | `200` + `Access-Control-Allow-Origin: *`. **Leggibile dal browser.** |
+| Wikipedia REST | `200` + ACAO `*` — usata come controllo della catena di prova |
+| Wikinews IT | `200` + ACAO `*`, ma volume di notizie irrisorio |
+| Google News RSS | `200` **senza** ACAO: il browser la blocca |
+| GDELT DOC 2.0 | **`429` a due tentativi**, e sull'errore nemmeno gli header CORS |
+| ReliefWeb (ONU) | `410 Gone` — endpoint dismesso |
+
+Copertura verificata, non dedotta: **1.493 incendi nel mondo negli ultimi 60 giorni, 28 nel
+bacino mediterraneo**, i più recenti Turchia 28/07, Portogallo 27/07, Spagna 24/07. La fonte
+vede la regione che ci interessa.
+
+### Trappole trovate provando
+
+- **Serve `category=wildfires`.** Senza filtro, su 723 eventi aperti **465 sono ghiaccio marino
+  polare**: due terzi di rumore.
+- **`status=all`, non `status=open`.** Gli incendi si chiudono in fretta e sparirebbero proprio
+  quando servono.
+- **L'endpoint geojson dichiara `Content-Type: application/rss+xml`.** È sbagliato, il corpo è
+  JSON: chi si fida dell'header si rompe.
+- **Il raggio è la decisione vera, e non è stata presa.** Con 300 km, il giorno della prova
+  nessuna delle 21 destinazioni risultava toccata — ma l'incendio in Portogallo era a ~510 km
+  dall'Algarve. Il seed ha già `radius_km` per destinazione: è lì che va tarato.
+- **Basta una chiamata sola**, non 21: EONET restituisce tutti gli eventi e l'abbinamento si fa
+  in locale con l'haversine già in `scoring.js`.
+
+### Il modello qui non serve
+
+Era la premessa dell'idea ed è sbagliata. EONET dà dati strutturati — coordinate, categoria,
+data: un confronto di distanza fa tutto, in modo deterministico e verificabile. La parte che
+avrebbe bisogno di un modello — leggere notizie in prosa — è esattamente quella che il browser
+**non** può raggiungere, perché le fonti di news non mandano gli header CORS e qui non c'è un
+backend che faccia da proxy.
+
+### Limiti da mettere in conto
+
+- Copre **eventi naturali**: incendi, tempeste, vulcani, alluvioni. Non scioperi, non disordini,
+  non un museo chiuso per restauro. Per quelli servirebbe un proxy, cioè un server, cioè il
+  vincolo "gira in locale" che salta.
+- Dipendenza da un servizio governativo statunitense, senza garanzie di continuità. Se sparisce,
+  sparisce la funzione: non deve entrare in nessun calcolo che debba funzionare comunque.
+
+### Come andrebbe integrata
+
+Come la critica del ranking: **una segnalazione visibile, mai un punteggio che cala da solo.**
+Un avviso sulla card — *"Incendio attivo a 40 km, rilevato il 28/07 (NASA EONET)"* — con la
+fonte, la data e il bottone per escludere la destinazione. Un punteggio che cambia per una
+notizia che non vedi è la scatola nera che il §5 rifiuta.
+
+---
+
 ## 4. Modello dati
 
 ### Decisione strutturale [APERTA → risolta]
