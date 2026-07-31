@@ -99,7 +99,9 @@ export default function RankingCritique({ phrase, entries, weights, agent, onApp
 
           {stato.note && <p className="critique__note">{stato.note}</p>}
 
-          {stato.rejected.length > 0 && (
+          {/* Cosa il sanitizzatore ha buttato via: interessa solo quando si sta
+              mettendo a punto il prompt, come la lettura della frase sulla home. */}
+          {agent.debug && stato.rejected.length > 0 && (
             <p className="critique__note">Scartati dalla risposta: {stato.rejected.join(' · ')}.</p>
           )}
 

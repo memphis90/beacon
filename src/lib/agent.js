@@ -54,7 +54,17 @@ export const PRESETS = [
 ]
 
 export function emptyAgentConfig() {
-  return { enabled: false, preset: 'ollama', baseUrl: PRESETS[0].baseUrl, model: PRESETS[0].model, apiKey: '' }
+  return {
+    enabled: false,
+    preset: 'ollama',
+    baseUrl: PRESETS[0].baseUrl,
+    model: PRESETS[0].model,
+    apiKey: '',
+    // Mostra come la frase è stata letta prima di applicarla. Spento di
+    // default: è materiale da messa a punto, e in uso normale occupa il posto
+    // sotto il campo con una tabella che non si guarda.
+    debug: false,
+  }
 }
 
 export function loadAgentConfig() {

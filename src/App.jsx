@@ -213,9 +213,18 @@ export default function App() {
           <span className="visually-hidden">Apri cronologia e menu</span>
         </button>
 
-        <div className="topbar__brand">
+        {/* Il marchio riporta alla home, come ci si aspetta ovunque. Fa la
+            stessa cosa di "Nuova ricerca" nel drawer: i criteri restano dove
+            sono, torna solo la schermata della frase. */}
+        <button
+          type="button"
+          className="topbar__brand topbar__home"
+          onClick={() => setStarted(false)}
+          title="Torna alla home"
+          aria-label="Beacon — torna alla home"
+        >
           <Logo size={26} phase />
-        </div>
+        </button>
 
         <div className="topbar__search">
           <label htmlFor="q" className="visually-hidden">Cerca una destinazione</label>

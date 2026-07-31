@@ -88,6 +88,16 @@ a { color: var(--brand-600); }
   color: var(--primary-fixed-dim);
 }
 
+/* Il marchio è un bottone, ma non deve sembrarlo: niente cornice, niente
+   fondo. Il velo dell'hover è su `currentColor` perché sotto i 900px la
+   topbar diventa chiara con testo navy: un velo bianco fisso sparirebbe. */
+.topbar__home {
+  border: 0; background: none; color: inherit; text-align: left;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+}
+.topbar__home:hover { background: color-mix(in srgb, currentColor 12%, transparent); }
+
 .topbar__search { flex: 1; max-width: 460px; position: relative; }
 .topbar__search input {
   width: 100%; height: 36px;

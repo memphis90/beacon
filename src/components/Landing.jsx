@@ -223,7 +223,10 @@ export default function Landing({ destinations, onApply, onSkip, onLogout }) {
               </div>
             </div>
 
-            {parsed.understood.length > 0 && (
+            {/* Solo in debug: è la lettura della frase, cioè materiale da messa
+                a punto. In uso normale occupava il posto sotto il campo con una
+                tabella che nessuno guarda finché tutto funziona. */}
+            {agent.debug && parsed.understood.length > 0 && (
               <div className="landing__read">
                 <p className="landing__readtitle">
                   {conModello ? 'Intanto le regole leggono così' : 'Ho capito così'}
@@ -250,7 +253,7 @@ export default function Landing({ destinations, onApply, onSkip, onLogout }) {
             )}
           </form>
 
-          {parsed.ignored.length > 0 && (
+          {agent.debug && parsed.ignored.length > 0 && (
             <div className="landing__ignored">
               <p className="landing__readtitle">Questo non lo so fare</p>
               <ul>

@@ -130,6 +130,21 @@ export default function SettingsModal({ config, onChange, onClose }) {
               </p>
             </div>
 
+            <div className="checkline" style={{ marginTop: 4 }}>
+              <input
+                id="ag-debug"
+                type="checkbox"
+                checked={Boolean(draft.debug)}
+                onChange={(e) => setDraft({ ...draft, debug: e.target.checked })}
+              />
+              <label htmlFor="ag-debug">Debug: mostra come viene interpretata la frase</label>
+            </div>
+            <p className="landing__note">
+              Sotto il campo compaiono i criteri riconosciuti, ognuno con la parola da cui è
+              stato dedotto. Serve a capire perché una ricerca ha dato quel risultato: se una
+              destinazione non c'è, di solito è qui che si vede il motivo.
+            </p>
+
             {remoto && (
               <div className="notice notice--warn">
                 <div>
