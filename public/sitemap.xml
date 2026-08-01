@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Un URL solo, ed è corretto così: Beacon è una single-page application senza
+  routing: criteri, dettaglio, confronto e parametri vivono tutti nello stesso
+  indirizzo, e non esistono pagine separate da indicizzare. Una sitemap gonfia
+  di ancore o di percorsi finti non aiuterebbe nessuno.
+
+  Se un giorno le destinazioni avranno un URL proprio — è la cosa che
+  cambierebbe di più la reperibilità di questo progetto — questa sitemap
+  diventerà l'elenco di quelle pagine.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://beacon.arabel.dev/</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>

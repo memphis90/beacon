@@ -5,11 +5,118 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="theme-color" content="#203b52" />
-    <title>Beacon — Fase 0</title>
-    <meta name="description" content="Strumento personale per scegliere una destinazione di viaggio per interesse, budget e periodo." />
+
+    <!--
+      Il titolo dice cosa fa lo strumento, non a che punto è lo sviluppo.
+      Prima era "Beacon — Fase 0": "Fase 0" non lo cerca nessuno e occupava lo
+      spazio dove deve stare la promessa. Sotto i 60 caratteri, o Google lo
+      taglia proprio dove sta il senso.
+    -->
+    <title>Beacon — scegli dove andare in vacanza, con i numeri in chiaro</title>
+    <meta
+      name="description"
+      content="Descrivi il viaggio a parole: Beacon ordina le destinazioni per interessi, budget e periodo, e mostra l'aritmetica di ogni punteggio. Open source."
+    />
+
+    <!--
+      Su quali ricerche ha senso comparire.
+      Non "vacanze" o "dove andare in vacanza": lì ci sono Booking e le OTA, ed
+      è una guerra persa da un progetto senza budget. Le parole che seguono
+      descrivono ciò che questo strumento fa e gli altri no — un ranking
+      spiegato, calcolato in locale, che gira anche con un modello sul proprio
+      computer. Poche ricerche, ma di gente che cerca esattamente questo.
+    -->
+    <meta
+      name="keywords"
+      content="scegliere destinazione viaggio, confronto destinazioni, viaggio per interessi e budget, ranking destinazioni spiegato, strumento viaggio open source, modello locale Ollama"
+    />
+    <link rel="canonical" href="https://beacon.arabel.dev/" />
+
+    <!-- Anteprima nelle chat e sui social. Senza, un link condiviso è una
+         riga di testo azzurro: è il posto in cui la mancanza si vede di più. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Beacon" />
+    <meta property="og:locale" content="it_IT" />
+    <meta property="og:url" content="https://beacon.arabel.dev/" />
+    <meta property="og:title" content="Beacon — scegli dove andare in vacanza, con i numeri in chiaro" />
+    <meta
+      property="og:description"
+      content="Descrivi il viaggio a parole: Beacon ordina le destinazioni per interessi, budget e periodo, e mostra l'aritmetica di ogni punteggio."
+    />
+    <!-- 1024×538 e non 1200×630: stesso rapporto 1,91:1, che è quello che i
+         social ritagliano, a una risoluzione che resta nitida nel riquadro
+         dell'anteprima. Le dimensioni dichiarate devono corrispondere al file,
+         o alcune piattaforme rifiutano l'immagine invece di adattarla. -->
+    <meta property="og:image" content="https://beacon.arabel.dev/og.png" />
+    <meta property="og:image:width" content="1024" />
+    <meta property="og:image:height" content="538" />
+    <meta property="og:image:alt" content="Beacon: una classifica di destinazioni con il punteggio scomposto per asse di interesse." />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Beacon — scegli dove andare in vacanza, con i numeri in chiaro" />
+    <meta
+      name="twitter:description"
+      content="Descrivi il viaggio a parole: Beacon ordina le destinazioni per interessi, budget e periodo, e mostra l'aritmetica di ogni punteggio."
+    />
+    <meta name="twitter:image" content="https://beacon.arabel.dev/og.png" />
+
+    <!--
+      Dati strutturati: dicono a un motore CHE COSA è questa pagina, invece di
+      lasciarglielo dedurre da un guscio vuoto. `offers` a zero non è una posa:
+      l'app non vende niente e non ha account, ed è un fatto che vale la pena
+      dichiarare in modo leggibile da una macchina.
+    -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Beacon",
+        "url": "https://beacon.arabel.dev/",
+        "applicationCategory": "TravelApplication",
+        "operatingSystem": "Qualsiasi browser moderno",
+        "inLanguage": "it",
+        "description": "Strumento per scegliere una destinazione di viaggio a partire da una frase in italiano: ordina le destinazioni per interessi, budget e periodo, e mostra l'aritmetica di ogni punteggio.",
+        "isAccessibleForFree": true,
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+        "license": "https://opensource.org/licenses/MIT",
+        "codeRepository": "https://github.com/memphis90/beacon",
+        "featureList": [
+          "Interpretazione della frase con regole locali, senza rete",
+          "Interprete opzionale a modello linguistico, anche locale",
+          "Punteggio scomposto per asse di interesse",
+          "Confronto fra destinazioni",
+          "Correzione dei parametri con export dei dati"
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <!--
+      Il guscio di una single-page application è vuoto per chiunque non esegua
+      JavaScript: un crawler che non renderizza vede `<div id="root">` e niente
+      altro. Questo blocco è l'unico contenuto leggibile senza JS, e serve a
+      dire cosa c'è dietro — a una macchina e a una persona con lo script
+      bloccato.
+    -->
+    <noscript>
+      <h1>Beacon</h1>
+      <p>
+        Beacon aiuta a scegliere <strong>dove andare in vacanza</strong>: descrivi il viaggio a
+        parole — periodo, durata, budget, che cosa ti interessa — e lo strumento ordina le
+        destinazioni europee del suo catalogo mostrando <strong>perché</strong> ognuna sta dov'è,
+        con il contributo di ogni asse di interesse in chiaro.
+      </p>
+      <p>
+        Non prenota niente, non cerca voli, non ha account e non traccia nessuno. Il calcolo
+        avviene nel browser; l'interpretazione della frase può essere affidata a un modello
+        linguistico che gira sul tuo computer.
+      </p>
+      <p>
+        Per usarlo serve JavaScript attivo. Il codice è pubblico:
+        <a href="https://github.com/memphis90/beacon">github.com/memphis90/beacon</a>.
+      </p>
+    </noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

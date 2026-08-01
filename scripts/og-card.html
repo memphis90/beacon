@@ -1,0 +1,103 @@
+<!doctype html>
+<!--
+  La scheda per l'anteprima social, 1200×630.
+
+  Non è una schermata dell'app: una schermata a quella dimensione diventa
+  illeggibile nel riquadro di un'anteprima, dove il testo viene mostrato alto
+  poche decine di pixel. Qui ci sono le tre cose che devono passare a colpo
+  d'occhio — il marchio, cosa fa, e che il punteggio è scomposto — con corpi
+  grandi abbastanza da leggersi anche in miniatura.
+
+  Si rigenera aprendo questo file e catturando il riquadro in
+  `public/og.png`. Sta in scripts/ e non in public/ di proposito: è uno
+  strumento per produrre un file, non un file da servire.
+-->
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Beacon — scheda per l'anteprima</title>
+    <style>
+      @font-face {
+        font-family: 'Hanken Grotesk';
+        src: url('../src/assets/fonts/hanken-grotesk-latin.woff2') format('woff2');
+        font-weight: 400 800;
+        font-display: block;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { background: #555; display: grid; place-items: center; min-height: 100vh; }
+      .card {
+        width: 1200px; height: 630px;
+        position: relative; overflow: hidden;
+        display: flex; flex-direction: column; justify-content: space-between;
+        padding: 72px 80px;
+        background: #203b52;
+        color: #fff;
+        font-family: 'Hanken Grotesk', system-ui, sans-serif;
+      }
+      /* Un alone ambra dietro il faro: è la luce, ed è l'unico colore che nel
+         marchio non cambia mai. */
+      .glow {
+        position: absolute; top: -220px; right: -160px;
+        width: 620px; height: 620px; border-radius: 50%;
+        background: radial-gradient(circle, rgba(245,158,11,0.30) 0%, rgba(245,158,11,0) 68%);
+      }
+      .top { display: flex; align-items: center; gap: 22px; position: relative; }
+      .name { font-size: 54px; font-weight: 700; letter-spacing: -0.02em; }
+      .claim {
+        position: relative;
+        font-size: 60px; line-height: 1.14; font-weight: 700; letter-spacing: -0.025em;
+        max-width: 15ch;
+      }
+      .claim em { font-style: normal; color: #f59e0b; }
+      .rows { position: relative; display: flex; flex-direction: column; gap: 14px; }
+      .row {
+        display: flex; align-items: center; gap: 18px;
+        font-size: 26px; font-weight: 600;
+        color: rgba(255,255,255,0.92);
+      }
+      .rank { width: 42px; color: rgba(255,255,255,0.5); font-variant-numeric: tabular-nums; }
+      .bar { height: 12px; border-radius: 6px; background: rgba(255,255,255,0.16); flex: 1; max-width: 360px; position: relative; }
+      .bar i { position: absolute; inset: 0 auto 0 0; border-radius: 6px; background: #f59e0b; }
+      .num { font-variant-numeric: tabular-nums; color: #fff; width: 74px; text-align: right; }
+      .foot {
+        position: relative; display: flex; align-items: center; justify-content: space-between;
+        font-size: 22px; font-weight: 500; color: rgba(255,255,255,0.62);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="glow"></div>
+
+      <div class="top">
+        <svg viewBox="0 0 32 32" width="56" height="56" fill="none" stroke="#fff"
+             stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4.5 27.6h23" />
+          <path d="M10.2 27.6 12.9 15.2" />
+          <path d="M21.8 27.6 19.1 15.2" />
+          <path d="M11.6 15.2h8.8" />
+          <path d="M12.4 9.6 16 5.8 19.6 9.6" />
+          <circle cx="16" cy="12.2" r="1.7" fill="#f59e0b" stroke="none" />
+          <g stroke="#f59e0b" stroke-width="1.7">
+            <path d="M20.4 11.1 24.6 9.4" />
+            <path d="M11.6 11.1 7.4 9.4" />
+          </g>
+        </svg>
+        <span class="name">Beacon</span>
+      </div>
+
+      <div class="claim">Dove andare, <em>con i numeri in chiaro</em>.</div>
+
+      <div class="rows">
+        <div class="row"><span class="rank">1º</span> Praga <span class="bar"><i style="width:96%"></i></span> <span class="num">100.0</span></div>
+        <div class="row"><span class="rank">2º</span> Budapest <span class="bar"><i style="width:88%"></i></span> <span class="num">96.0</span></div>
+        <div class="row"><span class="rank">3º</span> Vienna <span class="bar"><i style="width:84%"></i></span> <span class="num">94.7</span></div>
+      </div>
+
+      <div class="foot">
+        <span>Descrivi il viaggio a parole. Il punteggio te lo spiega.</span>
+        <span>beacon.arabel.dev</span>
+      </div>
+    </div>
+  </body>
+</html>

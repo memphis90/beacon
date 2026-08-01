@@ -1,0 +1,15 @@
+# Beacon — https://beacon.arabel.dev
+#
+# Questo file deve ESISTERE come file: senza, il server di una single-page
+# application risponde con index.html a qualunque percorso, e un crawler che
+# chiede /robots.txt si ritrova una pagina HTML con status 200. Non è un
+# dettaglio: è una risposta valida che dice una cosa falsa.
+
+User-agent: *
+Allow: /
+
+# Non c'è niente da nascondere: nessuna area riservata, nessun parametro che
+# generi pagine duplicate, nessun contenuto dietro autenticazione. Quello che
+# l'app fa avviene nel browser, e non produce URL da scansionare.
+
+Sitemap: https://beacon.arabel.dev/sitemap.xml
