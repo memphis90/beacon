@@ -96,10 +96,21 @@ export default function App({ startedInitially = false }) {
   const [settingsOpen, setSettingsOpen] = useState(false)
   const [agent, setAgent] = useState(loadAgentConfig)
   const [history, setHistory] = useState(loadHistory)
-  // La frase che ha prodotto questi criteri: serve alla critica del modello,
-  // che confronta le parole scritte con i pesi effettivi. Dopo un ricaricamento
-  // la si ripesca dalla cronologia, che è dove l'ultima ricerca è già salvata.
-  const [phrase, setPhrase] = useState(() => loadHistory()[0]?.text || '')
+  /**
+   * La frase che ha prodotto QUESTI criteri, e nessun'altra.
+   *
+   * Serve alla critica del modello, che confronta le parole scritte con i pesi
+   * effettivi. Prima veniva inizializzata dall'ultima voce di cronologia, e
+   * questo produceva un difetto sottile: chi entrava scavalcando la frase — per
+   * sfogliare tutte le destinazioni — si trovava una critica che ragionava su
+   * una ricerca vecchia, fatta magari il giorno prima e senza rapporto con
+   * quello che aveva sotto gli occhi. Il modello non stava sbagliando: gli
+   * veniva data la domanda sbagliata.
+   *
+   * Ora resta vuota finché una frase non c'è davvero, e senza frase la critica
+   * non parte affatto — che è la risposta corretta a "non hai chiesto niente".
+   */
+  const [phrase, setPhrase] = useState('')
   /**
    * Ricaricare la pagina riporta alla home, cioè al campo della frase.
    *
@@ -223,7 +234,12 @@ export default function App({ startedInitially = false }) {
         destinations={merged}
         agent={agent}
         onAgentChange={applyAgent}
-        onSkip={() => setStarted(true)}
+        onSkip={() => {
+          // Entrare senza frase vuol dire anche azzerarla: se prima avevi
+          // cercato, quella vecchia resterebbe attaccata ai risultati nuovi.
+          setPhrase('')
+          setStarted(true)
+        }}
         onLogout={azzera}
         onApply={(patch, text) => {
           setPhrase(text || '')

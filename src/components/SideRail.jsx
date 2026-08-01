@@ -137,11 +137,12 @@ export default function SideRail({
           <Voce Icon={IconEdit} label="Parametri" count={nav.overriddenCount} onClick={nav.onEditor} />
         )}
 
-        {/* Rientro rapido dalla home: senza il vecchio "Salta e usa i filtri"
-            la frase sarebbe l'unico modo di entrare, e chi sa già cosa cercare
-            dovrebbe scriverne una finta per arrivare agli slider. */}
+        {/* "Scopri le destinazioni" e non "Vai ai filtri, senza frase": la
+            seconda descriveva il meccanismo, la prima dice cosa ottieni.
+            Senza questa voce la frase sarebbe l'unico modo di entrare, e chi
+            vuole solo sfogliare il catalogo dovrebbe scriverne una finta. */}
         {onSkipToFilters && (
-          <Voce Icon={IconFilter} label="Vai ai filtri, senza frase" onClick={onSkipToFilters} />
+          <Voce Icon={IconFilter} label="Scopri le destinazioni" onClick={onSkipToFilters} />
         )}
       </nav>
 

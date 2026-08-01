@@ -169,6 +169,26 @@ describe('render — l’app si disegna senza riferimenti penzolanti', () => {
     expect(html).toContain('compare__notes')
   })
 
+  /**
+   * Entrare senza frase — "Scopri le destinazioni" — non deve trascinarsi
+   * dietro l'ultima ricerca fatta: la critica ragionerebbe su una domanda che
+   * chi guarda non ha posto.
+   */
+  it('senza frase la critica non si disegna, anche con un modello pronto', async () => {
+    const html = await renderizza('../src/components/RankingCritique.jsx', {
+      phrase: '',
+      entries: [{}, {}],
+      weights: { culture: 8 },
+      agent: {
+        enabled: true,
+        activeId: 'm1',
+        profiles: [{ id: 'm1', baseUrl: 'http://localhost:11434/v1', model: 'x' }],
+      },
+      onApplyWeight: () => {},
+    })
+    expect(html).toBe('')
+  })
+
   it('il pannello della critica non si disegna senza un modello attivo', async () => {
     const html = await renderizza('../src/components/RankingCritique.jsx', {
       phrase: 'meta per halloween',
