@@ -53,6 +53,15 @@ const EN = {
   'ten days': 'dieci giorni', 'seven days': 'sette giorni',
   nights: 'notti', night: 'notte', days: 'giorni', day: 'giorno',
 
+  // I numeri in lettere: "five nights" è il modo normale di scriverlo, e
+  // senza queste voci la durata andrebbe persa in silenzio. Le espressioni
+  // composte ("seven days") restano più specifiche e vincono, perché la
+  // sostituzione ordina le chiavi dalla più lunga.
+  one: 'uno', two: 'due', three: 'tre', four: 'quattro', five: 'cinque',
+  six: 'sei', seven: 'sette', eight: 'otto', nine: 'nove', ten: 'dieci',
+  eleven: 'undici', twelve: 'dodici', thirteen: 'tredici', fourteen: 'quattordici',
+  fifteen: 'quindici', twenty: 'venti',
+
   // Budget
   budget: 'budget', max: 'max', maximum: 'massimo', under: 'sotto', 'up to': 'entro',
   euros: 'euro', eur: 'euro', cheap: 'economico', 'low cost': 'economico',

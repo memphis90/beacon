@@ -27,13 +27,39 @@ const SEASONS = [
   ['primavera', 4], ['estate', 7], ['autunno', 10], ['inverno', 1],
 ]
 
-/** Espressioni di durata che non sono un numero esplicito. */
+/**
+ * I numeri scritti in lettere.
+ *
+ * "cinque notti" è il modo normale di scrivere una durata in una frase — più
+ * naturale di "5 notti" — e prima non produceva niente: la regola voleva
+ * cifre. Chi scriveva così arrivava ai risultati con le notti predefinite,
+ * senza che nulla dicesse che quel pezzo di frase era stato buttato.
+ *
+ * Si fermano a venti perché oltre non servono: `nights` è tagliato a 60 e una
+ * vacanza scritta in lettere oltre le tre settimane non esiste.
+ */
+const NUMBER_WORDS = {
+  un: 1, uno: 1, una: 1, due: 2, tre: 3, quattro: 4, cinque: 5, sei: 6,
+  sette: 7, otto: 8, nove: 9, dieci: 10, undici: 11, dodici: 12, tredici: 13,
+  quattordici: 14, quindici: 15, sedici: 16, diciassette: 17, diciotto: 18,
+  diciannove: 19, venti: 20,
+}
+
+/**
+ * Espressioni di durata che non sono un numero.
+ *
+ * "sette giorni", "dieci giorni" e "quindici giorni" stavano qui: ora li legge
+ * la regola dei numeri, che vale per qualunque quantità invece che per tre
+ * casi elencati. Tenerli avrebbe creato una divergenza silenziosa — la voce
+ * diceva che "quindici giorni" vale 14 notti (l'idioma "due settimane"),
+ * mentre "sette giorni" ne valeva 7 (i giorni contati come notti). Ora la
+ * regola è una sola: N giorni sono N notti, e le settimane restano un idioma.
+ */
 const DURATIONS = [
   [/\bweekend lung[oh]\b|\bponte\b/, 3],
   [/\bweekend\b|\bfine settimana\b/, 2],
-  [/\bdue settimane\b|\bquindici giorni\b/, 14],
-  [/\buna settimana\b|\bsette giorni\b/, 7],
-  [/\bdieci giorni\b/, 10],
+  [/\bdue settimane\b/, 14],
+  [/\buna settimana\b/, 7],
 ]
 
 /**
@@ -146,10 +172,15 @@ export function parseQuery(input, { destinations = [] } = {}) {
   }
 
   // ---- durata --------------------------------------------------------
-  const explicitNights = text.match(/(\d+)\s*(nott[ei]|giorn[oi])/)
+  // Cifre o lettere: "5 notti" e "cinque notti" sono la stessa cosa detta in
+  // due modi, e il secondo è quello che viene più naturale scrivendo.
+  const explicitNights = text.match(
+    new RegExp(`(\\d+|${Object.keys(NUMBER_WORDS).join('|')})\\s*(nott[ei]|giorn[oi])`)
+  )
   const phrase = DURATIONS.find(([re]) => re.test(text))
   if (explicitNights) {
-    const value = Math.max(1, Number(explicitNights[1]))
+    const scritto = explicitNights[1]
+    const value = Math.max(1, /^\d+$/.test(scritto) ? Number(scritto) : NUMBER_WORDS[scritto])
     const isDays = /giorn/.test(explicitNights[2])
     patch.nights = value
     understood.push({

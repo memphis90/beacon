@@ -120,6 +120,9 @@ export default function Landing({ destinations, agent, onAgentChange, onApply, o
       const result = await interpretWithModel(text, {
         config: agent,
         destinations,
+        // La lingua la stabiliscono già le regole, che girano a ogni tasto:
+        // serve al modello per rispondere nella lingua in cui hai scritto.
+        lang: parsed.lang,
         signal: controller.signal,
       })
       setInCorso(null)

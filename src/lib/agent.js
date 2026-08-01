@@ -438,9 +438,25 @@ TEMI DISPONIBILI, con quante destinazioni li portano. Un tema che corrisponde va
 ${elencoTemi}`
 }
 
+/**
+ * Cosa cambia quando la frase non è italiana.
+ *
+ * Lo schema e le regole restano in italiano — riscriverli per lingua è la
+ * stessa trappola che il dizionario di `lexicon.js` evita alle regole locali,
+ * e un modello capace di leggere una frase inglese è capace di leggere anche
+ * istruzioni italiane. Cambia una cosa sola: **cosa esce**. Le etichette dei
+ * chip e la parola citata devono tornare nella lingua di chi ha scritto, o
+ * l'app risponde in italiano a chi non l'ha usato.
+ */
+const OUTPUT_LANG = {
+  en: `\n\nIMPORTANTE: l'utente scrive in INGLESE. Lo schema e queste istruzioni restano in italiano, ma la risposta no: nel campo "understood" scrivi "label" e "value" in inglese, e copia in "from" le parole ESATTE della frase inglese. I nomi dei campi JSON, le chiavi degli assi e quelle dei temi restano quelli elencati sopra: sono identificatori, non testo da tradurre.`,
+}
+
 /** Il prompt di sistema, con il contesto in coda se il chiamante lo fornisce. */
-export const buildSystemPrompt = (contesto) =>
-  contesto ? `${SYSTEM_PROMPT}\n\n${contesto}` : SYSTEM_PROMPT
+export const buildSystemPrompt = (contesto, lang = 'it') => {
+  const base = contesto ? `${SYSTEM_PROMPT}\n\n${contesto}` : SYSTEM_PROMPT
+  return OUTPUT_LANG[lang] ? `${base}${OUTPUT_LANG[lang]}` : base
+}
 
 /**
  * Una chiamata al server, con il JSON già estratto e verificato.
@@ -513,9 +529,9 @@ async function askForJson(system, user, { config, signal, timeout }) {
  */
 export async function interpretWithModel(
   text,
-  { config, signal, timeout = 180000, destinations, seaTempMin } = {}
+  { config, signal, timeout = 180000, destinations, seaTempMin, lang = 'it' } = {}
 ) {
-  const system = buildSystemPrompt(describeRules(destinations, { seaTempMin }))
+  const system = buildSystemPrompt(describeRules(destinations, { seaTempMin }), lang)
   const parsed = await askForJson(system, text, { config, signal, timeout })
   const { patch, rejected } = sanitisePatch(parsed)
   return { patch, understood: sanitiseUnderstood(parsed.understood), rejected, source: 'model' }

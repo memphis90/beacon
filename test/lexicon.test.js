@@ -67,6 +67,25 @@ describe('lexicon — l’inglese senza riscrivere le regole', () => {
     expect(chip(r, 'month').value).toBe('ottobre')
   })
 
+  it('legge i numeri in lettere, che è come si scrivono davvero', () => {
+    expect(parseQuery('cinque notti a ottobre').patch.nights).toBe(5)
+    expect(parseQuery('tre giorni a marzo').patch.nights).toBe(3)
+    expect(parseQuery('un giorno a Roma').patch.nights).toBe(1)
+    expect(parseQuery('five nights in october').patch.nights).toBe(5)
+  })
+
+  it('“undici” non viene letto come “un”', () => {
+    // L'alternanza contiene sia "un" sia "undici": senza backtracking la
+    // prima vincerebbe e undici notti diventerebbero una.
+    expect(parseQuery('undici notti a giugno').patch.nights).toBe(11)
+  })
+
+  it('le settimane restano un idioma, i giorni contano come notti', () => {
+    expect(parseQuery('due settimane ad agosto').patch.nights).toBe(14)
+    expect(parseQuery('una settimana a maggio').patch.nights).toBe(7)
+    expect(parseQuery('quindici giorni a luglio').patch.nights).toBe(15)
+  })
+
   it('restoreOriginal lascia stare ciò che non ha tradotto', () => {
     const { origini } = toItalian('museums and beaches in july')
     expect(restoreOriginal('ottobre', origini)).toBe('ottobre')
