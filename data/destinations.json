@@ -12,7 +12,7 @@
         "lon": -8.2
       },
       "radius_km": 60,
-      "wikidata_id": null,
+      "wikidata_id": "Q26831",
       "wikipedia_title": "Algarve",
       "wikipedia_title_en": "Algarve",
       "airports": [
@@ -177,7 +177,7 @@
         "lon": 4.9041
       },
       "radius_km": 25,
-      "wikidata_id": null,
+      "wikidata_id": "Q727",
       "wikipedia_title": "Amsterdam",
       "wikipedia_title_en": "Amsterdam",
       "airports": [
@@ -336,7 +336,7 @@
         "lon": 18.7712
       },
       "radius_km": 30,
-      "wikidata_id": null,
+      "wikidata_id": "Q207468",
       "wikipedia_title": "Bocche di Cattaro",
       "wikipedia_title_en": "Bay of Kotor",
       "airports": [
@@ -496,7 +496,7 @@
         "lon": 2.1686
       },
       "radius_km": 30,
-      "wikidata_id": null,
+      "wikidata_id": "Q1492",
       "wikipedia_title": "Barcellona",
       "wikipedia_title_en": "Barcelona",
       "airports": [
@@ -662,7 +662,7 @@
         "lon": 19.0402
       },
       "radius_km": 25,
-      "wikidata_id": null,
+      "wikidata_id": "Q1781",
       "wikipedia_title": "Budapest",
       "wikipedia_title_en": "Budapest",
       "airports": [
@@ -829,7 +829,7 @@
         "lon": 14.6027
       },
       "radius_km": 25,
-      "wikidata_id": null,
+      "wikidata_id": "Q212214",
       "wikipedia_title": "Costiera amalfitana",
       "wikipedia_title_en": "Amalfi Coast",
       "airports": [
@@ -995,8 +995,8 @@
         "lon": 24.8093
       },
       "radius_km": 120,
-      "wikidata_id": null,
-      "wikipedia_title": "Creta",
+      "wikidata_id": "Q34374",
+      "wikipedia_title": "Creta (Grecia)",
       "wikipedia_title_en": "Crete",
       "airports": [
         "HER",
@@ -1162,7 +1162,7 @@
         "lon": 11.8447
       },
       "radius_km": 60,
-      "wikidata_id": null,
+      "wikidata_id": "Q1283",
       "wikipedia_title": "Dolomiti",
       "wikipedia_title_en": "Dolomites",
       "airports": [
@@ -1329,7 +1329,7 @@
         "lon": 18.0944
       },
       "radius_km": 25,
-      "wikidata_id": null,
+      "wikidata_id": "Q1722",
       "wikipedia_title": "Dubrovnik",
       "wikipedia_title_en": "Dubrovnik",
       "airports": [
@@ -1488,9 +1488,9 @@
         "lon": -19.5
       },
       "radius_km": 120,
-      "wikidata_id": null,
-      "wikipedia_title": "Islanda",
-      "wikipedia_title_en": "Iceland",
+      "wikidata_id": "Q204796",
+      "wikipedia_title": "Suðurland",
+      "wikipedia_title_en": "Southern Region (Iceland)",
       "airports": [
         "KEF"
       ],
@@ -1654,7 +1654,7 @@
         "lon": 28.9784
       },
       "radius_km": 40,
-      "wikidata_id": null,
+      "wikidata_id": "Q406",
       "wikipedia_title": "Istanbul",
       "wikipedia_title_en": "Istanbul",
       "airports": [
@@ -1821,7 +1821,7 @@
         "lon": -9.1393
       },
       "radius_km": 40,
-      "wikidata_id": null,
+      "wikidata_id": "Q597",
       "wikipedia_title": "Lisbona",
       "wikipedia_title_en": "Lisbon",
       "airports": [
@@ -1980,7 +1980,7 @@
         "lon": 13.75
       },
       "radius_km": 90,
-      "wikidata_id": null,
+      "wikidata_id": "Q186822",
       "wikipedia_title": "Isole Lofoten",
       "wikipedia_title_en": "Lofoten",
       "airports": [
@@ -2148,7 +2148,7 @@
         "lon": -16.9595
       },
       "radius_km": 40,
-      "wikidata_id": null,
+      "wikidata_id": "Q26253",
       "wikipedia_title": "Madera",
       "wikipedia_title_en": "Madeira Island",
       "airports": [
@@ -2313,7 +2313,7 @@
         "lon": 2.9712
       },
       "radius_km": 60,
-      "wikidata_id": null,
+      "wikidata_id": "Q8828",
       "wikipedia_title": "Maiorca",
       "wikipedia_title_en": "Mallorca",
       "airports": [
@@ -2478,7 +2478,7 @@
         "lon": 2.3522
       },
       "radius_km": 30,
-      "wikidata_id": null,
+      "wikidata_id": "Q90",
       "wikipedia_title": "Parigi",
       "wikipedia_title_en": "Paris",
       "airports": [
@@ -2646,7 +2646,7 @@
         "lon": 14.4378
       },
       "radius_km": 30,
-      "wikidata_id": null,
+      "wikidata_id": "Q1085",
       "wikipedia_title": "Praga",
       "wikipedia_title_en": "Prague",
       "airports": [
@@ -2806,7 +2806,7 @@
         "lon": 12.4964
       },
       "radius_km": 30,
-      "wikidata_id": null,
+      "wikidata_id": "Q220",
       "wikipedia_title": "Roma",
       "wikipedia_title_en": "Rome",
       "airports": [
@@ -2973,7 +2973,7 @@
         "lon": -1.9812
       },
       "radius_km": 30,
-      "wikidata_id": null,
+      "wikidata_id": "Q10313",
       "wikipedia_title": "San Sebastián",
       "wikipedia_title_en": "San Sebastián",
       "airports": [
@@ -3134,7 +3134,7 @@
         "lon": 25.4615
       },
       "radius_km": 20,
-      "wikidata_id": null,
+      "wikidata_id": "Q129296",
       "wikipedia_title": "Santorini",
       "wikipedia_title_en": "Santorini",
       "airports": [
@@ -3294,7 +3294,7 @@
         "lon": 24.7536
       },
       "radius_km": 30,
-      "wikidata_id": null,
+      "wikidata_id": "Q1770",
       "wikipedia_title": "Tallinn",
       "wikipedia_title_en": "Tallinn",
       "airports": [
@@ -3454,7 +3454,7 @@
         "lon": 24.8
       },
       "radius_km": 120,
-      "wikidata_id": null,
+      "wikidata_id": "Q39473",
       "wikipedia_title": "Transilvania",
       "wikipedia_title_en": "Transylvania",
       "airports": [
@@ -3622,7 +3622,7 @@
         "lon": 16.3738
       },
       "radius_km": 25,
-      "wikidata_id": null,
+      "wikidata_id": "Q1741",
       "wikipedia_title": "Vienna",
       "wikipedia_title_en": "Vienna",
       "airports": [

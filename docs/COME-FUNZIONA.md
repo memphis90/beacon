@@ -153,7 +153,7 @@ asse è responsabile di questo risultato*.
 | Costi | Stime, mostrate **sempre** come fascia. Mai valori puntuali |
 | Clima | `climate_source: "seed_approx"` — stime, non Open-Meteo. Badge visibile in UI |
 | Costo del volo | **Non modellato.** Entra in Fase 2 |
-| `wikidata_id` | `null` per tutte: lo risolveranno gli script di Fase 1 |
+| `wikidata_id` | **Risolto** per tutte e 23, verificato sulle coordinate (`scripts/resolve-wikidata.mjs`) |
 | Foto | URL verificati salvati nel dato, con attribuzione. Fallback grafico offline |
 | POI | Curati a mano. Non è un generatore di itinerari (Fase 3) |
 
@@ -191,6 +191,32 @@ producono un file in `data/staging/` da confrontare e fondere a mano
 (`node scripts/merge-staging.mjs`). Rispettano il rate limit delle API
 pubbliche — intervallo minimo, backoff sul 429, user-agent identificativo:
 Wikimedia e Overpass sono servizi gratuiti condivisi.
+
+### `resolve-wikidata.mjs`
+
+Risolve il `wikidata_id` di ogni destinazione, che è l'aggancio da cui parte
+tutta la Fase 1. **Non cerca per nome**: una ricerca su "Roma" restituisce la
+città, la provincia, un film e un asteroide, e sceglierne uno a occhio
+avvelenerebbe in silenzio ogni import futuro. Parte invece dal titolo della
+voce di Wikipedia, che nel seed c'è già ed è una scelta umana.
+
+Poi **verifica sulle coordinate**: l'elemento trovato deve avere una P625
+vicina a quella dichiarata nel seed, con tolleranza proporzionale al raggio —
+per una città sono chilometri, per un'area il "centro" è una convenzione e due
+convenzioni diverse distano quanto è grande la regione.
+
+La verifica ha subito ripagato, trovando due titoli sbagliati nel seed:
+
+- `creta` puntava a **una pagina di disambiguazione** (it.wikipedia "Creta"
+  elenca l'isola, l'argilla e altro). Ora punta a "Creta (Grecia)" → Q34374.
+  Lo script scarta le disambiguazioni e prova il titolo successivo.
+- `islanda-sud` puntava alla voce **"Islanda"**, cioè al paese intero: il
+  `wikidata_id` sarebbe stato quello dello stato, e ogni dato importato in
+  futuro — popolazione, superficie, confini — sarebbe stato dell'Islanda tutta
+  invece che della costa meridionale. Ora punta a "Suðurland" → Q204796.
+
+Nessuno dei due si vedeva dall'app: il primo era mascherato dagli `ALTERNATES`
+delle immagini, il secondo restituiva comunque una foto plausibile.
 
 ### Test
 
