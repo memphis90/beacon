@@ -363,6 +363,15 @@ textarea.control { height: auto; padding: 8px 10px; resize: vertical; }
 .chip--reset {
   border-style: dashed; background: var(--surface); color: var(--ink-2); padding-right: 11px;
 }
+/* Un veto è un chip che si legge in negativo: qui il chip È il bottone, e il
+   colore dice che sta togliendo qualcosa invece che aggiungerla. */
+.chip--removable {
+  padding-right: 11px; cursor: pointer;
+  border-color: color-mix(in srgb, var(--crit) 45%, var(--border-strong));
+  background: color-mix(in srgb, var(--crit) 10%, var(--surface));
+  color: var(--ink);
+}
+.chip--removable:hover { background: color-mix(in srgb, var(--crit) 20%, var(--surface)); }
 
 /* ---------- Header risultati ---------- */
 

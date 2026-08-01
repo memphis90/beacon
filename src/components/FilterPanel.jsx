@@ -134,6 +134,30 @@ export default function FilterPanel({ criteria, onChange, open = false, onClose,
             è il filtro più stretto del pannello.
           </p>
         </div>
+
+        {/* I veti nascono dalla frase, non da questo pannello: non c'è un
+            campo per scriverli, ma devono essere visibili e togliibili. Un
+            filtro che toglie destinazioni senza comparire da nessuna parte è
+            esattamente la scatola nera che l'app evita. */}
+        {criteria.excluded?.length > 0 && (
+          <div className="field">
+            <span className="filters__label">Escluse dalla tua frase</span>
+            <div className="chips">
+              {criteria.excluded.map((v) => (
+                <button
+                  key={v}
+                  type="button"
+                  className="chip chip--removable"
+                  onClick={() => set({ excluded: criteria.excluded.filter((x) => x !== v) })}
+                  title={`Rimetti in gioco ${v}`}
+                >
+                  {v} <span aria-hidden="true">×</span>
+                  <span className="visually-hidden">, rimuovi l’esclusione</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
       </Group>
 
       <Group title="Periodo e durata">

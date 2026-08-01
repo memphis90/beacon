@@ -101,7 +101,16 @@ const AXIS_LABELS = {
 /** Modificatori d'intensità cercati nelle vicinanze della parola dell'asse. */
 const STRONG = /\bsoprattutto\b|\bprincipalmente\b|\bmolt[oa]\b|\btant[oa]\b|\bmassim\w+\b|\bsolo\b|\bsopra ?tutto\b/
 const WEAK = /\bun po'? di\b|\bun poco di\b|\banche\b|\bqualche\b|\bleggerment\w+\b|\bmagari\b/
-const NEGATED = /\bsenza\b|\bniente\b|\bnessun\w*\b|\bno\b|\bevitare\b|\bnon voglio\b/
+/**
+ * `\bevit\w+\b` e non `\bevitare\b`: la regola cercava solo l'infinito, e
+ * "evito le discoteche" — che è il modo normale di dirlo — passava come una
+ * menzione qualsiasi, cioè peso 7 alla vita notturna. Un errore silenzioso e
+ * dell'esatto segno opposto. Lo stesso vale per "escludo", "odio", "detesto":
+ * sono verbi coniugati, e la negazione in italiano si scrive quasi sempre così.
+ */
+const NEGATED = /\bsenza\b|\bniente\b|\bnessun\w*\b|\bno\b|\bevit\w+\b|\besclud\w+\b|\besclus\w+\b|\bodio\b|\bdetesto\b|\bnon sopporto\b|\bnon voglio\b|\bnon mi interessa\w*\b/
+/* "mai" è stato provato e scartato: in "il mare più bello che abbia mai
+   visto" nega il mare, che è l'opposto di quel che dice la frase. */
 
 /** Cose che il parser riconosce ma l'app non sa ancora fare. */
 const OUT_OF_SCOPE = [
@@ -116,6 +125,10 @@ const OUT_OF_SCOPE = [
  * forme dove serve (`citt[àa]`), e togliere gli accenti spezzerebbe i nomi
  * delle destinazioni ("San Sebastián") nel confronto finale.
  */
+/* I nomi del catalogo finiscono dentro un'espressione regolare: "Cinque Terre"
+   va bene, ma un nome con una parentesi o un punto la romperebbe. */
+const escapeRe = (s) => String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+
 const normalise = (text) =>
   String(text || '')
     .toLowerCase()
@@ -283,12 +296,68 @@ export function parseQuery(input, { destinations = [] } = {}) {
     })
   }
 
-  // ---- nomi di destinazione o paese -----------------------------------
+  /* ---- nomi di destinazione o paese, in positivo E in negativo ---------
+   *
+   * "Voglio il mare ma non in Sardegna" nominava la Sardegna, e nominare un
+   * luogo voleva dire cercarlo: il risultato era la Sardegna in cima, cioè
+   * l'esatto contrario. Un nome preceduto da una negazione non è una ricerca,
+   * è un veto, e va trattato come tale — fuori dalla classifica, non in fondo.
+   *
+   * Gli elenchi si propagano. In "non in Sardegna, Sicilia o Puglia" la
+   * negazione è scritta una volta sola e vale per tutti e tre: fra un nome e
+   * il successivo ci devono stare solo separatori e preposizioni, altrimenti
+   * il "non" ha smesso di riguardarli. */
   const names = destinations.flatMap((d) => [d.name, d.countryName].filter(Boolean))
-  const hit = names.find((name) => name && new RegExp(`\\b${normalise(name)}\\b`).test(text))
+  const trovati = []
+  for (const name of new Set(names)) {
+    if (!name) continue
+    const re = new RegExp(`(^|[^\\p{L}])(${escapeRe(normalise(name))})(?![\\p{L}])`, 'u')
+    const m = re.exec(text)
+    if (m) trovati.push({ name, at: m.index + m[1].length, end: m.index + m[1].length + m[2].length })
+  }
+  trovati.sort((a, b) => a.at - b.at)
+
+  /** Solo separatori di elenco fra un nome escluso e il successivo. */
+  const CATENA = /^[\s,;]*(?:o|e|oppure|né|ne)?[\s,;]*(?:in|a|ad|nel|nella|nelle|nei|sul|sulla)?\s*$/
+
+  /* La negazione dei luoghi include il "non" nudo, che per gli assi invece non
+     vale: "non voglio caos" nega, "un posto non turistico" no. */
+  const VETO = /\bnon\b|\bsenza\b|\bniente\b|\bnessun\w*\b|\btranne\b|\beccetto\b|\bfuorché\b|\besclu\w+\b|\bevit\w+\b|\bmeno\b/g
+
+  /* Fra la negazione e il nome ci possono stare solo parole di servizio.
+     Senza questo controllo "un posto non turistico in Grecia" vieterebbe la
+     Grecia: il "non" c'è, ma riguarda "turistico". */
+  const PONTE = /^(?:\s*(?:in|a|ad|nel|nella|nelle|nei|negli|sul|sulla|sulle|il|lo|la|le|i|gli|l'|di|del|della|dei|delle|che|per|verso|zona))*\s*$/
+
+  const esclusi = []
+  let precedenteEscluso = null
+  for (const t of trovati) {
+    const inizio = Math.max(0, t.at - 30)
+    const finestra = text.slice(inizio, t.at)
+    const ultimaNeg = [...finestra.matchAll(VETO)].pop()
+    const negato =
+      (ultimaNeg != null && PONTE.test(finestra.slice(ultimaNeg.index + ultimaNeg[0].length))) ||
+      (precedenteEscluso !== null && CATENA.test(text.slice(precedenteEscluso, t.at)))
+    if (negato) {
+      esclusi.push(t.name)
+      precedenteEscluso = t.end
+    } else {
+      precedenteEscluso = null
+    }
+  }
+
+  if (esclusi.length) {
+    patch.excluded = esclusi
+    understood.push({
+      key: 'excluded', label: 'Escluse', value: esclusi.join(', '),
+      from: esclusi[0].toLowerCase(), hint: 'tolte dai risultati, non solo penalizzate',
+    })
+  }
+
+  const hit = trovati.find((t) => !esclusi.includes(t.name))
   if (hit) {
-    patch.query = hit
-    understood.push({ key: 'query', label: 'Ricerca', value: hit, from: hit.toLowerCase() })
+    patch.query = hit.name
+    understood.push({ key: 'query', label: 'Ricerca', value: hit.name, from: hit.name.toLowerCase() })
   }
 
   // ---- fuori portata ---------------------------------------------------

@@ -12,6 +12,7 @@ import { countryName } from './format.js'
 
 export const FILTER = {
   QUERY: 'query',
+  EXCLUDED: 'excluded',
   TYPE: 'type',
   SEA: 'sea',
   BUDGET: 'budget',
@@ -20,6 +21,7 @@ export const FILTER = {
 
 export const FILTER_LABEL = {
   [FILTER.QUERY]: 'ricerca testuale',
+  [FILTER.EXCLUDED]: 'esclusa dalla richiesta',
   [FILTER.TYPE]: 'tipo di destinazione',
   [FILTER.SEA]: 'temperatura del mare',
   [FILTER.BUDGET]: 'budget massimo',
@@ -151,7 +153,12 @@ export function applyHardFilters(destinations, criteria) {
     seaTempMin = 21,
     seaRequired = false,
     allowedTypes = null,
+    excluded: escluse = null,
   } = criteria || {}
+
+  const veti = (Array.isArray(escluse) ? escluse : [])
+    .map((v) => String(v || '').trim().toLowerCase())
+    .filter(Boolean)
 
   const normalisedQuery = query.trim().toLowerCase()
   /**
@@ -180,6 +187,24 @@ export function applyHardFilters(destinations, criteria) {
         detail: 'anagrafica importata, punteggi non ancora assegnati',
       })
       continue
+    }
+
+    /* Il veto viene prima della ricerca: chi ha detto "non in Sardegna" ha
+       detto una cosa più forte di qualunque preferenza, e una destinazione
+       vietata non deve nemmeno arrivare al punteggio. Stesso confronto
+       testuale della query — nome, codice paese, paese per esteso — così
+       "niente Grecia" toglie tutte le isole greche e non solo un'omonima. */
+    if (veti.length) {
+      const haystack = [
+        destination.name,
+        destination.country,
+        countryName(destination.country),
+      ].join(' ').toLowerCase()
+      const veto = veti.find((v) => haystack.includes(v))
+      if (veto) {
+        excluded.push({ destination, filter: FILTER.EXCLUDED, detail: `hai escluso "${veto}"` })
+        continue
+      }
     }
 
     if (normalisedQuery) {

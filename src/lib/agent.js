@@ -369,6 +369,17 @@ export function sanitisePatch(raw) {
 
   if ('seaRequired' in raw) patch.seaRequired = Boolean(raw.seaRequired)
 
+  /* I veti sono testo libero come `query`, e come `query` non ci si fida:
+     ripuliti, tagliati e limitati a cinque — un elenco più lungo di così non
+     è una richiesta, è un modello che ha frainteso la frase. */
+  if (Array.isArray(raw.excluded)) {
+    const veti = raw.excluded
+      .map((v) => String(v || '').trim())
+      .filter((v) => v.length > 1 && v.length <= 40)
+      .slice(0, 5)
+    if (veti.length) patch.excluded = veti
+  }
+
   if (Array.isArray(raw.allowedTypes)) {
     const types = raw.allowedTypes.filter((t) => TYPES.includes(t))
     if (types.length && types.length < TYPES.length) patch.allowedTypes = types
@@ -423,7 +434,8 @@ Schema:
   "weights": { asse: 0-10 },
   "seaRequired": true quando il mare è una CONDIZIONE ("voglio il mare", "deve essere balneabile") oppure il TIPO di destinazione ("una località di mare", "una meta balneare", "un posto al mare", "vacanza al mare"): in quel secondo caso il mare non è un gusto, è la categoria del posto, e una città che ha l'oceano a mezz'ora non la soddisfa. ATTENZIONE: è un filtro che CANCELLA le destinazioni troppo fredde nel mese chiesto, e nei mesi freddi le cancella tutte. Restano interessi, da tradurre nel peso "sea" senza questo campo: "mare tranquillo", "snorkeling", "spiagge", "con vista sul mare",
   "allowedTypes": sottoinsieme di ["city","area","island"],
-  "query": nome di una destinazione o di un paese se esplicitamente nominato,
+  "query": nome di una destinazione o di un paese se esplicitamente nominato E VOLUTO,
+  "excluded": elenco di nomi di destinazione o di paese che la frase RIFIUTA ("ma non in Sardegna", "niente Grecia", "tranne la Spagna"). Sono veti: spariscono dai risultati. Un nome rifiutato non va MAI anche in "query",
   "themes": sottoinsieme dell'elenco dei temi, al massimo 2. Serve quando la frase evoca un CARATTERE che gli assi non sanno dire — "Halloween" non chiede più cultura, chiede atmosfera gotica. Non escludono niente: danno un bonus a chi ha quell'etichetta. Ometti il campo se la frase parla solo di interessi,
   "understood": [ { "label": "...", "value": "...", "from": "la parola esatta della frase da cui l'hai dedotto", "note": "opzionale" } ]
 }
@@ -531,9 +543,10 @@ export function describeRules(tutte, { seaTempMin = 21 } = {}) {
   return `CONTESTO — il catalogo su cui la tua risposta sarà applicata. Sono ${destinations.length} destinazioni (${perTipo}) e non ne esistono altre:
 ${catalogo}
 
-COSA FA OGNI CAMPO. "month", "nights" e "weights" ordinano soltanto e non tolgono niente. Gli altri tre ESCLUDONO: una destinazione esclusa sparisce dai risultati, e se escludono tutto la persona vede una schermata vuota.
+COSA FA OGNI CAMPO. "month", "nights" e "weights" ordinano soltanto e non tolgono niente. Gli altri quattro ESCLUDONO: una destinazione esclusa sparisce dai risultati, e se escludono tutto la persona vede una schermata vuota.
 
 - "query" è un confronto testuale su nome e paese, e va usato quando la frase nomina un luogo: "cinque notti in Grecia" → "Grecia", "un weekend a Lisbona" → "Lisbona", "un'isola greca" → "Grecia" insieme ad allowedTypes ["island"]. Il luogo deve comparire nell'elenco qui sopra, come nome o come paese: se non c'è, il confronto non trova niente e i risultati sono zero. Una descrizione che non è un luogo ("una capitale del nord", "una meta romantica", "un posto tranquillo") non va MAI in "query": per quella usa "allowedTypes" e i pesi. Il catalogo ti dice quali nomi esistono, non quale destinazione proporre: la scelta non è tua.
+- "excluded" toglie chi corrisponde, col confronto testuale di "query" ma al contrario: "Grecia" fra gli esclusi toglie tutte le destinazioni greche, non una sola. È l'unico modo di rispettare un rifiuto — abbassare un peso non basta, perché una destinazione molto forte sugli altri assi tornerebbe comunque in cima. Se la frase nomina un luogo per rifiutarlo, il nome va QUI e non in "query": metterlo in "query" produce l'esatto contrario di quel che è stato chiesto.
 - "allowedTypes" tiene solo i tipi elencati.
 - "seaRequired": true tiene solo chi ha il mare ad almeno ${seaTempMin} °C NEL MESE CHIESTO. Quante destinazioni lo superano, mese per mese: ${perMese}.${mesiVuoti.length ? ` In ${mesiVuoti.join(', ')} non ne passa NESSUNA: metterlo a true su uno di quei mesi svuota la ricerca.` : ''} Se la frase non pone il mare come condizione necessaria, ometti il campo e alza il peso "sea": ottieni le stesse destinazioni in cima senza cancellare le altre.
 - "budgetMax" è il costo a terra per persona per l'INTERO soggiorno, confrontato con la stima media del catalogo. Una notte costa fra ${minimo} € e ${massimo} €: un budget sotto ${minimo} € per notte non lascia passare niente. Se la frase dice "economico" senza una cifra, non inventarla: quello è il peso "value", che ordina dal più conveniente senza cancellare nessuno. Il filtro serve solo quando un numero c'è.
