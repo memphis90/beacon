@@ -81,11 +81,16 @@ a { color: var(--brand-600); }
   transition: padding-left 200ms cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-/* `center` e non `baseline`: il marchio è un SVG, e su una linea di base
-   calcolata sul testo resterebbe appeso più in alto delle lettere. */
-.topbar__brand {
+/* Il nome, identico nelle due schermate.
+ *
+ * Erano due dichiarazioni separate — 24px/700 nei risultati, 20px/800 sulla
+ * home — e passando dall'una all'altra il marchio cambiava taglia e peso nello
+ * stesso angolo dello schermo. Un marchio che si muove non è più un punto
+ * fermo, che è l'unica cosa che un marchio deve fare. */
+.topbar__brand,
+.landing__brand {
   display: flex; align-items: center; gap: var(--inline-gap);
-  font-size: 24px; line-height: 32px; font-weight: 700; letter-spacing: -0.01em; /* headline-lg */
+  font-size: 22px; line-height: 30px; font-weight: 700; letter-spacing: -0.01em;
   white-space: nowrap;
 }
 .topbar__brand span {
@@ -1126,7 +1131,10 @@ input[type='range']:disabled { opacity: 0.45; }
     height: 48px;
     padding: 0 var(--container-margin);
   }
-  .topbar__brand { font-size: 20px; line-height: 28px; } /* headline-md */
+  /* Sotto i 900px il nome rimpicciolisce in ENTRAMBE le schermate, o
+     tornerebbe a essere di due taglie diverse proprio dove lo spazio è poco. */
+  .topbar__brand,
+  .landing__brand { font-size: 20px; line-height: 28px; }
 
   .mtools {
     display: block;
@@ -1552,11 +1560,10 @@ input[type='range']:disabled { opacity: 0.45; }
 @media (max-width: 900px) {
   .landing__bar { padding-left: var(--container-margin); }
 }
-.landing__brand {
-  display: flex; align-items: center; gap: var(--inline-gap);
-  font-size: 20px; line-height: 28px; font-weight: 800; /* headline-md */
-  letter-spacing: -0.015em; color: var(--primary);
-}
+/* Taglia e peso arrivano dalla regola condivisa con `.topbar__brand`: qui
+   resta solo il colore, che sulla barra chiara della home è quello del
+   marchio e non il testo ereditato. */
+.landing__brand { color: var(--primary); }
 .landing__phase {
   padding: 2px 8px; border-radius: var(--radius-pill);
   background: var(--surface-3); color: var(--ink-2);

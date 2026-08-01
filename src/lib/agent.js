@@ -181,6 +181,40 @@ export function endpointHost(baseUrl) {
 export const isLocalEndpoint = (baseUrl) => /^https?:\/\/(localhost|127\.|\[::1\])/i.test(baseUrl || '')
 
 /**
+ * La pagina è servita da un sito, non aperta in locale.
+ *
+ * Distinzione che conta più di quanto sembri: un modello che gira sulla tua
+ * macchina è raggiungibile dalla pagina solo se la pagina viene dalla tua
+ * macchina. Da un sito, il browser mette in mezzo due difese — una regola che
+ * chiede al server il permesso di rispondere a quell'origine, e un controllo
+ * che impedisce ai siti pubblici di frugare nella rete locale — e la seconda
+ * non si disattiva dal lato del sito, che è esattamente il punto.
+ */
+export const isHostedPage = () =>
+  typeof window !== 'undefined'
+  && /^https?:$/.test(window.location?.protocol || '')
+  && !/^(localhost|127\.0\.0\.1|\[::1\])$/i.test(window.location?.hostname || '')
+
+/** Un endpoint locale chiamato da un sito: è il caso che fallisce sempre. */
+export const isBlockedCombination = (baseUrl) => isLocalEndpoint(baseUrl) && isHostedPage()
+
+/** Il messaggio d'errore quando `fetch` muore senza dire perché. */
+export function localEndpointHint(baseUrl) {
+  if (isBlockedCombination(baseUrl)) {
+    return 'Il browser ha bloccato la chiamata: questa pagina arriva da un sito e il modello gira '
+      + 'sul tuo computer. Un sito non può raggiungere un servizio locale, e non è una cosa che '
+      + 'si aggiusta dal sito. Usa l’app in locale (npm run dev), oppure configura un endpoint '
+      + 'remoto.'
+  }
+  if (isLocalEndpoint(baseUrl)) {
+    return 'Nessuna risposta dall’endpoint locale. Controlla che il server sia acceso e che '
+      + 'l’indirizzo sia giusto (per Ollama: http://localhost:11434/v1).'
+  }
+  return 'Nessuna risposta dall’endpoint. Controlla l’indirizzo, la connessione, e che il '
+    + 'server accetti chiamate da questa pagina.'
+}
+
+/**
  * Il profilo su cui si lavora. Accetta sia la configurazione intera sia un
  * profilo singolo, così tutte le chiamate passano di qui senza sapere quale
  * delle due hanno in mano.
@@ -508,6 +542,13 @@ async function askForJson(system, user, { config, signal, timeout }) {
     return JSON.parse(match[0])
   } catch (error) {
     if (error.name === 'AbortError') throw new Error('Il modello non ha risposto in tempo')
+    // `fetch` fallisce con un TypeError secco — "Failed to fetch" — sia quando
+    // il server non c'è, sia quando c'è ma il browser ha rifiutato la
+    // risposta. Il motivo vero non arriva alla pagina, per progetto: dirlo
+    // sarebbe dire a un sito cosa gira sulla tua macchina. Qui si nomina la
+    // causa di gran lunga più probabile invece di lasciare un errore che non
+    // suggerisce niente.
+    if (error instanceof TypeError) throw new Error(localEndpointHint(profile.baseUrl))
     throw error
   } finally {
     clearTimeout(timer)

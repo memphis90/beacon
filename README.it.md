@@ -123,6 +123,25 @@ restano in `localStorage` — non c'è un server a cui mandarle.
 > Punteggio, filtri e ordine restano calcolati in locale, e ogni criterio è
 > mostrato con la parola da cui è stato dedotto.
 
+### I modelli locali vogliono l'app in locale
+
+Una pagina servita da un **sito** non può raggiungere un servizio che gira sul
+**tuo computer**. Il browser lo impedisce — una pagina pubblica che fruga nella
+rete locale è esattamente l'attacco per cui quel divieto esiste — e non è
+qualcosa che il sito possa disattivare. Non è una tua configurazione sbagliata.
+
+Quindi:
+
+| Dove gira l'app | Ollama / LM Studio | Endpoint remoti |
+|---|---|---|
+| in locale (`npm run dev`, `npm run preview`) | ✅ | ✅ |
+| da un sito | ❌ bloccato dal browser | ✅ |
+
+Se vuoi i modelli locali, clona il repo e usalo in locale — che è anche l'unica
+configurazione in cui **niente di quello che scrivi esce dal tuo computer**.
+L'app te lo dice nel pannello delle impostazioni, invece di lasciare che la
+chiamata fallisca con un errore di rete che non spiega niente.
+
 ## I tuoi dati
 
 Tutto in `localStorage`, su questa macchina: criteri, preferiti, cronologia,

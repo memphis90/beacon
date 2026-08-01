@@ -1,7 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import {
   activeProfile, agentIsReady, buildSystemPrompt, critiquePayload, describeRules,
-  emptyAgentConfig, nextProfileId, normaliseAgentConfig, profileLabel, sanitiseCritique,
+  emptyAgentConfig, isBlockedCombination, isLocalEndpoint, localEndpointHint,
+  nextProfileId, normaliseAgentConfig, profileLabel, sanitiseCritique,
   sanitisePatch, sanitiseUnderstood,
 } from '../src/lib/agent.js'
 
@@ -153,6 +154,30 @@ describe('normaliseAgentConfig — più modelli, uno attivo', () => {
   it('nextProfileId non riusa un identificatore già assegnato', () => {
     expect(nextProfileId([{ id: 'm1' }, { id: 'm4' }])).toBe('m5')
     expect(nextProfileId([])).toBe('m1')
+  })
+})
+
+/**
+ * Un endpoint locale chiamato da una pagina servita da un sito non fallisce a
+ * volte: fallisce sempre, ed è il browser a deciderlo. L'app deve dirlo con
+ * parole sue, perché `fetch` restituisce solo "Failed to fetch".
+ */
+describe('endpoint locali e pagine ospitate', () => {
+  it('riconosce gli indirizzi locali', () => {
+    expect(isLocalEndpoint('http://localhost:11434/v1')).toBe(true)
+    expect(isLocalEndpoint('http://127.0.0.1:1234/v1')).toBe(true)
+    expect(isLocalEndpoint('https://api.groq.com/openai/v1')).toBe(false)
+  })
+
+  it('fuori dal browser non dichiara nessun blocco', () => {
+    // Nei test `window` non esiste: la pagina non è "ospitata", quindi il
+    // messaggio è quello del server che non risponde, non quello del divieto.
+    expect(isBlockedCombination('http://localhost:11434/v1')).toBe(false)
+    expect(localEndpointHint('http://localhost:11434/v1')).toContain('server sia acceso')
+  })
+
+  it('per un endpoint remoto il suggerimento cambia', () => {
+    expect(localEndpointHint('https://api.groq.com/openai/v1')).toContain('accetti chiamate')
   })
 })
 

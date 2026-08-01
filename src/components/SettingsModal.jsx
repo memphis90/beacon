@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { IconPlus, IconTrash } from './Icons.jsx'
 import {
-  PRESETS, activeProfile, agentIsReady, interpretWithModel, nextProfileId,
-  normaliseAgentConfig, profileFromPreset, profileIsUsable, profileLabel,
+  PRESETS, activeProfile, agentIsReady, interpretWithModel, isBlockedCombination,
+  nextProfileId, normaliseAgentConfig, profileFromPreset, profileIsUsable, profileLabel,
 } from '../lib/agent.js'
 
 /**
@@ -261,6 +261,27 @@ export default function SettingsModal({ config, onChange, onClose }) {
                   mandarla.
                 </p>
               </div>
+
+              {/* Detto PRIMA di provare, non dopo: questa combinazione non
+                  fallisce a volte, fallisce sempre, e scoprirlo dall'errore
+                  fa sospettare la propria configurazione invece della causa
+                  vera. */}
+              {isBlockedCombination(profilo.baseUrl) && (
+                <div className="notice notice--warn">
+                  <div>
+                    <strong>Da qui non funzionerà.</strong> Questa pagina arriva da un sito, e
+                    l’endpoint che hai scritto è sul tuo computer: il browser non lascia che un
+                    sito raggiunga un servizio locale, ed è una difesa che non si disattiva dal
+                    lato del sito.
+                    <p style={{ margin: '8px 0 0' }}>
+                      Le strade sono due: usare l’app <strong>in locale</strong> — clonare il
+                      repo e <code>npm run dev</code>, così pagina e modello stanno sulla stessa
+                      macchina — oppure configurare qui un <strong>endpoint remoto</strong>,
+                      accettando che la frase esca da questo computer.
+                    </p>
+                  </div>
+                </div>
+              )}
 
               {remoto && (
                 <div className="notice notice--warn">

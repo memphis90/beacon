@@ -124,6 +124,25 @@ out which model reads your phrases best. Keys, when needed, stay in
 > result**. Scoring, filters and ordering stay computed locally, and every
 > criterion is shown together with the word it was inferred from.
 
+### Local models need the app to run locally
+
+A page served from a **website** cannot reach a service running on **your
+machine**. Browsers block it — a public page probing your local network is
+exactly the attack that block exists to stop — and it isn't something the site
+can switch off. It's not a misconfiguration on your side.
+
+So:
+
+| You run the app… | Ollama / LM Studio | Remote endpoints |
+|---|---|---|
+| locally (`npm run dev`, `npm run preview`) | ✅ | ✅ |
+| from a hosted site | ❌ blocked by the browser | ✅ |
+
+If you want local models, clone the repo and run it locally — which is also the
+only configuration where **nothing you type ever leaves your computer**. The
+app says so in the settings panel instead of letting the call fail with an
+opaque network error.
+
 ## Your data
 
 Everything lives in `localStorage`, on your machine: criteria, favourites,
