@@ -47,6 +47,13 @@ export const PRESETS = [
     note: 'Come Ollama: server locale compatibile OpenAI.',
   },
   {
+    id: 'google',
+    label: 'Google AI Studio (Gemma, gratis)',
+    baseUrl: 'https://generativelanguage.googleapis.com/v1beta/openai',
+    model: 'gemma-3-27b-it',
+    note: 'Remoto, gratuito entro quota e senza carta. Chiave da aistudio.google.com/apikey. La frase esce dal tuo computer.',
+  },
+  {
     id: 'openrouter',
     label: 'OpenRouter (modelli :free)',
     baseUrl: 'https://openrouter.ai/api/v1',
@@ -618,6 +625,56 @@ async function askForJson(system, user, { config, signal, timeout }) {
     // sarebbe dire a un sito cosa gira sulla tua macchina. Qui si nomina la
     // causa di gran lunga più probabile invece di lasciare un errore che non
     // suggerisce niente.
+    if (error instanceof TypeError) throw new Error(localEndpointHint(profile.baseUrl))
+    throw error
+  } finally {
+    clearTimeout(timer)
+  }
+}
+
+/**
+ * I modelli che quell'endpoint offre davvero, chiesti a lui.
+ *
+ * Nasce da un problema ricorrente: il nome del modello scritto in un preset
+ * invecchia. Il catalogo gratuito di OpenRouter cambia di mese in mese, Google
+ * rinomina le versioni di Gemma, e un preset che punta a un modello ritirato
+ * fallisce con un 404 che chi legge attribuisce all'app. Un elenco chiesto al
+ * fornitore non può invecchiare: se un modello non c'è più, non compare.
+ *
+ * `/models` fa parte del dialetto OpenAI e lo espone chiunque l'app supporti.
+ * Chi non lo espone dà errore, e il campo resta un campo di testo come prima:
+ * si degrada, non si rompe.
+ */
+export async function listModels(profile, { signal, timeout = 20000 } = {}) {
+  if (!profile?.baseUrl) throw new Error('Endpoint non configurato')
+
+  const controller = new AbortController()
+  const timer = setTimeout(() => controller.abort(), timeout)
+  if (signal) signal.addEventListener('abort', () => controller.abort(), { once: true })
+
+  try {
+    const res = await fetch(`${profile.baseUrl.replace(/\/+$/, '')}/models`, {
+      signal: controller.signal,
+      headers: profile.apiKey ? { Authorization: `Bearer ${profile.apiKey}` } : {},
+    })
+    if (res.status === 401 || res.status === 403) {
+      throw new Error(`${endpointHost(profile.baseUrl)} ha rifiutato la chiave (${res.status}).`)
+    }
+    if (!res.ok) throw new Error(`L’endpoint ha risposto ${res.status} all’elenco dei modelli.`)
+
+    const data = await res.json()
+    const ids = (data?.data || data?.models || [])
+      .map((m) => m?.id || m?.name)
+      .filter((id) => typeof id === 'string')
+      // Google restituisce "models/gemma-3-27b-it": la chiamata vuole il nome
+      // senza il prefisso della collezione.
+      .map((id) => id.replace(/^models\//, ''))
+      .sort((a, b) => a.localeCompare(b))
+
+    if (!ids.length) throw new Error('L’endpoint non ha elencato nessun modello.')
+    return ids
+  } catch (error) {
+    if (error.name === 'AbortError') throw new Error('L’elenco dei modelli non è arrivato in tempo')
     if (error instanceof TypeError) throw new Error(localEndpointHint(profile.baseUrl))
     throw error
   } finally {

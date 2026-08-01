@@ -103,9 +103,15 @@ plug in a language model. **Any OpenAI-compatible endpoint** works:
 |---|---|---|---|
 | **Ollama** | locally | no | **no** |
 | **LM Studio** | locally | no | **no** |
+| Google AI Studio (Gemma) | remote, free, no card | yes | yes |
 | Groq | remote, free tier | yes | yes |
 | OpenRouter (`:free` models) | remote | yes | yes |
 | Any OpenAI-compatible server | depends | depends | depends |
+
+No provider accepts anonymous calls, not even for free models: the key isn't
+about paying, it's about **whose quota this is**. The settings panel can ask an
+endpoint which models it actually serves (*"Quali modelli ha?"*), so a model
+retired upstream doesn't turn into an unexplainable error.
 
 All four verified to accept browser calls (they reply to the CORS preflight
 with `allow-origin: *`), so a hosted page can talk to them directly.

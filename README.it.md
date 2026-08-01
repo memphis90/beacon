@@ -102,9 +102,15 @@ endpoint compatibile con l'API OpenAI**:
 |---|---|---|---|
 | **Ollama** | in locale | no | **no** |
 | **LM Studio** | in locale | no | **no** |
+| Google AI Studio (Gemma) | remoto, gratuito senza carta | sì | sì |
 | Groq | remoto, piano gratuito | sì | sì |
 | OpenRouter (modelli `:free`) | remoto | sì | sì |
 | Qualsiasi server OpenAI-compatibile | dipende | dipende | dipende |
+
+Nessun fornitore, nemmeno per i modelli gratuiti, accetta chiamate senza
+chiave: la chiave non serve a pagare, serve a dire **di chi è la quota**. Il
+pannello sa chiedere all'endpoint quali modelli offre davvero (*"Quali modelli
+ha?"*), così un nome ritirato dal fornitore non diventa un errore inspiegabile.
 
 Tutti e quattro accettano chiamate dal browser (rispondono al preflight CORS
 con `allow-origin: *`), quindi una pagina online può parlarci direttamente.

@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { IconPlus, IconTrash } from './Icons.jsx'
 import {
   PRESETS, activeProfile, agentIsReady, interpretWithModel, isBlockedCombination,
-  nextProfileId, normaliseAgentConfig, profileFromPreset, profileIsUsable, profileLabel,
-  profileNeedsKey,
+  listModels, nextProfileId, normaliseAgentConfig, profileFromPreset, profileIsUsable,
+  profileLabel, profileNeedsKey,
 } from '../lib/agent.js'
 
 /**
@@ -32,6 +32,10 @@ export default function SettingsModal({ config, onChange, onClose }) {
   // un profilo senza per questo metterlo in uso.
   const [editId, setEditId] = useState(() => activeProfile(config)?.id ?? null)
   const [probe, setProbe] = useState(null)
+  // L'elenco dei modelli è per profilo e non si porta dietro il cambio di
+  // riga: quelli di un endpoint non sono quelli di un altro.
+  const [modelli, setModelli] = useState([])
+  const [elencoStato, setElencoStato] = useState(null)
 
   const profilo = draft.profiles.find((p) => p.id === editId) || draft.profiles[0] || null
   const preset = PRESETS.find((p) => p.id === profilo?.preset) || PRESETS[PRESETS.length - 1]
@@ -92,6 +96,18 @@ export default function SettingsModal({ config, onChange, onClose }) {
   /** Scorciatoia: mette in uso la riga aperta senza passare dal menu. */
   const usaQuesto = () => {
     setDraft((d) => ({ ...d, activeId: profilo.id, enabled: true }))
+  }
+
+  const caricaModelli = async () => {
+    setElencoStato('loading')
+    try {
+      const ids = await listModels(profilo)
+      setModelli(ids)
+      setElencoStato(null)
+    } catch (error) {
+      setModelli([])
+      setElencoStato(error.message)
+    }
   }
 
   const test = async () => {
@@ -188,7 +204,7 @@ export default function SettingsModal({ config, onChange, onClose }) {
                       type="button"
                       className="models__pick"
                       aria-pressed={p.id === profilo?.id}
-                      onClick={() => { setEditId(p.id); setProbe(null) }}
+                      onClick={() => { setEditId(p.id); setProbe(null); setModelli([]); setElencoStato(null) }}
                     >
                       <strong>{profileLabel(p)}</strong>
                       <small>
@@ -247,11 +263,34 @@ export default function SettingsModal({ config, onChange, onClose }) {
 
                 <div className="field">
                   <label htmlFor="ag-model">Modello</label>
+                  {/* Il datalist si riempie con l'elenco chiesto all'endpoint:
+                      i nomi dei modelli invecchiano, e un preset che punta a
+                      uno ritirato fallisce con un 404 che sembra colpa
+                      dell'app. Resta un campo di testo, così un endpoint che
+                      non espone /models non toglie niente. */}
                   <input
                     id="ag-model" className="control" placeholder="llama3.2"
+                    list={modelli.length ? 'ag-modelli' : undefined}
                     value={profilo.model}
                     onChange={(e) => patch({ model: e.target.value })}
                   />
+                  {modelli.length > 0 && (
+                    <datalist id="ag-modelli">
+                      {modelli.map((m) => <option key={m} value={m} />)}
+                    </datalist>
+                  )}
+                  <p className="landing__note">
+                    <button
+                      type="button"
+                      className="btn btn--ghost btn--sm"
+                      disabled={!profilo.baseUrl || elencoStato === 'loading'}
+                      onClick={caricaModelli}
+                    >
+                      {elencoStato === 'loading' ? 'Chiedo l’elenco…' : 'Quali modelli ha?'}
+                    </button>
+                    {modelli.length > 0 && ` ${modelli.length} disponibili: scrivi per filtrare.`}
+                    {elencoStato && elencoStato !== 'loading' && ` ${elencoStato}`}
+                  </p>
                 </div>
               </div>
 
