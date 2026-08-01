@@ -1,7 +1,7 @@
 import { AXES, AXIS_KEYS } from './axes.js'
 import { THEMES, THEME_BONUS, THEME_BONUS_MAX, THEME_KEYS } from './themes.js'
 import { countryName } from './format.js'
-import { seaTemperature, tripCost } from './scoring.js'
+import { isUnscored, seaTemperature, tripCost } from './scoring.js'
 
 /**
  * Interpretazione della frase tramite un modello linguistico.
@@ -477,8 +477,20 @@ const MESI_IT = [
  * catalogo serve a sapere quali nomi esistono, non a selezionarne uno — la
  * scelta resta del punteggio, che è verificabile.
  */
-export function describeRules(destinations, { seaTempMin = 21 } = {}) {
-  if (!Array.isArray(destinations) || destinations.length === 0) return ''
+export function describeRules(tutte, { seaTempMin = 21 } = {}) {
+  /**
+   * Solo le destinazioni che possono davvero comparire.
+   *
+   * Dalla Fase 1 il catalogo contiene anche l'anagrafica di posti non ancora
+   * valutati, che il ranking tiene fuori. Elencarli qui sarebbe la bugia più
+   * dannosa possibile: il modello leggerebbe "Firenze" fra le destinazioni
+   * esistenti, la userebbe come `query` su una frase che la nomina, e il
+   * filtro testuale restituirebbe zero risultati. Lo stesso vale per i
+   * conteggi del mare — "44 a luglio" quando ne possono uscire dieci porta a
+   * decidere su un catalogo immaginario.
+   */
+  const destinations = Array.isArray(tutte) ? tutte.filter((d) => !isUnscored(d)) : []
+  if (destinations.length === 0) return ''
 
   const catalogo = destinations
     .map((d) => `${d.name} (${countryName(d.country)}, ${TIPO_IT[d.type] || d.type})`)

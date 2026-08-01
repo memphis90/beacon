@@ -15,6 +15,11 @@ import {
 describe('describeRules — le regole vere, dette al modello', () => {
   const dest = (over) => ({
     name: 'Prova', country: 'IT', type: 'island',
+    // I punteggi ci vogliono: senza, la destinazione è "non ancora valutata" e
+    // il contesto la tiene fuori — che è il comportamento voluto, ma qui
+    // stiamo provando altro.
+    scores: { nature: 50, culture: 50, sea: 50, food: 50, nightlife: 50, outdoor: 50, family: 50, offbeat: 50 },
+    scores_source: 'manual',
     climate: Object.fromEntries(
       Array.from({ length: 12 }, (_, i) => [String(i + 1), { sea_temp: 10 }])
     ),
@@ -74,6 +79,22 @@ describe('describeRules — le regole vere, dette al modello', () => {
 
   it('rispetta una soglia del mare diversa', () => {
     expect(describeRules([caldo, freddo], { seaTempMin: 30 })).toContain('almeno 30 °C')
+  })
+
+  /**
+   * Il catalogo raccontato al modello deve contenere solo ciò che può
+   * comparire. Un posto elencato ma escluso dal ranking è la bugia peggiore:
+   * il modello lo userebbe come `query`, e la ricerca darebbe zero risultati.
+   */
+  it('non racconta al modello le destinazioni non ancora valutate', () => {
+    const daValutare = dest({ name: 'Nonvalutata', scores_source: 'todo' })
+    const testo = describeRules([caldo, freddo, daValutare])
+    expect(testo).not.toContain('Nonvalutata')
+    expect(testo).toContain('2 destinazioni')
+  })
+
+  it('senza destinazioni valutate non inventa un contesto', () => {
+    expect(describeRules([dest({ scores_source: 'todo' })])).toBe('')
   })
 
   it('senza catalogo non inventa un contesto', () => {

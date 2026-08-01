@@ -28,6 +28,7 @@ import { fileURLToPath } from 'node:url'
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const SOURCE = resolve(ROOT, 'data/destinations.json')
+const PUNTI = resolve(ROOT, 'data/climate-points.txt')
 const STAGING = resolve(ROOT, 'data/staging/climate.json')
 
 const UA =
@@ -166,6 +167,27 @@ async function mare(lat, lon) {
 const doc = JSON.parse(readFileSync(SOURCE, 'utf8'))
 
 /**
+ * Dove chiedere il clima, quando il baricentro non rappresenta il posto.
+ *
+ * Per un'isola o una regione montuosa il punto medio della superficie cade in
+ * quota: il centroide di Tenerife sta sul Teide, e l'archivio risponde con la
+ * temperatura di 3700 metri. Non è un errore della misura — è la domanda che
+ * era sbagliata. Vedi data/climate-points.txt.
+ */
+const riferimenti = new Map()
+try {
+  for (const riga of readFileSync(PUNTI, 'utf8').split(/\r?\n/)) {
+    const pulita = riga.trim()
+    if (!pulita || pulita.startsWith('#')) continue
+    const [id, lat, lon] = pulita.split('|').map((p) => p.trim())
+    if (id && Number.isFinite(Number(lat)) && Number.isFinite(Number(lon))) {
+      riferimenti.set(id, { lat: Number(lat), lon: Number(lon) })
+    }
+  }
+  if (riferimenti.size) console.log(`${riferimenti.size} punti di riferimento climatico dichiarati.\n`)
+} catch { /* il file è facoltativo */ }
+
+/**
  * Ripartenza: quello che è già in staging non si richiede.
  *
  * Centodue destinazioni per due chiamate ciascuna, a due secondi e mezzo
@@ -210,7 +232,8 @@ for (const d of doc.destinations) {
     continue
   }
 
-  const terra = await clima(d.coords.lat, d.coords.lon)
+  const punto = riferimenti.get(d.id) || d.coords
+  const terra = await clima(punto.lat, punto.lon)
   if (terra === RIPROVA) {
     console.log(`${etichetta} limite di frequenza — la lascio per la prossima passata`)
     fermate += 1
@@ -222,11 +245,30 @@ for (const d of doc.destinations) {
     continue
   }
 
-  const acqua = await mare(d.coords.lat, d.coords.lon)
+  const acqua = await mare(punto.lat, punto.lon)
+
+  /**
+   * La misura aggiorna i numeri del mare, non decide SE il mare c'è.
+   *
+   * La griglia del modello marino è larga una manciata di chilometri, e su
+   * una città vicina alla costa risponde con dei valori anche quando al mare
+   * non ci si va a piedi: Roma, a venticinque chilometri dal Tirreno, ne
+   * riceveva uno. Accettarlo l'avrebbe fatta passare per il filtro "mare
+   * balneabile", che è una promessa che quella destinazione non mantiene.
+   *
+   * Per chi un clima ce l'aveva già, il verdetto precedente resta: se non
+   * aveva mare, non ne acquista uno. Per le destinazioni nuove non c'è un
+   * verdetto da rispettare — entrano comunque come "da valutare", e chi
+   * assegna i punteggi guarderà anche questo.
+   */
+  const avevaClima = Boolean(d.climate?.['7'])
+  const avevaMare = avevaClima
+    && Object.values(d.climate).some((m) => m?.sea_temp != null)
+  const accettaMare = avevaClima ? avevaMare : true
 
   const climate = {}
   for (let m = 1; m <= 12; m += 1) {
-    climate[m] = { ...terra[m], sea_temp: acqua ? acqua[m] : null }
+    climate[m] = { ...terra[m], sea_temp: acqua && accettaMare ? acqua[m] : null }
   }
 
   changes[d.id] = { climate, climate_source: 'open-meteo' }

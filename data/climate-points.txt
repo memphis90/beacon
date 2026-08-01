@@ -1,0 +1,31 @@
+# Punti di riferimento per il clima, dove il baricentro non rappresenta il posto.
+#
+#   id | lat | lon | perché
+#
+# Il problema, scoperto confrontando le misure con le stime precedenti: per
+# un'isola o una regione, la coordinata del seed è un baricentro geografico, e
+# il baricentro di un posto montuoso cade in montagna. Il centroide di Tenerife
+# sta sul Teide, a 3700 metri: l'archivio meteo risponde 17 °C a luglio, che è
+# vero lassù e falso per chiunque vada a Tenerife. Stessa cosa per Madeira
+# (Pico Ruivo) e Creta (Psiloritis).
+#
+# La misura non è sbagliata: è la domanda che era sbagliata. Qui si chiede il
+# clima dove le persone stanno davvero — una città o un paese rappresentativo —
+# invece che nel punto medio della superficie.
+#
+# Serve solo per le destinazioni in cui le due cose divergono. Per una città il
+# baricentro è la città, e non c'è niente da correggere.
+
+madeira      | 32.6669 | -16.9241 | Funchal, non Pico Ruivo (1862 m)
+creta        | 35.5138 |  24.0180 | Chania, non lo Psiloritis (2456 m)
+tenerife     | 28.4636 | -16.2518 | Santa Cruz, non il Teide (3715 m)
+dolomiti     | 46.5405 |  12.1357 | Cortina d'Ampezzo, non le cime
+val-gardena  | 46.5776 |  11.6707 | Ortisei, fondovalle
+islanda-sud  | 63.4187 | -19.0060 | Vík, sulla costa: la regione è quella
+sicilia      | 38.1157 |  13.3615 | Palermo, non le Madonie
+sardegna     | 39.2238 |   9.1217 | Cagliari, non il Gennargentu
+corsica      | 41.9192 |   8.7386 | Ajaccio, non il Monte Cinto
+cipro        | 34.7720 |  33.0400 | Limassol, non il Troodos
+peloponneso  | 37.0392 |  22.1142 | Kalamata, non il Taigeto
+transilvania | 45.7983 |  24.1256 | Sibiu, non i Carpazi
+lapponia     | 68.4400 |  17.4300 | Narvik, dove si arriva

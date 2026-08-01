@@ -151,7 +151,7 @@ asse è responsabile di questo risultato*.
 |---|---|
 | Punteggi degli assi | Stime iniziali, da correggere dal pannello Parametri |
 | Costi | Stime, mostrate **sempre** come fascia. Mai valori puntuali |
-| Clima | `climate_source: "seed_approx"` — stime, non Open-Meteo. Badge visibile in UI |
+| Clima | **Misurato**: medie 2015–2024 da Open-Meteo sul punto della destinazione (`scripts/fetch-climate.mjs`) |
 | Costo del volo | **Non modellato.** Entra in Fase 2 |
 | `wikidata_id` | **Risolto** per tutte e 23, verificato sulle coordinate (`scripts/resolve-wikidata.mjs`) |
 | Foto | URL verificati salvati nel dato, con attribuzione. Fallback grafico offline |
@@ -226,6 +226,39 @@ Tre trappole trovate scrivendolo, tutte silenziose:
 - **I posti a cavallo di più paesi.** L'Istria sta in Croazia, Slovenia e
   Italia, il seed ha un campo solo, e qualunque scelta automatica è arbitraria:
   un terzo campo facoltativo in `candidates.txt` forza il codice ISO.
+
+### `fetch-climate.mjs` — dalle stime alle misure
+
+Sostituisce il clima scritto a mano con medie di dieci anni di osservazioni
+(2015–2024) da Open-Meteo, sul punto di ogni destinazione. Lo scarto medio
+rispetto alle stime era di 2,2 °C sull'aria di luglio — ma la media nasconde i
+casi che contavano.
+
+**Il mare si dichiara da sé.** L'API marina interrogata su un punto di terra
+non dà errore: restituisce una serie di valori nulli. Firenze zero valori
+validi, Rodi settecentotrentuno. Non serve una lista di chi ha la costa,
+scritta a mano e destinata a invecchiare.
+
+Tre cose che il confronto con le stime ha fatto emergere, e che sarebbero
+passate inosservate senza:
+
+- **Il baricentro di un'isola è una montagna.** Il centroide di Tenerife cade
+  sul Teide, a 3715 metri: l'archivio rispondeva 17 °C a luglio, vero lassù e
+  falso per chiunque vada a Tenerife. Stessa cosa per Madeira (Pico Ruivo) e
+  Creta (Psiloritis), che risultava a 18 °C. La misura non era sbagliata: era
+  sbagliata la domanda. `data/climate-points.txt` dichiara, per le
+  destinazioni in cui le due cose divergono, il punto dove le persone stanno
+  davvero — Funchal, Chania, Santa Cruz.
+- **La griglia marina è più larga della costa.** Roma, a venticinque
+  chilometri dal Tirreno, riceveva una temperatura del mare: sarebbe passata
+  per il filtro "mare balneabile", promessa che quella destinazione non
+  mantiene. La misura ora aggiorna i numeri del mare, non decide *se* il mare
+  c'è: per chi un verdetto ce l'aveva già, quello resta.
+- **Maggio non è più un mese morto.** Con le stime, zero destinazioni
+  superavano i 21 °C di mare a maggio, e ogni frase che chiedeva il mare in
+  primavera svuotava i risultati. Con le misure, Madeira ci arriva. Il contesto
+  passato al modello si è corretto da solo, perché quei conteggi li calcola dal
+  seed.
 
 ### `resolve-wikidata.mjs`
 
