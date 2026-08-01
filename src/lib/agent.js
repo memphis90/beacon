@@ -47,18 +47,21 @@ export const PRESETS = [
     note: 'Come Ollama: server locale compatibile OpenAI.',
   },
   {
+    id: 'openrouter',
+    label: 'OpenRouter (modelli :free)',
+    baseUrl: 'https://openrouter.ai/api/v1',
+    // Il catalogo dei modelli gratuiti cambia: quelli col suffisso :free
+    // vengono aggiunti e ritirati. Se questo non risponde più, l'elenco
+    // aggiornato è su openrouter.ai/models?q=free.
+    model: 'google/gemma-4-31b-it:free',
+    note: 'Remoto, gratuito entro quota. Chiave da openrouter.ai/keys. La frase esce dal tuo computer.',
+  },
+  {
     id: 'groq',
     label: 'Groq (piano gratuito)',
     baseUrl: 'https://api.groq.com/openai/v1',
     model: 'llama-3.1-8b-instant',
-    note: 'Remoto e gratuito entro quota. La frase esce dal tuo computer.',
-  },
-  {
-    id: 'openrouter',
-    label: 'OpenRouter (modelli :free)',
-    baseUrl: 'https://openrouter.ai/api/v1',
-    model: 'meta-llama/llama-3.3-70b-instruct:free',
-    note: 'Remoto. Usa un modello con suffisso :free per restare a costo zero.',
+    note: 'Remoto, gratuito entro quota. Chiave da console.groq.com. La frase esce dal tuo computer.',
   },
   { id: 'custom', label: 'Altro endpoint', baseUrl: '', model: '', note: 'Qualsiasi server compatibile OpenAI.' },
 ]
@@ -104,8 +107,25 @@ export function nextProfileId(profiles = []) {
   return `m${massimo + 1}`
 }
 
+/**
+ * Il profilo di partenza dipende da dove gira la pagina.
+ *
+ * In locale è Ollama: è la scelta giusta — niente chiave, niente frase che
+ * esce — ed è a portata di `ollama pull`. Da un sito, però, un endpoint locale
+ * è quello che il browser blocca sempre: partire da lì significa aprire le
+ * impostazioni su una configurazione che non può funzionare, e far sospettare
+ * a chi prova di aver sbagliato qualcosa.
+ *
+ * Quello che NON si può fare è precompilare anche la chiave. Una chiave dentro
+ * il client è una chiave regalata: il bundle è pubblico, si legge in dieci
+ * secondi, e la quota gratuita di chi l'ha messa finisce il giorno dopo. Resta
+ * un campo da riempire — ma uno solo, e l'app dice dove prenderlo.
+ */
+const presetIniziale = () =>
+  PRESETS.find((p) => p.id === (isHostedPage() ? 'openrouter' : 'ollama')) || PRESETS[0]
+
 export function emptyAgentConfig() {
-  const primo = profileFromPreset(PRESETS[0], 'm1')
+  const primo = profileFromPreset(presetIniziale(), 'm1')
   return {
     enabled: false,
     activeId: primo.id,
@@ -507,24 +527,39 @@ async function askForJson(system, user, { config, signal, timeout }) {
   const timer = setTimeout(() => controller.abort(), timeout)
   if (signal) signal.addEventListener('abort', () => controller.abort(), { once: true })
 
+  const url = `${profile.baseUrl.replace(/\/+$/, '')}/chat/completions`
+  const chiama = (jsonMode) => fetch(url, {
+    method: 'POST',
+    signal: controller.signal,
+    headers: {
+      'Content-Type': 'application/json',
+      ...(profile.apiKey ? { Authorization: `Bearer ${profile.apiKey}` } : {}),
+    },
+    body: JSON.stringify({
+      model: profile.model,
+      temperature: 0,
+      ...(jsonMode ? { response_format: { type: 'json_object' } } : {}),
+      messages: [
+        { role: 'system', content: system },
+        { role: 'user', content: user },
+      ],
+    }),
+  })
+
   try {
-    const response = await fetch(`${profile.baseUrl.replace(/\/+$/, '')}/chat/completions`, {
-      method: 'POST',
-      signal: controller.signal,
-      headers: {
-        'Content-Type': 'application/json',
-        ...(profile.apiKey ? { Authorization: `Bearer ${profile.apiKey}` } : {}),
-      },
-      body: JSON.stringify({
-        model: profile.model,
-        temperature: 0,
-        response_format: { type: 'json_object' },
-        messages: [
-          { role: 'system', content: system },
-          { role: 'user', content: user },
-        ],
-      }),
-    })
+    let response = await chiama(true)
+
+    /**
+     * `response_format: json_object` non è supportato da tutti i modelli, e
+     * chi non lo supporta risponde 400 rifiutando l'intera richiesta. Capita
+     * soprattutto sui modelli gratuiti, cioè proprio dove serve che funzioni.
+     *
+     * Si riprova una volta senza. Non è una perdita: il JSON viene comunque
+     * estratto dal testo poco sotto, perché già oggi alcuni server accettano
+     * il parametro e poi lo ignorano — la difesa c'era prima di questo
+     * ripiego, e questo ripiego la usa.
+     */
+    if (response.status === 400) response = await chiama(false)
 
     if (!response.ok) {
       const body = await response.text().catch(() => '')

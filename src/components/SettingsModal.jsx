@@ -19,6 +19,12 @@ import {
  * solo, il confronto costava riscrivere URL, nome del modello ed eventuale
  * chiave a ogni giro — e infatti non si faceva.
  */
+/** Dove si prende la chiave, per i preset che ne vogliono una. */
+const chiaviDove = {
+  openrouter: 'https://openrouter.ai/keys',
+  groq: 'https://console.groq.com/keys',
+}
+
 export default function SettingsModal({ config, onChange, onClose }) {
   const [draft, setDraft] = useState(() => normaliseAgentConfig(config))
   // Quale riga si sta modificando. È indipendente da `activeId`: si aggiusta
@@ -258,8 +264,26 @@ export default function SettingsModal({ config, onChange, onClose }) {
                 />
                 <p className="landing__note">
                   Resta in <code>localStorage</code> su questa macchina: non c’è un server a cui
-                  mandarla.
+                  mandarla. {chiaviDove[profilo.preset] && (
+                    <>
+                      La ottieni da{' '}
+                      <a href={chiaviDove[profilo.preset]} target="_blank" rel="noreferrer noopener">
+                        {new URL(chiaviDove[profilo.preset]).host}
+                      </a>, gratis.
+                    </>
+                  )}
                 </p>
+                {/* Perché la chiave la devi mettere tu, e non è pigrizia di
+                    chi ha scritto l'app: una chiave dentro il client è una
+                    chiave regalata — il codice della pagina è pubblico e si
+                    legge in dieci secondi. */}
+                {remoto && !profilo.apiKey && (
+                  <p className="landing__note">
+                    Serve la tua, non ce n’è una condivisa: il codice di questa pagina è
+                    pubblico, e una chiave scritta dentro sarebbe leggibile da chiunque —
+                    con la quota di chi l’ha messa.
+                  </p>
+                )}
               </div>
 
               {/* Detto PRIMA di provare, non dopo: questa combinazione non

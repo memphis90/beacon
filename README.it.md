@@ -106,7 +106,10 @@ endpoint compatibile con l'API OpenAI**:
 | OpenRouter (modelli `:free`) | remoto | sì | sì |
 | Qualsiasi server OpenAI-compatibile | dipende | dipende | dipende |
 
-Con Ollama:
+Tutti e quattro accettano chiamate dal browser (rispondono al preflight CORS
+con `allow-origin: *`), quindi una pagina online può parlarci direttamente.
+
+**In locale, con Ollama:**
 
 ```bash
 ollama pull llama3.2
@@ -114,6 +117,14 @@ ollama pull llama3.2
 
 poi nell'app: il chip accanto al campo di testo → **Configura un modello…** →
 preset *Ollama (locale)* → **Prova la connessione** → **Salva**.
+
+**Da una pagina online, con un modello remoto gratuito:** il pannello si apre
+già su un profilo OpenRouter con endpoint e modello compilati — ti resta da
+incollare la chiave, gratuita da [openrouter.ai/keys](https://openrouter.ai/keys).
+
+Nell'app non c'è una chiave condivisa, e non ci sarà: il codice di questa
+pagina è pubblico, quindi una chiave scritta dentro sarebbe leggibile da
+chiunque — con la quota di chi l'ha messa.
 
 Puoi tenerne **più d'uno** e passare dall'uno all'altro in un clic: è il modo
 per capire quale interpreta meglio le tue frasi. Le chiavi, se servono,

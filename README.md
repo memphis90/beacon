@@ -107,7 +107,10 @@ plug in a language model. **Any OpenAI-compatible endpoint** works:
 | OpenRouter (`:free` models) | remote | yes | yes |
 | Any OpenAI-compatible server | depends | depends | depends |
 
-With Ollama:
+All four verified to accept browser calls (they reply to the CORS preflight
+with `allow-origin: *`), so a hosted page can talk to them directly.
+
+**Locally, with Ollama:**
 
 ```bash
 ollama pull llama3.2
@@ -115,6 +118,14 @@ ollama pull llama3.2
 
 then in the app: the chip next to the text field → **Configura un modello…** →
 preset *Ollama (locale)* → **Prova la connessione** → **Salva**.
+
+**From a hosted page, with a free remote model:** the settings panel already
+opens on an OpenRouter profile with endpoint and model filled in — you only
+paste your key, free from [openrouter.ai/keys](https://openrouter.ai/keys).
+
+There is no shared key baked into the app, and there won't be: this page's code
+is public, so a key inside it would be readable by anyone — spending the quota
+of whoever put it there.
 
 You can keep **more than one** and switch with a click — which is how you find
 out which model reads your phrases best. Keys, when needed, stay in
