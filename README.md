@@ -4,62 +4,67 @@
 
 # Beacon
 
-**Scegli dove andare in vacanza descrivendolo a parole.**
-Una frase in italiano, una classifica di destinazioni, e ogni punteggio spiegato voce per voce.
+**Pick where to go on holiday by describing it in a sentence.**
+One phrase in, a ranked list of destinations out — with every score explained line by line.
 
-[![Licenza MIT](https://img.shields.io/github/license/memphis90/beacon?color=1baf7a)](LICENSE)
-[![Stelle](https://img.shields.io/github/stars/memphis90/beacon?style=flat&color=f59e0b)](https://github.com/memphis90/beacon/stargazers)
-[![Ultimo commit](https://img.shields.io/github/last-commit/memphis90/beacon)](https://github.com/memphis90/beacon/commits)
+**English** · [Italiano](README.it.md)
+
+[![MIT licence](https://img.shields.io/github/license/memphis90/beacon?color=1baf7a)](LICENSE)
+[![Stars](https://img.shields.io/github/stars/memphis90/beacon?style=flat&color=f59e0b)](https://github.com/memphis90/beacon/stargazers)
+[![Last commit](https://img.shields.io/github/last-commit/memphis90/beacon)](https://github.com/memphis90/beacon/commits)
 [![React](https://img.shields.io/badge/React-19-2a78d6?logo=react&logoColor=white)](https://react.dev)
 [![Vite](https://img.shields.io/badge/Vite-7-eb6834?logo=vite&logoColor=white)](https://vite.dev)
-[![Modelli locali](https://img.shields.io/badge/LLM-Ollama%20%7C%20LM%20Studio-203b52)](#modelli-supportati)
-[![Sponsor](https://img.shields.io/badge/sponsor-%E2%9D%A4-e34948?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/memphis90)
+[![Local models](https://img.shields.io/badge/LLM-Ollama%20%7C%20LM%20Studio-203b52)](#supported-models)
 
-`travel` · `decision-support` · `react` · `vite` · `llm` · `ollama` · `local-first` · `italiano`
+`travel` · `decision-support` · `react` · `vite` · `llm` · `ollama` · `local-first`
 
 </div>
 
+> **Heads-up:** the interface is currently **Italian only**. The rule-based
+> parser already understands **English** phrases; full UI translation is
+> planned. See [Languages](#languages).
+
 ---
 
-## Cosa fa
+## What it does
 
-Scrivi come vorresti che fosse il viaggio:
+Describe the trip you want:
 
-> *cinque notti a ottobre, soprattutto cultura, poco turistico*
+> *five nights in October, mostly culture, off the beaten track*
 
-Beacon traduce la frase in criteri — mese, durata, budget, otto assi di
-interesse — e ordina le destinazioni con una media pesata. Poi ti mostra
-**perché** una destinazione è finita in cima:
+Beacon turns the sentence into criteria — month, length, budget, eight
+interest axes — and ranks destinations with a weighted average. Then it shows
+you **why** a destination came out on top:
 
 ```
-"meta perfetta per halloween"
-  → ottobre · tema gotico · cultura 8
+"the perfect place for halloween"
+  → October · gothic theme · culture 8
 
-  1. Parigi      105.0    97.0 + 8 tema gotico
-  2. Praga       100.0    92.0 + 8 tema gotico
-  3. Vienna      100.0    92.0 + 8 tema gotico
-  4. Roma         98.0
-  5. Budapest     96.0    88.0 + 8 tema gotico
+  1. Paris       105.0    97.0 + 8 gothic theme
+  2. Prague      100.0    92.0 + 8 gothic theme
+  3. Vienna      100.0    92.0 + 8 gothic theme
+  4. Rome         98.0
+  5. Budapest     96.0    88.0 + 8 gothic theme
 ```
 
-Niente ordine misterioso: il contributo di ogni asse è visibile sulla card, e
-il dettaglio ne mostra l'aritmetica completa. Quando un risultato non ti
-convince, vedi **quale asse** l'ha prodotto e lo correggi.
+No mystery ordering: each axis's contribution is visible on the card, and the
+detail view spells out the full arithmetic. When a result doesn't convince
+you, you can see **which axis produced it** — and fix it.
 
-**Cosa NON fa:** non prenota, non cerca voli, non ha account, non ti profila.
-È uno strumento per decidere, non un negozio.
+**What it does NOT do:** no booking, no flight search, no accounts, no
+tracking. It's a tool for deciding, not a shop.
 
-## A cosa serve
+## Why
 
-I motori di viaggio ordinano per popolarità o per commissione, e non lo
-dicono. Beacon parte dall'idea opposta: la classifica è tua, i pesi li scegli
-tu, e il calcolo è ispezionabile fino all'ultimo decimale. Se il ranking
-contraddice il tuo giudizio, il difetto è nei dati o nei pesi — e puoi
-sistemarli entrambi dall'app.
+Travel engines rank by popularity or by commission, and don't say which. Beacon
+starts from the opposite idea: the ranking is yours, you choose the weights, and
+the maths is inspectable down to the last decimal. If the ranking contradicts
+your judgement, the fault is in the data or in the weights — and you can fix
+both from inside the app.
 
-## Installazione
+## Install
 
-Serve **Node 20+**.
+Requires **Node 20+**.
 
 ```bash
 git clone https://github.com/memphis90/beacon.git
@@ -68,93 +73,101 @@ npm install
 npm run dev          # → http://localhost:5173
 ```
 
-Altri comandi:
+Other commands:
 
 ```bash
-npm run build        # bundle di produzione in dist/
-npm run preview      # serve il bundle appena costruito
-npm test             # 123 test
+npm run build        # production bundle in dist/
+npm run preview      # serve the built bundle
+npm test             # 132 tests
 ```
 
-Funziona **subito, senza configurare niente**: l'interprete predefinito sono
-regole scritte che girano nel browser e coprono mesi, durate, budget,
-interessi e tipo di destinazione. Nessuna rete, nessuna attesa.
+It works **out of the box, with nothing to configure**: the default
+interpreter is a set of written rules running in the browser, covering months,
+durations, budgets, interests and destination types. No network, no waiting.
 
-## Modelli supportati
+## Languages
 
-Per le frasi che le regole non coprono — atmosfere, ricorrenze, intenzioni
-implicite — puoi collegare un modello linguistico. Va bene **qualunque
-endpoint compatibile con l'API OpenAI**:
+The **interface is Italian**. The rules read phrases in **Italian and
+English**: an English sentence is normalised to Italian through a keyword
+dictionary before parsing, so the rule grammar stays a single one. The chips
+still show **the words you actually typed**, not the translated ones.
 
-| | Dove gira | Chiave | La frase esce dal PC |
+Adding a language costs a dictionary (`src/lib/lexicon.js`), not a new grammar.
+
+## Supported models
+
+For phrases the rules don't cover — moods, holidays, implicit intent — you can
+plug in a language model. **Any OpenAI-compatible endpoint** works:
+
+| | Runs | API key | Sentence leaves your machine |
 |---|---|---|---|
-| **Ollama** | in locale | no | **no** |
-| **LM Studio** | in locale | no | **no** |
-| Groq | remoto, piano gratuito | sì | sì |
-| OpenRouter (modelli `:free`) | remoto | sì | sì |
-| Qualsiasi server OpenAI-compatibile | dipende | dipende | dipende |
+| **Ollama** | locally | no | **no** |
+| **LM Studio** | locally | no | **no** |
+| Groq | remote, free tier | yes | yes |
+| OpenRouter (`:free` models) | remote | yes | yes |
+| Any OpenAI-compatible server | depends | depends | depends |
 
-Con Ollama:
+With Ollama:
 
 ```bash
 ollama pull llama3.2
 ```
 
-poi nell'app: il chip accanto al campo di testo → **Configura un modello…** →
+then in the app: the chip next to the text field → **Configura un modello…** →
 preset *Ollama (locale)* → **Prova la connessione** → **Salva**.
 
-Puoi tenerne **più d'uno** e passare dall'uno all'altro in un clic: è il modo
-per capire quale interpreta meglio le tue frasi. Le chiavi, se servono,
-restano in `localStorage` — non c'è un server a cui mandarle.
+You can keep **more than one** and switch with a click — which is how you find
+out which model reads your phrases best. Keys, when needed, stay in
+`localStorage`: there is no server to send them to.
 
-> Il modello **traduce la frase in criteri, non decide il risultato**.
-> Punteggio, filtri e ordine restano calcolati in locale, e ogni criterio è
-> mostrato con la parola da cui è stato dedotto.
+> The model **turns the sentence into criteria, it does not decide the
+> result**. Scoring, filters and ordering stay computed locally, and every
+> criterion is shown together with the word it was inferred from.
 
-## I tuoi dati
+## Your data
 
-Tutto in `localStorage`, su questa macchina: criteri, preferiti, cronologia,
-modelli configurati e le correzioni ai parametri. Nessun backend, nessuna
-telemetria. *Esci e azzera i dati* cancella tutto.
+Everything lives in `localStorage`, on your machine: criteria, favourites,
+history, configured models and your parameter corrections. No backend, no
+telemetry. *Esci e azzera i dati* wipes it all.
 
-## Stato
+## Status
 
-**Fase 0**: 23 destinazioni europee con parametri assegnati a mano. Costi,
-clima e punteggi sono **stime iniziali**, dichiarate come tali
-nell'interfaccia e correggibili dal pannello *Parametri*.
+**Phase 0**: 23 European destinations with hand-assigned parameters. Costs,
+climate and scores are **initial estimates**, labelled as such in the
+interface and correctable from the *Parametri* panel.
 
-Le fasi successive porteranno ingestione automatica da Wikidata e
-OpenStreetMap (Fase 1), clima e prezzi reali (Fase 2), ricerca semantica e
-bozze di itinerario (Fase 3). Il dettaglio è in
-[`PLANNING.md`](PLANNING.md), insieme ai vincoli che il progetto non violerà.
+Later phases bring automatic ingestion from Wikidata and OpenStreetMap
+(Phase 1), real climate and price data (Phase 2), semantic search and
+itinerary drafts (Phase 3). Details in [`PLANNING.md`](PLANNING.md) — in
+Italian — along with the constraints the project won't break.
 
-> **Come funziona dentro** — modello di calcolo, i due interpreti, cosa il
-> modello può e non può toccare: [`docs/COME-FUNZIONA.md`](docs/COME-FUNZIONA.md).
+> **How it works inside** — scoring model, the two interpreters, what the model
+> can and cannot touch: [`docs/COME-FUNZIONA.md`](docs/COME-FUNZIONA.md)
+> (Italian).
 
-## Contribuire
+## Contributing
 
-Il lavoro più utile non è codice: sono i **parametri**. I punteggi attuali
-sono stime; se conosci bene una destinazione, correggerla nel pannello
-*Parametri* ed esportare `overrides.json` vale più di qualunque
-rifattorizzazione.
+The most useful work isn't code, it's **parameters**. The current scores are
+estimates; if you know a destination well, correcting it in the *Parametri*
+panel and exporting `overrides.json` is worth more than any refactor.
 
-Per il codice: issue e PR sono benvenute. `npm test` deve restare verde.
+For code: issues and PRs welcome. `npm test` must stay green.
 
-## Licenza
+Note that the codebase and its comments are in Italian.
 
-[MIT](LICENSE) per il codice.
+## Licence
 
-Non coperto dalla MIT: le **foto** vengono da Wikimedia Commons con licenze
-proprie e **attribuzione obbligatoria** (il campo `image_credit` di ogni
-destinazione *è* quella attribuzione); il font **Hanken Grotesk** è sotto SIL
-OFL; le **tile della mappa** sono © OpenStreetMap contributors, ODbL.
+[MIT](LICENSE) for the code.
+
+Not covered by MIT: the **photos** come from Wikimedia Commons under their own
+licences and **require attribution** (each destination's `image_credit` field
+*is* that attribution); the **Hanken Grotesk** font is under SIL OFL; the **map
+tiles** are © OpenStreetMap contributors, ODbL.
 
 <div align="center">
 
-Se ti è utile, una ⭐ aiuta.
+If you find it useful, a ⭐ helps.
 &nbsp;·&nbsp;
-[Segnala un problema](https://github.com/memphis90/beacon/issues)
-&nbsp;·&nbsp;
-[Sponsor](https://github.com/sponsors/memphis90)
+[Report an issue](https://github.com/memphis90/beacon/issues)
 
 </div>

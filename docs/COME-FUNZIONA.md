@@ -71,6 +71,30 @@ il campo è sempre la loro. Coprono mesi, durate, budget, gli otto assi con
 l'intensità (*"soprattutto"*, *"un po' di"*, *"senza"*), il tipo di
 destinazione e il mare come requisito.
 
+### Le altre lingue, senza riscrivere le regole
+
+Le regole sono una grammatica italiana. Per leggere altre lingue non si
+riscrivono: la frase viene **normalizzata all'italiano** prima della lettura,
+sostituendo le sole parole-chiave che le regole conoscono (`lexicon.js`).
+Tutto il resto passa intatto, perché tanto verrebbe ignorato comunque.
+
+Non si usa il modello per tradurre, e la ragione è che toglierebbe alle regole
+l'unica cosa per cui esistono: girare senza rete, senza attesa e senza
+configurazione. "Regole, ma solo se hai un modello" è un ripiego rotto.
+
+Due dettagli che sembrano piccoli e non lo sono:
+
+- **La soglia.** Si traduce solo se compaiono almeno due parole del
+  dizionario. "Un weekend a Barcellona" contiene "weekend", che è anche
+  inglese: con una corrispondenza sola si tradurrebbe una frase italiana, e
+  "no" diventerebbe "niente" ribaltando il senso di quello che è stato chiesto.
+- **I chip tornano nella lingua di chi scrive.** Le regole lavorano sul testo
+  tradotto, quindi ogni `from` è una parola italiana; prima di uscire viene
+  rimappata all'originale. Mostrare "ottobre" a chi ha scritto "october"
+  romperebbe la sola promessa che quella schermata fa.
+
+Il costo di una lingua nuova è un oggetto di parole, non una grammatica.
+
 **Modello** (`agent.js`) lavora *all'invio*, non a ogni tasto: una chiamata
 locale costa una decina di secondi, e a ogni tasto sarebbe una raffica di
 chiamate buttate via. Durante l'attesa l'app lo dice in primo piano e la si può

@@ -15,6 +15,8 @@
  * cambia di una riga.
  */
 
+import { restoreOriginal, toItalian } from './lexicon.js'
+
 const MONTHS = [
   ['gennaio', 1], ['febbraio', 2], ['marzo', 3], ['aprile', 4],
   ['maggio', 5], ['giugno', 6], ['luglio', 7], ['agosto', 8],
@@ -111,7 +113,13 @@ function intensity(text, index) {
 }
 
 export function parseQuery(input, { destinations = [] } = {}) {
-  const text = normalise(input || '')
+  /**
+   * La frase viene portata in italiano prima di essere letta, se non lo è già.
+   * Le regole restano una sola grammatica; le altre lingue costano un
+   * dizionario di parole-chiave. Vedi `lexicon.js`.
+   */
+  const { text: tradotto, lang, origini } = toItalian(normalise(input || ''))
+  const text = tradotto
   const understood = []
   const ignored = []
   const patch = {}
@@ -213,5 +221,21 @@ export function parseQuery(input, { destinations = [] } = {}) {
     if (match) ignored.push({ from: match[0], reason })
   }
 
-  return { patch, understood, ignored, empty: understood.length === 0 }
+  /**
+   * I chip tornano a parlare la lingua di chi ha scritto.
+   *
+   * Le regole hanno lavorato sulla frase tradotta, quindi ogni `from` è una
+   * parola italiana. Mostrarla a chi ha scritto "hiking" romperebbe la sola
+   * promessa che questa schermata fa — *ecco la parola da cui l'ho dedotto* —
+   * proprio nel punto in cui chiede di essere creduta.
+   */
+  const inLinguaOriginale = (voce) => ({ ...voce, from: restoreOriginal(voce.from, origini) })
+
+  return {
+    patch,
+    understood: understood.map(inLinguaOriginale),
+    ignored: ignored.map(inLinguaOriginale),
+    lang,
+    empty: understood.length === 0,
+  }
 }
