@@ -1,4 +1,5 @@
 import { DESTINATION_TYPES } from '../lib/axes.js'
+import { themeLabel } from '../lib/themes.js'
 import { monthName } from '../lib/format.js'
 
 /** Forma fissa "filtro: valore", così la riga si legge a colpo d'occhio. */
@@ -84,6 +85,25 @@ export default function ActiveFilters({ criteria, defaults, onChange, onReset })
         label="Tipo"
         value={labels || 'nessun tipo'}
         onRemove={() => set({ allowedTypes: DESTINATION_TYPES.map((t) => t.key) })}
+      />
+    )
+  }
+
+  /**
+   * Un chip per tema, togliibile singolarmente.
+   *
+   * Il tema non esclude niente, ma sposta il punteggio: se non fosse qui, una
+   * destinazione salita di otto punti perché "gotica" sarebbe salita senza che
+   * si veda perché — e il chip è anche l'unico modo di dire al modello che
+   * quel tema non era quello che intendevi.
+   */
+  for (const key of criteria.themes || []) {
+    chips.push(
+      <Chip
+        key={`theme-${key}`}
+        label="Tema"
+        value={themeLabel(key)}
+        onRemove={() => set({ themes: criteria.themes.filter((t) => t !== key) })}
       />
     )
   }

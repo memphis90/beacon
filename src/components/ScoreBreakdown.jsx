@@ -10,6 +10,8 @@
  * dell'asse guida qui sotto e nella tabella dell'aritmetica del dettaglio.
  * §5 del planning resta soddisfatto lì, non qui.
  */
+import { themeLabel } from '../lib/themes.js'
+
 function band(score) {
   if (score >= 70) return 'high'
   if (score >= 40) return 'mid'
@@ -33,8 +35,9 @@ export default function ScoreBreakdown({ scoring, tall = false, showLegend = tru
         role="img"
         aria-label={
           active.length
-            ? `Punteggio ${scoring.total.toFixed(1)} su 100. ` +
-              active.map((c) => `${c.label} ${c.score}`).join(', ')
+            ? `Punteggio ${scoring.total.toFixed(1)}. ` +
+              active.map((c) => `${c.label} ${c.score}`).join(', ') +
+              (scoring.themeBonus > 0 ? `. Più ${scoring.themeBonus} punti di tema` : '')
             : 'Nessun asse attivo'
         }
       >
@@ -60,6 +63,19 @@ export default function ScoreBreakdown({ scoring, tall = false, showLegend = tru
             </>
           ) : (
             'Nessun asse attivo'
+          )}
+          {/* Il bonus tematico non entra nella barra: la barra è la media
+              pesata degli assi, e infilarci dentro un'aggiunta che non viene
+              da un asse renderebbe illeggibili entrambe le cose. Sta scritto
+              accanto, come somma esplicita. */}
+          {scoring.themeBonus > 0 && (
+            <>
+              {' · '}
+              <b style={{ color: 'var(--ink)' }}>
+                {scoring.base.toFixed(1)} + {scoring.themeBonus} tema{' '}
+                {scoring.matchedThemes.map(themeLabel).join(' e ').toLowerCase()}
+              </b>
+            </>
           )}
         </p>
       )}

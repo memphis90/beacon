@@ -3,6 +3,7 @@ import DetailMap from './DetailMap.jsx'
 import ScoreBreakdown from './ScoreBreakdown.jsx'
 import { DESTINATION_TYPES, MONTHS } from '../lib/axes.js'
 import { climateSummary } from '../lib/scoring.js'
+import { themeLabel } from '../lib/themes.js'
 import { countryFlag, countryName, eurRange, monthName, temp } from '../lib/format.js'
 
 const typeLabel = (key) => DESTINATION_TYPES.find((t) => t.key === key)?.label || key
@@ -92,6 +93,22 @@ export default function DetailPanel({ entry, criteria, onClose, onEdit, onCompar
                       <td className="num">{c.weight === 0 ? '—' : c.contribution.toFixed(1)}</td>
                     </tr>
                   ))}
+                  {/* Il bonus tematico ha una riga sua, con la sua origine
+                      scritta accanto: è l'unico punto in cui il totale si
+                      scosta dalla somma dei contributi, e senza questa riga
+                      l'aritmetica non tornerebbe — che è il modo peggiore di
+                      perdere la fiducia di chi la sta controllando. */}
+                  {scoring.themeBonus > 0 && (
+                    <tr className="scorecard__theme">
+                      <td>
+                        <span className="table__swatch table__swatch--theme" />
+                        Tema {scoring.matchedThemes.map(themeLabel).join(', ').toLowerCase()}
+                      </td>
+                      <td className="num">—</td>
+                      <td className="num">—</td>
+                      <td className="num">+{scoring.themeBonus.toFixed(1)}</td>
+                    </tr>
+                  )}
                 </tbody>
                 <tfoot>
                   <tr className="scorecard__total">

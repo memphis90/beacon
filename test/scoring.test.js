@@ -33,6 +33,75 @@ function makeDestination(overrides = {}) {
   }
 }
 
+/**
+ * Il bonus tematico è l'unico pezzo di punteggio che non viene dagli assi.
+ * Queste prove tengono ferme le due cose che lo rendono accettabile: che resti
+ * separato e leggibile nella scomposizione, e che non possa ribaltare il
+ * ranking da solo.
+ */
+describe('temi — un bonus visibile, non un nono asse', () => {
+  const pesi = { ...emptyWeights(0), culture: 10 }
+  const gotica = makeDestination({ id: 'g', themes: ['gotico', 'medievale'] })
+  const altra = makeDestination({ id: 'a', themes: ['balneare'] })
+
+  it('somma il bonus solo a chi porta il tema, tenendolo separato dalla base', () => {
+    const con = scoreDestination(gotica, pesi, ['gotico'])
+    const senza = scoreDestination(altra, pesi, ['gotico'])
+    expect(con.base).toBe(50)
+    expect(con.themeBonus).toBe(8)
+    expect(con.total).toBe(58)
+    expect(con.matchedThemes).toEqual(['gotico'])
+    expect(senza.themeBonus).toBe(0)
+    expect(senza.total).toBe(50)
+  })
+
+  it('due temi che corrispondono valgono di più, ma con un tetto', () => {
+    const due = scoreDestination(gotica, pesi, ['gotico', 'medievale'])
+    expect(due.themeBonus).toBe(16)
+  })
+
+  it('non schiaccia l’ordine fra due destinazioni già alte', () => {
+    // Il caso che ha fatto togliere il tetto a 100: con un tetto, 97 e 92
+    // finivano appaiate proprio nel confronto che la ricerca deve dirimere.
+    const alta = makeDestination({ id: 'alta', themes: ['gotico'], scores: { ...makeDestination().scores, culture: 97 } })
+    const meno = makeDestination({ id: 'meno', themes: ['gotico'], scores: { ...makeDestination().scores, culture: 92 } })
+    const r = rankDestinations([meno, alta], { weights: pesi, themes: ['gotico'] })
+    expect(r.results[0].destination.id).toBe('alta')
+    expect(r.results[0].scoring.total).toBeGreaterThan(r.results[1].scoring.total)
+  })
+
+  it('senza pesi non inventa un punteggio: il tema non crea un ranking', () => {
+    const s = scoreDestination(gotica, emptyWeights(0), ['gotico'])
+    expect(s.total).toBeNull()
+    expect(s.themeBonus).toBe(0)
+  })
+
+  it('una destinazione senza etichette non è penalizzata, solo non premiata', () => {
+    const nuda = makeDestination({ id: 'n' })
+    expect(scoreDestination(nuda, pesi, ['gotico']).total).toBe(50)
+  })
+
+  it('il tema NON esclude: chi non ce l’ha resta nei risultati', () => {
+    const r = rankDestinations([gotica, altra], { weights: pesi, themes: ['gotico'] })
+    expect(r.results).toHaveLength(2)
+    expect(r.results[0].destination.id).toBe('g')
+    expect(r.excluded).toHaveLength(0)
+  })
+
+  it('non ribalta una differenza vera sugli assi', () => {
+    // 20 punti di distacco sugli assi non si annullano con un'etichetta.
+    const forte = makeDestination({ id: 'f', scores: { ...makeDestination().scores, culture: 80 } })
+    const debole = makeDestination({ id: 'd', themes: ['gotico'], scores: { ...makeDestination().scores, culture: 55 } })
+    const r = rankDestinations([forte, debole], { weights: pesi, themes: ['gotico'] })
+    expect(r.results[0].destination.id).toBe('f')
+  })
+
+  it('un tema che nessuno porta non cambia niente', () => {
+    const r = rankDestinations([gotica, altra], { weights: pesi, themes: ['artico'] })
+    expect(r.results.every((x) => x.scoring.themeBonus === 0)).toBe(true)
+  })
+})
+
 describe('costi', () => {
   it('somma le tre voci in una fascia, senza collassarla in un punto', () => {
     expect(nightlyCost(makeDestination())).toEqual({ low: 65, mid: 100, high: 170 })

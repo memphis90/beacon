@@ -3,6 +3,7 @@ import ScoreBreakdown from './ScoreBreakdown.jsx'
 import { IconHeart, IconScale, IconThermo, IconWave } from './Icons.jsx'
 import { DESTINATION_TYPES } from '../lib/axes.js'
 import { climateSummary } from '../lib/scoring.js'
+import { themeLabel } from '../lib/themes.js'
 import { countryFlag, countryName, eurRange, temp } from '../lib/format.js'
 
 const typeLabel = (key) => DESTINATION_TYPES.find((t) => t.key === key)?.label || key
@@ -27,6 +28,14 @@ export default function DestinationCard({
 
         <div className="card__scorepill">
           Punteggio <b>{scoring.total == null ? '—' : scoring.total.toFixed(1)}</b>
+          {/* Il perché di una risalita, dove si guarda il punteggio: senza,
+              una destinazione che scavalca le altre di otto punti lo fa per
+              una ragione che sta solo nel dettaglio. */}
+          {scoring.themeBonus > 0 && (
+            <em className="card__themebonus" title={`+${scoring.themeBonus} per il tema ${scoring.matchedThemes.map(themeLabel).join(', ')}`}>
+              +{scoring.themeBonus} tema
+            </em>
+          )}
         </div>
 
         <span className="card__type">{typeLabel(destination.type)}</span>

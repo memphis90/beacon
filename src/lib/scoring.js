@@ -7,6 +7,7 @@
  * leggibile e testabile da solo.
  */
 import { AXES, AXIS_KEYS } from './axes.js'
+import { THEME_BONUS, THEME_BONUS_MAX } from './themes.js'
 import { countryName } from './format.js'
 
 export const FILTER = {
@@ -206,7 +207,7 @@ export function applyHardFilters(destinations, criteria) {
  * debuggabile, ed è il totale da solo che rende un motore di ranking una
  * scatola nera.
  */
-export function scoreDestination(destination, weights) {
+export function scoreDestination(destination, weights, themes = []) {
   const weightSum = sumWeights(weights)
 
   const contributions = AXES.map((axis) => {
@@ -222,8 +223,42 @@ export function scoreDestination(destination, weights) {
     }
   })
 
+  const base = weightSum === 0 ? null : contributions.reduce((acc, c) => acc + c.contribution, 0)
+
+  /**
+   * Il bonus tematico è tenuto SEPARATO dalla media pesata, e i due numeri
+   * restano entrambi visibili nel dettaglio.
+   *
+   * Sommarlo dentro i contributi lo avrebbe reso invisibile: il totale sarebbe
+   * salito senza che nessun asse lo spiegasse, che è esattamente la scatola
+   * nera che il §5 rifiuta. Così invece la riga si legge come un'aggiunta —
+   * "83.2 di media pesata, più 8 perché è gotica" — e si può contestare l'una
+   * o l'altra parte.
+   *
+   * Senza pesi non c'è punteggio, e il bonus non lo inventa: sommare 8 a "non
+   * c'è ranking" darebbe un ordine fondato solo sulle etichette.
+   */
+  const matched = Array.isArray(themes)
+    ? themes.filter((t) => (destination.themes || []).includes(t))
+    : []
+  const themeBonus = base === null ? 0 : Math.min(matched.length * THEME_BONUS, THEME_BONUS_MAX)
+
   return {
-    total: weightSum === 0 ? null : contributions.reduce((acc, c) => acc + c.contribution, 0),
+    /**
+     * Nessun tetto a 100, ed è una scelta pagata: "105" su una scala che
+     * altrove è 0-100 si legge male.
+     *
+     * L'alternativa la si è provata e costava di più. Con il tetto, Parigi
+     * (97 di cultura) e Praga (92) finivano entrambe a 100 su una ricerca a
+     * tema gotico: cinque punti di differenza reale cancellati proprio fra le
+     * due destinazioni che quella ricerca deve confrontare. Un punteggio che
+     * perde l'ordine è peggio di un punteggio che sfora la scala, perché
+     * l'ordine è tutto ciò per cui serve.
+     */
+    total: base === null ? null : base + themeBonus,
+    base,
+    themeBonus,
+    matchedThemes: matched,
     weightSum,
     contributions,
   }
@@ -244,11 +279,11 @@ const SORTERS = {
  */
 export function rankDestinations(destinations, criteria = {}) {
   const { kept, excluded } = applyHardFilters(destinations, criteria)
-  const { weights = {}, nights = 1, sortBy = 'score' } = criteria
+  const { weights = {}, nights = 1, sortBy = 'score', themes = [] } = criteria
 
   const results = kept.map((destination) => ({
     destination,
-    scoring: scoreDestination(destination, weights),
+    scoring: scoreDestination(destination, weights, themes),
     cost: tripCost(destination, nights),
   }))
 

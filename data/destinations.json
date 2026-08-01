@@ -162,7 +162,10 @@
       ],
       "notes": "Famiglia a 85, il valore più alto del seed. Il mare è oceano: non supera i 21 °C nemmeno ad agosto, quindi con soglia a 24 °C esce anche in piena estate. È il caso che rende visibile la differenza fra Atlantico e Mediterraneo.",
       "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Ponta_da_Piedade_aerial_view.jpg/1280px-Ponta_da_Piedade_aerial_view.jpg",
-      "image_credit": "Arne Müseler · CC BY-SA 3.0 de"
+      "image_credit": "Arne Müseler · CC BY-SA 3.0 de",
+      "themes": [
+        "balneare"
+      ]
     },
     {
       "id": "amsterdam",
@@ -318,7 +321,10 @@
       ],
       "notes": "Il mare c’è — Zandvoort è a 25 km — ma il Mare del Nord tocca i 19 °C solo ad agosto. È il caso che distingue “ha accesso al mare” da “è una destinazione di mare”.",
       "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Imagen_de_los_canales_conc%C3%A9ntricos_en_%C3%81msterdam.png/1280px-Imagen_de_los_canales_conc%C3%A9ntricos_en_%C3%81msterdam.png",
-      "image_credit": "Andrés Barrios · CC BY-SA 4.0"
+      "image_credit": "Andrés Barrios · CC BY-SA 4.0",
+      "themes": [
+        "gotico"
+      ]
     },
     {
       "id": "baia-di-kotor",
@@ -475,7 +481,10 @@
       ],
       "notes": "Candidata principale al criterio §9.3 del planning: costi bassi, offbeat alto, mare caldo. Se il ranking non la fa mai emergere, il modello premia troppo la notorietà. Molta pioggia in inverno.",
       "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Kotor_aerial_1.jpg/1280px-Kotor_aerial_1.jpg",
-      "image_credit": "kallerna · CC BY-SA 4.0"
+      "image_credit": "kallerna · CC BY-SA 4.0",
+      "themes": [
+        "medievale"
+      ]
     },
     {
       "id": "barcellona",
@@ -637,7 +646,178 @@
       ],
       "notes": "Vita notturna a 90 e fuori rotta a 12 sono la stessa informazione vista da due lati. Il rapporto della città col turismo di massa è teso, e in alta stagione si sente.",
       "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Evening_light_over_Barcelona.jpg/1280px-Evening_light_over_Barcelona.jpg",
-      "image_credit": "M McBey · CC BY 2.0"
+      "image_credit": "M McBey · CC BY 2.0",
+      "themes": [
+        "gastronomico",
+        "balneare"
+      ]
+    },
+    {
+      "id": "budapest",
+      "name": "Budapest",
+      "country": "HU",
+      "type": "city",
+      "coords": {
+        "lat": 47.4979,
+        "lon": 19.0402
+      },
+      "radius_km": 25,
+      "wikidata_id": null,
+      "wikipedia_title": "Budapest",
+      "wikipedia_title_en": "Budapest",
+      "airports": [
+        "BUD"
+      ],
+      "scores": {
+        "nature": 32,
+        "culture": 88,
+        "sea": 0,
+        "food": 72,
+        "nightlife": 86,
+        "outdoor": 35,
+        "family": 60,
+        "offbeat": 38
+      },
+      "scores_source": "manual",
+      "climate_source": "seed_approx",
+      "climate": {
+        "1": {
+          "temp_avg": 0,
+          "temp_max": 3,
+          "rain_days": 7,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": 2,
+          "temp_max": 6,
+          "rain_days": 6,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": 7,
+          "temp_max": 12,
+          "rain_days": 6,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 12,
+          "temp_max": 18,
+          "rain_days": 7,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 17,
+          "temp_max": 23,
+          "rain_days": 8,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 20,
+          "temp_max": 26,
+          "rain_days": 8,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 22,
+          "temp_max": 28,
+          "rain_days": 7,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 22,
+          "temp_max": 28,
+          "rain_days": 7,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 17,
+          "temp_max": 23,
+          "rain_days": 6,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 11,
+          "temp_max": 16,
+          "rain_days": 6,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 6,
+          "temp_max": 9,
+          "rain_days": 8,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": 1,
+          "temp_max": 4,
+          "rain_days": 8,
+          "sea_temp": null
+        }
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 26,
+          "high": 45
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 5,
+          "high": 9
+        },
+        "currency": "EUR"
+      },
+      "pois": [
+        {
+          "name": "Bastione dei Pescatori",
+          "lat": 47.5025,
+          "lon": 19.0348,
+          "kind": "monumento"
+        },
+        {
+          "name": "Parlamento ungherese",
+          "lat": 47.5072,
+          "lon": 19.0456,
+          "kind": "monumento"
+        },
+        {
+          "name": "Terme Széchenyi",
+          "lat": 47.5187,
+          "lon": 19.0832,
+          "kind": "terme"
+        },
+        {
+          "name": "Quartiere ebraico",
+          "lat": 47.4979,
+          "lon": 19.0614,
+          "kind": "quartiere"
+        },
+        {
+          "name": "Mercato Centrale",
+          "lat": 47.4869,
+          "lon": 19.0587,
+          "kind": "mercato"
+        },
+        {
+          "name": "Isola Margherita",
+          "lat": 47.5266,
+          "lon": 19.0494,
+          "kind": "natura"
+        }
+      ],
+      "notes": "Cultura a 88 e vita notturna a 86: le due cose convivono, cosa rara nel seed. Nessun accesso al mare: sea = 0 per costruzione, non per giudizio. Prezzi da Europa centrale nonostante il fiorino: la fascia bassa e sotto Praga. Il clima e continentale, con inverni sotto zero e luglio-agosto afosi.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/View_from_Gell%C3%A9rt_Hill_to_the_Danube%2C_Hungary_-_Budapest_%2828493220635%29.jpg/1280px-View_from_Gell%C3%A9rt_Hill_to_the_Danube%2C_Hungary_-_Budapest_%2828493220635%29.jpg",
+      "image_credit": "Visions of Domino · CC BY 2.0",
+      "themes": [
+        "gotico",
+        "termale",
+        "imperiale"
+      ]
     },
     {
       "id": "costiera-amalfitana",
@@ -799,7 +979,11 @@
       ],
       "notes": "family basso non per ostilità ai bambini ma per la logistica: scale ovunque, strade strette, spostamenti lenti. Costi alti e in aumento a luglio-agosto.",
       "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Amalfi_Coast_%28Italy%2C_October_2020%29_-_75_%2850558355441%29.jpg/1280px-Amalfi_Coast_%28Italy%2C_October_2020%29_-_75_%2850558355441%29.jpg",
-      "image_credit": "Bruno Rijsman · CC BY-SA 2.0"
+      "image_credit": "Bruno Rijsman · CC BY-SA 2.0",
+      "themes": [
+        "balneare",
+        "romantico"
+      ]
     },
     {
       "id": "creta",
@@ -962,7 +1146,11 @@
       ],
       "notes": "Raggio 120 km: l'isola è lunga 260 km e le due estremità non sono la stessa vacanza. transport_local_day alto perché senza auto a noleggio l'isola è quasi inaccessibile.",
       "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Aerial_view_of_the_Old_Venetian_Harbour_in_Chania%2C_Greece.jpg/1280px-Aerial_view_of_the_Old_Venetian_Harbour_in_Chania%2C_Greece.jpg",
-      "image_credit": "dronepicr · CC BY 2.0"
+      "image_credit": "dronepicr · CC BY 2.0",
+      "themes": [
+        "archeologico",
+        "balneare"
+      ]
     },
     {
       "id": "dolomiti",
@@ -1126,7 +1314,10 @@
       ],
       "notes": "Il raggio di 60 km è largo: l'area copre valli molto diverse tra loro per costi e affollamento. Candidata a essere spezzata in più voci quando il dataset cresce.",
       "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Faloria_Cortina_d%27Ampezzo_10.jpg/1280px-Faloria_Cortina_d%27Ampezzo_10.jpg",
-      "image_credit": "kallerna · CC BY-SA 4.0"
+      "image_credit": "kallerna · CC BY-SA 4.0",
+      "themes": [
+        "alpino"
+      ]
     },
     {
       "id": "dubrovnik",
@@ -1282,7 +1473,10 @@
       ],
       "notes": "offbeat a 8 non è un giudizio sulla città ma sulla sua notorietà: è fra le mete più affollate del Mediterraneo, con navi da crociera che ne moltiplicano le presenze in poche ore. Il centro storico è pedonale e tutto in salita.",
       "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/The_walls_of_the_fortress_and_View_of_the_old_city._panorama.jpg/1280px-The_walls_of_the_fortress_and_View_of_the_old_city._panorama.jpg",
-      "image_credit": "Zysko serhii · CC BY-SA 4.0"
+      "image_credit": "Zysko serhii · CC BY-SA 4.0",
+      "themes": [
+        "medievale"
+      ]
     },
     {
       "id": "islanda-sud",
@@ -1444,7 +1638,11 @@
       ],
       "notes": "Natura a 99, il massimo del seed. Costo dei trasporti locali a 24 €/giorno perché senza auto a noleggio l’area è inaccessibile. Piove o nevica praticamente sempre.",
       "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/2008-05-24_35_Sk%C3%B3gafoss.jpg/1280px-2008-05-24_35_Sk%C3%B3gafoss.jpg",
-      "image_credit": "Hansueli Krapf · CC BY-SA 3.0"
+      "image_credit": "Hansueli Krapf · CC BY-SA 3.0",
+      "themes": [
+        "vulcanico",
+        "artico"
+      ]
     },
     {
       "id": "istanbul",
@@ -1607,7 +1805,11 @@
       ],
       "notes": "Cultura e cibo altissimi a costi bassissimi: è la destinazione che più spesso sorprenderà il ranking. Fuori rotta a 40 perché è notissima ma poco battuta dal turismo europeo rispetto alle capitali dell’Ovest.",
       "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Historical_peninsula_and_modern_skyline_of_Istanbul.jpg/1280px-Historical_peninsula_and_modern_skyline_of_Istanbul.jpg",
-      "image_credit": "Hunanuk · CC0"
+      "image_credit": "Hunanuk · CC0",
+      "themes": [
+        "imperiale",
+        "gastronomico"
+      ]
     },
     {
       "id": "lisbona",
@@ -1763,7 +1965,10 @@
       ],
       "notes": "Trasporto pubblico ottimo, molte salite. Alfama pedonale. Il mare è oceano: bello ma freddo e ventoso rispetto al Mediterraneo.",
       "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Lisboa_-_Portugal_%2852597836992%29.jpg/1280px-Lisboa_-_Portugal_%2852597836992%29.jpg",
-      "image_credit": "Vitor Oliveira from Torres Vedras, PORTUGAL · CC BY-SA 2.0"
+      "image_credit": "Vitor Oliveira from Torres Vedras, PORTUGAL · CC BY-SA 2.0",
+      "themes": [
+        "gastronomico"
+      ]
     },
     {
       "id": "lofoten",
@@ -1927,7 +2132,11 @@
       ],
       "notes": "sea a 20 e non 0: le spiagge sono spettacolari ma l'acqua non supera i 12 °C. È il caso che dimostra perché il filtro di stagionalità deve escludere e non penalizzare.",
       "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Moskenes_Reinebringen_lub_2025-07-21_img09_Aussicht.jpg/1280px-Moskenes_Reinebringen_lub_2025-07-21_img09_Aussicht.jpg",
-      "image_credit": "Lukas Beck · CC BY 4.0"
+      "image_credit": "Lukas Beck · CC BY 4.0",
+      "themes": [
+        "artico",
+        "nordico"
+      ]
     },
     {
       "id": "madeira",
@@ -2089,7 +2298,10 @@
       ],
       "notes": "Clima piatto tutto l'anno: è l'unica del seed senza vera stagionalità. sea a 62 e non più alto perché le spiagge sono poche e per lo più di ciottoli o piscine naturali.",
       "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Funchal%2C_Jardins_da_Quinta_Vigia_%28lookout%29.jpg/1280px-Funchal%2C_Jardins_da_Quinta_Vigia_%28lookout%29.jpg",
-      "image_credit": "Dr. Thomas Liptak · CC BY-SA 4.0"
+      "image_credit": "Dr. Thomas Liptak · CC BY-SA 4.0",
+      "themes": [
+        "vulcanico"
+      ]
     },
     {
       "id": "maiorca",
@@ -2251,7 +2463,10 @@
       ],
       "notes": "Il raggio di 60 km copre due isole diverse: la costa turistica del sud e la Serra de Tramuntana a nord, che è patrimonio UNESCO e trekking vero. Candidata a essere spezzata quando il dataset cresce.",
       "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Vall_de_Soller.jpg/1280px-Vall_de_Soller.jpg",
-      "image_credit": "Top Cat 14 · Public domain"
+      "image_credit": "Top Cat 14 · Public domain",
+      "themes": [
+        "balneare"
+      ]
     },
     {
       "id": "parigi",
@@ -2414,7 +2629,12 @@
       ],
       "notes": "La più cara del seed insieme a Santorini e alle Lofoten. Fuori rotta a 5: se il tuo peso su quell’asse è alto e Parigi resta in cima, il modello ha un problema.",
       "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/La_Tour_Eiffel_vue_de_la_Tour_Saint-Jacques%2C_Paris_ao%C3%BBt_2014_%282%29.jpg/1280px-La_Tour_Eiffel_vue_de_la_Tour_Saint-Jacques%2C_Paris_ao%C3%BBt_2014_%282%29.jpg",
-      "image_credit": "Yann Caradec from Paris, France · CC BY-SA 2.0"
+      "image_credit": "Yann Caradec from Paris, France · CC BY-SA 2.0",
+      "themes": [
+        "gotico",
+        "romantico",
+        "gastronomico"
+      ]
     },
     {
       "id": "praga",
@@ -2570,7 +2790,11 @@
       ],
       "notes": "Centro molto affollato da maggio a settembre. Birra economica ovunque. Nessun accesso al mare: sea = 0 per costruzione, non per giudizio.",
       "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Prague_%286365119737%29.jpg/1280px-Prague_%286365119737%29.jpg",
-      "image_credit": "Moyan Brenn from Italy · CC BY 2.0"
+      "image_credit": "Moyan Brenn from Italy · CC BY 2.0",
+      "themes": [
+        "gotico",
+        "medievale"
+      ]
     },
     {
       "id": "roma",
@@ -2733,7 +2957,11 @@
       ],
       "notes": "Il litorale di Ostia è a 25 km, ma Roma non è una destinazione di mare ed è modellata come tale: con il filtro mare attivo esce, che è il comportamento giusto. Cultura a 98: è il massimo del seed, e serve da riferimento.",
       "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Trevi_Fountain%2C_Rome%2C_Italy_2_-_May_2007.jpg/1280px-Trevi_Fountain%2C_Rome%2C_Italy_2_-_May_2007.jpg",
-      "image_credit": "Diliff · CC BY 3.0"
+      "image_credit": "Diliff · CC BY 3.0",
+      "themes": [
+        "archeologico",
+        "romantico"
+      ]
     },
     {
       "id": "san-sebastian",
@@ -2890,7 +3118,11 @@
       ],
       "notes": "Il punteggio food a 97 è deliberatamente estremo: se il ranking non la porta in cima con food al massimo, il modello è rotto. Piove spesso anche d'estate.",
       "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/San_Sebasti%C3%A1n_-_Ayuntamiento_10.jpg/1280px-San_Sebasti%C3%A1n_-_Ayuntamiento_10.jpg",
-      "image_credit": "Zarateman · CC0"
+      "image_credit": "Zarateman · CC0",
+      "themes": [
+        "gastronomico",
+        "balneare"
+      ]
     },
     {
       "id": "santorini",
@@ -3046,7 +3278,11 @@
       ],
       "notes": "La più cara per notte del seed. Mare a 78 e non di più: le spiagge sono di sabbia vulcanica scura e poche, il richiamo è la caldera, non il bagno.",
       "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Oia_sunset_-_panoramio_%282%29.jpg/1280px-Oia_sunset_-_panoramio_%282%29.jpg",
-      "image_credit": "TomasEE · CC BY 3.0"
+      "image_credit": "TomasEE · CC BY 3.0",
+      "themes": [
+        "vulcanico",
+        "romantico"
+      ]
     },
     {
       "id": "tallinn",
@@ -3202,7 +3438,179 @@
       ],
       "notes": "Il Baltico raggiunge i 18 °C solo a luglio-agosto: con il filtro mare attivo esce da tutto il resto dell'anno. È il caso di test del filtro di stagionalità.",
       "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Raekoja_plats_at_night.jpg/1280px-Raekoja_plats_at_night.jpg",
-      "image_credit": "Jorge Franganillo · CC BY 2.0"
+      "image_credit": "Jorge Franganillo · CC BY 2.0",
+      "themes": [
+        "medievale",
+        "nordico"
+      ]
+    },
+    {
+      "id": "transilvania",
+      "name": "Transilvania",
+      "country": "RO",
+      "type": "area",
+      "coords": {
+        "lat": 46.15,
+        "lon": 24.8
+      },
+      "radius_km": 120,
+      "wikidata_id": null,
+      "wikipedia_title": "Transilvania",
+      "wikipedia_title_en": "Transylvania",
+      "airports": [
+        "SBZ",
+        "CLJ",
+        "TGM"
+      ],
+      "scores": {
+        "nature": 78,
+        "culture": 80,
+        "sea": 0,
+        "food": 55,
+        "nightlife": 40,
+        "outdoor": 72,
+        "family": 55,
+        "offbeat": 78
+      },
+      "scores_source": "manual",
+      "climate_source": "seed_approx",
+      "climate": {
+        "1": {
+          "temp_avg": -3,
+          "temp_max": 1,
+          "rain_days": 7,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": -1,
+          "temp_max": 4,
+          "rain_days": 6,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": 4,
+          "temp_max": 10,
+          "rain_days": 7,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 10,
+          "temp_max": 16,
+          "rain_days": 9,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 15,
+          "temp_max": 21,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 18,
+          "temp_max": 24,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 20,
+          "temp_max": 26,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 19,
+          "temp_max": 26,
+          "rain_days": 9,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 15,
+          "temp_max": 22,
+          "rain_days": 7,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 9,
+          "temp_max": 16,
+          "rain_days": 6,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 3,
+          "temp_max": 8,
+          "rain_days": 8,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": -1,
+          "temp_max": 3,
+          "rain_days": 8,
+          "sea_temp": null
+        }
+      },
+      "costs": {
+        "accommodation": {
+          "low": 30,
+          "mid": 55,
+          "high": 95
+        },
+        "food_per_day": {
+          "low": 14,
+          "mid": 22,
+          "high": 40
+        },
+        "transport_local_day": {
+          "low": 5,
+          "mid": 10,
+          "high": 18
+        },
+        "currency": "EUR"
+      },
+      "pois": [
+        {
+          "name": "Castello di Bran",
+          "lat": 45.5149,
+          "lon": 25.3672,
+          "kind": "monumento"
+        },
+        {
+          "name": "Sighișoara",
+          "lat": 46.2197,
+          "lon": 24.7925,
+          "kind": "borgo"
+        },
+        {
+          "name": "Sibiu",
+          "lat": 45.7983,
+          "lon": 24.1256,
+          "kind": "quartiere"
+        },
+        {
+          "name": "Brașov e la Chiesa Nera",
+          "lat": 45.6427,
+          "lon": 25.5887,
+          "kind": "monumento"
+        },
+        {
+          "name": "Strada Transfăgărășan",
+          "lat": 45.6019,
+          "lon": 24.6172,
+          "kind": "panorama"
+        },
+        {
+          "name": "Monti Fagaraș",
+          "lat": 45.6,
+          "lon": 24.73,
+          "kind": "natura"
+        }
+      ],
+      "notes": "Offbeat a 78: è la destinazione meno battuta del seed insieme alle Lofoten. Cultura sassone e borghi fortificati, non monumenti singoli: il punteggio culturale sta in un insieme diffuso, non in un museo. Nessun accesso al mare: sea = 0 per costruzione. Trasporti locali cari rispetto al resto perché serve l’auto. Il legame con Dracula è più letterario che storico, ma l’atmosfera dei borghi in ottobre è reale.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Castelul_Bran2.jpg/1280px-Castelul_Bran2.jpg",
+      "image_credit": "Dobre Cezar · CC BY-SA 3.0 ro",
+      "themes": [
+        "gotico",
+        "medievale"
+      ]
     },
     {
       "id": "vienna",
@@ -3358,7 +3766,11 @@
       ],
       "notes": "Famiglia a 78, il valore più alto fra le città: distanze brevi, trasporto pubblico eccellente, molto verde. È il contraltare della Costiera Amalfitana, che su quell’asse sta a 45.",
       "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Schoenbrunn_philharmoniker_2012.jpg/1280px-Schoenbrunn_philharmoniker_2012.jpg",
-      "image_credit": "Superbass · CC BY-SA 3.0"
+      "image_credit": "Superbass · CC BY-SA 3.0",
+      "themes": [
+        "imperiale",
+        "gotico"
+      ]
     }
   ]
 }

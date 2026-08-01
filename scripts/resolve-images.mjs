@@ -48,6 +48,11 @@ const ALTERNATES = {
   santorini: ['Oia, Greece', 'Fira, Greece', 'Santorini caldera'],
   // La voce "Algarve" restituisce un palazzo: l'asse dominante è il mare.
   algarve: ['Ponta da Piedade', 'Praia da Marinha', 'Lagos, Portugal'],
+  // "Transilvania" è una regione storica: la sua voce ha per immagine guida la
+  // bandiera, e "Sighișoara" la mappa della Romania. Il titolo inglese del
+  // castello di Bran è l'unico che restituisce davvero una foto del luogo —
+  // ed è anche l'immagine che chi cerca la Transilvania si aspetta.
+  transilvania: ['Bran Castle', 'Sighișoara Citadel', 'Sibiu', 'Brașov'],
 }
 
 const UA =

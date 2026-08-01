@@ -1,5 +1,7 @@
 import { useState } from 'react'
+import { IconSearch } from './Icons.jsx'
 import { AXES, DESTINATION_TYPES, MONTHS, emptyWeights } from '../lib/axes.js'
+import { THEMES, THEME_BONUS, THEME_BONUS_MAX } from '../lib/themes.js'
 
 /**
  * Scorciatoie a chip, come nel mockup desktop.
@@ -73,6 +75,17 @@ export default function FilterPanel({ criteria, onChange, open = false, onClose,
     set({ allowedTypes: next })
   }
 
+  /**
+   * Il terzo tema scaccia il più vecchio invece di essere rifiutato in
+   * silenzio: il tetto al bonus è di due temi, e un bottone che si preme senza
+   * che succeda niente è peggio di un limite dichiarato dal comportamento.
+   */
+  const toggleTheme = (key) => {
+    const current = criteria.themes || []
+    if (current.includes(key)) return set({ themes: current.filter((t) => t !== key) })
+    set({ themes: [...current, key].slice(-2) })
+  }
+
   return (
     <aside className={`filters${open ? ' filters--open' : ''}`} aria-label="Criteri di ricerca">
       {/* Intestazione del pannello a scomparsa: visibile solo su mobile */}
@@ -80,6 +93,30 @@ export default function FilterPanel({ criteria, onChange, open = false, onClose,
         <strong>Filtri</strong>
         <button type="button" className="btn btn--sm" onClick={onClose}>Chiudi</button>
       </div>
+
+      {/* Prima voce del pannello: la ricerca per nome è un filtro duro come il
+          budget o il tipo, e nella barra in alto stava da sola, lontana dagli
+          altri criteri e senza il chip che la spiega accanto. */}
+      <Group title="Nome o paese">
+        <div className="field">
+          <label htmlFor="f-query" className="visually-hidden">Cerca una destinazione</label>
+          <div className="filters__search">
+            <IconSearch />
+            <input
+              id="f-query"
+              type="search"
+              className="control"
+              placeholder="Creta, Grecia, Lisbona…"
+              value={criteria.query}
+              onChange={(e) => set({ query: e.target.value })}
+            />
+          </div>
+          <p className="filters__note">
+            Confronto testuale su nome e paese. <strong>Esclude</strong> chi non corrisponde:
+            è il filtro più stretto del pannello.
+          </p>
+        </div>
+      </Group>
 
       <Group title="Periodo e durata">
         <div className="field">
@@ -250,6 +287,31 @@ export default function FilterPanel({ criteria, onChange, open = false, onClose,
             <label htmlFor={`t-${type.key}`}>{type.label}</label>
           </div>
         ))}
+      </Group>
+
+      {/* Anche a mano, non solo dal modello. Un criterio raggiungibile per la
+          sola via dell'interprete sarebbe invisibile a chi entra dai filtri, e
+          impossibile da correggere per chi non ha un modello configurato. */}
+      <Group title="Carattere del posto" defaultOpen={false}>
+        <p className="filters__note">
+          Non escludono nessuno: aggiungono <strong>{THEME_BONUS} punti</strong> a chi porta
+          quell’etichetta (al massimo {THEME_BONUS_MAX}). Servono a separare destinazioni vicine
+          quando gli interessi da soli non bastano — “gotico” per Halloween, “alpino” per la
+          settimana bianca.
+        </p>
+        <div className="segctl segctl--wrap" role="group" aria-label="Carattere del posto">
+          {THEMES.map((tema) => (
+            <button
+              key={tema.key}
+              type="button"
+              aria-pressed={(criteria.themes || []).includes(tema.key)}
+              title={tema.hint}
+              onClick={() => toggleTheme(tema.key)}
+            >
+              {tema.label}
+            </button>
+          ))}
+        </div>
       </Group>
 
       {/* Ancorato in fondo alla sidebar, come nel mockup desktop. */}
