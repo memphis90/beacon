@@ -145,6 +145,30 @@ describe('render — l’app si disegna senza riferimenti penzolanti', () => {
     expect(scheda).not.toContain('destlist')
   })
 
+  it('il confronto è una pagina, con barre sugli assi e note fuori tabella', async () => {
+    const { default: seed } = await import('../data/destinations.json', { with: { type: 'json' } })
+    const { scoreDestination, tripCost } = await import('../src/lib/scoring.js')
+    const { emptyWeights } = await import('../src/lib/axes.js')
+
+    const criteria = {
+      month: 7, nights: 5, weights: { ...emptyWeights(0), culture: 8 }, themes: [],
+    }
+    const entries = seed.destinations.slice(0, 3).map((destination) => ({
+      destination,
+      scoring: scoreDestination(destination, criteria.weights, criteria.themes),
+      cost: tripCost(destination, criteria.nights),
+    }))
+
+    const html = await renderizza('../src/components/ComparePanel.jsx', {
+      entries, criteria, onClose: () => {}, onRemove: () => {},
+    })
+    expect(html).not.toContain('aria-modal')
+    expect(html).toContain('compare__meter')
+    expect(html).toContain('Solo le differenze')
+    // Le note stanno nel loro blocco, non dentro una cella della tabella.
+    expect(html).toContain('compare__notes')
+  })
+
   it('il pannello della critica non si disegna senza un modello attivo', async () => {
     const html = await renderizza('../src/components/RankingCritique.jsx', {
       phrase: 'meta per halloween',

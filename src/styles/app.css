@@ -154,11 +154,10 @@ a { color: var(--brand-600); }
 /* ---------- Pagina dei parametri ---------- */
 
 /* Una pagina, non una modale: prende il posto dei risultati invece di
-   coprirli. Larghezza di lettura, perché è un elenco da scorrere. */
+   coprirli, e ne prende anche tutta la larghezza — le righe dell'elenco
+   portano nome, paese, tipo e stato, e su una colonna stretta si accavallano. */
 .page {
   display: block;
-  max-width: 900px;
-  margin: 0 auto;
   padding: calc(var(--container-margin) * 1.25);
   padding-left: calc(var(--rail-w) + var(--container-margin));
   transition: padding-left 200ms cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -887,7 +886,72 @@ textarea.control { height: auto; padding: 8px 10px; resize: vertical; }
 .compare__head h4 {
   margin: 0 0 2px; font-size: 20px; line-height: 28px; font-weight: 600; letter-spacing: -0.01em; /* headline-md */
 }
-.compare__head small { font-size: 11px; line-height: 14px; font-weight: 500; color: var(--ink-2); } /* caption */
+.compare__head small {
+  display: block; margin-bottom: 4px;
+  font-size: 11px; line-height: 14px; font-weight: 500; color: var(--ink-2); /* caption */
+}
+
+/* Le righe raggruppate: senza, sedici criteri di fila sono un muro e l'occhio
+   non ha dove appoggiarsi. */
+.compare__group th {
+  padding: 16px 10px 6px;
+  border-bottom: 2px solid var(--border-strong);
+  background: var(--surface);
+  font-size: 11px; line-height: 16px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--ink-2);
+}
+.compare__group th small {
+  margin-left: 8px;
+  font-size: 11px; font-weight: 500; letter-spacing: 0; text-transform: none;
+  color: var(--ink-3);
+}
+
+.compare__axis { display: inline-flex; align-items: center; gap: 6px; }
+.compare__axis.is-muted { opacity: 0.55; }
+
+/* La barra È il valore: l'occhio confronta lunghezze molto meglio di cifre a
+   tre caratteri. Il numero resta accanto per chi vuole verificare. */
+.compare__meter {
+  position: relative; display: flex; align-items: center; gap: 8px;
+  min-width: 96px; height: 22px;
+  padding: 0 8px;
+  border-radius: var(--radius-xs);
+  background: var(--surface-3);
+  overflow: hidden;
+}
+.compare__meterfill {
+  position: absolute; left: 0; top: 0; bottom: 0;
+  opacity: 0.28;
+}
+.compare__meter b {
+  position: relative;
+  font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--ink);
+}
+
+.compare__score { display: flex; flex-direction: column; }
+.compare__score strong { font-size: 18px; line-height: 22px; font-variant-numeric: tabular-nums; }
+.compare__score em { font-style: normal; font-size: 11px; color: var(--ink-2); }
+
+.compare__toggle { flex: none; margin-left: auto; font-size: 12px; color: var(--ink-2); }
+.page__head .compare__toggle + .btn { margin-left: 0; }
+
+.compare__notes {
+  margin-top: var(--container-margin);
+  padding-top: var(--container-margin);
+  border-top: 1px solid var(--border);
+}
+.compare__notes h3 {
+  margin: 0 0 8px;
+  font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.02em;
+  text-transform: uppercase; color: var(--ink-2);
+}
+.compare__notes p {
+  margin: 0 0 8px;
+  max-width: 80ch;
+  font-size: 13px; line-height: 20px; color: var(--ink-2);
+}
+.compare__notes strong { color: var(--ink); }
 
 /* ---------- Editor ---------- */
 

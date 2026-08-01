@@ -201,6 +201,9 @@ export default function App({ startedInitially = false }) {
   const { closing: detailClosing, dismiss: dismissDetail } = useDismiss(() => setDetailId(null))
   const detailEntry = detailId ? entryFor(detailId) : null
   const compareEntries = compareIds.map(entryFor).filter(Boolean)
+  // Il confronto ha senso da due in su: con una sola destinazione la pagina
+  // esisterebbe per mostrare una colonna accanto a niente.
+  const confrontoAperto = compareOpen && compareEntries.length >= 2
   const overriddenCount = countOverriddenDestinations(overrides)
 
   // Quanti criteri divergono dal default: alimenta il badge del bottone Filtri
@@ -333,6 +336,8 @@ export default function App({ startedInitially = false }) {
         }}
       />
 
+      {/* Le pagine prendono il posto dei risultati invece di coprirli:
+          parametri e confronto sono consultazioni, non interruzioni. */}
       {parametri && (
         <ParametersPage
           merged={merged}
@@ -343,7 +348,20 @@ export default function App({ startedInitially = false }) {
         />
       )}
 
-      {!parametri && (
+      {!parametri && confrontoAperto && (
+        <ComparePanel
+          entries={compareEntries}
+          criteria={criteria}
+          onRemove={(id) => {
+            const next = compareIds.filter((x) => x !== id)
+            setCompareIds(next)
+            if (next.length < 2) setCompareOpen(false)
+          }}
+          onClose={() => setCompareOpen(false)}
+        />
+      )}
+
+      {!parametri && !confrontoAperto && (
       <div className="layout">
         <FilterPanel
           criteria={criteria}
@@ -452,19 +470,6 @@ export default function App({ startedInitially = false }) {
             onCompare={() => toggleCompare(detailEntry.destination.id)}
             onEdit={() => { setEditor({ id: detailEntry.destination.id }); dismissDetail() }}
             onClose={dismissDetail}
-          />
-        )}
-
-        {compareOpen && compareEntries.length > 0 && (
-          <ComparePanel
-            entries={compareEntries}
-            criteria={criteria}
-            onRemove={(id) => {
-              const next = compareIds.filter((x) => x !== id)
-              setCompareIds(next)
-              if (next.length < 2) setCompareOpen(false)
-            }}
-            onClose={() => setCompareOpen(false)}
           />
         )}
 
