@@ -1088,6 +1088,16 @@ input[type='range']:disabled { opacity: 0.45; }
 .scorerow input[type='number'] { width: 100%; height: 30px; text-align: right; }
 .scorerow--changed .scorerow__name { color: var(--ink); font-weight: 700; }
 
+/* La riga dell'asse calcolato: niente cursore, quindi il testo prende le
+   colonne che sarebbero sue. La spiegazione sta accanto al nome perché è lì
+   che si va a cercarla — nel momento in cui ci si accorge che manca lo
+   slider. */
+.scorerow--derived { grid-template-columns: 14px 1fr; align-items: start; }
+.scorerow--derived .scorerow__note {
+  grid-column: 2; margin: 2px 0 0;
+  font-size: 12px; line-height: 16px; color: var(--ink-muted);
+}
+
 /* ---------- Bottom nav (mobile) ---------- */
 /* Sostituisce le azioni della topbar sotto i 900px: ricerca, preferiti,
    confronto, editor. Nascosta su desktop. */
@@ -1369,6 +1379,9 @@ input[type='range']:disabled { opacity: 0.45; }
   .section:has(.scorerow) > .ofield { grid-column: 1 / -1; }
   .scorerow { grid-template-columns: 14px 1fr 52px; }
   .scorerow input[type='range'] { display: none; }
+  /* Fuori dalla griglia a colonne: è una frase, non un valore, e stretta in
+     una colonna da 200px diventerebbe illeggibile. */
+  .scorerow--derived { grid-column: 1 / -1; grid-template-columns: 14px 1fr; }
 }
 
 /* ==========================================================================

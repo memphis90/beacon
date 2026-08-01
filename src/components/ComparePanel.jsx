@@ -179,7 +179,12 @@ export default function ComparePanel({ entries, criteria, onClose, onRemove }) {
                       {peso > 0 && <span className="badge badge--info">peso {peso}</span>}
                     </span>
                   }
-                  values={entries.map((e) => e.destination.scores?.[axis.key] ?? 0)}
+                  /* Dal calcolo, non dai dati: l'economicità non sta in
+                     `scores` e leggerla da lì la mostrerebbe sempre a zero. */
+                  values={entries.map((e) =>
+                    e.scoring?.contributions?.find((c) => c.key === axis.key)?.score
+                    ?? e.destination.scores?.[axis.key] ?? 0
+                  )}
                   direction="max"
                   /* La barra è il confronto, il numero è la verifica: l'occhio
                      legge la prima, chi controlla legge il secondo. */

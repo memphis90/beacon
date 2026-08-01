@@ -79,6 +79,13 @@ const EN = {
   'few tourists': 'poco turistico', authentic: 'autentico', unusual: 'insolito',
   'hidden gem': 'insolito', quiet: 'poco affollato',
 
+  // Assi — economicità
+  cheap: 'economico', 'low cost': 'low cost', 'low-cost': 'low cost',
+  affordable: 'conveniente', inexpensive: 'economico', budget: 'economico',
+  'on a budget': 'economico', 'good value': 'conveniente',
+  'without breaking the bank': 'senza spendere una fortuna',
+  'value for money': 'conveniente', 'save money': 'risparmiare',
+
   // Assi — outdoor
   hiking: 'trekking', trekking: 'trekking', trails: 'sentieri', walking: 'camminare',
   skiing: 'sci', ski: 'sci', cycling: 'ciclismo', biking: 'bici', bike: 'bici',

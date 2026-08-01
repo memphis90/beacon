@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { AXES, DESTINATION_TYPES, MONTHS, emptyScores } from '../lib/axes.js'
+import { EDITABLE_AXES, DESTINATION_TYPES, MONTHS, emptyScores } from '../lib/axes.js'
 import {
   clearDestinationOverrides,
   clearOverride,
@@ -418,7 +418,7 @@ export default function EditorPanel({ merged, overrides, onOverridesChange, init
 
           <div className="section">
             <h3>Punteggi (0–100)</h3>
-            {AXES.map((axis) => {
+            {EDITABLE_AXES.map((axis) => {
               const path = ['scores', axis.key]
               const value = read(path) ?? 0
               const isChanged = changed(path)
@@ -448,6 +448,17 @@ export default function EditorPanel({ merged, overrides, onOverridesChange, init
                 </div>
               )
             })}
+            {/* Il nono asse non ha un cursore, e la ragione va detta qui e non
+                in un README: chi apre questa pagina per correggerlo deve
+                capire in trenta secondi dove si corregge davvero. */}
+            <div className="scorerow scorerow--derived">
+              <span className="scorerow__dot" style={{ background: '#6b7d8c' }} />
+              <span className="scorerow__name">Economicità</span>
+              <p className="scorerow__note">
+                Calcolata dai costi qui sopra, rispetto al resto del catalogo. Non si modifica:
+                se una destinazione risulta troppo cara o troppo economica, il numero da correggere è il prezzo.
+              </p>
+            </div>
             <OField
               label="Origine dei punteggi"
               changed={changed(['scores_source'])}

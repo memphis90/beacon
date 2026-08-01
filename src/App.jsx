@@ -18,7 +18,7 @@ import { IconEdit, IconGitHub, IconHeart, IconMenu, IconScale } from './componen
 import { REPO_URL } from './lib/project.js'
 import { emptyWeights } from './lib/axes.js'
 import { axesFromThemes } from './lib/themes.js'
-import { rankDestinations, scoreDestination, tripCost } from './lib/scoring.js'
+import { rankDestinations, scoreDestination, tripCost, costRange } from './lib/scoring.js'
 import { loadAgentConfig, saveAgentConfig } from './lib/agent.js'
 import { loadHistory } from './lib/history.js'
 import { useDismiss } from './lib/useDismiss.js'
@@ -169,6 +169,7 @@ export default function App({ startedInitially = false }) {
   }
 
   const merged = useMemo(() => mergedDestinations(overrides), [overrides])
+  const fasciaCosti = useMemo(() => costRange(merged), [merged])
   const ranking = useMemo(() => rankDestinations(merged, criteria), [merged, criteria])
 
   /**
@@ -182,7 +183,9 @@ export default function App({ startedInitially = false }) {
     if (!destination) return null
     return {
       destination,
-      scoring: scoreDestination(destination, criteria.weights, criteria.themes),
+      // Stesso intervallo del ranking: l'economicità di una destinazione non
+      // può cambiare fra la card e il suo dettaglio.
+      scoring: scoreDestination(destination, criteria.weights, criteria.themes, fasciaCosti),
       cost: tripCost(destination, criteria.nights),
     }
   }

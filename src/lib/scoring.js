@@ -253,12 +253,40 @@ export function applyHardFilters(destinations, criteria) {
  * debuggabile, ed è il totale da solo che rende un motore di ranking una
  * scatola nera.
  */
-export function scoreDestination(destination, weights, themes = []) {
+/**
+ * L'intervallo di costo del catalogo, su cui si misura l'economicità.
+ *
+ * È una proprietà dell'INSIEME, non della singola destinazione: "costa poco"
+ * ha senso solo rispetto a qualcosa. Va quindi calcolato una volta e passato
+ * giù, o due schermate della stessa app userebbero scale diverse.
+ */
+export function costRange(destinations) {
+  const costi = (destinations || [])
+    .filter((d) => !isUnscored(d) && d.costs)
+    .map((d) => nightlyCost(d).mid)
+    .filter((c) => c > 0)
+  if (costi.length < 2) return null
+  return { min: Math.min(...costi), max: Math.max(...costi) }
+}
+
+/** 100 alla più economica del catalogo, 0 alla più cara. Lineare in mezzo. */
+export function cheapness(destination, range) {
+  if (!range || !destination?.costs) return 0
+  const c = nightlyCost(destination).mid
+  if (!(c > 0) || range.max === range.min) return 0
+  return Math.round(Math.max(0, Math.min(100, ((range.max - c) / (range.max - range.min)) * 100)))
+}
+
+export function scoreDestination(destination, weights, themes = [], range = null) {
   const weightSum = sumWeights(weights)
 
   const contributions = AXES.map((axis) => {
     const weight = Number(weights?.[axis.key]) || 0
-    const score = Number(destination.scores?.[axis.key]) || 0
+    /* L'asse derivato non legge `scores`: lo calcola dal costo. È ciò che
+       gli impedisce di contraddire il prezzo scritto sulla stessa card. */
+    const score = axis.derived
+      ? cheapness(destination, range)
+      : Number(destination.scores?.[axis.key]) || 0
     return {
       key: axis.key,
       label: axis.label,
@@ -327,9 +355,15 @@ export function rankDestinations(destinations, criteria = {}) {
   const { kept, excluded } = applyHardFilters(destinations, criteria)
   const { weights = {}, nights = 1, sortBy = 'score', themes = [] } = criteria
 
+  // L'intervallo si misura su TUTTO il catalogo passato, non sulle
+  // sopravvissute ai filtri: altrimenti "economica" cambierebbe significato a
+  // ogni filtro mosso, e la stessa destinazione varrebbe 40 o 90 secondo cosa
+  // le sta accanto in quel momento.
+  const range = costRange(destinations)
+
   const results = kept.map((destination) => ({
     destination,
-    scoring: scoreDestination(destination, weights, themes),
+    scoring: scoreDestination(destination, weights, themes, range),
     cost: tripCost(destination, nights),
   }))
 

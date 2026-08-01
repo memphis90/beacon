@@ -11,7 +11,7 @@ import {
   summariseExclusions,
   tripCost,
 } from '../src/lib/scoring.js'
-import { emptyWeights } from '../src/lib/axes.js'
+import { emptyWeights, AXES } from '../src/lib/axes.js'
 
 function makeDestination(overrides = {}) {
   return {
@@ -179,7 +179,7 @@ describe('scoreDestination', () => {
 
   it('restituisce un contributo per ogni asse anche quando il peso è zero', () => {
     const { contributions } = scoreDestination(makeDestination(), { ...emptyWeights(), food: 1 })
-    expect(contributions).toHaveLength(8)
+    expect(contributions).toHaveLength(AXES.length)
   })
 })
 

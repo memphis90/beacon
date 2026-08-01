@@ -76,11 +76,26 @@ const AXIS_WORDS = [
   ['culture', /\bcultur\w+\b|\bmuse\w+\b|\bstoria\b|\bstoric\w+\b|\barte\b|\bmonument\w+\b|\barcheolog\w+\b|\bchies\w+\b|\bpatrimonio\b/],
   ['food', /\bcibo\b|\bmangiare\b|\bgastronom\w+\b|\bcucina\b|\bristorant\w+\b|\bvino\b|\bvini\b|\benogastronom\w+\b|\bmercati\b/],
   ['sea', /\bmare\b|\bspiagg\w+\b|\bbalnear\w+\b|\bbalneabil\w+\b|\bcosta\b|\bbagno\b|\bmarittim\w+\b/],
+  /* "costoso" NON sta qui: è l'opposto. Solo "poco costoso" conta, e ci
+     arriva col "poco" davanti attaccato all'espressione. */
+  ['value', /\beconomic\w+\b|\bconvenient\w+\b|\blow ?cost\b|\bspendere poco\b|\bprezzi bassi\b|\bpoco costos\w+\b|\brisparmi\w+\b|\ba buon mercato\b|\bbudget ridott\w+\b/],
 ]
+
+/**
+ * "Senza spendere una fortuna" vuol dire ECONOMICO, non "niente economicità".
+ *
+ * La regola dell'intensità guarda indietro e trova "senza", che di norma nega
+ * — ed è giusto per "senza vita notturna". Qui però il "senza" nega la spesa,
+ * non l'asse, e il risultato sarebbe l'esatto contrario di quel che si chiede:
+ * peso zero all'economicità proprio a chi ha detto di volerla. Sono poche
+ * espressioni fatte, e conviene riconoscerle intere.
+ */
+const RISPARMIO_NEGATO = /\bsenza spendere (?:troppo|una fortuna|un patrimonio|tanto)\b|\bsenza svenarsi\b|\bsenza spese folli\b/
 
 const AXIS_LABELS = {
   nature: 'Natura', culture: 'Cultura', sea: 'Mare', food: 'Cibo',
   nightlife: 'Vita notturna', outdoor: 'Outdoor', family: 'Famiglia', offbeat: 'Fuori rotta',
+  value: 'Economicità',
 }
 
 /** Modificatori d'intensità cercati nelle vicinanze della parola dell'asse. */
@@ -229,6 +244,16 @@ export function parseQuery(input, { destinations = [] } = {}) {
       from: match[0], hint,
     })
   }
+
+  const risparmio = RISPARMIO_NEGATO.exec(text)
+  if (risparmio) {
+    weights.value = 8
+    const gia = understood.findIndex((u) => u.key === 'axis:value')
+    const voce = { key: 'axis:value', label: 'Economicità', value: 'peso 8', from: risparmio[0], hint: 'il «senza» qui nega la spesa, non l’asse' }
+    if (gia >= 0) understood[gia] = voce
+    else understood.push(voce)
+  }
+
   if (Object.keys(weights).length) patch.weights = weights
 
   /* ---- il mare come requisito, non come interesse ---------------------

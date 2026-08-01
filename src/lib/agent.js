@@ -428,7 +428,7 @@ Schema:
   "understood": [ { "label": "...", "value": "...", "from": "la parola esatta della frase da cui l'hai dedotto", "note": "opzionale" } ]
 }
 
-Assi ammessi: nature (paesaggio da guardare), culture, sea, food, nightlife, outdoor (attività: trekking, sci, sport), family, offbeat (poco turistico).
+Assi ammessi: nature (paesaggio da guardare), culture, sea, food, nightlife, outdoor (attività: trekking, sci, sport), family, offbeat (poco turistico), value (economicità).
 
 Assi e temi rispondono a due domande diverse: l'asse dice QUANTO ti interessa una cosa, il tema dice CHE COSA deve essere il posto. "Halloween" è tema gotico e assi cultura/vita notturna insieme, non l'uno al posto degli altri.
 
@@ -441,6 +441,7 @@ Regole:
 - Un tema NON sostituisce i pesi. Il tema vale pochi punti e serve a distinguere fra destinazioni vicine; sono i pesi a decidere l'ordine. Se metti un tema senza pesi, il risultato è la classifica generica di sempre con uno scarto minimo: includi SEMPRE anche gli assi che quel carattere implica.
 - Il campo "from" è obbligatorio per ogni voce di "understood" e deve contenere parole prese TESTUALMENTE dalla frase.
 - Non inventare criteri non presenti nella frase.
+- "value" è l'asse dell'economicità e il suo punteggio NON è scritto nei dati: viene calcolato dal costo di ogni destinazione rispetto all'intero catalogo, quindi la più economica vale 100 e la più cara 0. Usalo quando la frase dice "economico", "conveniente", "spendere poco", "senza spendere una fortuna", "low cost". Attenzione: "senza spendere una fortuna" chiede economicità ALTA, non zero — lì il "senza" nega la spesa, non l'asse. Se invece la frase dà una cifra ("massimo 80 euro a notte"), quello è "budget", che è un filtro e taglia via chi sfora: i due si possono usare insieme, ma non sono la stessa cosa.
 - Se metti "seaRequired": true, in "understood" ci deve essere una voce con label "Mare obbligatorio" e "from" con le parole esatte che lo rendono una condizione. Se non riesci a citarle, non è una condizione: ometti il campo.
 
 Esempio. Frase: "qualche giorno sul mare ad aprile, con buon vino"
@@ -535,7 +536,7 @@ COSA FA OGNI CAMPO. "month", "nights" e "weights" ordinano soltanto e non tolgon
 - "query" è un confronto testuale su nome e paese, e va usato quando la frase nomina un luogo: "cinque notti in Grecia" → "Grecia", "un weekend a Lisbona" → "Lisbona", "un'isola greca" → "Grecia" insieme ad allowedTypes ["island"]. Il luogo deve comparire nell'elenco qui sopra, come nome o come paese: se non c'è, il confronto non trova niente e i risultati sono zero. Una descrizione che non è un luogo ("una capitale del nord", "una meta romantica", "un posto tranquillo") non va MAI in "query": per quella usa "allowedTypes" e i pesi. Il catalogo ti dice quali nomi esistono, non quale destinazione proporre: la scelta non è tua.
 - "allowedTypes" tiene solo i tipi elencati.
 - "seaRequired": true tiene solo chi ha il mare ad almeno ${seaTempMin} °C NEL MESE CHIESTO. Quante destinazioni lo superano, mese per mese: ${perMese}.${mesiVuoti.length ? ` In ${mesiVuoti.join(', ')} non ne passa NESSUNA: metterlo a true su uno di quei mesi svuota la ricerca.` : ''} Se la frase non pone il mare come condizione necessaria, ometti il campo e alza il peso "sea": ottieni le stesse destinazioni in cima senza cancellare le altre.
-- "budgetMax" è il costo a terra per persona per l'INTERO soggiorno, confrontato con la stima media del catalogo. Una notte costa fra ${minimo} € e ${massimo} €: un budget sotto ${minimo} € per notte non lascia passare niente. Se la frase dice "economico" senza una cifra, non inventarla — usa il campo solo quando un numero c'è.
+- "budgetMax" è il costo a terra per persona per l'INTERO soggiorno, confrontato con la stima media del catalogo. Una notte costa fra ${minimo} € e ${massimo} €: un budget sotto ${minimo} € per notte non lascia passare niente. Se la frase dice "economico" senza una cifra, non inventarla: quello è il peso "value", che ordina dal più conveniente senza cancellare nessuno. Il filtro serve solo quando un numero c'è.
 
 TEMI DISPONIBILI, con quante destinazioni li portano. Un tema che corrisponde vale ${THEME_BONUS} punti in più sul punteggio (massimo ${THEME_BONUS_MAX}): sposta l'ordine fra destinazioni vicine, non ribalta una differenza vera, e non esclude nessuno. Usa SOLO queste parole, al massimo due, e solo se la frase evoca davvero quel carattere:
 ${elencoTemi}`
