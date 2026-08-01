@@ -373,6 +373,14 @@ textarea.control { height: auto; padding: 8px 10px; resize: vertical; }
 }
 .chip--removable:hover { background: color-mix(in srgb, var(--crit) 20%, var(--surface)); }
 
+/* Il punteggio del mare ridotto dalla stagione: il valore fermo barrato, il
+   valore del mese accanto, il motivo sotto. */
+.scorecard__was { color: var(--ink-muted); text-decoration-thickness: 1px; }
+.scorecard__why {
+  display: block; font-size: 11px; line-height: 14px;
+  font-weight: 500; color: var(--ink-muted); white-space: nowrap;
+}
+
 /* ---------- Header risultati ---------- */
 
 .results__head {

@@ -68,8 +68,11 @@ const DURATIONS = [
  * "notte").
  */
 const AXIS_WORDS = [
-  ['nightlife', /\bvita notturna\b|\bmovida\b|\bdiscotech\w*\b|\bnightlife\b|\blocali notturni\b|\bserate\b/],
-  ['offbeat', /\bfuori rotta\b|\bpoco turistic\w+\b|\bnon turistic\w+\b|\bnon affollat\w+\b|\blontano dalla folla\b|\balternativ\w+\b|\binsolit\w+\b|\bautentic\w+\b|\bfuori dai circuiti\b/],
+  ['nightlife', /\bvita notturna\b|\bmovida\b|\bdiscotech\w*\b|\bnightlife\b|\blocali notturni\b|\bserate\b|\blocali la sera\b|\bconoscere (?:gente|persone)\b|\battivit[àa](?![\p{L}]) serali?\b|\bballare\b/u],
+  /* "turismo di massa" mancava, ed è il modo più comune di dire "fuori rotta"
+     in una frase che chiede tranquillità: senza, "evito il turismo di massa"
+     non spostava nulla e Mykonos restava nona. */
+  ['offbeat', /\bfuori rotta\b|\bpoco turistic\w+\b|\bnon turistic\w+\b|\bnon affollat\w+\b|\bturismo di massa\b|\bpoca gente\b|\bpoca folla\b|\bzero turisti\b|\blontano dalla folla\b|\balternativ\w+\b|\binsolit\w+\b|\bautentic\w+\b|\bfuori dai circuiti\b/],
   ['outdoor', /\btrekking\b|\bescursion\w+\b|\bcammin\w+\b|\bsentier\w+\b|\bsci\b|\bsciare\b|\bbici\b|\bciclismo\b|\bkayak\b|\bsurf\b|\bimmersion\w+\b|\bsport\w*\b|\bavventura\b|\barrampic\w+\b/],
   ['family', /\bfamigl\w+\b|\bbambin\w+\b|\bfigli\b|\bbimb\w+\b/],
   ['nature', /\bnatur\w+\b|\bpaesagg\w+\b|\bpanoram\w+\b|\bmontagn\w+\b|\bparch\w+\b|\bverde\b|\bfiord\w+\b|\blagh\w+\b|\blago\b/],
@@ -112,8 +115,25 @@ const NEGATED = /\bsenza\b|\bniente\b|\bnessun\w*\b|\bno\b|\bevit\w+\b|\besclud\
 /* "mai" è stato provato e scartato: in "il mare più bello che abbia mai
    visto" nega il mare, che è l'opposto di quel che dice la frase. */
 
+/**
+ * Richieste che escono dal catalogo, riconosciute senza passare dal modello.
+ *
+ * Scritto nel prompt il confine c'era già, e un modello piccolo l'ha ignorato
+ * lo stesso: a "una vacanza al mare fuori Europa" ha risposto Cefalonia e
+ * Cilento, con punteggi alti e nessun dubbio. Un'istruzione che si può
+ * disobbedire non è una garanzia, quindi questa è una regola deterministica
+ * che vale per tutti e due gli interpreti: la frase la incrocia prima che
+ * qualcuno decida qualcosa.
+ */
+export const FUORI_CATALOGO =
+  /\bfuori (?:dall')?\s?europa\b|\bextra ?europee?\b|\bnon in europa\b|\bcaraibi\b|\btropic\w+\b|\basia\b|\basiatic\w+\b|\bafrica\b|\bamerica\b|\bmaldive\b|\bthailandia\b|\bzanzibar\b|\bmauritius\b|\bcapo verde\b|\begitto\b|\bmar rosso\b|\bmessico\b|\bbali\b|\bindonesia\b|\bdubai\b|\bemirati\b|\bseychelles\b|\bpolinesia\b/
+
+export const FUORI_CATALOGO_MOTIVO =
+  'il catalogo copre solo Europa e Mediterraneo: per questa richiesta non esiste una risposta giusta, e i risultati qui sotto NON la soddisfano'
+
 /** Cose che il parser riconosce ma l'app non sa ancora fare. */
 const OUT_OF_SCOPE = [
+  [FUORI_CATALOGO, FUORI_CATALOGO_MOTIVO],
   [/\bore di volo\b|\bvolo dirett\w+\b|\baeroporto di partenza\b|\bscal[oi]\b/, 'il filtro sul tempo di volo è previsto in Fase 2 e non è implementato'],
   [/\bhotel\b|\bprenot\w+\b|\bdisponibilit\w+\b/, 'non è un motore di prenotazione: nessuna disponibilità, nessun acquisto'],
   [/\bprezzo del volo\b|\bcosto del volo\b|\bvoli\b/, 'il costo del volo non è modellato: il budget copre solo alloggio, cibo e trasporti locali'],
@@ -239,7 +259,19 @@ export function parseQuery(input, { destinations = [] } = {}) {
   if (/\bisol[ae]\b/.test(text)) {
     patch.allowedTypes = ['island']
     understood.push({ key: 'types', label: 'Solo', value: 'isole', from: 'isola' })
-  } else if (/\bcitt[àa]\b/.test(text)) {
+  /* Due difetti nella stessa riga, e il secondo è emerso correggendo il primo.
+   *
+   * Uno: `\bcitt[àa]\b` non scattava MAI su "città europea", perché `\b` in
+   * JavaScript è ASCII e dopo la "à" non c'è confine di parola — identico a
+   * "località di mare". Serve il confine Unicode.
+   *
+   * Due: corretto quello, la parola scattava troppo. "Storia, musei, città
+   * antiche" chiede cose da vedere, non un tipo di destinazione, e riduceva la
+   * ricerca alle sole città buttando fuori Sicilia, Creta e Rodi — che sono
+   * esattamente le risposte giuste. Ci vuole l'articolo: "una città" dichiara
+   * che la destinazione dev'essere quella, "città antiche" descrive cosa ci si
+   * aspetta di trovarci. */
+  } else if (/\b(?:una|in una|nella|la|di una|qualche)\s+citt[àa](?![\p{L}])/u.test(text)) {
     patch.allowedTypes = ['city']
     understood.push({ key: 'types', label: 'Solo', value: 'città', from: 'città' })
   }
@@ -376,7 +408,29 @@ export function parseQuery(input, { destinations = [] } = {}) {
     })
   }
 
-  const hit = trovati.find((t) => !esclusi.includes(t.name))
+  /**
+   * Un luogo messo a confronto non è un luogo cercato.
+   *
+   * "Sono indeciso tra Sardegna e Grecia" nominava la Sardegna, e nominare
+   * voleva dire filtrare: il catalogo scendeva a UNA destinazione, cioè
+   * proprio quella su cui la persona stava chiedendo un parere. Chi è indeciso
+   * fra due cose vuole vederne altre che gli somiglino, non una sola delle due
+   * imposta come unica risposta possibile.
+   *
+   * Il confronto lo dichiarano le parole della frase, non un'inferenza:
+   * "indeciso tra", "meglio X o Y", "preferisco X o Y". In quel caso i pesi
+   * restano — sono il vero contenuto della frase — e cade solo il filtro.
+   */
+  const CONFRONTO = /\bindecis\w+\b|\bmeglio\b[^.]{0,40}\bo\b|\bpreferisc\w+\b[^.]{0,30}\bo\b|\bo\b\s*(?:invece|piuttosto)\b|\bal posto di\b|\bcosa scelgo\b/
+  const confronto = CONFRONTO.exec(text)
+
+  const hit = confronto ? null : trovati.find((t) => !esclusi.includes(t.name))
+  if (confronto && trovati.length > 1) {
+    ignored.push({
+      from: confronto[0],
+      reason: `stai confrontando ${trovati.slice(0, 3).map((t) => t.name).join(' e ')}: non le ho usate come filtro, altrimenti resterebbe solo una risposta possibile`,
+    })
+  }
   if (hit) {
     patch.query = hit.name
     understood.push({ key: 'query', label: 'Ricerca', value: hit.name, from: hit.name.toLowerCase() })

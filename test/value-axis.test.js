@@ -37,7 +37,7 @@ describe('asse economicità (derivato)', () => {
     // È la garanzia che l'asse non possa contraddire il prezzo mostrato.
     const bugiarda = { ...catalogo[2], scores: { ...catalogo[2].scores, value: 100 } }
     const range = costRange(catalogo)
-    const { contributions } = scoreDestination(bugiarda, { ...emptyWeights(), value: 10 }, [], range)
+    const { contributions } = scoreDestination(bugiarda, { ...emptyWeights(), value: 10 }, [], { costRange: range })
     expect(contributions.find((c) => c.key === 'value').score).toBe(0)
   })
 

@@ -191,7 +191,10 @@ export default function App({ startedInitially = false }) {
       destination,
       // Stesso intervallo del ranking: l'economicità di una destinazione non
       // può cambiare fra la card e il suo dettaglio.
-      scoring: scoreDestination(destination, criteria.weights, criteria.themes, fasciaCosti),
+      scoring: scoreDestination(destination, criteria.weights, criteria.themes, {
+        costRange: fasciaCosti,
+        month: criteria.month,
+      }),
       cost: tripCost(destination, criteria.nights),
     }
   }

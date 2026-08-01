@@ -2,6 +2,7 @@ import { AXES, AXIS_KEYS } from './axes.js'
 import { THEMES, THEME_BONUS, THEME_BONUS_MAX, THEME_KEYS } from './themes.js'
 import { countryName } from './format.js'
 import { isUnscored, seaTemperature, tripCost, PRIMARY_MIN } from './scoring.js'
+import { FUORI_CATALOGO, FUORI_CATALOGO_MOTIVO } from './parseQuery.js'
 
 /**
  * Interpretazione della frase tramite un modello linguistico.
@@ -414,6 +415,24 @@ export function sanitisePatch(raw) {
     const themes = []
     for (const value of raw.themes) {
       const key = typeof value === 'string' ? value.trim().toLowerCase() : ''
+      /**
+       * Un asse finito fra i temi non è un errore da buttare: è la cosa
+       * giusta scritta nella casella sbagliata.
+       *
+       * Su "evito discoteche e turismo di massa" il modello ha messo
+       * `offbeat` fra i temi. Il vocabolario chiuso l'ha scartato, e della
+       * frase è rimasto solo il mare: Mykonos nona, Ibiza diciottesima —
+       * esattamente le due da evitare. L'intenzione era corretta e leggibile,
+       * e buttarla via è stato più dannoso che accoglierla.
+       *
+       * Il peso è 7, cioè quello di una menzione semplice: il modello non ha
+       * espresso un'intensità, e assegnargliene una alta sarebbe inventare.
+       */
+      if (AXIS_KEYS.includes(key)) {
+        const pesi = patch.weights || {}
+        if (pesi[key] == null) patch.weights = { ...pesi, [key]: 7 }
+        continue
+      }
       if (!THEME_KEYS.includes(key)) { rejected.push(`tema sconosciuto "${value}"`); continue }
       if (!themes.includes(key)) themes.push(key)
     }
@@ -450,7 +469,7 @@ Schema:
   "weights": { asse: 0-10 },
   "seaRequired": true quando il mare è una CONDIZIONE ("voglio il mare", "deve essere balneabile") oppure il TIPO di destinazione ("una località di mare", "una meta balneare", "un posto al mare", "vacanza al mare"): in quel secondo caso il mare non è un gusto, è la categoria del posto, e una città che ha l'oceano a mezz'ora non la soddisfa. ATTENZIONE: è un filtro che CANCELLA le destinazioni troppo fredde nel mese chiesto, e nei mesi freddi le cancella tutte. Restano interessi, da tradurre nel peso "sea" senza questo campo: "mare tranquillo", "snorkeling", "spiagge", "con vista sul mare",
   "allowedTypes": sottoinsieme di ["city","area","island"],
-  "query": nome di una destinazione o di un paese se esplicitamente nominato E VOLUTO,
+  "query": nome di una destinazione o di un paese se esplicitamente nominato E VOLUTO. Un luogo messo a CONFRONTO non va qui: "sono indeciso tra Sardegna e Grecia" chiede di vedere alternative simili a entrambe, e filtrare su una sola lascerebbe come unica risposta proprio la cosa su cui la persona è indecisa,
   "primary": UN SOLO asse fra quelli ammessi, quello senza cui la vacanza sarebbe sbagliata e non solo meno bella. Omettilo se la frase elenca gusti senza gerarchia,
   "excluded": elenco di nomi di destinazione o di paese che la frase RIFIUTA ("ma non in Sardegna", "niente Grecia", "tranne la Spagna"). Sono veti: spariscono dai risultati. Un nome rifiutato non va MAI anche in "query",
   "themes": sottoinsieme dell'elenco dei temi, al massimo 2. Serve quando la frase evoca un CARATTERE che gli assi non sanno dire — "Halloween" non chiede più cultura, chiede atmosfera gotica. Non escludono niente: danno un bonus a chi ha quell'etichetta. Ometti il campo se la frase parla solo di interessi,
@@ -462,7 +481,8 @@ Assi ammessi: nature (paesaggio da guardare), culture, sea, food, nightlife, out
 Assi e temi rispondono a due domande diverse: l'asse dice QUANTO ti interessa una cosa, il tema dice CHE COSA deve essere il posto. "Halloween" è tema gotico e assi cultura/vita notturna insieme, non l'uno al posto degli altri.
 
 Regole:
-- Scala dei pesi: menzione semplice 7, enfasi ("soprattutto", "molto") 9, attenuazione ("un po' di") 3, negazione ("senza") 0.
+- Scala dei pesi: menzione semplice 7, enfasi ("soprattutto", "molto") 9, attenuazione ("un po' di") 3, negazione 0.
+- La negazione in italiano si scrive quasi sempre con un verbo coniugato: "evito le discoteche", "escludo la movida", "odio la folla", "niente vita notturna", "non voglio turismo di massa". Valgono tutte quanto "senza": peso 0 sull'asse che nominano. Una cosa nominata per rifiutarla è comunque un asse che devi mettere, a zero — ometterlo la lascerebbe al valore predefinito, cioè il contrario di quel che è stato chiesto.
 - Includi SOLO gli assi effettivamente nominati.
 - "5 giorni" significa nights 5.
 - Una festa o una ricorrenza nominata FISSA il mese, ed è l'unico modo che hai per collocarla nel tempo: capodanno 1, San Valentino 2, carnevale 2, Pasqua 4, 25 aprile 4, primo maggio 5, ferragosto 8, Halloween 10, Ognissanti 11, Natale 12. "Ponte del 2 giugno" è 6. Se la ricorrenza non è in questo elenco ma ha una data fissa che conosci, usa quella; se cade a cavallo di due mesi, scegli quello in cui cade il giorno principale.
@@ -557,8 +577,21 @@ export function describeRules(tutte, { seaTempMin = 21 } = {}) {
     return `- ${t.key}: ${t.hint} (${quante} destinazioni)`
   }).join('\n')
 
+  /**
+   * Il confine geografico, scritto invece che lasciato dedurre.
+   *
+   * L'elenco delle destinazioni lo contiene già, ma leggerlo e ricavarne "non
+   * si esce dall'Europa" sono due cose diverse: su "una vacanza al mare fuori
+   * Europa" il modello ha inventato un filtro pur di rispondere, e l'app ha
+   * proposto Cilento e Algarve a chi l'Europa l'aveva esclusa. Una risposta
+   * sbagliata detta con sicurezza è peggio di un "non ce l'ho".
+   */
+  const paesi = [...new Set(destinations.map((d) => countryName(d.country)))].sort()
+
   return `CONTESTO — il catalogo su cui la tua risposta sarà applicata. Sono ${destinations.length} destinazioni (${perTipo}) e non ne esistono altre:
 ${catalogo}
+
+CONFINE. Il catalogo copre ${paesi.length} paesi, tutti europei o mediterranei: ${paesi.join(', ')}. Non contiene NIENTE fuori da qui. Se la frase chiede esplicitamente un altrove — "fuori Europa", "ai Caraibi", "in Asia" — non esiste una risposta giusta: lascia i campi vuoti e scrivi in "understood" una voce che lo dice, citando le parole della frase. Non inventare filtri né ripiegare su una destinazione europea che gli somiglia: chi ha chiesto i tropici e riceve il Cilento non è stato capito male, è stato ingannato.
 
 COSA FA OGNI CAMPO. "month", "nights" e "weights" ordinano soltanto e non tolgono niente. Gli altri quattro ESCLUDONO: una destinazione esclusa sparisce dai risultati, e se escludono tutto la persona vede una schermata vuota.
 
@@ -566,6 +599,7 @@ COSA FA OGNI CAMPO. "month", "nights" e "weights" ordinano soltanto e non tolgon
 - "primary" esclude chi sta sotto ${PRIMARY_MIN} su 100 in quell'asse. Serve quando la frase elenca molte cose ma una sola le comanda: "mare bellissimo, poca folla, ristoranti, borghi, trekking leggero" chiede cinque cose, e senza mare la vacanza è sbagliata mentre senza borghi è solo meno bella. Senza questo campo i cinque pesi si equivalgono e il mare vale un quinto, cioè una destinazione fortissima sulle altre quattro vince una ricerca sul mare. Mettilo SOLO quando la gerarchia è nella frase; se sono gusti messi in fila, omettilo — è un filtro, e su un elenco senza padrone taglierebbe risultati buoni.
 - "excluded" toglie chi corrisponde, col confronto testuale di "query" ma al contrario: "Grecia" fra gli esclusi toglie tutte le destinazioni greche, non una sola. È l'unico modo di rispettare un rifiuto — abbassare un peso non basta, perché una destinazione molto forte sugli altri assi tornerebbe comunque in cima. Se la frase nomina un luogo per rifiutarlo, il nome va QUI e non in "query": metterlo in "query" produce l'esatto contrario di quel che è stato chiesto.
 - "allowedTypes" tiene solo i tipi elencati.
+- "month" non ordina soltanto: sull'asse "sea" il punteggio viene scalato dalla temperatura del mare in QUEL mese (piena dai 25 °C, nulla sotto i 16). "Mare a ottobre" e "mare ad agosto" danno quindi classifiche diverse da sole, senza bisogno di filtri: se la frase dice un mese, mettilo sempre, anche quando ti sembra che serva solo a ordinare.
 - "seaRequired": true tiene solo chi ha il mare ad almeno ${seaTempMin} °C NEL MESE CHIESTO. Quante destinazioni lo superano, mese per mese: ${perMese}.${mesiVuoti.length ? ` In ${mesiVuoti.join(', ')} non ne passa NESSUNA: metterlo a true su uno di quei mesi svuota la ricerca.` : ''} Se la frase non pone il mare come condizione necessaria, ometti il campo e alza il peso "sea": ottieni le stesse destinazioni in cima senza cancellare le altre.
 - "budgetMax" è il costo a terra per persona per l'INTERO soggiorno, confrontato con la stima media del catalogo. Una notte costa fra ${minimo} € e ${massimo} €: un budget sotto ${minimo} € per notte non lascia passare niente. Se la frase dice "economico" senza una cifra, non inventarla: quello è il peso "value", che ordina dal più conveniente senza cancellare nessuno. Il filtro serve solo quando un numero c'è.
 
@@ -769,7 +803,26 @@ export async function interpretWithModel(
   const system = buildSystemPrompt(describeRules(destinations, { seaTempMin }), lang)
   const parsed = await askForJson(system, text, { config, signal, timeout })
   const { patch, rejected } = sanitisePatch(parsed)
-  return { patch, understood: sanitiseUnderstood(parsed.understood), rejected, source: 'model' }
+  const understood = sanitiseUnderstood(parsed.understood)
+
+  /**
+   * L'avviso sul confine non passa dal modello, e non è una svista.
+   *
+   * Nel prompt il confine è scritto per esteso, e un modello piccolo l'ha
+   * ignorato lo stesso: a "una vacanza al mare fuori Europa" ha risposto
+   * Cefalonia e Cilento con punteggi alti e nessun dubbio. Un'istruzione che
+   * si può disobbedire non è una garanzia; questo controllo è deterministico e
+   * arriva dopo, così l'avviso c'è comunque — qualunque modello ci sia dietro
+   * e qualunque cosa abbia deciso di rispondere.
+   */
+  const fuori = FUORI_CATALOGO.exec(String(text || '').toLowerCase())
+  if (fuori) {
+    understood.unshift({
+      label: 'Fuori catalogo', value: FUORI_CATALOGO_MOTIVO, from: fuori[0], warning: true,
+    })
+  }
+
+  return { patch, understood, rejected, source: 'model' }
 }
 
 /* ==========================================================================

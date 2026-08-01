@@ -99,7 +99,22 @@ export default function DetailPanel({ entry, criteria, onClose, onEdit, onCompar
                         {c.label}
                       </td>
                       <td className="num">{c.weight}</td>
-                      <td className="num">{c.score}</td>
+                      {/* Quando la stagione ha ridotto il mare, si vedono
+                          tutti e due i numeri e il perché: un punteggio che
+                          cambia senza spiegazione è un punteggio di cui non
+                          ci si può fidare. */}
+                      <td className="num">
+                        {c.seasonal ? (
+                          <>
+                            <s className="scorecard__was">{c.baseScore}</s> {c.score}
+                            <small className="scorecard__why">
+                              {c.seasonal.temp != null
+                                ? `mare a ${c.seasonal.temp} °C in ${MONTHS[c.seasonal.month - 1].toLowerCase()}`
+                                : 'senza mare'}
+                            </small>
+                          </>
+                        ) : c.score}
+                      </td>
                       <td className="num">{c.weight === 0 ? '—' : c.contribution.toFixed(1)}</td>
                     </tr>
                   ))}

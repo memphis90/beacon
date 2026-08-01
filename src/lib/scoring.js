@@ -98,6 +98,33 @@ export function warmestSeaMonth(destination) {
   return best
 }
 
+/**
+ * Quanto vale il mare NEL MESE CHIESTO.
+ *
+ * Il punteggio `sea` è una qualità ferma — quanto sono belle le spiagge, quanto
+ * è viva la costa — e giustamente non cambia mai. Ma "mare a ottobre" e "mare
+ * ad agosto" sono due domande diverse, e finché il punteggio restava statico
+ * producevano lo stesso ordine: la Sardegna prima di Cipro a ottobre, quando in
+ * Sardegna il bagno non si fa più. Avevamo dodici temperature misurate per ogni
+ * destinazione e la classifica non ne usava nessuna.
+ *
+ * La rampa è lineare fra 16 °C e 25 °C, ed è una scelta dichiarata invece che
+ * una scala a gradini: sotto i 16 il mare non conta, dai 25 conta tutto, e in
+ * mezzo conta in proporzione. Vale solo per l'asse mare e solo quando un mese
+ * c'è: senza mese la domanda non ha stagione.
+ *
+ * Il dato mancante NON è un mare freddo. Una destinazione che non ha mai una
+ * temperatura del mare è nell'entroterra e il fattore è 0; una che ce l'ha in
+ * altri mesi ma non in questo ha un buco nei dati, e un buco non deve
+ * diventare una condanna: resta 1, e a decidere torna il punteggio fermo.
+ */
+export function seaSeasonFactor(destination, month) {
+  if (!month) return 1
+  const t = seaTemperature(destination, month)
+  if (t == null) return warmestSeaMonth(destination) ? 1 : 0
+  return Math.max(0, Math.min(1, (t - 16) / 9))
+}
+
 const MONTH_NAMES = [
   'gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno',
   'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre',
@@ -344,22 +371,34 @@ export function cheapness(destination, range) {
   return Math.round(Math.max(0, Math.min(100, ((range.max - c) / (range.max - range.min)) * 100)))
 }
 
-export function scoreDestination(destination, weights, themes = [], range = null) {
+export function scoreDestination(destination, weights, themes = [], context = {}) {
+  const { costRange: range = null, month = null } = context || {}
   const weightSum = sumWeights(weights)
 
   const contributions = AXES.map((axis) => {
     const weight = Number(weights?.[axis.key]) || 0
     /* L'asse derivato non legge `scores`: lo calcola dal costo. È ciò che
        gli impedisce di contraddire il prezzo scritto sulla stessa card. */
-    const score = axis.derived
+    const fermo = axis.derived
       ? cheapness(destination, range)
       : Number(destination.scores?.[axis.key]) || 0
+
+    /* La stagione tocca un asse solo, e la modifica resta visibile: il
+       punteggio fermo e quello del mese viaggiano insieme, così la
+       scomposizione può dire "88, ma a ottobre il mare è a 17 °C". */
+    const fattore = axis.key === 'sea' ? seaSeasonFactor(destination, month) : 1
+    const score = fattore === 1 ? fermo : Math.round(fermo * fattore)
+
     return {
       key: axis.key,
       label: axis.label,
       color: axis.color,
       weight,
       score,
+      ...(fattore === 1 ? {} : {
+        baseScore: fermo,
+        seasonal: { month, temp: seaTemperature(destination, month), factor: fattore },
+      }),
       contribution: weightSum === 0 ? 0 : (weight * score) / weightSum,
     }
   })
@@ -420,7 +459,7 @@ const SORTERS = {
  */
 export function rankDestinations(destinations, criteria = {}) {
   const { kept, excluded } = applyHardFilters(destinations, criteria)
-  const { weights = {}, nights = 1, sortBy = 'score', themes = [] } = criteria
+  const { weights = {}, nights = 1, sortBy = 'score', themes = [], month = null } = criteria
 
   // L'intervallo si misura su TUTTO il catalogo passato, non sulle
   // sopravvissute ai filtri: altrimenti "economica" cambierebbe significato a
@@ -430,7 +469,7 @@ export function rankDestinations(destinations, criteria = {}) {
 
   const results = kept.map((destination) => ({
     destination,
-    scoring: scoreDestination(destination, weights, themes, range),
+    scoring: scoreDestination(destination, weights, themes, { costRange: range, month }),
     cost: tripCost(destination, nights),
   }))
 
