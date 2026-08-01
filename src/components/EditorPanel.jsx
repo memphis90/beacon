@@ -88,39 +88,27 @@ const COST_ROWS = [
   ['transport_local_day', 'Trasporti locali, al giorno'],
 ]
 
-export default function EditorPanel({ merged, overrides, onOverridesChange, initialId, onClose }) {
-  /**
-   * `null` significa "mostra l'elenco", e apre così quando si entra dal menu.
-   *
-   * Prima partiva dalla prima destinazione del catalogo, con una tendina per
-   * cambiarla: chi aveva corretto tre destinazioni su ventitré riapriva il
-   * pannello e ne trovava una sola, senza un posto dove vedere le altre due.
-   * Il lavoro fatto non era da nessuna parte. Dal dettaglio di una
-   * destinazione si continua ad arrivare dritti alla sua scheda, che lì è
-   * quello che si sta chiedendo.
-   */
-  const [id, setId] = useState(initialId || null)
+/**
+ * L'elenco delle destinazioni: una pagina, non una modale.
+ *
+ * Consultare cosa si è già corretto non è un'operazione da interrompere e
+ * chiudere — è il punto di partenza del lavoro sui parametri. Una modale dice
+ * l'opposto: "fai in fretta e torna da dove sei venuto". La modale resta per
+ * la modifica vera, che invece È un'operazione: si apre su una destinazione,
+ * si cambia, si chiude.
+ */
+export function ParametersPage({ merged, overrides, onOverridesChange, onPick, onClose }) {
   const [filtro, setFiltro] = useState('')
   const [newName, setNewName] = useState('')
   const [message, setMessage] = useState(null)
   const fileInput = useRef(null)
 
-  const destination = id ? merged.find((d) => d.id === id) : null
-
-  const fromSeed = destination ? Boolean(seedById(destination.id)) : false
-  const read = (path) => path.reduce((node, key) => (node == null ? undefined : node[key]), destination)
-  // Per una destinazione creata ex novo tutto vive nell'override: marcare ogni
-  // campo come "modificato" sarebbe rumore senza informazione.
-  const changed = (path) => fromSeed && isOverridden(overrides, destination.id, path)
-  const write = (path, value) => onOverridesChange(setOverride(overrides, destination.id, path, value))
-  const reset = (path) => onOverridesChange(clearOverride(overrides, destination.id, path))
-
   /**
-   * L'elenco: le modificate in cima, poi le altre in ordine alfabetico.
+   * Le modificate in cima, poi le altre in ordine alfabetico.
    *
-   * Non è un vezzo di ordinamento — è la risposta alla domanda con cui si apre
-   * questo pannello, "cosa ho già corretto". In fondo a un elenco alfabetico
-   * di ventitré voci, tre destinazioni toccate sono invisibili.
+   * Non è un vezzo di ordinamento: è la risposta alla domanda con cui si apre
+   * questa pagina, "cosa ho già corretto". In fondo a un elenco alfabetico di
+   * ventitré voci, tre destinazioni toccate sono invisibili.
    */
   const cercato = filtro.trim().toLowerCase()
   const elenco = merged
@@ -133,8 +121,6 @@ export default function EditorPanel({ merged, overrides, onOverridesChange, init
     .sort((a, b) => (b.campi > 0) - (a.campi > 0) || a.destination.name.localeCompare(b.destination.name, 'it'))
 
   const modificate = elenco.filter((r) => r.campi > 0).length
-
-  const numberOrNull = (raw) => (raw === '' ? null : Number(raw))
 
   const createDestination = (event) => {
     event.preventDefault()
@@ -150,9 +136,10 @@ export default function EditorPanel({ merged, overrides, onOverridesChange, init
       ...overrides,
       destinations: { ...overrides.destinations, [slug]: blankDestination(name) },
     })
-    setId(slug)
     setNewName('')
-    setMessage({ tone: 'info', text: `Creata "${name}". Compila punteggi, costi e clima.` })
+    // Dritti nella scheda: una destinazione appena creata è vuota, e lasciarla
+    // nell'elenco vorrebbe dire cercarla per compilarla.
+    onPick(slug)
   }
 
   const importFile = async (event) => {
@@ -172,23 +159,142 @@ export default function EditorPanel({ merged, overrides, onOverridesChange, init
   }
 
   return (
+    <section className="page" aria-label="Parametri delle destinazioni">
+      <header className="page__head">
+        <div>
+          <h2>Parametri delle destinazioni</h2>
+          <p>
+            Punteggi, costi e clima del catalogo. Le modifiche restano in un layer separato:
+            <code> data/destinations.json</code> non viene mai riscritto dall’app.
+          </p>
+        </div>
+        <button type="button" className="btn" onClick={onClose}>Torna ai risultati</button>
+      </header>
+
+      {message && (
+        <div className={`notice${message.tone === 'warn' ? ' notice--warn' : ''}`}>{message.text}</div>
+      )}
+
+      <div className="inline inline--wrap" style={{ marginBottom: 12 }}>
+        <label htmlFor="ed-filtro" className="visually-hidden">Cerca una destinazione</label>
+        <span className="filters__search" style={{ flex: 1, minWidth: 200 }}>
+          <IconSearch />
+          <input
+            id="ed-filtro"
+            type="search"
+            className="control"
+            placeholder="Cerca per nome o paese…"
+            value={filtro}
+            onChange={(e) => setFiltro(e.target.value)}
+          />
+        </span>
+        <form onSubmit={createDestination} className="inline" style={{ marginLeft: 'auto' }}>
+          <label htmlFor="ed-new" className="visually-hidden">Nome nuova destinazione</label>
+          <input
+            id="ed-new"
+            className="control"
+            style={{ width: 200 }}
+            placeholder="Nome nuova destinazione"
+            value={newName}
+            onChange={(e) => setNewName(e.target.value)}
+          />
+          <button type="submit" className="btn btn--accent" disabled={!newName.trim()}>
+            Aggiungi
+          </button>
+        </form>
+      </div>
+
+      <p className="filters__note" style={{ marginBottom: 12 }}>
+        {modificate === 0
+          ? `${merged.length} destinazioni, nessuna ancora corretta. I punteggi del seed sono stime: correggere quelle che conosci è il lavoro che rende utile il ranking.`
+          : `${modificate} ${modificate === 1 ? 'destinazione corretta' : 'destinazioni corrette'} su ${merged.length}. Sono in cima all’elenco.`}
+      </p>
+
+      <ul className="destlist">
+        {elenco.map(({ destination: d, campi, nuova }) => (
+          <li key={d.id} className={campi > 0 ? 'destlist__row destlist__row--touched' : 'destlist__row'}>
+            <button type="button" className="destlist__pick" onClick={() => onPick(d.id)}>
+              <span className="destlist__name">
+                {d.name}
+                {nuova && <span className="badge badge--edit">creata da te</span>}
+                {!nuova && campi > 0 && (
+                  <span className="badge badge--edit">
+                    {campi} {campi === 1 ? 'campo' : 'campi'}
+                  </span>
+                )}
+              </span>
+              <small>{countryName(d.country)} · {typeLabel(d.type)}</small>
+            </button>
+
+            {/* Il ripristino sta qui e non solo dentro la scheda: da qui si
+                vede cosa si è toccato, ed è il momento in cui viene da disfare
+                una correzione sbagliata. */}
+            {campi > 0 && (
+              <button
+                type="button"
+                className="destlist__reset"
+                title={`Riporta ${d.name} ai valori del seed`}
+                aria-label={`Riporta ${d.name} ai valori del seed`}
+                onClick={() => onOverridesChange(clearDestinationOverrides(overrides, d.id))}
+              >
+                <IconTrash width="15" height="15" />
+              </button>
+            )}
+
+            <IconChevron width="16" height="16" className="destlist__go" />
+          </li>
+        ))}
+      </ul>
+
+      {elenco.length === 0 && (
+        <p className="hside__empty">Nessuna destinazione corrisponde a “{filtro.trim()}”.</p>
+      )}
+
+      <div className="page__foot">
+        <button type="button" className="btn btn--primary" onClick={() => downloadOverrides(overrides)}>
+          Esporta overrides.json
+        </button>
+        <button type="button" className="btn" onClick={() => fileInput.current?.click()}>
+          Importa…
+        </button>
+        <input ref={fileInput} type="file" accept="application/json,.json" hidden onChange={importFile} />
+      </div>
+    </section>
+  )
+}
+
+/** La modifica vera: una destinazione per volta, in una modale. */
+export default function EditorPanel({ merged, overrides, onOverridesChange, initialId, onClose }) {
+  const [message, setMessage] = useState(null)
+
+  const destination = merged.find((d) => d.id === initialId)
+  if (!destination) return null
+
+  const fromSeed = Boolean(seedById(destination.id))
+  const read = (path) => path.reduce((node, key) => (node == null ? undefined : node[key]), destination)
+  // Per una destinazione creata ex novo tutto vive nell'override: marcare ogni
+  // campo come "modificato" sarebbe rumore senza informazione.
+  const changed = (path) => fromSeed && isOverridden(overrides, destination.id, path)
+  const write = (path, value) => onOverridesChange(setOverride(overrides, destination.id, path, value))
+  const reset = (path) => onOverridesChange(clearOverride(overrides, destination.id, path))
+
+  const numberOrNull = (raw) => (raw === '' ? null : Number(raw))
+
+  return (
     <div className="overlay overlay--center" onClick={onClose} role="presentation">
       <section
         className="panel panel--modal"
         role="dialog"
         aria-modal="true"
-        aria-label="Editor destinazioni"
+        aria-label={`Parametri di ${destination.name}`}
         onClick={(e) => e.stopPropagation()}
       >
         <header className="panel__head">
           <div>
-            <h2>
-              {destination ? destination.name : 'Parametri delle destinazioni'}
-            </h2>
+            <h2>{destination.name}</h2>
             <p>
-              {destination
-                ? 'Punteggi, costi e clima di questa destinazione. Ogni campo corretto resta segnato.'
-                : 'Le modifiche restano in un layer separato: data/destinations.json non viene mai riscritto dall’app.'}
+              {countryName(destination.country)} · {typeLabel(destination.type)} — punteggi,
+              costi e clima. Ogni campo corretto resta segnato.
             </p>
           </div>
           <button type="button" className="panel__close" onClick={onClose} aria-label="Chiudi">×</button>
@@ -199,107 +305,17 @@ export default function EditorPanel({ merged, overrides, onOverridesChange, init
             <div className={`notice${message.tone === 'warn' ? ' notice--warn' : ''}`}>{message.text}</div>
           )}
 
-          {!destination && (
-            <div className="section">
-              <div className="inline inline--wrap" style={{ marginBottom: 12 }}>
-                <label htmlFor="ed-filtro" className="visually-hidden">Cerca una destinazione</label>
-                <span className="filters__search" style={{ flex: 1, minWidth: 200 }}>
-                  <IconSearch />
-                  <input
-                    id="ed-filtro"
-                    type="search"
-                    className="control"
-                    placeholder="Cerca per nome o paese…"
-                    value={filtro}
-                    onChange={(e) => setFiltro(e.target.value)}
-                  />
+          <div className="section">
+            <div className="inline inline--wrap">
+              {!fromSeed && <span className="badge badge--edit">creata da te</span>}
+              {fromSeed && countOverriddenFields(overrides, destination.id) > 0 && (
+                <span className="badge badge--edit">
+                  {countOverriddenFields(overrides, destination.id)} campi corretti
                 </span>
-                <form onSubmit={createDestination} className="inline" style={{ marginLeft: 'auto' }}>
-                  <label htmlFor="ed-new" className="visually-hidden">Nome nuova destinazione</label>
-                  <input
-                    id="ed-new"
-                    className="control"
-                    style={{ width: 200 }}
-                    placeholder="Nome nuova destinazione"
-                    value={newName}
-                    onChange={(e) => setNewName(e.target.value)}
-                  />
-                  <button type="submit" className="btn btn--accent" disabled={!newName.trim()}>
-                    Aggiungi
-                  </button>
-                </form>
-              </div>
-
-              <p className="filters__note" style={{ marginBottom: 12 }}>
-                {modificate === 0
-                  ? `${merged.length} destinazioni, nessuna ancora corretta. I punteggi del seed sono stime: correggere quelle che conosci è il lavoro che rende utile il ranking.`
-                  : `${modificate} ${modificate === 1 ? 'destinazione corretta' : 'destinazioni corrette'} su ${merged.length}. Sono in cima all’elenco.`}
-              </p>
-
-              <ul className="destlist">
-                {elenco.map(({ destination: d, campi, nuova }) => (
-                  <li key={d.id} className={campi > 0 ? 'destlist__row destlist__row--touched' : 'destlist__row'}>
-                    <button
-                      type="button"
-                      className="destlist__pick"
-                      onClick={() => { setId(d.id); setMessage(null) }}
-                    >
-                      <span className="destlist__name">
-                        {d.name}
-                        {nuova && <span className="badge badge--edit">creata da te</span>}
-                        {!nuova && campi > 0 && (
-                          <span className="badge badge--edit">
-                            {campi} {campi === 1 ? 'campo' : 'campi'}
-                          </span>
-                        )}
-                      </span>
-                      <small>{countryName(d.country)} · {typeLabel(d.type)}</small>
-                    </button>
-
-                    {/* Il ripristino sta qui e non solo dentro la scheda: da qui
-                        si vede cosa si è toccato, ed è il momento in cui viene
-                        da disfare una correzione sbagliata. */}
-                    {campi > 0 && (
-                      <button
-                        type="button"
-                        className="destlist__reset"
-                        title={`Riporta ${d.name} ai valori del seed`}
-                        aria-label={`Riporta ${d.name} ai valori del seed`}
-                        onClick={() => onOverridesChange(clearDestinationOverrides(overrides, d.id))}
-                      >
-                        <IconTrash width="15" height="15" />
-                      </button>
-                    )}
-
-                    <IconChevron width="16" height="16" className="destlist__go" />
-                  </li>
-                ))}
-              </ul>
-
-              {elenco.length === 0 && (
-                <p className="hside__empty">Nessuna destinazione corrisponde a “{filtro.trim()}”.</p>
               )}
             </div>
-          )}
+          </div>
 
-          {destination && (
-            <div className="section">
-              <div className="inline inline--wrap" style={{ marginBottom: 12 }}>
-                <button type="button" className="btn" onClick={() => { setId(null); setMessage(null) }}>
-                  ← Tutte le destinazioni
-                </button>
-                {!fromSeed && <span className="badge badge--edit">creata da te</span>}
-                {fromSeed && countOverriddenFields(overrides, destination.id) > 0 && (
-                  <span className="badge badge--edit">
-                    {countOverriddenFields(overrides, destination.id)} campi corretti
-                  </span>
-                )}
-              </div>
-            </div>
-          )}
-
-          {destination && (
-          <>
           <div className="section">
             <h3>Anagrafica</h3>
             <div className="editor__grid">
@@ -509,27 +525,11 @@ export default function EditorPanel({ merged, overrides, onOverridesChange, init
               />
             </OField>
           </div>
-          </>
-          )}
         </div>
 
         <footer className="panel__foot">
-          <button type="button" className="btn btn--primary" onClick={() => downloadOverrides(overrides)}>
-            Esporta overrides.json
-          </button>
-          <button type="button" className="btn" onClick={() => fileInput.current?.click()}>
-            Importa…
-          </button>
-          <input
-            ref={fileInput}
-            type="file"
-            accept="application/json,.json"
-            hidden
-            onChange={importFile}
-          />
-          {/* Solo dentro una scheda: dall'elenco il ripristino sta su ogni
-              riga, dove si vede a cosa si applica. */}
-          {destination && (
+          {/* Esporta e importa sono passati alla pagina: riguardano tutte le
+              destinazioni, non quella aperta qui. */}
           <button
             type="button"
             className="btn"
@@ -538,15 +538,14 @@ export default function EditorPanel({ merged, overrides, onOverridesChange, init
               const wasNew = !fromSeed
               onOverridesChange(clearDestinationOverrides(overrides, destination.id))
               // Una destinazione creata da te, eliminata, non esiste più:
-              // restare sulla sua scheda mostrerebbe una pagina vuota.
-              if (wasNew) setId(null)
-              setMessage({ tone: 'info', text: wasNew ? 'Destinazione eliminata.' : 'Valori riportati al seed.' })
+              // restare sulla sua scheda mostrerebbe campi vuoti.
+              if (wasNew) onClose()
+              else setMessage({ tone: 'info', text: 'Valori riportati al seed.' })
             }}
           >
             {fromSeed ? 'Ripristina dal seed' : 'Elimina destinazione'}
           </button>
-          )}
-          <button type="button" className="btn" style={{ marginLeft: 'auto' }} onClick={onClose}>
+          <button type="button" className="btn btn--primary" style={{ marginLeft: 'auto' }} onClick={onClose}>
             Chiudi
           </button>
         </footer>

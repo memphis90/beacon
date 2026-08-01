@@ -119,7 +119,7 @@ describe('render — l’app si disegna senza riferimenti penzolanti', () => {
    * prima partiva dalla prima del catalogo, e chi ne aveva corrette tre non
    * aveva un posto dove ritrovarle.
    */
-  it('i parametri si aprono sull’elenco, e su una scheda se la nomini', async () => {
+  it('i parametri sono una pagina, la scheda di una destinazione una modale', async () => {
     const { default: seed } = await import('../data/destinations.json', { with: { type: 'json' } })
     const { emptyOverrides } = await import('../src/lib/store.js')
     const props = {
@@ -129,14 +129,20 @@ describe('render — l’app si disegna senza riferimenti penzolanti', () => {
       onClose: () => {},
     }
 
-    const elenco = await renderizza('../src/components/EditorPanel.jsx', props)
-    expect(elenco).toContain('Parametri delle destinazioni')
-    expect(elenco).toContain('Creta')
-    expect(elenco).toContain('Transilvania')
+    const { ParametersPage } = await import('../src/components/EditorPanel.jsx')
+    const pagina = renderToStaticMarkup(createElement(ParametersPage, { ...props, onPick: () => {} }))
+    expect(pagina).toContain('Parametri delle destinazioni')
+    expect(pagina).toContain('Creta')
+    expect(pagina).toContain('Transilvania')
+    // La pagina non è una modale: nessun velo, nessun ruolo di dialogo.
+    expect(pagina).not.toContain('overlay')
+    expect(pagina).not.toContain('aria-modal')
 
     const scheda = await renderizza('../src/components/EditorPanel.jsx', { ...props, initialId: 'creta' })
-    expect(scheda).toContain('Tutte le destinazioni')
+    expect(scheda).toContain('aria-modal')
     expect(scheda).toContain('Anagrafica')
+    // La scheda parla di una destinazione sola: l'elenco non ci deve tornare.
+    expect(scheda).not.toContain('destlist')
   })
 
   it('il pannello della critica non si disegna senza un modello attivo', async () => {

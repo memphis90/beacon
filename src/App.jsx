@@ -5,7 +5,7 @@ import ComparePanel from './components/ComparePanel.jsx'
 import MobileTools from './components/MobileTools.jsx'
 import DestinationCard from './components/DestinationCard.jsx'
 import DetailPanel from './components/DetailPanel.jsx'
-import EditorPanel from './components/EditorPanel.jsx'
+import EditorPanel, { ParametersPage } from './components/EditorPanel.jsx'
 import FilterPanel from './components/FilterPanel.jsx'
 import Landing from './components/Landing.jsx'
 import RankingCritique from './components/RankingCritique.jsx'
@@ -85,6 +85,11 @@ export default function App({ startedInitially = false }) {
   const [onlyFavourites, setOnlyFavourites] = useState(false)
   const [detailId, setDetailId] = useState(null)
   const [compareIds, setCompareIds] = useState([])
+  // Due stati distinti perché sono due cose distinte: la pagina dei parametri
+  // si consulta — resta lì, non interrompe niente — e la scheda di una singola
+  // destinazione si apre, si cambia e si chiude. Una modale sull'elenco diceva
+  // "fai in fretta e torna indietro" a un'attività che è il lavoro principale.
+  const [parametri, setParametri] = useState(false)
   const [editor, setEditor] = useState(null)
   const [filtersOpen, setFiltersOpen] = useState(false)
   const [railOpen, setRailOpen] = useState(false)
@@ -324,10 +329,21 @@ export default function App({ startedInitially = false }) {
           compareCount: compareIds.length,
           onCompare: () => { setCompareOpen(true); setRailOpen(false) },
           overriddenCount,
-          onEditor: () => { setEditor({ id: null }); setRailOpen(false) },
+          onEditor: () => { setParametri(true); setRailOpen(false) },
         }}
       />
 
+      {parametri && (
+        <ParametersPage
+          merged={merged}
+          overrides={overrides}
+          onOverridesChange={applyOverrides}
+          onPick={(id) => setEditor({ id })}
+          onClose={() => setParametri(false)}
+        />
+      )}
+
+      {!parametri && (
       <div className="layout">
         <FilterPanel
           criteria={criteria}
@@ -452,16 +468,20 @@ export default function App({ startedInitially = false }) {
           />
         )}
 
-        {editor && (
-          <EditorPanel
-            merged={merged}
-            overrides={overrides}
-            onOverridesChange={applyOverrides}
-            initialId={editor.id}
-            onClose={() => setEditor(null)}
-          />
-        )}
       </div>
+      )}
+
+      {/* Fuori dal layout dei risultati: la scheda di una destinazione si apre
+          sia da lì sia dalla pagina dei parametri, che il layout lo sostituisce. */}
+      {editor && (
+        <EditorPanel
+          merged={merged}
+          overrides={overrides}
+          onOverridesChange={applyOverrides}
+          initialId={editor.id}
+          onClose={() => setEditor(null)}
+        />
+      )}
 
       {settingsOpen && (
         <SettingsModal

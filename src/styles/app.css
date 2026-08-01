@@ -151,7 +151,43 @@ a { color: var(--brand-600); }
 
 .mtools { display: none; }
 
-/* ---------- Elenco delle destinazioni, nel pannello dei parametri ---------- */
+/* ---------- Pagina dei parametri ---------- */
+
+/* Una pagina, non una modale: prende il posto dei risultati invece di
+   coprirli. Larghezza di lettura, perché è un elenco da scorrere. */
+.page {
+  display: block;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: calc(var(--container-margin) * 1.25);
+  padding-left: calc(var(--rail-w) + var(--container-margin));
+  transition: padding-left 200ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.page__head {
+  display: flex; align-items: flex-start; gap: var(--stack-gap);
+  margin-bottom: var(--container-margin);
+}
+.page__head h2 {
+  margin: 0;
+  font-size: 24px; line-height: 32px; font-weight: 600; letter-spacing: -0.01em;
+}
+.page__head p {
+  margin: 4px 0 0;
+  font-size: 12px; line-height: 18px; color: var(--ink-2);
+}
+.page__head .btn { flex: none; margin-left: auto; }
+.page__foot {
+  display: flex; flex-wrap: wrap; gap: var(--inline-gap);
+  margin-top: var(--container-margin);
+  padding-top: var(--container-margin);
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 900px) {
+  .page { padding-left: var(--container-margin); }
+}
+
+/* ---------- Elenco delle destinazioni, nella pagina dei parametri ---------- */
 
 /* Le corrette stanno in cima e portano il conto dei campi toccati: è la
    risposta alla domanda con cui si apre quel pannello, "cosa ho già fatto". */
