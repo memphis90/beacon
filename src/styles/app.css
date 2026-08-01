@@ -67,13 +67,18 @@ a { color: var(--brand-600); }
 
 /* ---------- Header (topbar) ---------- */
 
+/* Hamburger e nome a sinistra, codice a destra. Il rientro a sinistra è la
+   colonna della barra laterale, che sta sopra e parte da `top: 0`: senza, il
+   nome finirebbe sotto le icone. */
 .topbar {
   position: sticky; top: 0; z-index: 40;
   height: var(--header-h);
-  display: flex; align-items: center; gap: var(--stack-gap);
+  display: flex; align-items: center; gap: var(--inline-gap);
   padding: 0 calc(var(--container-margin) * 1.25);
+  padding-left: calc(var(--rail-w) + var(--container-margin));
   background: var(--primary);
   color: var(--on-primary);
+  transition: padding-left 200ms cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 /* `center` e non `baseline`: il marchio è un SVG, e su una linea di base
@@ -98,49 +103,30 @@ a { color: var(--brand-600); }
 }
 .topbar__home:hover { background: color-mix(in srgb, currentColor 12%, transparent); }
 
-.topbar__search { flex: 1; max-width: 460px; position: relative; }
-.topbar__search input {
-  width: 100%; height: 36px;
-  padding: 0 12px 0 34px;
-  border: 1px solid transparent; border-radius: var(--radius-sm);
-  background: color-mix(in srgb, var(--on-primary) 12%, transparent);
-  color: var(--on-primary);
-  font-size: 14px;
-}
-.topbar__search input::placeholder { color: var(--primary-fixed-dim); }
-.topbar__search input:focus { background: var(--on-primary); color: var(--ink); }
-.topbar__search input:focus::placeholder { color: var(--ink-3); }
-.topbar__search svg {
-  position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
-  width: 16px; height: 16px; color: var(--primary-fixed-dim); pointer-events: none;
-}
-.topbar__search input:focus + svg { color: var(--ink-3); }
-
-.topbar__actions { margin-left: auto; display: flex; gap: var(--inline-gap); }
-
-.topbar__btn {
-  height: 34px; padding: 0 14px;
-  border: 1px solid color-mix(in srgb, var(--on-primary) 28%, transparent);
-  border-radius: var(--radius-sm);
-  background: transparent; color: var(--on-primary);
-  font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.02em; /* label-md */
-  display: inline-flex; align-items: center;
-}
-.topbar__btn:hover { background: color-mix(in srgb, var(--on-primary) 12%, transparent); }
-/* Testo scuro sull'ambra, non bianco: bianco su --accent dà 2.17:1, sotto il
-   minimo di 4.5:1. Il navy sullo stesso fondo dà 8.5:1, e 5.3:1 sull'hover. */
-.topbar__btn--accent { background: var(--accent); border-color: var(--accent); color: var(--primary); }
-.topbar__btn--accent:hover { background: var(--accent-dark); }
-.topbar__btn[data-count]::after {
-  content: attr(data-count);
-  margin-left: 7px; padding: 1px 6px;
+/* Il collegamento al codice, in fondo alla barra. Discreto: è un invito a
+   verificare, non un'azione della ricerca. */
+.topbar__repo {
+  margin-left: auto;
+  display: inline-flex; align-items: center; gap: 7px;
+  height: 34px; padding: 0 12px;
+  border: 1px solid color-mix(in srgb, currentColor 28%, transparent);
   border-radius: var(--radius-pill);
-  background: color-mix(in srgb, var(--on-primary) 22%, transparent);
-  font-size: 11px; line-height: 14px; font-weight: 500; /* caption */
+  color: inherit; text-decoration: none;
+  font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.02em;
+}
+.topbar__repo:hover { background: color-mix(in srgb, currentColor 14%, transparent); }
+/* Sotto i 600px resta la sola icona: accanto al marchio, l'etichetta
+   costringerebbe il nome a spezzarsi. */
+@media (max-width: 600px) {
+  .topbar__repolabel { display: none; }
+  .topbar__repo { padding: 0 9px; }
 }
 
 /* ---------- Layout ---------- */
 
+/* Il `padding-left` è la colonna della barra laterale chiusa: la barra è
+   `fixed`, quindi non toglie spazio da sola e senza questo ci finirebbe sopra
+   la sidebar dei filtri. */
 .layout {
   display: grid;
   grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
@@ -150,18 +136,31 @@ a { color: var(--brand-600); }
   max-width: none;
   margin: 0;
   padding: calc(var(--container-margin) * 1.25);
+  /* Dopo la scorciatoia, non prima, o la scorciatoia lo azzera. */
+  padding-left: calc(var(--rail-w) + var(--container-margin));
   align-items: start;
+  transition: padding-left 200ms cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 .results { min-width: 0; }
 
 /* ---------- Strumenti mobile (ricerca + filtri + tab) ---------- */
-/* Sostituiscono topbar__search / topbar__actions sotto i 900px. Nascosti su
-   desktop: la ricerca e le azioni restano nella topbar. */
+/* Sotto i 900px la sidebar dei filtri non c'è: la ricerca per nome e l'accesso
+   al pannello passano di qui. Nascosti su desktop, dove entrambi stanno nella
+   sidebar. */
 
 .mtools { display: none; }
 
 /* ---------- Sidebar filtri (desktop) / pannello a scomparsa (mobile) ---------- */
+
+/* La lente dentro il campo, come stava nella barra in alto: è il segno che
+   dice "qui si scrive un nome", e senza il campo si confonde con gli altri. */
+.filters__search { position: relative; display: block; }
+.filters__search .control { padding-left: 34px; }
+.filters__search > svg {
+  position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+  width: 16px; height: 16px; color: var(--ink-3); pointer-events: none;
+}
 
 .filters {
   position: sticky; top: calc(var(--header-h) + var(--container-margin));
@@ -328,17 +327,6 @@ textarea.control { height: auto; padding: 8px 10px; resize: vertical; }
   background: var(--brand-tint); border-color: var(--brand-600); color: var(--brand-800);
 }
 
-.viewtoggle {
-  display: flex; border: 1px solid var(--border-strong);
-  border-radius: var(--radius-sm); overflow: hidden;
-}
-.viewtoggle button {
-  display: grid; place-items: center;
-  width: 34px; height: 34px; border: 0;
-  background: var(--surface); color: var(--ink-3);
-}
-.viewtoggle button[aria-pressed='true'] { background: var(--brand-800); color: var(--on-primary); }
-
 /* ---------- Avvisi ---------- */
 
 .notice {
@@ -377,7 +365,6 @@ textarea.control { height: auto; padding: 8px 10px; resize: vertical; }
   display: grid; gap: var(--stack-gap);
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
-.grid--list { grid-template-columns: 1fr; }
 
 /* ---------- Card ---------- */
 
@@ -420,6 +407,11 @@ textarea.control { height: auto; padding: 8px 10px; resize: vertical; }
   font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.02em; color: var(--ink-2); /* label-md */
 }
 .card__scorepill b { font-size: 18px; line-height: 22px; font-weight: 700; color: var(--ink); } /* data-num */
+/* Il pezzo di punteggio che non viene dagli assi, marcato come tale. */
+.card__themebonus {
+  font-style: normal; font-size: 10px; line-height: 14px; font-weight: 700;
+  letter-spacing: 0.02em; color: var(--brand-800);
+}
 
 .card__fav {
   position: absolute; bottom: calc(var(--inline-gap) * 1.25); right: calc(var(--inline-gap) * 1.25);
@@ -716,6 +708,13 @@ textarea.control { height: auto; padding: 8px 10px; resize: vertical; }
   border-radius: var(--radius-xs); margin-right: 7px; vertical-align: baseline;
 }
 .table tr.is-muted td { color: var(--ink-2); }
+/* Il bonus tematico non è un asse: niente colore della palette categorica,
+   che è riservata agli otto. Un tratteggio dice "aggiunta", non "asse nono". */
+.table__swatch--theme {
+  border: 1px dashed var(--brand-800);
+  background: var(--brand-tint);
+}
+.scorecard__theme td { color: var(--brand-800); font-weight: 600; }
 
 .table--scroll { display: block; overflow-x: auto; }
 
@@ -928,12 +927,18 @@ input[type='range']:disabled { opacity: 0.45; }
 
 /* ---------- Footer del sito ---------- */
 
+/* Stessa altezza del blocco profilo in fondo alla barra laterale: arrivati in
+   fondo alla pagina, il bordo superiore del piede e il separatore sopra il
+   profilo sono la stessa linea che attraversa lo schermo. */
 .sitefooter {
+  box-sizing: border-box; min-height: var(--foot-h);
   border-top: 1px solid var(--border);
   background: var(--surface-2);
-  padding: calc(var(--container-margin) * 1.25) var(--container-margin);
+  padding: 0 var(--container-margin);
+  padding-left: calc(var(--rail-w) + var(--container-margin));
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
   gap: var(--stack-gap);
+  transition: padding-left 200ms cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 .sitefooter nav { display: flex; flex-wrap: wrap; gap: var(--stack-gap); }
 .sitefooter nav button {
@@ -968,9 +973,14 @@ input[type='range']:disabled { opacity: 0.45; }
    restano identici al desktop: cambia solo dove vivono i controlli. */
 
 @media (max-width: 900px) {
-  /* La topbar perde ricerca e azioni: le sostituiscono mtools e bottomnav. */
-  .topbar__search,
-  .topbar__actions { display: none; }
+  /* La barra laterale non occupa più una colonna: è tornata un cassetto, e il
+     rientro lascerebbe una striscia vuota su uno schermo che non ne ha da
+     spendere. */
+  .topbar,
+  .landing__bar { padding-left: var(--container-margin); }
+  .layout { padding-left: 0; }
+  .landing__body { padding-left: 0; }
+  .sitefooter { padding-left: var(--container-margin); }
 
   /* ---- Strumenti mobile ---- */
   /* Su mobile la topbar contiene solo il marchio: ricerca e azioni sono
@@ -1124,7 +1134,6 @@ input[type='range']:disabled { opacity: 0.45; }
   /* I chip di preset stanno su due righe e restano bassi: senza questo
      scendono a 30px, sotto il minimo comodo da toccare. */
   .segctl button { min-height: 44px; }
-  .viewtoggle button { width: 44px; height: 44px; }
   .card__fav { width: 44px; height: 44px; }
   /* Il pomello dello slider è già 24px: coincide con un target trascinabile
      comodo, non serve gonfiare l'hit-box invisibile con min-height. */
@@ -1152,38 +1161,6 @@ input[type='range']:disabled { opacity: 0.45; }
   }
   .topbar__brand { color: var(--primary); }
   .topbar__brand span { color: var(--ink-2); }
-
-  /* Ordine visivo marchio → tab → ricerca, senza toccare l'ordine nel DOM
-     (che resta marchio/ricerca/azioni: sotto i 900px serve così). */
-  .topbar__actions { order: 1; }
-  .topbar__search { order: 2; margin-left: auto; flex: 0 1 280px; max-width: 280px; }
-
-  .topbar__search input {
-    background: var(--surface-container-low);
-    border: 1px solid var(--border-strong);
-    border-radius: var(--radius-pill);
-    color: var(--ink);
-  }
-  .topbar__search input::placeholder { color: var(--ink-3); }
-  .topbar__search input:focus { background: var(--surface-container-low); color: var(--ink); border-color: var(--primary); }
-  .topbar__search input:focus::placeholder { color: var(--ink-3); }
-  .topbar__search svg,
-  .topbar__search input:focus + svg { color: var(--ink-3); }
-
-  /* I tre bottoni diventano tab orizzontali. Confronta ed Editor aprono
-     modali, non viste: non esiste davvero una "pagina attiva" per loro come
-     per Preferiti (aria-pressed su onlyFavourites). Il trattamento resta
-     comunque uniforme sui tre, come nel mockup. */
-  .topbar__btn {
-    background: transparent; border: 0; border-bottom: 2px solid transparent;
-    border-radius: 0; height: auto; padding: 4px 2px 6px;
-    color: var(--ink-2);
-  }
-  .topbar__btn:hover { background: transparent; color: var(--primary); }
-  .topbar__btn[aria-pressed='true'] { color: var(--primary); border-bottom-color: var(--primary); font-weight: 700; }
-  .topbar__btn--accent { background: transparent; border-color: transparent; color: var(--ink-2); }
-  .topbar__btn--accent:hover { background: transparent; color: var(--primary); }
-  .topbar__btn[data-count]::after { background: var(--primary); color: var(--on-primary); }
 
   /* ---- Sidebar filtri: piena altezza sotto la topbar chiara, senza carta ---- */
   .filters {
@@ -1261,28 +1238,6 @@ input[type='range']:disabled { opacity: 0.45; }
   font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.02em; /* label-md */
 }
 .topbar__menu:hover { background: var(--surface-2); }
-
-@media (min-width: 901px) {
-  /* Tre colonne, con la ricerca nella corsia centrale: così resta centrata
-     rispetto alla pagina anche quando marchio e menu hanno larghezze diverse.
-     Con flex e margin:auto si centrerebbe rispetto allo spazio residuo, che
-     non è la stessa cosa e si vede. */
-  .topbar {
-    display: grid;
-    grid-template-columns: 1fr minmax(0, 520px) 1fr;
-    align-items: center;
-    gap: var(--container-margin);
-  }
-  /* Colonna esplicita per ciascuno: una regola precedente dava `order: 2` alla
-     ricerca per spingerla a destra col flex, e in griglia l'ordine decide in
-     quale cella finisce l'elemento — la mandava in terza colonna. */
-  .topbar__brand { grid-column: 1; justify-self: start; order: 0; }
-  .topbar__search {
-    grid-column: 2; justify-self: stretch; order: 0;
-    margin-left: 0; flex: none; max-width: none;
-  }
-  .topbar__menu { grid-column: 3; justify-self: end; order: 0; }
-}
 
 @media (max-width: 900px) {
   /* Su mobile le stesse voci stanno già nella bottom nav: un secondo accesso
@@ -1362,10 +1317,13 @@ input[type='range']:disabled { opacity: 0.45; }
    Notifiche
    ========================================================================== */
 
+/* Il `+ 64px` lascia libero l'angolo del pulsante della critica: una notifica
+   che ci finisce sopra copre l'unico modo di aprirla, e sparisce da sola
+   lasciando il dubbio di averla urtata. */
 .toasts {
   position: fixed; z-index: 90;
   right: calc(var(--container-margin) * 1.25);
-  bottom: calc(var(--container-margin) * 1.25);
+  bottom: calc(var(--container-margin) * 1.25 + 64px);
   display: flex; flex-direction: column; gap: var(--inline-gap);
   width: min(380px, calc(100vw - var(--container-margin) * 2));
   pointer-events: none;
@@ -1410,15 +1368,21 @@ input[type='range']:disabled { opacity: 0.45; }
 .toast__close:hover { background: color-mix(in srgb, var(--on-primary) 14%, transparent); color: var(--on-primary); }
 
 @media (max-width: 900px) {
-  /* Sopra la bottom nav, altrimenti la copre proprio mentre la stai usando. */
+  /* Sopra la bottom nav e sopra il pulsante della critica, altrimenti coprono
+     proprio quello che stai per usare. */
   .toasts {
     left: var(--container-margin);
     right: var(--container-margin);
-    bottom: calc(var(--bottomnav-h) + var(--inline-gap));
+    bottom: calc(var(--bottomnav-h) + var(--inline-gap) + 64px);
     width: auto;
   }
   .toast__action { min-height: 44px; }
   .toast__close { width: 44px; height: 44px; }
+
+  .critique {
+    right: var(--container-margin);
+    bottom: calc(var(--bottomnav-h) + var(--inline-gap));
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1437,12 +1401,16 @@ input[type='range']:disabled { opacity: 0.45; }
   --landing-col: min(820px, 100%);
 }
 
+/* Stessa impaginazione della barra dei risultati: passando da una schermata
+   all'altra il nome non deve spostarsi. */
 .landing__bar {
   position: sticky; top: 0; z-index: 40;
-  display: flex; align-items: center; gap: var(--stack-gap);
+  display: flex; align-items: center; gap: var(--inline-gap);
   height: 64px; padding: 0 calc(var(--container-margin) * 1.25);
+  padding-left: calc(var(--rail-w) + var(--container-margin));
   background: var(--surface-container-lowest);
   border-bottom: 1px solid var(--border);
+  transition: padding-left 200ms cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 .landing__brand {
   display: flex; align-items: center; gap: var(--inline-gap);
@@ -1461,6 +1429,10 @@ input[type='range']:disabled { opacity: 0.45; }
 .landing__state i { width: 6px; height: 6px; border-radius: 50%; background: var(--ink-3); }
 .landing__state--model i { background: var(--ok); }
 .landing__bar .btn { margin-left: auto; }
+/* Sulla home la barra è chiara: il collegamento prende il colore del testo,
+   non quello del marchio, o graverebbe più del titolo. */
+.landing__bar .topbar__repo { color: var(--ink-2); }
+.landing__bar .topbar__repo:hover { background: var(--surface-2); color: var(--ink); }
 
 /* Hamburger della home: stesso gesto dei risultati, stesso lato. Qui però resta
    visibile anche sotto i 900px — la home non ha la bottom nav che altrove
@@ -1601,6 +1573,68 @@ input[type='range']:disabled { opacity: 0.45; }
   font-size: 12px; font-weight: 600; color: var(--ink-2);
 }
 .picker__menu button.picker__config > svg { margin-top: 0; }
+.picker__empty {
+  margin: 0; padding: 4px 10px 10px;
+  font-size: 11px; line-height: 15px; color: var(--ink-2);
+}
+
+/* ---------- Elenco dei modelli configurati, nelle impostazioni ---------- */
+
+/* Una riga per modello, selezionabile: il modulo qui sotto lavora sempre su
+   quella aperta. Con un solo endpoint la lista non serviva; da due in poi è
+   l'unico modo per sapere cosa c'è configurato senza aprirli uno a uno. */
+.models__head {
+  display: flex; align-items: center; gap: var(--inline-gap);
+  margin-bottom: 8px;
+}
+.models__title {
+  flex: 1;
+  font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.02em;
+  color: var(--ink-2);
+}
+.models__head .btn { display: inline-flex; align-items: center; gap: 6px; }
+
+.models { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.models__row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 4px 8px 4px 4px;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--surface);
+}
+.models__row--open { border-color: var(--primary); background: var(--brand-tint); }
+.models__pick {
+  flex: 1; min-width: 0;
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 7px 8px;
+  border: 0; border-radius: var(--radius-xs);
+  background: none; color: var(--ink); text-align: left;
+}
+.models__pick:hover { background: var(--surface-2); }
+.models__row--open .models__pick:hover { background: transparent; }
+.models__pick strong {
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font-size: 13px; line-height: 18px; font-weight: 600;
+}
+.models__pick small {
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font-size: 11px; line-height: 15px; color: var(--ink-2);
+}
+.models__badge {
+  flex: none;
+  padding: 2px 8px; border-radius: var(--radius-pill);
+  background: var(--brand-600); color: var(--on-primary);
+  font-size: 10px; line-height: 14px; font-weight: 700; letter-spacing: 0.02em;
+}
+.models__del {
+  flex: none;
+  width: 28px; height: 28px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 0; border-radius: var(--radius-xs);
+  background: none; color: var(--ink-3);
+}
+.models__del:hover { background: var(--crit); color: var(--on-primary); }
+
+.models__actions { display: flex; gap: 8px; margin-top: 12px; }
 
 .landing__read {
   padding: 14px var(--card-inset);
@@ -1765,19 +1799,63 @@ input[type='range']:disabled { opacity: 0.45; }
 
 /* ---------- Critica del modello al ranking ---------- */
 
-/* Bordo diverso da `.reco`, che è un fatto calcolato: qui è un'opinione, e le
-   due cose non devono sembrare la stessa. */
+/* In basso a destra, sopra ogni cosa tranne le notifiche: è un commento a
+   margine, non un passaggio della ricerca, e non deve occupare lo spazio dei
+   risultati mentre lo si aspetta. */
 .critique {
-  display: block;
-  margin: var(--stack-gap) 0 var(--container-margin);
-  padding: var(--card-inset);
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--brand-800);
-  border-radius: var(--radius-sm);
-  background: var(--surface-container-lowest);
+  position: fixed; z-index: 85;
+  right: calc(var(--container-margin) * 1.25);
+  bottom: calc(var(--container-margin) * 1.25);
+  display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
 }
+
+.critique__fab {
+  position: relative;
+  width: 52px; height: 52px;
+  display: grid; place-items: center;
+  border: 1px solid var(--brand-800); border-radius: 50%;
+  background: var(--brand-700); color: var(--on-primary);
+  box-shadow: var(--shadow-3);
+}
+.critique__fab:hover { background: var(--brand-800); }
+.critique__fab[aria-expanded='true'] { background: var(--brand-800); }
+/* Mentre pensa: lo stesso respiro dei tre punti, senza rubare la scena. */
+.critique__fab--busy { animation: critique-busy 1600ms ease-in-out infinite; }
+@keyframes critique-busy {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+.critique__badge {
+  position: absolute; top: -2px; right: -2px;
+  min-width: 20px; height: 20px; padding: 0 5px;
+  display: grid; place-items: center;
+  border-radius: var(--radius-pill);
+  background: var(--accent); color: var(--primary);
+  font-size: 11px; line-height: 1; font-weight: 700;
+}
+
+.critique__panel {
+  width: min(380px, calc(100vw - var(--container-margin) * 2));
+  max-height: min(60vh, 520px);
+  display: flex; flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-container-lowest);
+  box-shadow: var(--shadow-3);
+  animation: critique-in 180ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+@keyframes critique-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+.critique__head {
+  display: flex; align-items: center; gap: var(--inline-gap);
+  padding: 10px 8px 10px var(--card-inset);
+  border-bottom: 1px solid var(--border);
+}
+.critique__body { padding: var(--card-inset); overflow-y: auto; }
+
 .critique__title {
-  margin: 0 0 var(--stack-gap);
   display: flex; align-items: center; gap: var(--inline-gap);
   font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.02em;
   color: var(--ink-2);
@@ -1793,7 +1871,8 @@ input[type='range']:disabled { opacity: 0.45; }
 .critique__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
 .critique__list li { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
 .critique__why { margin: 0; font-size: 14px; line-height: 21px; color: var(--ink); }
-.critique__note { margin: var(--stack-gap) 0 0; font-size: 12px; line-height: 18px; color: var(--ink-2); }
+.critique__note { margin: 0; font-size: 12px; line-height: 18px; color: var(--ink-2); }
+.critique__list + .critique__note { margin-top: var(--stack-gap); }
 .critique__foot {
   margin: var(--container-margin) 0 0;
   padding-top: var(--stack-gap); border-top: 1px solid var(--border);
@@ -1807,24 +1886,103 @@ input[type='range']:disabled { opacity: 0.45; }
    centrato sullo spazio residuo — cioè visibilmente spostato a destra rispetto
    alla pagina. Senza, cade al centro davvero. */
 
+/* ---------- La barra laterale: rail da chiusa, pannello da aperta ----------
+ *
+ * Da chiusa è una colonna di icone larga `--rail-w`, sempre presente: le voci
+ * principali restano raggiungibili senza aprire niente. Da aperta si allarga e
+ * mostra etichette e cronologia, coprendo il contenuto — non lo sposta, o ogni
+ * apertura rifarebbe il layout della pagina sotto le mani di chi legge.
+ *
+ * Sta sopra la barra in alto e parte da `top: 0`: il faro in cima alla colonna
+ * e il nome "Beacon" nella barra finiscono così affiancati nell'angolo, che è
+ * dove un marchio spezzato in due pezzi si rimette insieme. */
 .hside {
   display: flex; flex-direction: column;
-  height: 100vh; position: sticky; top: 0;
   background: var(--surface-container-low);
   border-right: 1px solid var(--border);
 }
 
-.hside__head {
-  display: flex; align-items: center; gap: var(--inline-gap); flex-wrap: wrap;
-  padding: var(--container-margin);
-  border-bottom: 1px solid var(--border);
-}
-.hside__brand {
-  display: inline-flex; align-items: center; gap: 7px;
-  font-size: 16px; line-height: 22px; font-weight: 800;
-  letter-spacing: -0.015em; color: var(--primary);
+.hside--rail {
+  position: fixed; top: 0; left: 0; bottom: 0; z-index: 45;
+  /* La larghezza viene dal guscio: aprendo la barra `--rail-w` cresce, e con
+     essa il rientro del contenuto. Così la barra STRINGE la pagina invece di
+     coprirla — su uno strumento dove si confrontano numeri, un pannello che
+     cala sopra i risultati nasconde proprio quello che si stava leggendo. */
+  width: var(--rail-w);
+  /* NON `overflow: hidden`: da chiusa il menu del profilo esce di lato, fuori
+     dai 64px, e verrebbe tagliato. Le etichette non sbordano perché da chiusa
+     sono `display: none`, non semplicemente fuori quadro. */
+  overflow: visible;
+  transition: width 200ms cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
+/* Il guscio dichiara quanto spazio prende la barra. Una variabile sola, e
+   tutto ciò che rientra a sinistra — barre, layout, piede — la segue. */
+.shell { --rail-w: 64px; }
+.shell.is-railopen { --rail-w: min(300px, 88vw); }
+
+/* Da chiusa: solo icone, tutto centrato nella colonna. `--collapsed` non
+   esiste come classe perché la barra è chiusa per difetto: è l'apertura a
+   essere lo stato eccezionale, e si scrive dove serve. */
+.hside--rail:not(.hside--open) .hside__label { display: none; }
+.hside--rail:not(.hside--open) .hside__head { justify-content: center; padding: 0; }
+.hside--rail:not(.hside--open) .hside__nav { padding: var(--inline-gap) 8px; }
+.hside--rail:not(.hside--open) .hside__nav button {
+  position: relative;
+  justify-content: center;
+  min-height: 44px; padding: 0;
+}
+/* Il contatore da chiusa non può stare in fila: diventa un pallino sull'icona,
+   come su qualunque barra di navigazione. */
+.hside--rail:not(.hside--open) .hside__count {
+  position: absolute; top: 4px; right: 6px;
+  margin: 0; min-width: 16px; padding: 0 4px;
+  font-size: 10px; line-height: 16px;
+}
+.hside--rail:not(.hside--open) .hside__profile { justify-content: center; padding: 8px; }
+.hside--rail:not(.hside--open) .hside__profilebtn { justify-content: center; padding: 8px 0; }
+/* Il menu del profilo esce di lato: dentro 64px non ci starebbe. */
+.hside--rail:not(.hside--open) .hside__menu {
+  left: calc(100% + 6px); right: auto; bottom: 8px;
+  width: 220px;
+}
+
+/* Alta esattamente quanto la barra in alto: il suo bordo inferiore e la fine
+   della topbar devono essere la stessa linea, o l'angolo si legge come due
+   pezzi accostati male. */
+.hside__head {
+  flex: none; box-sizing: border-box;
+  /* 64px: l'altezza della barra in alto sul desktop e della barra della home.
+     Sotto i 900px la barra laterale è un cassetto e non ha niente da
+     allineare. */
+  height: var(--header-h-desktop);
+  display: flex; align-items: center; gap: var(--inline-gap);
+  padding: 0 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Il comando che apre: fermo è il faro, sotto il puntatore è l'hamburger. I
+   due segni stanno impilati nello stesso quadrato — scambiarli con `display`
+   farebbe saltare la larghezza del bottone a ogni passaggio del mouse. */
+.hside__toggle {
+  position: relative; flex: none;
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  border: 0; border-radius: var(--radius-sm);
+  background: none; color: var(--primary);
+}
+.hside__toggle:hover { background: var(--surface-3); }
+.hside__mark,
+.hside__burger {
+  grid-area: 1 / 1;
+  display: inline-flex;
+  transition: opacity 140ms ease;
+}
+.hside__burger { opacity: 0; color: var(--ink); }
+.hside__toggle:hover .hside__mark,
+.hside__toggle:focus-visible .hside__mark { opacity: 0; }
+.hside__toggle:hover .hside__burger,
+.hside__toggle:focus-visible .hside__burger { opacity: 1; }
 .hside__section { flex: 1; min-height: 0; display: flex; flex-direction: column; padding: var(--container-margin) var(--inline-gap) 0; }
 .hside__title {
   display: flex; align-items: center; gap: 6px;
@@ -1895,7 +2053,7 @@ input[type='range']:disabled { opacity: 0.45; }
 
 /* Occupa quel che resta sotto la barra: con `min-height: 100vh` la pagina
    sarebbe alta 100vh + l'altezza della barra, e scrollerebbe a vuoto. */
-.landing__body { flex: 1; display: flex; flex-direction: column; }
+.landing__body { flex: 1; display: flex; flex-direction: column; padding-left: var(--rail-w); }
 
 /* Icona a destra del testo nel bottone principale, come nel prototipo. */
 .landing__boxbar .btn--primary { display: inline-flex; align-items: center; gap: var(--inline-gap); }
@@ -1910,22 +2068,37 @@ input[type='range']:disabled { opacity: 0.45; }
 }
 .topbar__menu:hover { background: var(--surface-2); border-color: transparent; }
 
-/* ---------- SideRail come drawer nella pagina risultati ---------- */
+.hside__head .panel__close { margin-left: auto; }
 
-.hside--drawer {
-  position: fixed; top: 0; left: 0; bottom: 0; z-index: 80;
-  width: min(300px, 88vw);
-  height: 100vh;
-  border-right: 1px solid var(--border);
-  box-shadow: var(--shadow-3);
-  /* Scivola da SINISTRA, cioè dal lato in cui la stessa barra sta ferma nella
-     home: aprirla dal lato opposto disorienta. */
-  transform: translateX(-100%);
-  visibility: hidden;
-  transition: transform 220ms cubic-bezier(0.22, 0.61, 0.36, 1), visibility 0s linear 220ms;
+/* Sotto i 900px la rail torna un cassetto: 64px di colonna su uno schermo
+   stretto sono un decimo della larghezza, e lì le stesse voci stanno già nella
+   bottom nav. Chiusa esce di scena del tutto. */
+@media (max-width: 900px) {
+  /* Fuori schermo, e sopra il contenuto quando entra: su uno schermo stretto
+     stringere la pagina non lascerebbe niente da leggere. */
+  .hside--rail {
+    width: min(300px, 88vw);
+    z-index: 80;
+    transform: translateX(-100%);
+    visibility: hidden;
+    transition: transform 220ms cubic-bezier(0.22, 0.61, 0.36, 1), visibility 0s linear 220ms;
+  }
+  .hside--rail.hside--open {
+    transform: none; visibility: visible;
+    box-shadow: var(--shadow-3);
+    transition: transform 220ms cubic-bezier(0.22, 0.61, 0.36, 1), visibility 0s;
+  }
 }
-.hside--open { transform: none; visibility: visible; transition: transform 220ms cubic-bezier(0.22, 0.61, 0.36, 1), visibility 0s; }
-.hside--drawer .hside__head .panel__close { margin-left: auto; }
+
+/* Sopra i 900px la barra sposta il contenuto, quindi il velo non serve: c'è
+   ancora tutto da vedere e da cliccare. */
+@media (min-width: 901px) {
+  .drawer-scrim { display: none; }
+  /* L'hamburger della barra in alto è un doppione del faro, che è lì accanto
+     e fa la stessa cosa. */
+  .topbar__menu,
+  .landing__menu { display: none; }
+}
 
 .hside__nav { display: flex; flex-direction: column; padding: var(--inline-gap); gap: 2px; }
 .hside__nav button {
@@ -1948,7 +2121,16 @@ input[type='range']:disabled { opacity: 0.45; }
 
 /* ---------- Profilo con menu ---------- */
 
-.hside__profile { position: relative; display: block; padding: var(--inline-gap); border-top: 1px solid var(--border); }
+/* `margin-top: auto` e non l'ordine dei figli: da chiusa la cronologia è una
+   voce come le altre e non spinge più niente in fondo, quindi il profilo
+   risalirebbe a metà colonna. Da aperta la sezione cronologia cresce e il
+   margine non fa nulla — il profilo resta dov'era. */
+.hside__profile {
+  position: relative; margin-top: auto;
+  box-sizing: border-box; min-height: var(--foot-h);
+  display: flex; align-items: center;
+  padding: var(--inline-gap); border-top: 1px solid var(--border);
+}
 .hside__profilebtn {
   display: flex; align-items: center; gap: var(--inline-gap);
   width: 100%; padding: 8px;
@@ -1979,35 +2161,12 @@ input[type='range']:disabled { opacity: 0.45; }
 .hside__menudanger { color: var(--crit); }
 .hside__menudanger:hover { background: var(--error-container); }
 
-/* Hamburger a sinistra, accanto al marchio. */
-.topbar__menu { order: -1; margin-right: 2px; }
-
-@media (min-width: 901px) {
-  .topbar__menu { grid-column: 1; justify-self: start; }
-  /* Marchio e hamburger condividono la prima colonna della griglia. */
-  .topbar { grid-template-columns: 1fr minmax(0, 520px) 1fr; }
-  .topbar__brand { grid-column: 1; justify-self: start; margin-left: 44px; }
-}
-
-@media (min-width: 901px) {
-  /* Hamburger e marchio scorrono naturalmente a sinistra; la ricerca è
-     centrata sulla PAGINA con un posizionamento assoluto, non sullo spazio
-     residuo — con la griglia i due elementi di sinistra finivano nella stessa
-     cella e si sarebbero sovrapposti. */
-  .topbar {
-    display: flex; align-items: center; gap: var(--inline-gap);
-    /* NON `position: relative`: sovrascriveva lo `sticky` dichiarato sopra e
-       sopra i 900px la barra scorreva via con la pagina. `sticky` è comunque
-       un elemento posizionato, quindi la ricerca in `absolute` qui sotto si
-       ancora ugualmente alla barra. */
-    position: sticky; top: 0;
-    grid-template-columns: none;
-  }
-  .topbar__menu { order: 0; grid-column: auto; justify-self: auto; margin-right: 0; }
-  .topbar__brand { order: 1; grid-column: auto; justify-self: auto; margin-left: 0; }
-  .topbar__search {
-    position: absolute; left: 50%; transform: translateX(-50%);
-    width: min(520px, 42vw);
-    grid-column: auto; justify-self: auto;
-  }
-}
+/* Hamburger nella prima delle tre zone della barra.
+ *
+ * Qui c'erano due blocchi di override successivi che si contendevano il
+ * layout: uno rimetteva la barra a `flex` per centrare la ricerca in assoluto,
+ * l'altro cacciava il marchio nella colonna di sinistra con un margine di
+ * 44px. Il risultato era un marchio che non stava né a sinistra né al centro.
+ * Tolta la ricerca dalla barra, la griglia a tre zone dichiarata in cima basta
+ * da sola e non serve nessun correttivo. */
+.topbar__menu { flex: none; }

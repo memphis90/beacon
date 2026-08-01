@@ -8,15 +8,16 @@ import DetailPanel from './components/DetailPanel.jsx'
 import EditorPanel from './components/EditorPanel.jsx'
 import FilterPanel from './components/FilterPanel.jsx'
 import Landing from './components/Landing.jsx'
-import Logo from './components/Logo.jsx'
 import RankingCritique from './components/RankingCritique.jsx'
 import ResultsHeader from './components/ResultsHeader.jsx'
 import SettingsModal from './components/SettingsModal.jsx'
 import SideRail from './components/SideRail.jsx'
 import SiteFooter from './components/SiteFooter.jsx'
 import Toasts from './components/Toasts.jsx'
-import { IconEdit, IconHeart, IconMenu, IconScale, IconSearch } from './components/Icons.jsx'
+import { IconEdit, IconGitHub, IconHeart, IconMenu, IconScale } from './components/Icons.jsx'
+import { REPO_URL } from './lib/project.js'
 import { emptyWeights } from './lib/axes.js'
+import { axesFromThemes } from './lib/themes.js'
 import { rankDestinations, scoreDestination, tripCost } from './lib/scoring.js'
 import { loadAgentConfig, saveAgentConfig } from './lib/agent.js'
 import { loadHistory } from './lib/history.js'
@@ -30,9 +31,13 @@ import {
 } from './lib/store.js'
 
 const CRITERIA_KEY = 'destination-finder:criteria:v1'
-const STARTED_KEY = 'destination-finder:started:v1'
 const FAVOURITES_KEY = 'destination-finder:favourites:v1'
 const MAX_COMPARE = 4
+
+// Residuo delle versioni in cui la schermata d'ingresso, una volta superata,
+// non tornava più: oggi nessuno lo legge, e lasciarlo nello storage farebbe
+// credere che serva ancora a qualcosa.
+try { localStorage.removeItem('destination-finder:started:v1') } catch { /* niente da fare */ }
 
 function baseCriteria() {
   return {
@@ -46,6 +51,10 @@ function baseCriteria() {
     // riportare a uno stato in cui NON è escluso niente.
     seaRequired: false,
     allowedTypes: ['city', 'area', 'island'],
+    // I temi non sono un filtro: nessuna destinazione viene esclusa perché non
+    // è gotica. Sono un bonus sul punteggio, e partono vuoti perché una
+    // ricerca senza tema non deve favorire nessuno.
+    themes: [],
     sortBy: 'score',
   }
 }
@@ -59,13 +68,21 @@ function readJson(key, fallback) {
   }
 }
 
-export default function App() {
+/**
+ * `startedInitially` è un appiglio per le prove, non una funzionalità.
+ *
+ * La schermata dei risultati sta dietro `started`, che parte sempre da false e
+ * si supera solo scrivendo una frase: da un render statico è irraggiungibile, e
+ * infatti un riferimento penzolante in quel ramo — una prop rimasta a puntare a
+ * uno stato cancellato — è arrivato fino al browser con i test verdi. Con
+ * questo, `test/render.test.js` disegna anche l'altra metà dell'app.
+ */
+export default function App({ startedInitially = false }) {
   const defaults = useMemo(baseCriteria, [])
   const [criteria, setCriteria] = useState(() => ({ ...baseCriteria(), ...readJson(CRITERIA_KEY, {}) }))
   const [overrides, setOverrides] = useState(loadOverrides)
   const [favourites, setFavourites] = useState(() => readJson(FAVOURITES_KEY, []))
   const [onlyFavourites, setOnlyFavourites] = useState(false)
-  const [view, setView] = useState('grid')
   const [detailId, setDetailId] = useState(null)
   const [compareIds, setCompareIds] = useState([])
   const [editor, setEditor] = useState(null)
@@ -78,16 +95,32 @@ export default function App() {
   // che confronta le parole scritte con i pesi effettivi. Dopo un ricaricamento
   // la si ripesca dalla cronologia, che è dove l'ultima ricerca è già salvata.
   const [phrase, setPhrase] = useState(() => loadHistory()[0]?.text || '')
-  // Chi ha già cercato una volta non rivede la schermata d'ingresso: sarebbe
-  // un pedaggio quotidiano su uno strumento che si usa spesso.
-  const [started, setStarted] = useState(() => readJson(STARTED_KEY, false))
+  /**
+   * Ricaricare la pagina riporta alla home, cioè al campo della frase.
+   *
+   * Prima questo flag stava in `localStorage` e chi aveva già cercato una volta
+   * si ritrovava per sempre nei risultati: un ricaricamento significa quasi
+   * sempre "ricomincio", e riaprire una classifica calcolata da criteri decisi
+   * chissà quando è disorientante — soprattutto perché la frase che l'aveva
+   * prodotta non è più sotto gli occhi. I criteri restano salvati: da qui si
+   * riscrive una frase, oppure si va ai filtri dal drawer e ci si ritrova
+   * esattamente la ricerca di prima.
+   */
+  const [started, setStarted] = useState(startedInitially)
   const { items: toasts, push: pushToast, dismiss: dismissToast } = useToasts()
 
   useEffect(() => { localStorage.setItem(CRITERIA_KEY, JSON.stringify(criteria)) }, [criteria])
   useEffect(() => { localStorage.setItem(FAVOURITES_KEY, JSON.stringify(favourites)) }, [favourites])
-  useEffect(() => { localStorage.setItem(STARTED_KEY, JSON.stringify(started)) }, [started])
 
   const applyOverrides = (next) => { setOverrides(next); saveOverrides(next) }
+
+  /**
+   * La configurazione dell'interprete sta QUI, non anche dentro `Landing`.
+   * Con due copie caricate separatamente da `localStorage`, il modello scelto
+   * nel menu della home restava sconosciuto ai risultati fino al ricaricamento
+   * della pagina: la critica del ranking girava sull'interprete precedente.
+   */
+  const applyAgent = (next) => { setAgent(next); saveAgentConfig(next) }
 
   /**
    * "Esci" su uno strumento senza account può voler dire una cosa sola:
@@ -97,7 +130,7 @@ export default function App() {
   const azzera = () => {
     const conferma = window.confirm(
       'Cancello tutto quello che è salvato su questo computer: criteri, preferiti, cronologia, ' +
-      'configurazione del modello e le modifiche fatte nell’editor.\n\n' +
+      'modelli configurati e le modifiche fatte nell’editor.\n\n' +
       'Le modifiche non esportate in overrides.json vanno perse. Procedo?'
     )
     if (!conferma) return
@@ -119,7 +152,7 @@ export default function App() {
     if (!destination) return null
     return {
       destination,
-      scoring: scoreDestination(destination, criteria.weights),
+      scoring: scoreDestination(destination, criteria.weights, criteria.themes),
       cost: tripCost(destination, criteria.nights),
     }
   }
@@ -173,12 +206,15 @@ export default function App() {
     (criteria.seaRequired ? 1 : 0) +
     (criteria.allowedTypes.length !== 3 ? 1 : 0) +
     (criteria.query.trim() ? 1 : 0) +
+    (criteria.themes?.length || 0) +
     Object.keys(criteria.weights).filter((k) => criteria.weights[k] !== defaults.weights[k]).length
 
   if (!started) {
     return (
       <Landing
         destinations={merged}
+        agent={agent}
+        onAgentChange={applyAgent}
         onSkip={() => setStarted(true)}
         onLogout={azzera}
         onApply={(patch, text) => {
@@ -188,10 +224,19 @@ export default function App() {
           // Se non ne nomina nessuno, restano i predefiniti, altrimenti si
           // arriverebbe ai risultati con tutti i pesi a zero e nessun ranking.
           const chiesti = patch.weights && Object.keys(patch.weights).length > 0
+          // Un tema senza interessi — "meta per Halloween" — cade sugli assi
+          // che quel tema implica invece che sui predefiniti. Con tutti a 5 la
+          // classifica sarebbe quella generica di sempre, spostata di otto
+          // punti: chi legge concluderebbe che il tema non ha fatto niente.
+          const daTema = !chiesti ? axesFromThemes(patch.themes) : null
+          const impliciti = daTema && Object.keys(daTema).length > 0
+
           setCriteria({
             ...baseCriteria(),
             ...patch,
-            weights: chiesti ? { ...emptyWeights(0), ...patch.weights } : emptyWeights(5),
+            weights: chiesti
+              ? { ...emptyWeights(0), ...patch.weights }
+              : impliciti ? { ...emptyWeights(0), ...daTema } : emptyWeights(5),
           })
           setStarted(true)
         }}
@@ -200,8 +245,15 @@ export default function App() {
   }
 
   return (
-    <>
+    // Il guscio porta lo stato della barra laterale come classe: aprendola,
+    // `--rail-w` cresce e tutto ciò che rientra a sinistra segue da solo. È il
+    // modo per farla STRINGERE il contenuto invece di coprirlo, senza che
+    // ogni regola debba sapere se la barra è aperta.
+    <div className={`shell${railOpen ? ' is-railopen' : ''}`}>
       <header className="topbar">
+        {/* Su desktop apre il faro in cima alla barra laterale; qui l'hamburger
+            resta solo sotto i 900px, dove la barra è un cassetto fuori
+            schermo e il suo comando sarebbe irraggiungibile. */}
         <button
           type="button"
           className="topbar__menu"
@@ -213,9 +265,11 @@ export default function App() {
           <span className="visually-hidden">Apri cronologia e menu</span>
         </button>
 
-        {/* Il marchio riporta alla home, come ci si aspetta ovunque. Fa la
-            stessa cosa di "Nuova ricerca" nel drawer: i criteri restano dove
-            sono, torna solo la schermata della frase. */}
+        {/* Solo il nome: il faro sta in cima alla barra laterale, subito a
+            sinistra di qui. Ripeterlo sarebbe due volte lo stesso marchio a
+            due centimetri di distanza. Riporta alla home, come ci si aspetta
+            ovunque: i criteri restano dove sono, torna la schermata della
+            frase. */}
         <button
           type="button"
           className="topbar__brand topbar__home"
@@ -223,20 +277,28 @@ export default function App() {
           title="Torna alla home"
           aria-label="Beacon — torna alla home"
         >
-          <Logo size={26} phase />
+          Beacon
         </button>
 
-        <div className="topbar__search">
-          <label htmlFor="q" className="visually-hidden">Cerca una destinazione</label>
-          <input
-            id="q"
-            type="search"
-            placeholder="Cerca per nome o paese…"
-            value={criteria.query}
-            onChange={(e) => setCriteria({ ...criteria, query: e.target.value })}
-          />
-          <IconSearch />
-        </div>
+        {/* La ricerca per nome non è più qui: è un filtro come gli altri —
+            esclude chi non corrisponde — e stava lontana dai suoi simili, in
+            una barra che per il resto non contiene criteri. Ora è la prima
+            voce del pannello filtri, dove si trova insieme a budget e tipo. */}
+
+        {/* Il codice, in fondo alla barra. Uno strumento che si giustifica
+            mostrando la propria aritmetica deve anche poter far leggere il
+            codice che la calcola: senza il collegamento, "verificabile" resta
+            una parola. */}
+        <a
+          className="topbar__repo"
+          href={REPO_URL}
+          target="_blank"
+          rel="noreferrer noopener"
+          title="Il codice di Beacon su GitHub"
+        >
+          <IconGitHub width="20" height="20" />
+          <span className="topbar__repolabel">Codice</span>
+        </a>
 
       </header>
 
@@ -245,8 +307,8 @@ export default function App() {
       )}
 
       <SideRail
-        variant="drawer"
         open={railOpen}
+        onOpen={() => setRailOpen(true)}
         onClose={() => setRailOpen(false)}
         history={history}
         onHistoryChange={setHistory}
@@ -297,8 +359,6 @@ export default function App() {
             count={visible.length}
             total={merged.length}
             criteria={criteria}
-            view={view}
-            onView={setView}
             onSort={(sortBy) => setCriteria({ ...criteria, sortBy })}
           />
 
@@ -324,16 +384,10 @@ export default function App() {
               sopra le card era la stessa informazione due volte. Resta nel
               pannello Confronta, dove le destinazioni non sono ordinate e il
               fatto non è deducibile a colpo d'occhio. */}
-          {ranking.hasRanking && (
-            <RankingCritique
-              phrase={phrase}
-              entries={visible}
-              weights={criteria.weights}
-              agent={agent}
-              onApplyWeight={(axis, value) =>
-                setCriteria((c) => ({ ...c, weights: { ...c.weights, [axis]: value } }))}
-            />
-          )}
+          {/* La critica del modello non sta più qui: era un riquadro nel posto
+              dove si guarda per primo, riempito dieci secondi dopo e spesso
+              con "niente da ridire". Ora è il pulsante in basso a destra,
+              montato in fondo alla pagina insieme alle notifiche. */}
 
           {visible.length === 0 ? (
             <div className="notice notice--empty">
@@ -344,7 +398,7 @@ export default function App() {
               )}
             </div>
           ) : (
-            <div className={`grid${view === 'list' ? ' grid--list' : ''}`}>
+            <div className="grid">
               {visible.map((entry, index) => (
                 <DestinationCard
                   key={entry.destination.id}
@@ -412,8 +466,19 @@ export default function App() {
       {settingsOpen && (
         <SettingsModal
           config={agent}
-          onChange={(next) => { setAgent(next); saveAgentConfig(next) }}
+          onChange={applyAgent}
           onClose={() => setSettingsOpen(false)}
+        />
+      )}
+
+      {ranking.hasRanking && (
+        <RankingCritique
+          phrase={phrase}
+          entries={visible}
+          weights={criteria.weights}
+          agent={agent}
+          onApplyWeight={(axis, value) =>
+            setCriteria((c) => ({ ...c, weights: { ...c.weights, [axis]: value } }))}
         />
       )}
 
@@ -431,6 +496,6 @@ export default function App() {
         onEditor={() => setEditor({ id: null })}
       />
 
-    </>
+    </div>
   )
 }

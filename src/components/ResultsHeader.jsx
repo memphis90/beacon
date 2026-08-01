@@ -1,4 +1,3 @@
-import { IconGrid, IconList } from './Icons.jsx'
 import { monthName } from '../lib/format.js'
 
 /**
@@ -16,7 +15,7 @@ const TABS = [
 
 const isCost = (sort) => sort === 'cost_asc' || sort === 'cost_desc'
 
-export default function ResultsHeader({ count, total, criteria, view, onView, onSort }) {
+export default function ResultsHeader({ count, total, criteria, onSort }) {
   const activeTab = isCost(criteria.sortBy) ? 'cost' : criteria.sortBy
 
   const pick = (key) => {
@@ -52,16 +51,10 @@ export default function ResultsHeader({ count, total, criteria, view, onView, on
           ))}
         </div>
 
-        <div className="viewtoggle" role="group" aria-label="Vista risultati">
-          <button type="button" aria-pressed={view === 'grid'} onClick={() => onView('grid')} title="Griglia">
-            <IconGrid width="17" height="17" />
-            <span className="visually-hidden">Griglia</span>
-          </button>
-          <button type="button" aria-pressed={view === 'list'} onClick={() => onView('list')} title="Lista">
-            <IconList width="17" height="17" />
-            <span className="visually-hidden">Lista</span>
-          </button>
-        </div>
+        {/* Niente più selettore griglia/lista: la lista mostrava le stesse
+            informazioni della griglia su una riga più larga, e la scelta fra
+            due rese equivalenti è un controllo in più da capire senza niente
+            da decidere. Le card restano una griglia che si adatta da sola. */}
       </div>
     </div>
   )

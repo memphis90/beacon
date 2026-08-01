@@ -1,25 +1,32 @@
 import { useEffect, useRef, useState } from 'react'
 import {
-  IconClock, IconEdit, IconFilter, IconHeart, IconLogout, IconPlus,
+  IconClock, IconEdit, IconFilter, IconHeart, IconLogout, IconMenu, IconPlus,
   IconScale, IconSettings, IconTrash, IconUser,
 } from './Icons.jsx'
 import { LogoMark } from './Logo.jsx'
 import { clearHistory, removeFromHistory, timeAgo } from '../lib/history.js'
+import { activeProfile, agentIsReady, profileLabel } from '../lib/agent.js'
 
 /**
- * Cronologia, navigazione e profilo: un solo pannello per la home e per i
- * risultati.
+ * Cronologia, navigazione e profilo: una barra sola per la home e i risultati.
  *
- * Averne uno solo evita che cronologia e navigazione vivano in due posti che
- * poi divergono. Entrambe le pagine lo aprono in `variant="drawer"`, da
- * sinistra e dallo stesso hamburger: lo stesso gesto deve dare lo stesso
- * pannello dallo stesso lato, o si perde l'orientamento passando da una
- * schermata all'altra. `variant="static"` resta la resa a colonna fissa, oggi
- * non usata da nessuna pagina.
+ * **Non sparisce mai.** Chiusa resta una colonna di icone larga quanto un
+ * bersaglio; aperta si allarga e mostra le etichette e la cronologia per
+ * esteso. Prima era un cassetto che usciva e rientrava, e da chiuso non
+ * lasciava traccia: le uniche vie per Preferiti, Confronta ed Editor erano
+ * dietro un hamburger, cioè invisibili finché non le cercavi. Una riga di
+ * icone costa 64px e le tiene sotto il pollice.
+ *
+ * Sotto i 900px torna un cassetto: 64px di colonna su uno schermo stretto sono
+ * un decimo della larghezza, e lì le stesse voci stanno già nella bottom nav.
+ *
+ * Il marchio sta in cima alla barra; il nome "Beacon" no — quello vive nella
+ * barra in alto, accanto all'hamburger. Sono la stessa cosa in due pezzi, e
+ * l'angolo in alto a sinistra li rimette insieme.
  */
 export default function SideRail({
-  variant = 'static',
   open = false,
+  onOpen,
   onClose,
   history,
   onHistoryChange,
@@ -47,44 +54,73 @@ export default function SideRail({
     }
   }, [menuOpen])
 
-  const isDrawer = variant === 'drawer'
+  // Richiudendo la barra il menu del profilo non deve restare aperto: da
+  // chiusa uscirebbe da una colonna di 64px, sospeso sul nulla.
+  useEffect(() => { if (!open) setMenuOpen(false) }, [open])
+
+  /**
+   * Una voce della barra: icona sempre, etichetta solo da aperta.
+   * `fillable` perché solo il cuore ha una versione piena — passare `filled`
+   * alle altre icone lo farebbe finire come attributo sull'`svg`.
+   */
+  const Voce = ({ Icon, label, count, pressed, fillable, disabled, onClick, danger }) => (
+    <button
+      type="button"
+      className={danger ? 'hside__menudanger' : undefined}
+      aria-pressed={pressed}
+      disabled={disabled}
+      onClick={onClick}
+      // Da chiusa l'etichetta è nascosta: il title è l'unico modo per sapere
+      // cosa fa un'icona prima di premerla.
+      title={open ? undefined : label}
+    >
+      <Icon width="19" height="19" {...(fillable ? { filled: pressed } : {})} />
+      <span className="hside__label">{label}</span>
+      {count > 0 && <span className="hside__count">{count}</span>}
+    </button>
+  )
 
   return (
     <aside
       id="side-rail"
-      className={`hside${isDrawer ? ' hside--drawer' : ''}${isDrawer && open ? ' hside--open' : ''}`}
+      className={`hside hside--rail${open ? ' hside--open' : ''}`}
       aria-label="Cronologia e menu"
-      aria-hidden={isDrawer && !open}
     >
+      {/* Il faro È il comando che apre e chiude.
+          Fermo mostra il marchio; sotto il puntatore diventa l'hamburger, che
+          è il segno universale per "qui si apre". Due bersagli separati —
+          marchio inerte più hamburger accanto — sarebbero due cose nello
+          stesso angolo che fanno quasi la stessa cosa. */}
       <div className="hside__head">
-        <span className="hside__brand"><LogoMark width="22" height="22" /> Beacon</span>
-        <span className="landing__phase">Fase 0</span>
-        {isDrawer && (
-          <button type="button" className="panel__close" onClick={onClose} aria-label="Chiudi">×</button>
-        )}
+        <button
+          type="button"
+          className="hside__toggle"
+          aria-expanded={open}
+          aria-controls="side-rail"
+          onClick={() => (open ? onClose() : onOpen())}
+          title={open ? 'Chiudi la barra' : 'Apri la barra'}
+        >
+          <span className="hside__mark"><LogoMark width="26" height="26" beams={false} /></span>
+          <span className="hside__burger"><IconMenu width="22" height="22" /></span>
+          <span className="visually-hidden">{open ? 'Chiudi la barra' : 'Apri la barra'}</span>
+        </button>
+        <span className="hside__label landing__phase">Fase 0</span>
       </div>
 
       {nav && (
         <nav className="hside__nav">
-          <button type="button" onClick={nav.onNewSearch}>
-            <IconPlus width="17" height="17" />
-            Nuova ricerca
-          </button>
-          <button type="button" aria-pressed={nav.onlyFavourites} onClick={nav.onFavourites}>
-            <IconHeart filled={nav.onlyFavourites} width="17" height="17" />
-            Preferiti
-            {nav.favouritesCount > 0 && <span className="hside__count">{nav.favouritesCount}</span>}
-          </button>
-          <button type="button" disabled={nav.compareCount < 2} onClick={nav.onCompare}>
-            <IconScale width="17" height="17" />
-            Confronta
-            {nav.compareCount > 0 && <span className="hside__count">{nav.compareCount}</span>}
-          </button>
-          <button type="button" onClick={nav.onEditor}>
-            <IconEdit width="17" height="17" />
-            Editor
-            {nav.overriddenCount > 0 && <span className="hside__count">{nav.overriddenCount}</span>}
-          </button>
+          <Voce Icon={IconPlus} label="Nuova ricerca" onClick={nav.onNewSearch} />
+          <Voce
+            Icon={IconHeart} label="Preferiti" fillable
+            count={nav.favouritesCount} pressed={nav.onlyFavourites}
+            onClick={nav.onFavourites}
+          />
+          <Voce
+            Icon={IconScale} label="Confronta"
+            count={nav.compareCount} disabled={nav.compareCount < 2}
+            onClick={nav.onCompare}
+          />
+          <Voce Icon={IconEdit} label="Editor" count={nav.overriddenCount} onClick={nav.onEditor} />
         </nav>
       )}
 
@@ -93,54 +129,60 @@ export default function SideRail({
           dovrebbe scriverne una finta per arrivare agli slider. */}
       {onSkipToFilters && (
         <nav className="hside__nav">
-          <button type="button" onClick={onSkipToFilters}>
-            <IconFilter width="17" height="17" />
-            Vai ai filtri, senza frase
-          </button>
+          <Voce Icon={IconFilter} label="Vai ai filtri, senza frase" onClick={onSkipToFilters} />
         </nav>
       )}
 
-      <div className="hside__section">
-        <p className="hside__title">
-          <IconClock width="14" height="14" />
-          Cronologia
-          {history.length > 0 && (
-            <button
-              type="button"
-              className="hside__clear"
-              onClick={() => onHistoryChange(clearHistory())}
-              title="Svuota la cronologia"
-            >
-              Svuota
-            </button>
-          )}
-        </p>
-
-        {history.length === 0 ? (
-          <p className="hside__empty">
-            Le ricerche che fai restano qui, su questo computer. Nessuna ancora.
+      {/* Da chiusa la cronologia è un'icona che apre la barra: l'elenco delle
+          frasi ha bisogno di larghezza per essere leggibile, e troncato a 64px
+          non direbbe niente. Il numero sull'icona dice che c'è qualcosa. */}
+      {!open ? (
+        <nav className="hside__nav">
+          <Voce Icon={IconClock} label="Cronologia" count={history.length} onClick={onOpen} />
+        </nav>
+      ) : (
+        <div className="hside__section">
+          <p className="hside__title">
+            <IconClock width="14" height="14" />
+            Cronologia
+            {history.length > 0 && (
+              <button
+                type="button"
+                className="hside__clear"
+                onClick={() => onHistoryChange(clearHistory())}
+                title="Svuota la cronologia"
+              >
+                Svuota
+              </button>
+            )}
           </p>
-        ) : (
-          <ul className="hside__list">
-            {history.map((entry) => (
-              <li key={entry.id}>
-                <button type="button" className="hside__item" onClick={() => onPickHistory(entry)}>
-                  <span className="hside__text">{entry.text}</span>
-                  <span className="hside__meta">{timeAgo(entry.at)} · {entry.source}</span>
-                </button>
-                <button
-                  type="button"
-                  className="hside__remove"
-                  onClick={() => onHistoryChange(removeFromHistory(history, entry.id))}
-                  aria-label={`Rimuovi "${entry.text}" dalla cronologia`}
-                >
-                  <IconTrash width="14" height="14" />
-                </button>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+
+          {history.length === 0 ? (
+            <p className="hside__empty">
+              Le ricerche che fai restano qui, su questo computer. Nessuna ancora.
+            </p>
+          ) : (
+            <ul className="hside__list">
+              {history.map((entry) => (
+                <li key={entry.id}>
+                  <button type="button" className="hside__item" onClick={() => onPickHistory(entry)}>
+                    <span className="hside__text">{entry.text}</span>
+                    <span className="hside__meta">{timeAgo(entry.at)} · {entry.source}</span>
+                  </button>
+                  <button
+                    type="button"
+                    className="hside__remove"
+                    onClick={() => onHistoryChange(removeFromHistory(history, entry.id))}
+                    aria-label={`Rimuovi "${entry.text}" dalla cronologia`}
+                  >
+                    <IconTrash width="14" height="14" />
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
 
       <div className="hside__profile" ref={profileRef}>
         <button
@@ -149,11 +191,14 @@ export default function SideRail({
           aria-expanded={menuOpen}
           aria-haspopup="menu"
           onClick={() => setMenuOpen((v) => !v)}
+          title={open ? undefined : 'Profilo locale'}
         >
           <span className="hside__avatar"><IconUser width="18" height="18" /></span>
-          <span className="hside__who">
+          <span className="hside__who hside__label">
             <strong>Profilo locale</strong>
-            <small>{agent?.enabled ? `modello · ${agent.model}` : 'regole locali'}</small>
+            <small>
+              {agentIsReady(agent) ? `modello · ${profileLabel(activeProfile(agent))}` : 'regole locali'}
+            </small>
           </span>
         </button>
 

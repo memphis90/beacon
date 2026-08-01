@@ -115,6 +115,13 @@
   --card-inset: 1rem;
 
   --sidebar-w: 320px;
+  /* Barra laterale da chiusa: una colonna di sole icone. 64px è il minimo che
+     tiene un bersaglio da 44px con l'aria attorno. */
+  --rail-w: 64px;
+  /* Altezza condivisa dal piede della pagina e dal blocco profilo in fondo
+     alla barra laterale: le due linee che li separano dal contenuto devono
+     essere la stessa linea quando si è in fondo alla pagina. */
+  --foot-h: 72px;
   --header-h: 56px;
   /* Il mockup desktop alza la topbar a 64px. Sotto i 900px l'app non è quel
      mockup (è il portale con bottom nav) e resta su --header-h: token

@@ -1,11 +1,13 @@
 import { useEffect, useMemo, useState } from 'react'
 import InterpreterPicker from './InterpreterPicker.jsx'
-import Logo from './Logo.jsx'
 import SettingsModal from './SettingsModal.jsx'
 import SideRail from './SideRail.jsx'
-import { IconArrowUp, IconEuro, IconMenu, IconMountain, IconScale, IconWave } from './Icons.jsx'
+import { IconArrowUp, IconEuro, IconGitHub, IconMenu, IconMountain, IconScale, IconWave } from './Icons.jsx'
+import { REPO_URL } from '../lib/project.js'
 import { parseQuery } from '../lib/parseQuery.js'
-import { interpretWithModel, loadAgentConfig, saveAgentConfig } from '../lib/agent.js'
+import {
+  activeProfile, agentIsReady, interpretWithModel, isLocalEndpoint, profileLabel,
+} from '../lib/agent.js'
 import { addToHistory, loadHistory } from '../lib/history.js'
 import { countryName } from '../lib/format.js'
 
@@ -47,9 +49,8 @@ const ESEMPI = [
   { Icon: IconEuro, text: 'dove vado a giugno con 400 € e voglio il mare' },
 ]
 
-export default function Landing({ destinations, onApply, onSkip, onLogout }) {
+export default function Landing({ destinations, agent, onAgentChange, onApply, onSkip, onLogout }) {
   const [text, setText] = useState('')
-  const [agent, setAgent] = useState(loadAgentConfig)
   const [settingsOpen, setSettingsOpen] = useState(false)
   const [history, setHistory] = useState(loadHistory)
   const [railOpen, setRailOpen] = useState(false)
@@ -64,7 +65,10 @@ export default function Landing({ destinations, onApply, onSkip, onLogout }) {
   )
 
   const parsed = useMemo(() => parseQuery(text, { destinations: catalogo }), [text, catalogo])
-  const conModello = Boolean(agent.enabled && agent.baseUrl && agent.model)
+  // Il profilo scelto nel menu: il resto della schermata lo nomina, e la
+  // chiamata parte da lui.
+  const interprete = activeProfile(agent)
+  const conModello = agentIsReady(agent)
 
   const frasi = useMemo(() => attese(destinations.length), [destinations.length])
   const [frase, setFrase] = useState(0)
@@ -111,7 +115,13 @@ export default function Landing({ destinations, onApply, onSkip, onLogout }) {
     const controller = new AbortController()
     setInCorso(controller)
     try {
-      const result = await interpretWithModel(text, { config: agent, signal: controller.signal })
+      // Il catalogo va al modello insieme alla frase: senza, decide al buio su
+      // campi che escludono — vedi `describeRules`.
+      const result = await interpretWithModel(text, {
+        config: agent,
+        destinations,
+        signal: controller.signal,
+      })
       setInCorso(null)
       if (Object.keys(result.patch).length === 0) {
         setErroreModello('Il modello non ha riconosciuto nessun criterio in questa frase.')
@@ -130,10 +140,11 @@ export default function Landing({ destinations, onApply, onSkip, onLogout }) {
   const annulla = () => { inCorso?.abort(); setInCorso(null) }
 
   /**
-   * L'interprete si sceglie accanto al campo, non più nelle impostazioni: va
-   * scritto subito su disco, o cambiarlo e ricaricare la pagina lo perde.
+   * L'interprete si sceglie accanto al campo, non più nelle impostazioni. Lo
+   * stato però vive in `App`, che lo scrive su disco: tenerne una copia qui
+   * significava che il modello scelto nel menu non arrivava ai risultati.
    */
-  const applyAgent = (next) => { setAgent(next); saveAgentConfig(next) }
+  const applyAgent = (next) => onAgentChange(next)
 
   /** Una voce di cronologia riempie il campo: puoi ritoccarla prima di rilanciare. */
   const riprendi = (entry) => {
@@ -143,7 +154,7 @@ export default function Landing({ destinations, onApply, onSkip, onLogout }) {
   }
 
   return (
-    <div className="landing">
+    <div className={`landing shell${railOpen ? ' is-railopen' : ''}`}>
       <header className="landing__bar">
         <button
           type="button"
@@ -156,9 +167,22 @@ export default function Landing({ destinations, onApply, onSkip, onLogout }) {
           <span className="visually-hidden">Apri cronologia e menu</span>
         </button>
 
-        <div className="landing__brand">
-          <Logo size={26} phase phaseClass="landing__phase" />
-        </div>
+        {/* Come nei risultati: qui il nome, il faro in cima alla barra
+            laterale. La pastiglia della fase sta accanto al faro, non qui. */}
+        <div className="landing__brand">Beacon</div>
+
+        {/* Anche qui, non solo nei risultati: è la prima schermata che vede
+            chi arriva, ed è dove la domanda "cos'è questa cosa" si pone. */}
+        <a
+          className="topbar__repo"
+          href={REPO_URL}
+          target="_blank"
+          rel="noreferrer noopener"
+          title="Il codice di Beacon su GitHub"
+        >
+          <IconGitHub width="20" height="20" />
+          <span className="topbar__repolabel">Codice</span>
+        </a>
       </header>
 
       {railOpen && (
@@ -166,8 +190,8 @@ export default function Landing({ destinations, onApply, onSkip, onLogout }) {
       )}
 
       <SideRail
-        variant="drawer"
         open={railOpen}
+        onOpen={() => setRailOpen(true)}
         onClose={() => setRailOpen(false)}
         history={history}
         onHistoryChange={setHistory}
@@ -182,12 +206,7 @@ export default function Landing({ destinations, onApply, onSkip, onLogout }) {
         <main className="landing__main">
           <div className="landing__hero">
             <h1>Dove andiamo?</h1>
-            <p>
-              {conModello
-                ? 'Descrivi il viaggio a parole: all’invio lo interpreta il modello che hai configurato.'
-                : 'Descrivi il viaggio a parole. Oppure salta e regola i filtri a mano.'}
-            </p>
-          </div>
+      </div>
 
           <form className="landing__box" onSubmit={submit}>
             <div className="landing__boxinner">
@@ -246,7 +265,8 @@ export default function Landing({ destinations, onApply, onSkip, onLogout }) {
                 {conModello && (
                   <p className="landing__note">
                     Anteprima delle regole, gratuita e immediata. All’invio decide
-                    <strong> {agent.model}</strong>, e quello che capisce può essere diverso.
+                    <strong> {profileLabel(interprete)}</strong>, e quello che capisce può essere
+                    diverso.
                   </p>
                 )}
               </div>
@@ -308,7 +328,7 @@ export default function Landing({ destinations, onApply, onSkip, onLogout }) {
 
         <footer className="landing__foot">
           <p>
-            {agent.enabled
+            {conModello
               ? 'Il modello traduce solo la frase in criteri: punteggio, filtri duri e ranking restano calcolati qui.'
               : 'La frase è interpretata da regole scritte, che girano qui e che puoi vedere sbagliare.'}
             {' '}{destinations.length} destinazioni nel catalogo.
@@ -328,9 +348,15 @@ export default function Landing({ destinations, onApply, onSkip, onLogout }) {
             </p>
 
             <p className="thinkbox__phrase">“{text.trim()}”</p>
+            {/* Il modello che sta rispondendo, per nome: con più di uno
+                configurato, sapere quale è al lavoro è metà del motivo per cui
+                se ne tiene più di uno. L'avvertenza sul primo caricamento vale
+                solo in locale — su un endpoint remoto sarebbe una scusa per
+                un'attesa che ha altre cause. */}
             <p className="thinkbox__meta">
-              {agent.model} · in locale. La prima chiamata dopo l’avvio deve anche caricare il
-              modello in memoria, e può metterci più di un minuto.
+              {profileLabel(interprete)} · {isLocalEndpoint(interprete?.baseUrl)
+                ? 'in locale. La prima chiamata dopo l’avvio deve anche caricare il modello in memoria, e può metterci più di un minuto.'
+                : 'endpoint remoto: la frase è uscita da questo computer.'}
             </p>
             <button type="button" className="btn btn--sm" onClick={annulla}>Annulla</button>
           </div>

@@ -1,16 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <!-- Variante compatta del marchio: cinque barre invece di otto.
-       A 16px otto segmenti da 2px diventano una macchia; qui l'identità la
-       porta la forma - profilo irregolare su una linea - non il conteggio.
-       Fondo navy pieno perché una favicon trasparente sparisce sulle barre
-       scure del browser. -->
+  <!-- Variante compatta del marchio: il faro senza fasci e senza orizzonte.
+       A 16px due trattini obliqui non si leggono come luce, si leggono come
+       sporco, e la linea dell'orizzonte tocca il bordo della pastiglia.
+       Il tratto è più spesso che nel marchio grande: a questa dimensione
+       1.9px sparisce. Fondo navy pieno perché una favicon trasparente
+       sparisce sulle barre scure del browser. -->
   <rect width="32" height="32" rx="7" fill="#203b52"/>
-  <g fill="#ffffff">
-    <rect x="4.2" y="16" width="3.6" height="9.6" rx="1.8"/>
-    <rect x="9.2" y="11" width="3.6" height="14.6" rx="1.8"/>
-    <rect x="14.2" y="18.5" width="3.6" height="7.1" rx="1.8"/>
-    <rect x="24.2" y="13" width="3.6" height="12.6" rx="1.8"/>
+  <g fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M9.6 25.6 12.6 13.4"/>
+    <path d="M22.4 25.6 19.4 13.4"/>
+    <path d="M11.2 13.4h9.6"/>
+    <path d="M12 7.8 16 4 20 7.8"/>
   </g>
-  <rect x="19.2" y="6.5" width="3.6" height="19.1" rx="1.8" fill="#f59e0b"/>
-  <path d="M4.4 25.6h23.2" stroke="#ffffff" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <circle cx="16" cy="10.4" r="2" fill="#f59e0b"/>
 </svg>
