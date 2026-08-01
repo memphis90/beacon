@@ -218,6 +218,19 @@ export const isHostedPage = () =>
 /** Un endpoint locale chiamato da un sito: è il caso che fallisce sempre. */
 export const isBlockedCombination = (baseUrl) => isLocalEndpoint(baseUrl) && isHostedPage()
 
+/**
+ * Un endpoint remoto senza chiave è configurato a metà.
+ *
+ * Sembra pronto — endpoint e modello ci sono — e invece ogni frase muore con
+ * un 401 che parla la lingua del fornitore: OpenRouter risponde "No cookie
+ * auth credentials found", che a chi legge non dice né cosa manca né dove
+ * metterlo. Meglio non partire, e dirlo.
+ *
+ * Un endpoint locale non ne ha bisogno: Ollama e LM Studio non chiedono nulla.
+ */
+export const profileNeedsKey = (profile) =>
+  Boolean(profile?.baseUrl) && !isLocalEndpoint(profile.baseUrl) && !profile.apiKey
+
 /** Il messaggio d'errore quando `fetch` muore senza dire perché. */
 export function localEndpointHint(baseUrl) {
   if (isBlockedCombination(baseUrl)) {
@@ -247,9 +260,15 @@ export function activeProfile(config) {
   return config.baseUrl || config.model ? config : null
 }
 
-/** Acceso *e* configurato: un `enabled` su un profilo vuoto non è un modello. */
-export const agentIsReady = (config) =>
-  Boolean(config?.enabled && profileIsUsable(activeProfile(config)))
+/**
+ * Acceso *e* davvero utilizzabile: un `enabled` su un profilo vuoto non è un
+ * modello, e nemmeno un endpoint remoto a cui manca la chiave — quello
+ * fallirebbe a ogni frase con un errore del fornitore.
+ */
+export const agentIsReady = (config) => {
+  const profile = activeProfile(config)
+  return Boolean(config?.enabled && profileIsUsable(profile) && !profileNeedsKey(profile))
+}
 
 export function loadAgentConfig() {
   try {
@@ -522,6 +541,14 @@ async function askForJson(system, user, { config, signal, timeout }) {
   // sta provando nelle impostazioni: risolve `activeProfile`.
   const profile = activeProfile(config)
   if (!profileIsUsable(profile)) throw new Error('Endpoint o modello non configurati')
+  // Prima di partire, non dopo: la risposta del fornitore a una chiamata senza
+  // chiave è un 401 che parla di cookie e non dice cosa manca.
+  if (profileNeedsKey(profile)) {
+    throw new Error(
+      `Manca la chiave API per ${endpointHost(profile.baseUrl)}. È un endpoint remoto: senza `
+      + 'chiave rifiuta ogni richiesta. Aprila dalle impostazioni del modello e incollala lì.'
+    )
+  }
 
   const controller = new AbortController()
   const timer = setTimeout(() => controller.abort(), timeout)
@@ -563,6 +590,14 @@ async function askForJson(system, user, { config, signal, timeout }) {
 
     if (!response.ok) {
       const body = await response.text().catch(() => '')
+      // 401 e 403 hanno una sola causa pratica, e il corpo della risposta la
+      // dice con le parole del fornitore invece che con quelle di chi legge.
+      if (response.status === 401 || response.status === 403) {
+        throw new Error(
+          `${endpointHost(profile.baseUrl)} ha rifiutato la chiave (${response.status}). `
+          + 'Controlla che sia quella giusta per questo endpoint e che non sia scaduta.'
+        )
+      }
       throw new Error(`Il modello ha risposto ${response.status}${body ? `: ${body.slice(0, 120)}` : ''}`)
     }
 

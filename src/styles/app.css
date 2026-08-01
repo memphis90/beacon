@@ -641,6 +641,10 @@ textarea.control { height: auto; padding: 8px 10px; resize: vertical; }
 }
 .panel--wide { width: min(1100px, 100%); }
 .panel--modal { height: min(88vh, 900px); border-radius: var(--radius); width: min(1180px, 100%); }
+/* Il dettaglio è una scheda, non una tabella: più stretto del confronto, che
+   ha una colonna per destinazione, ma abbastanza da tenere la mappa e
+   l'aritmetica del punteggio senza mandarle a capo. */
+.panel--detail { width: min(760px, 100%); }
 
 .panel__head {
   display: flex; align-items: center; gap: var(--inline-gap);
@@ -1346,24 +1350,27 @@ input[type='range']:disabled { opacity: 0.45; }
    Curva d'ingresso decelerata (parte veloce, si posa), uscita accelerata
    (parte piano, se ne va): entrare è un arrivo, uscire è un congedo. */
 
-@keyframes sheet-scrim-in { from { opacity: 0; } to { opacity: 1; } }
-@keyframes sheet-scrim-out { from { opacity: 1; } to { opacity: 0; } }
-@keyframes sheet-in { from { transform: translateX(100%); } to { transform: none; } }
-@keyframes sheet-out { from { transform: none; } to { transform: translateX(100%); } }
+/* Il dettaglio non slitta più da destra: arriva al centro, quindi cresce di
+   un soffio invece di scorrere. La durata dell'uscita deve restare allineata
+   a quella di `useDismiss`, che tiene montato il nodo per 200ms. */
+@keyframes modal-scrim-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes modal-scrim-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes modal-in { from { opacity: 0; transform: scale(0.97) translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes modal-out { from { opacity: 1; transform: none; } to { opacity: 0; transform: scale(0.98) translateY(6px); } }
 
-.overlay--sheet { animation: sheet-scrim-in 220ms ease both; }
-.overlay--sheet .panel { animation: sheet-in 260ms cubic-bezier(0.22, 0.61, 0.36, 1) both; }
+.overlay--center { animation: modal-scrim-in 180ms ease both; }
+.overlay--center > .panel { animation: modal-in 200ms cubic-bezier(0.22, 0.61, 0.36, 1) both; }
 
-.overlay--sheet.overlay--closing { animation: sheet-scrim-out 200ms ease both; }
-.overlay--sheet.overlay--closing .panel { animation: sheet-out 200ms cubic-bezier(0.55, 0, 0.68, 0.53) both; }
+.overlay--center.overlay--closing { animation: modal-scrim-out 200ms ease both; }
+.overlay--center.overlay--closing > .panel { animation: modal-out 200ms cubic-bezier(0.55, 0, 0.68, 0.53) both; }
 
-/* Chi ha chiesto meno movimento non deve subire una slitta da destra a ogni
-   apertura. L'hook salta comunque l'attesa, quindi qui basta togliere il moto. */
+/* Chi ha chiesto meno movimento non deve subire una scala a ogni apertura.
+   L'hook salta comunque l'attesa, quindi qui basta togliere il moto. */
 @media (prefers-reduced-motion: reduce) {
-  .overlay--sheet,
-  .overlay--sheet .panel,
-  .overlay--sheet.overlay--closing,
-  .overlay--sheet.overlay--closing .panel {
+  .overlay--center,
+  .overlay--center > .panel,
+  .overlay--center.overlay--closing,
+  .overlay--center.overlay--closing > .panel {
     animation: none;
   }
 }

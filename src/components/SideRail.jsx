@@ -107,35 +107,43 @@ export default function SideRail({
         <span className="hside__label landing__phase">Fase 0</span>
       </div>
 
-      {nav && (
-        <nav className="hside__nav">
+      {/* Un blocco solo, e ogni voce compare se il chiamante la passa: due
+          `nav` separati mettevano le icone della home a un'altezza diversa da
+          quelle dei risultati, e passando da una schermata all'altra la stessa
+          colonna si spostava sotto il puntatore. */}
+      <nav className="hside__nav">
+        {nav?.onNewSearch && (
           <Voce Icon={IconPlus} label="Nuova ricerca" onClick={nav.onNewSearch} />
+        )}
+        {nav?.onFavourites && (
           <Voce
             Icon={IconHeart} label="Preferiti" fillable
             count={nav.favouritesCount} pressed={nav.onlyFavourites}
             onClick={nav.onFavourites}
           />
+        )}
+        {nav?.onCompare && (
           <Voce
             Icon={IconScale} label="Confronta"
             count={nav.compareCount} disabled={nav.compareCount < 2}
             onClick={nav.onCompare}
           />
-          {/* "Parametri" e non "Editor": dice cosa si cambia là dentro —
-              punteggi, costi, clima — mentre "Editor" dice solo che si può
-              scrivere. E non "Configurazioni", che si confonderebbe con le
-              Impostazioni del modello, che sono un'altra cosa. */}
+        )}
+        {/* "Parametri" e non "Editor": dice cosa si cambia là dentro —
+            punteggi, costi, clima — mentre "Editor" dice solo che si può
+            scrivere. E non "Configurazioni", che si confonderebbe con le
+            Impostazioni del modello, che sono un'altra cosa. */}
+        {nav?.onEditor && (
           <Voce Icon={IconEdit} label="Parametri" count={nav.overriddenCount} onClick={nav.onEditor} />
-        </nav>
-      )}
+        )}
 
-      {/* Rientro rapido dalla home: senza il vecchio "Salta e usa i filtri" la
-          frase sarebbe l'unico modo di entrare, e chi sa già cosa cercare
-          dovrebbe scriverne una finta per arrivare agli slider. */}
-      {onSkipToFilters && (
-        <nav className="hside__nav">
+        {/* Rientro rapido dalla home: senza il vecchio "Salta e usa i filtri"
+            la frase sarebbe l'unico modo di entrare, e chi sa già cosa cercare
+            dovrebbe scriverne una finta per arrivare agli slider. */}
+        {onSkipToFilters && (
           <Voce Icon={IconFilter} label="Vai ai filtri, senza frase" onClick={onSkipToFilters} />
-        </nav>
-      )}
+        )}
+      </nav>
 
       {/* Da chiusa la cronologia è un'icona che apre la barra: l'elenco delle
           frasi ha bisogno di larghezza per essere leggibile, e troncato a 64px

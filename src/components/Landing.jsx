@@ -199,6 +199,17 @@ export default function Landing({ destinations, agent, onAgentChange, onApply, o
         history={history}
         onHistoryChange={setHistory}
         onPickHistory={riprendi}
+        // Sulla home "Nuova ricerca" vuol dire svuotare il campo: è lo stesso
+        // gesto della voce omonima nei risultati — si riparte dalla frase —
+        // e nella stessa posizione della colonna.
+        nav={{
+          onNewSearch: () => {
+            setText('')
+            setErroreModello('')
+            setRailOpen(false)
+            document.getElementById('landing-q')?.focus()
+          },
+        }}
         agent={agent}
         onOpenSettings={() => { setRailOpen(false); setSettingsOpen(true) }}
         onSkipToFilters={() => { setRailOpen(false); onSkip() }}

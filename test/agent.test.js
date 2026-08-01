@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import {
   activeProfile, agentIsReady, buildSystemPrompt, critiquePayload, describeRules,
   emptyAgentConfig, isBlockedCombination, isLocalEndpoint, localEndpointHint,
-  nextProfileId, normaliseAgentConfig, profileLabel, sanitiseCritique,
+  nextProfileId, normaliseAgentConfig, profileLabel, profileNeedsKey, sanitiseCritique,
   sanitisePatch, sanitiseUnderstood,
 } from '../src/lib/agent.js'
 
@@ -190,9 +190,27 @@ describe('agentIsReady — acceso non basta, deve anche essere configurato', () 
   })
 
   it('è vero solo con endpoint, modello e interruttore acceso', () => {
-    const profiles = [{ id: 'm1', baseUrl: 'http://x/v1', model: 'a' }]
+    const profiles = [{ id: 'm1', baseUrl: 'http://localhost:11434/v1', model: 'a' }]
     expect(agentIsReady(normaliseAgentConfig({ enabled: false, profiles }))).toBe(false)
     expect(agentIsReady(normaliseAgentConfig({ enabled: true, profiles }))).toBe(true)
+  })
+
+  /**
+   * Un remoto senza chiave sembra configurato e non lo è: ogni frase morirebbe
+   * con un 401 che parla la lingua del fornitore. Meglio non dichiararlo
+   * pronto — così il menu non lo lascia nemmeno scegliere.
+   */
+  it('un endpoint remoto senza chiave non è pronto', () => {
+    const senza = [{ id: 'm1', baseUrl: 'https://openrouter.ai/api/v1', model: 'a' }]
+    const con = [{ ...senza[0], apiKey: 'sk-qualcosa' }]
+    expect(profileNeedsKey(senza[0])).toBe(true)
+    expect(agentIsReady(normaliseAgentConfig({ enabled: true, profiles: senza }))).toBe(false)
+    expect(agentIsReady(normaliseAgentConfig({ enabled: true, profiles: con }))).toBe(true)
+  })
+
+  it('un endpoint locale non chiede nessuna chiave', () => {
+    expect(profileNeedsKey({ baseUrl: 'http://localhost:11434/v1', model: 'a' })).toBe(false)
+    expect(profileNeedsKey({ baseUrl: 'http://127.0.0.1:1234/v1', model: 'a' })).toBe(false)
   })
 
   it('profileLabel ripiega sul nome del modello quando manca l’etichetta', () => {

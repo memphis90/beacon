@@ -20,13 +20,23 @@ export default function DetailPanel({ entry, criteria, onClose, onEdit, onCompar
   const isApprox = destination.climate_source === 'seed_approx'
 
   return (
+    /**
+     * Al centro, non di lato.
+     *
+     * Il pannello laterale nasceva quando i risultati restavano visibili
+     * accanto, e aveva senso: confrontavi la scheda con la griglia. Da quando
+     * il pulsante della critica sta in basso a destra, però, quella colonna
+     * gli finisce sopra — e resta comunque la finestra più stretta della
+     * pagina per il contenuto più denso che l'app ha, con la tabella
+     * dell'aritmetica e la mappa dentro.
+     */
     <div
-      className={`overlay overlay--sheet${closing ? ' overlay--closing' : ''}`}
+      className={`overlay overlay--center${closing ? ' overlay--closing' : ''}`}
       onClick={onClose}
       role="presentation"
     >
       <section
-        className="panel"
+        className="panel panel--modal panel--detail"
         role="dialog"
         aria-modal="true"
         aria-label={`Dettaglio di ${destination.name}`}

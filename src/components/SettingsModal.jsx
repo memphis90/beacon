@@ -3,6 +3,7 @@ import { IconPlus, IconTrash } from './Icons.jsx'
 import {
   PRESETS, activeProfile, agentIsReady, interpretWithModel, isBlockedCombination,
   nextProfileId, normaliseAgentConfig, profileFromPreset, profileIsUsable, profileLabel,
+  profileNeedsKey,
 } from '../lib/agent.js'
 
 /**
@@ -277,11 +278,12 @@ export default function SettingsModal({ config, onChange, onClose }) {
                     chi ha scritto l'app: una chiave dentro il client è una
                     chiave regalata — il codice della pagina è pubblico e si
                     legge in dieci secondi. */}
-                {remoto && !profilo.apiKey && (
-                  <p className="landing__note">
-                    Serve la tua, non ce n’è una condivisa: il codice di questa pagina è
-                    pubblico, e una chiave scritta dentro sarebbe leggibile da chiunque —
-                    con la quota di chi l’ha messa.
+                {profileNeedsKey(profilo) && (
+                  <p className="landing__note landing__note--warn">
+                    <strong>Senza chiave questo endpoint rifiuta ogni richiesta.</strong> Serve la
+                    tua, non ce n’è una condivisa: il codice di questa pagina è pubblico, e una
+                    chiave scritta dentro sarebbe leggibile da chiunque — con la quota di chi
+                    l’ha messa.
                   </p>
                 )}
               </div>
@@ -323,7 +325,13 @@ export default function SettingsModal({ config, onChange, onClose }) {
               )}
 
               <div className="models__actions">
-                <button type="button" className="btn btn--sm" onClick={test} disabled={!profileIsUsable(profilo)}>
+                <button
+                  type="button"
+                  className="btn btn--sm"
+                  onClick={test}
+                  disabled={!profileIsUsable(profilo) || profileNeedsKey(profilo)}
+                  title={profileNeedsKey(profilo) ? 'Manca la chiave API' : undefined}
+                >
                   Prova la connessione
                 </button>
                 <button

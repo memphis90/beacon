@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { IconChevron, IconList, IconSettings, IconSparkle } from './Icons.jsx'
-import { activeProfile, agentIsReady, endpointHost, profileIsUsable, profileLabel } from '../lib/agent.js'
+import {
+  activeProfile, agentIsReady, endpointHost, profileIsUsable, profileLabel, profileNeedsKey,
+} from '../lib/agent.js'
 
 /**
  * Chi interpreta la frase, scelto dove la frase si scrive.
@@ -77,7 +79,10 @@ export default function InterpreterPicker({ agent, onChange, onConfigure }) {
           </button>
 
           {profili.map((p) => {
-            const pronto = profileIsUsable(p)
+            // Un remoto senza chiave sembra pronto e non lo è: lasciarlo
+            // scegliere significa mandare ogni frase contro un 401.
+            const manca = profileNeedsKey(p)
+            const pronto = profileIsUsable(p) && !manca
             const scelto = usaModello && p.id === agent.activeId
             return (
               <button
@@ -96,7 +101,9 @@ export default function InterpreterPicker({ agent, onChange, onConfigure }) {
                       // L'host distingue due profili che girano lo stesso
                       // modello — il caso tipico: locale contro remoto.
                       ? `${endpointHost(p.baseUrl)}${p.label?.trim() ? ` · ${p.model}` : ''}`
-                      : 'Incompleto: manca l’endpoint o il nome del modello.'}
+                      : manca
+                        ? `Manca la chiave API per ${endpointHost(p.baseUrl)}: mettila qui sotto.`
+                        : 'Incompleto: manca l’endpoint o il nome del modello.'}
                   </small>
                 </span>
               </button>
