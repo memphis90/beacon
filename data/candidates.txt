@@ -1,0 +1,120 @@
+# Candidati per il catalogo — una destinazione per riga.
+#
+#   titolo della voce su it.wikipedia | city|area|island
+#
+# Perché una lista scritta a mano e non una query.
+# Ci ho provato: "tutte le città europee con almeno N edizioni linguistiche di
+# Wikipedia" è una query che l'endpoint pubblico rifiuta (502), e quando gira
+# risponde alla domanda sbagliata — la popolazione premia i capoluoghi
+# amministrativi, e restituisce Ankara prima di Firenze. Un catalogo di viaggio
+# non è un elenco di insediamenti ordinato per abitanti.
+#
+# Quindi la scelta di COSA sta nel catalogo resta umana, ed è giusto così: è un
+# giudizio, non un'interrogazione. Lo script riempie le caselle — identificatore
+# Wikidata, coordinate, paese — e verifica che il titolo non sia ambiguo.
+#
+# Il tipo va scritto: Wikidata classifica "Toscana" e "Provenza" in modi che non
+# corrispondono alle tre categorie dell'app, e dedurlo produrrebbe errori
+# silenziosi. Tre valori: city, area, island.
+#
+# Un terzo campo facoltativo forza il paese (codice ISO a due lettere). Serve
+# per i posti che ne hanno più d'uno: l'Istria sta in Croazia, Slovenia e
+# Italia, Wikidata li elenca tutti, e il seed ha un campo solo — qualunque
+# scelta automatica sarebbe arbitraria.
+#
+# I redirect vanno bene: lo script chiede a Wikipedia il titolo canonico prima
+# di interrogare Wikidata. Le pagine di disambiguazione no, e vengono segnalate.
+#
+# Le righe già presenti nel seed vengono saltate, quindi questo file può
+# crescere senza doverlo ripulire.
+
+# --- Italia ---------------------------------------------------------------
+Firenze | city
+Venezia | city
+Napoli | city
+Torino | city
+Bologna | city
+Palermo | city
+Verona | city
+Siena | city
+Matera | city
+Lecce | city
+Trieste | city
+Genova | city
+Val d'Orcia | area
+Cinque Terre | area
+Salento | area
+Langhe | area
+Lago di Como | area
+Val Gardena | area
+Sicilia | island
+Sardegna | island
+Ischia (isola) | island
+Isole Eolie | island
+
+# --- Penisola iberica -----------------------------------------------------
+Madrid | city
+Siviglia | city
+Granada | city
+Valencia | city
+Bilbao | city
+Porto (Portogallo) | city
+Ibiza (isola) | island
+Tenerife | island
+Formentera | island
+
+# --- Francia e Benelux ----------------------------------------------------
+Lione | city
+Marsiglia | city
+Nizza | city
+Bordeaux | city
+Bruges | city
+Gand | city
+Provenza | area
+Costa Azzurra | area
+Bretagna | area
+
+# --- Europa centrale ------------------------------------------------------
+Berlino | city
+Monaco di Baviera | city
+Amburgo | city
+Dresda | city
+Salisburgo | city
+Innsbruck | city
+Lubiana | city
+Zagabria | city
+Cracovia | city
+Bratislava | city
+Foresta Nera | area
+Baviera | area
+
+# --- Nord -----------------------------------------------------------------
+Copenaghen | city
+Stoccolma | city
+Oslo | city
+Helsinki | city
+Reykjavík | city
+Edimburgo | city
+Dublino | city
+Riga | city
+Vilnius | city
+Lapponia | area
+Isole Fær Øer | island
+
+# --- Sud-est e Mediterraneo -----------------------------------------------
+Atene | city
+Salonicco | city
+Spalato | city
+Zara (Croazia) | city
+Cattaro | city
+Sarajevo | city
+Belgrado | city
+Sofia | city
+Bucarest | city
+La Valletta | city
+Rodi | island
+Corfù | island
+Malta (isola) | island
+Cipro | island
+Peloponneso | area
+Istria | area | HR

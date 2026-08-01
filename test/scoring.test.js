@@ -3,6 +3,7 @@ import {
   FILTER,
   applyHardFilters,
   climateSummary,
+  isUnscored,
   nightlyCost,
   rankDestinations,
   recommend,
@@ -99,6 +100,37 @@ describe('temi — un bonus visibile, non un nono asse', () => {
   it('un tema che nessuno porta non cambia niente', () => {
     const r = rankDestinations([gotica, altra], { weights: pesi, themes: ['artico'] })
     expect(r.results.every((x) => x.scoring.themeBonus === 0)).toBe(true)
+  })
+})
+
+/**
+ * La Fase 1 porta l'anagrafica e si ferma lì: punteggi, costi e clima restano
+ * da assegnare. Il ranking deve tenerle fuori DICENDOLO — se finissero in
+ * fondo con zero punti si leggerebbero come "queste valgono poco" invece che
+ * "queste non le ho ancora guardate".
+ */
+describe('destinazioni non ancora valutate', () => {
+  const daValutare = {
+    id: 'nuova', name: 'Nuova', country: 'IT', type: 'city',
+    coords: { lat: 45, lon: 9 }, scores_source: 'todo', climate_source: 'todo',
+  }
+
+  it('le riconosce dalla marca o dall’assenza dei punteggi', () => {
+    expect(isUnscored(daValutare)).toBe(true)
+    expect(isUnscored({ ...daValutare, scores_source: undefined })).toBe(true)
+    expect(isUnscored(makeDestination())).toBe(false)
+  })
+
+  it('restano fuori dal ranking, con il motivo dichiarato', () => {
+    const r = rankDestinations([makeDestination(), daValutare], { weights: emptyWeights(5) })
+    expect(r.results).toHaveLength(1)
+    expect(r.excluded[0].filter).toBe(FILTER.UNSCORED)
+    expect(summariseExclusions(r.excluded)[0].label).toBe('non ancora valutate')
+  })
+
+  it('il calcolo dei costi non esplode quando i costi non ci sono', () => {
+    expect(() => tripCost(daValutare, 5)).not.toThrow()
+    expect(nightlyCost(daValutare)).toEqual({ low: 0, mid: 0, high: 0 })
   })
 })
 

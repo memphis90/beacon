@@ -192,6 +192,41 @@ producono un file in `data/staging/` da confrontare e fondere a mano
 pubbliche — intervallo minimo, backoff sul 429, user-agent identificativo:
 Wikimedia e Overpass sono servizi gratuiti condivisi.
 
+### `expand-catalogue.mjs` — la Fase 1
+
+Legge `data/candidates.txt` — una destinazione per riga, titolo della voce
+italiana più il tipo — e riempie le caselle: identificatore Wikidata,
+coordinate, paese, titolo inglese. Poi scrive in staging come tutti gli altri.
+
+**Riempie ciò che è un fatto, non ciò che è un giudizio.** Punteggi, costi e
+clima restano vuoti, marcati `scores_source: "todo"`: sono valutazioni o
+misure, e generarle d'ufficio significherebbe inventare i dati su cui si regge
+il ranking. Le destinazioni importate **restano fuori dai risultati** con un
+motivo dichiarato — "non ancora valutate" — perché a punteggio zero
+finirebbero ultime, dove si leggono come "questa vale poco" invece di "questa
+non l'ho ancora guardata". Compaiono in cima alla pagina *Parametri*, che è
+dove quel lavoro si fa.
+
+**Perché una lista scritta a mano e non una query.** La scoperta automatica
+l'ho provata: l'endpoint SPARQL pubblico rifiuta le query aperte sulle città
+europee (502), e quando risponde ordina per popolazione — che premia i
+capoluoghi amministrativi e mette Ankara prima di Firenze. Un catalogo di
+viaggio non è un elenco di insediamenti: *quali* posti ci stiano è un
+giudizio, e resta umano. Lo script fa la parte meccanica.
+
+Tre trappole trovate scrivendolo, tutte silenziose:
+
+- **`P17` non è un valore solo.** Dublino elenca il Regno d'Irlanda, il Regno
+  Unito e l'Irlanda: prendere il primo dava uno stato storico senza codice
+  ISO, e la destinazione risultava "senza paese" pur avendone uno ovvio. Ora i
+  claim con una data di fine vanno in coda.
+- **`wbgetentities` non segue i redirect.** "Isole Fær Øer" e "Zara (Croazia)"
+  risultavano introvabili pur essendo voci raggiungibili. Ora il titolo
+  canonico si chiede prima a Wikipedia, che i rimandi li risolve.
+- **I posti a cavallo di più paesi.** L'Istria sta in Croazia, Slovenia e
+  Italia, il seed ha un campo solo, e qualunque scelta automatica è arbitraria:
+  un terzo campo facoltativo in `candidates.txt` forza il codice ISO.
+
 ### `resolve-wikidata.mjs`
 
 Risolve il `wikidata_id` di ogni destinazione, che è l'aggancio da cui parte

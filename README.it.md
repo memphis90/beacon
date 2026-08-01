@@ -167,9 +167,13 @@ telemetria. *Esci e azzera i dati* cancella tutto.
 
 ## Stato
 
-**Fase 0**: 23 destinazioni europee con parametri assegnati a mano. Costi,
-clima e punteggi sono **stime iniziali**, dichiarate come tali
-nell'interfaccia e correggibili dal pannello *Parametri*.
+**102 destinazioni europee.** 23 hanno i parametri assegnati a mano — costi,
+clima e punteggi, tutte **stime iniziali** dichiarate come tali
+nell'interfaccia e correggibili dal pannello *Parametri*. Le altre 79 sono
+arrivate dall'ingestione Wikidata con la **sola anagrafica**: dove sono, cosa
+sono, come si chiamano. Restano **fuori dal ranking** finché non ricevono i
+punteggi, perché una destinazione senza punteggi non è una destinazione
+mediocre — è una che nessuno ha ancora guardato.
 
 Le fasi successive porteranno ingestione automatica da Wikidata e
 OpenStreetMap (Fase 1), clima e prezzi reali (Fase 2), ricerca semantica e

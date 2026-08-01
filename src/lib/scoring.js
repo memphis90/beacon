@@ -15,6 +15,7 @@ export const FILTER = {
   TYPE: 'type',
   SEA: 'sea',
   BUDGET: 'budget',
+  UNSCORED: 'unscored',
 }
 
 export const FILTER_LABEL = {
@@ -22,11 +23,33 @@ export const FILTER_LABEL = {
   [FILTER.TYPE]: 'tipo di destinazione',
   [FILTER.SEA]: 'temperatura del mare',
   [FILTER.BUDGET]: 'budget massimo',
+  [FILTER.UNSCORED]: 'non ancora valutate',
 }
+
+/**
+ * Una destinazione entrata dagli script ma non ancora giudicata.
+ *
+ * La Fase 1 porta l'anagrafica — dov'è, che cos'è, come si chiama — e si ferma
+ * lì: punteggi, costi e clima sono giudizi o misure, e riempirli d'ufficio
+ * sarebbe inventare i dati su cui si regge tutto il resto. `todo` è la marca
+ * che lo dichiara.
+ *
+ * Il ranking le tiene fuori. Non per severità: una destinazione senza punteggi
+ * avrebbe zero su ogni asse e finirebbe ultima, dove si legge come "questa
+ * vale poco" invece che "questa non l'ho ancora guardata". Escluderla con un
+ * motivo dichiarato è l'unica lettura onesta.
+ */
+export const isUnscored = (destination) =>
+  destination?.scores_source === 'todo' || !destination?.scores
 
 /** Costo stimato per persona, per notte. Restituisce sempre una fascia. */
 export function nightlyCost(destination) {
   const c = destination.costs
+  // Le destinazioni non ancora valutate non hanno costi: senza questa guardia
+  // il calcolo esplode invece di dire che il dato non c'è.
+  if (!c?.accommodation || !c?.food_per_day || !c?.transport_local_day) {
+    return { low: 0, mid: 0, high: 0 }
+  }
   const sum = (field) =>
     c.accommodation[field] + c.food_per_day[field] + c.transport_local_day[field]
   return { low: sum('low'), mid: sum('mid'), high: sum('high') }
@@ -136,6 +159,17 @@ export function applyHardFilters(destinations, criteria) {
   const excluded = []
 
   for (const destination of destinations) {
+    // Prima di ogni altro filtro: non ha senso dire che è stata esclusa dal
+    // budget una destinazione di cui non conosciamo ancora il costo.
+    if (isUnscored(destination)) {
+      excluded.push({
+        destination,
+        filter: FILTER.UNSCORED,
+        detail: 'anagrafica importata, punteggi non ancora assegnati',
+      })
+      continue
+    }
+
     if (normalisedQuery) {
       // Il nome del paese per esteso, non solo il codice ISO: cercando
       // "croazia" ci si aspetta Dubrovnik, non zero risultati perché nel

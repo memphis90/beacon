@@ -168,9 +168,13 @@ telemetry. *Esci e azzera i dati* wipes it all.
 
 ## Status
 
-**Phase 0**: 23 European destinations with hand-assigned parameters. Costs,
-climate and scores are **initial estimates**, labelled as such in the
-interface and correctable from the *Parametri* panel.
+**102 European destinations.** 23 carry hand-assigned parameters — costs,
+climate and scores, all **initial estimates** labelled as such in the interface
+and correctable from the *Parametri* panel. The other 79 arrived from the
+Wikidata ingestion with **identity only**: where they are, what they are, what
+they're called. They stay **out of the ranking** until someone scores them,
+because a destination with no scores isn't a mediocre one — it's one nobody has
+looked at yet.
 
 Later phases bring automatic ingestion from Wikidata and OpenStreetMap
 (Phase 1), real climate and price data (Phase 2), semantic search and

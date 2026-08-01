@@ -51,6 +51,33 @@ for (const [id, fields] of Object.entries(patch.changes || {})) {
   }
 }
 
+/**
+ * Le destinazioni NUOVE stanno in una sezione a parte.
+ *
+ * Aggiungere e correggere sono due gesti diversi e vanno guardati con occhi
+ * diversi: una correzione la si confronta col valore di prima, un'aggiunta la
+ * si giudica per intero. Tenerle nello stesso elenco avrebbe fatto scorrere
+ * via le seconde in mezzo alle prime.
+ *
+ * Un id già esistente non viene mai sovrascritto: quello è un aggiornamento
+ * travestito da aggiunta, e se serve si fa con `changes`.
+ */
+let aggiunte = 0
+for (const [id, destination] of Object.entries(patch.additions || {})) {
+  if (byId.has(id)) {
+    skipped.push(`${id}: esiste già, un'aggiunta non lo sovrascrive`)
+    continue
+  }
+  console.log(`+ ${id.padEnd(20)} ${destination.name} (${destination.country}, ${destination.type})`)
+  doc.destinations.push({ ...destination, id })
+  byId.set(id, destination)
+  aggiunte += 1
+}
+
+// L'ordine alfabetico è quello del seed: mantenerlo tiene il diff leggibile
+// anche quando le aggiunte sono molte.
+if (aggiunte) doc.destinations.sort((a, b) => a.name.localeCompare(b.name, 'it'))
+
 writeFileSync(TARGET, JSON.stringify(doc, null, 2) + '\n', 'utf8')
-console.log(`\n${applied} campi applicati su ${doc.destinations.length} destinazioni.`)
+console.log(`\n${applied} campi applicati, ${aggiunte} destinazioni aggiunte. Totale: ${doc.destinations.length}.`)
 skipped.forEach((s) => console.log(`  saltato — ${s}`))

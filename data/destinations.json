@@ -168,6 +168,27 @@
       ]
     },
     {
+      "id": "amburgo",
+      "name": "Amburgo",
+      "country": "DE",
+      "type": "city",
+      "coords": {
+        "lat": 53.55,
+        "lon": 10
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q1055",
+      "wikipedia_title": "Amburgo",
+      "wikipedia_title_en": "Hamburg",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
       "id": "amsterdam",
       "name": "Amsterdam",
       "country": "NL",
@@ -325,6 +346,27 @@
       "themes": [
         "gotico"
       ]
+    },
+    {
+      "id": "atene",
+      "name": "Atene",
+      "country": "GR",
+      "type": "city",
+      "coords": {
+        "lat": 37.9842,
+        "lon": 23.7281
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q1524",
+      "wikipedia_title": "Atene",
+      "wikipedia_title_en": "Athens",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
     },
     {
       "id": "baia-di-kotor",
@@ -653,6 +695,216 @@
       ]
     },
     {
+      "id": "baviera",
+      "name": "Baviera",
+      "country": "DE",
+      "type": "area",
+      "coords": {
+        "lat": 49.0786,
+        "lon": 11.3856
+      },
+      "radius_km": 90,
+      "wikidata_id": "Q980",
+      "wikipedia_title": "Baviera",
+      "wikipedia_title_en": "Bavaria",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "belgrado",
+      "name": "Belgrado",
+      "country": "RS",
+      "type": "city",
+      "coords": {
+        "lat": 44.8178,
+        "lon": 20.4569
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q3711",
+      "wikipedia_title": "Belgrado",
+      "wikipedia_title_en": "Belgrade",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "berlino",
+      "name": "Berlino",
+      "country": "DE",
+      "type": "city",
+      "coords": {
+        "lat": 52.5167,
+        "lon": 13.3833
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q64",
+      "wikipedia_title": "Berlino",
+      "wikipedia_title_en": "Berlin",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "bilbao",
+      "name": "Bilbao",
+      "country": "ES",
+      "type": "city",
+      "coords": {
+        "lat": 43.2631,
+        "lon": -2.935
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q8692",
+      "wikipedia_title": "Bilbao",
+      "wikipedia_title_en": "Bilbao",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "bologna",
+      "name": "Bologna",
+      "country": "IT",
+      "type": "city",
+      "coords": {
+        "lat": 44.4939,
+        "lon": 11.3428
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q1891",
+      "wikipedia_title": "Bologna",
+      "wikipedia_title_en": "Bologna",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "bordeaux",
+      "name": "Bordeaux",
+      "country": "FR",
+      "type": "city",
+      "coords": {
+        "lat": 44.8378,
+        "lon": -0.5794
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q1479",
+      "wikipedia_title": "Bordeaux",
+      "wikipedia_title_en": "Bordeaux",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "bratislava",
+      "name": "Bratislava",
+      "country": "SK",
+      "type": "city",
+      "coords": {
+        "lat": 48.1517,
+        "lon": 17.1093
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q1780",
+      "wikipedia_title": "Bratislava",
+      "wikipedia_title_en": "Bratislava",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "bretagna",
+      "name": "Bretagna",
+      "country": "FR",
+      "type": "area",
+      "coords": {
+        "lat": 48,
+        "lon": -3
+      },
+      "radius_km": 90,
+      "wikidata_id": "Q327",
+      "wikipedia_title": "Bretagna",
+      "wikipedia_title_en": "Brittany",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "bruges",
+      "name": "Bruges",
+      "country": "BE",
+      "type": "city",
+      "coords": {
+        "lat": 51.2089,
+        "lon": 3.2242
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q12994",
+      "wikipedia_title": "Bruges",
+      "wikipedia_title_en": "Bruges",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "bucarest",
+      "name": "Bucarest",
+      "country": "RO",
+      "type": "city",
+      "coords": {
+        "lat": 44.4134,
+        "lon": 26.0978
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q19660",
+      "wikipedia_title": "Bucarest",
+      "wikipedia_title_en": "Bucharest",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
       "id": "budapest",
       "name": "Budapest",
       "country": "HU",
@@ -820,6 +1072,132 @@
       ]
     },
     {
+      "id": "cattaro",
+      "name": "Cattaro",
+      "country": "ME",
+      "type": "city",
+      "coords": {
+        "lat": 42.4254,
+        "lon": 18.7712
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q171080",
+      "wikipedia_title": "Cattaro",
+      "wikipedia_title_en": "Kotor",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "cinque-terre",
+      "name": "Cinque Terre",
+      "country": "IT",
+      "type": "area",
+      "coords": {
+        "lat": 44.1269,
+        "lon": 9.7094
+      },
+      "radius_km": 90,
+      "wikidata_id": "Q275639",
+      "wikipedia_title": "Cinque Terre",
+      "wikipedia_title_en": "Cinque Terre",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "cipro",
+      "name": "Cipro",
+      "country": "CY",
+      "type": "island",
+      "coords": {
+        "lat": 35,
+        "lon": 33
+      },
+      "radius_km": 60,
+      "wikidata_id": "Q229",
+      "wikipedia_title": "Cipro",
+      "wikipedia_title_en": "Cyprus",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "copenaghen",
+      "name": "Copenaghen",
+      "country": "DK",
+      "type": "city",
+      "coords": {
+        "lat": 55.6761,
+        "lon": 12.5689
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q1748",
+      "wikipedia_title": "Copenaghen",
+      "wikipedia_title_en": "Copenhagen",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "corfu",
+      "name": "Corfù",
+      "country": "GR",
+      "type": "island",
+      "coords": {
+        "lat": 39.6,
+        "lon": 19.87
+      },
+      "radius_km": 60,
+      "wikidata_id": "Q121378",
+      "wikipedia_title": "Corfù",
+      "wikipedia_title_en": "Corfu",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "costa-azzurra",
+      "name": "Costa Azzurra",
+      "country": "FR",
+      "type": "area",
+      "coords": {
+        "lat": 43.32,
+        "lon": 6.665
+      },
+      "radius_km": 90,
+      "wikidata_id": "Q182822",
+      "wikipedia_title": "Costa Azzurra",
+      "wikipedia_title_en": "French Riviera",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
       "id": "costiera-amalfitana",
       "name": "Costiera Amalfitana",
       "country": "IT",
@@ -984,6 +1362,27 @@
         "balneare",
         "romantico"
       ]
+    },
+    {
+      "id": "cracovia",
+      "name": "Cracovia",
+      "country": "PL",
+      "type": "city",
+      "coords": {
+        "lat": 50.0614,
+        "lon": 19.9372
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q31487",
+      "wikipedia_title": "Cracovia",
+      "wikipedia_title_en": "Kraków",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
     },
     {
       "id": "creta",
@@ -1320,6 +1719,48 @@
       ]
     },
     {
+      "id": "dresda",
+      "name": "Dresda",
+      "country": "DE",
+      "type": "city",
+      "coords": {
+        "lat": 51.0493,
+        "lon": 13.7381
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q1731",
+      "wikipedia_title": "Dresda",
+      "wikipedia_title_en": "Dresden",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "dublino",
+      "name": "Dublino",
+      "country": "IE",
+      "type": "city",
+      "coords": {
+        "lat": 53.3497,
+        "lon": -6.2603
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q1761",
+      "wikipedia_title": "Dublino",
+      "wikipedia_title_en": "Dublin",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
       "id": "dubrovnik",
       "name": "Dubrovnik",
       "country": "HR",
@@ -1477,6 +1918,237 @@
       "themes": [
         "medievale"
       ]
+    },
+    {
+      "id": "edimburgo",
+      "name": "Edimburgo",
+      "country": "GB",
+      "type": "city",
+      "coords": {
+        "lat": 55.9533,
+        "lon": -3.1892
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q23436",
+      "wikipedia_title": "Edimburgo",
+      "wikipedia_title_en": "Edinburgh",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "f-r-er",
+      "name": "Fær Øer",
+      "country": "DK",
+      "type": "island",
+      "coords": {
+        "lat": 61.9699,
+        "lon": -6.8445
+      },
+      "radius_km": 60,
+      "wikidata_id": "Q4628",
+      "wikipedia_title": "Fær Øer",
+      "wikipedia_title_en": "Faroe Islands",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "firenze",
+      "name": "Firenze",
+      "country": "IT",
+      "type": "city",
+      "coords": {
+        "lat": 43.7714,
+        "lon": 11.2542
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q2044",
+      "wikipedia_title": "Firenze",
+      "wikipedia_title_en": "Florence",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "foresta-nera",
+      "name": "Foresta Nera",
+      "country": "DE",
+      "type": "area",
+      "coords": {
+        "lat": 48.3,
+        "lon": 8.15
+      },
+      "radius_km": 90,
+      "wikidata_id": "Q4204",
+      "wikipedia_title": "Foresta Nera",
+      "wikipedia_title_en": "Black Forest",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "formentera",
+      "name": "Formentera",
+      "country": "ES",
+      "type": "island",
+      "coords": {
+        "lat": 38.7,
+        "lon": 1.45
+      },
+      "radius_km": 60,
+      "wikidata_id": "Q52626",
+      "wikipedia_title": "Formentera",
+      "wikipedia_title_en": "Formentera",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "gand",
+      "name": "Gand",
+      "country": "BE",
+      "type": "city",
+      "coords": {
+        "lat": 51.0536,
+        "lon": 3.7253
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q1296",
+      "wikipedia_title": "Gand",
+      "wikipedia_title_en": "Ghent",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "genova",
+      "name": "Genova",
+      "country": "IT",
+      "type": "city",
+      "coords": {
+        "lat": 44.4072,
+        "lon": 8.934
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q1449",
+      "wikipedia_title": "Genova",
+      "wikipedia_title_en": "Genoa",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "granada",
+      "name": "Granada",
+      "country": "ES",
+      "type": "city",
+      "coords": {
+        "lat": 37.175,
+        "lon": -3.6
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q8810",
+      "wikipedia_title": "Granada",
+      "wikipedia_title_en": "Granada",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "helsinki",
+      "name": "Helsinki",
+      "country": "FI",
+      "type": "city",
+      "coords": {
+        "lat": 60.1708,
+        "lon": 24.9375
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q1757",
+      "wikipedia_title": "Helsinki",
+      "wikipedia_title_en": "Helsinki",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "ibiza",
+      "name": "Ibiza",
+      "country": "ES",
+      "type": "island",
+      "coords": {
+        "lat": 38.98,
+        "lon": 1.43
+      },
+      "radius_km": 60,
+      "wikidata_id": "Q52631",
+      "wikipedia_title": "Ibiza (isola)",
+      "wikipedia_title_en": "Ibiza",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "innsbruck",
+      "name": "Innsbruck",
+      "country": "AT",
+      "type": "city",
+      "coords": {
+        "lat": 47.2683,
+        "lon": 11.3933
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q1735",
+      "wikipedia_title": "Innsbruck",
+      "wikipedia_title_en": "Innsbruck",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
     },
     {
       "id": "islanda-sud",
@@ -1645,6 +2317,48 @@
       ]
     },
     {
+      "id": "isola-d-ischia",
+      "name": "isola d'Ischia",
+      "country": "IT",
+      "type": "island",
+      "coords": {
+        "lat": 40.7311,
+        "lon": 13.8956
+      },
+      "radius_km": 60,
+      "wikidata_id": "Q189387",
+      "wikipedia_title": "Isola d'Ischia",
+      "wikipedia_title_en": "Ischia",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "isole-eolie",
+      "name": "isole Eolie",
+      "country": "IT",
+      "type": "island",
+      "coords": {
+        "lat": 38.4967,
+        "lon": 14.9358
+      },
+      "radius_km": 60,
+      "wikidata_id": "Q179883",
+      "wikipedia_title": "Isole Eolie",
+      "wikipedia_title_en": "Aeolian Islands",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
       "id": "istanbul",
       "name": "Istanbul",
       "country": "TR",
@@ -1810,6 +2524,153 @@
         "imperiale",
         "gastronomico"
       ]
+    },
+    {
+      "id": "istria",
+      "name": "Istria",
+      "country": "HR",
+      "type": "area",
+      "coords": {
+        "lat": 45.2,
+        "lon": 13.9
+      },
+      "radius_km": 90,
+      "wikidata_id": "Q639912",
+      "wikipedia_title": "Istria",
+      "wikipedia_title_en": "Istria",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "la-valletta",
+      "name": "La Valletta",
+      "country": "MT",
+      "type": "city",
+      "coords": {
+        "lat": 35.8978,
+        "lon": 14.5125
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q23800",
+      "wikipedia_title": "La Valletta",
+      "wikipedia_title_en": "Valletta",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "lago-di-como",
+      "name": "lago di Como",
+      "country": "IT",
+      "type": "area",
+      "coords": {
+        "lat": 46,
+        "lon": 9.2667
+      },
+      "radius_km": 90,
+      "wikidata_id": "Q15523",
+      "wikipedia_title": "Lago di Como",
+      "wikipedia_title_en": "Lake Como",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "langhe",
+      "name": "Langhe",
+      "country": "IT",
+      "type": "area",
+      "coords": {
+        "lat": 44.6086,
+        "lon": 7.9636
+      },
+      "radius_km": 90,
+      "wikidata_id": "Q19865",
+      "wikipedia_title": "Langhe",
+      "wikipedia_title_en": "Langhe",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "lapponia",
+      "name": "Lapponia",
+      "country": "NO",
+      "type": "area",
+      "coords": {
+        "lat": 67.9,
+        "lon": 18.5167
+      },
+      "radius_km": 90,
+      "wikidata_id": "Q62132",
+      "wikipedia_title": "Lapponia",
+      "wikipedia_title_en": "Sápmi",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "lecce",
+      "name": "Lecce",
+      "country": "IT",
+      "type": "city",
+      "coords": {
+        "lat": 40.352,
+        "lon": 18.1691
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q13386",
+      "wikipedia_title": "Lecce",
+      "wikipedia_title_en": "Lecce",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "lione",
+      "name": "Lione",
+      "country": "FR",
+      "type": "city",
+      "coords": {
+        "lat": 45.7675,
+        "lon": 4.835
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q456",
+      "wikipedia_title": "Lione",
+      "wikipedia_title_en": "Lyon",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
     },
     {
       "id": "lisbona",
@@ -2139,6 +3000,27 @@
       ]
     },
     {
+      "id": "lubiana",
+      "name": "Lubiana",
+      "country": "SI",
+      "type": "city",
+      "coords": {
+        "lat": 46.0514,
+        "lon": 14.5061
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q437",
+      "wikipedia_title": "Lubiana",
+      "wikipedia_title_en": "Ljubljana",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
       "id": "madeira",
       "name": "Madeira",
       "country": "PT",
@@ -2304,6 +3186,27 @@
       ]
     },
     {
+      "id": "madrid",
+      "name": "Madrid",
+      "country": "ES",
+      "type": "city",
+      "coords": {
+        "lat": 40.4169,
+        "lon": -3.7033
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q2807",
+      "wikipedia_title": "Madrid",
+      "wikipedia_title_en": "Madrid",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
       "id": "maiorca",
       "name": "Maiorca",
       "country": "ES",
@@ -2467,6 +3370,174 @@
       "themes": [
         "balneare"
       ]
+    },
+    {
+      "id": "malta",
+      "name": "Malta",
+      "country": "MT",
+      "type": "island",
+      "coords": {
+        "lat": 35.9,
+        "lon": 14.45
+      },
+      "radius_km": 60,
+      "wikidata_id": "Q193896",
+      "wikipedia_title": "Malta (isola)",
+      "wikipedia_title_en": "Malta (island)",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "marsiglia",
+      "name": "Marsiglia",
+      "country": "FR",
+      "type": "city",
+      "coords": {
+        "lat": 43.2967,
+        "lon": 5.3764
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q23482",
+      "wikipedia_title": "Marsiglia",
+      "wikipedia_title_en": "Marseille",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "matera",
+      "name": "Matera",
+      "country": "IT",
+      "type": "city",
+      "coords": {
+        "lat": 40.6667,
+        "lon": 16.6
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q13616",
+      "wikipedia_title": "Matera",
+      "wikipedia_title_en": "Matera",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "monaco-di-baviera",
+      "name": "Monaco di Baviera",
+      "country": "DE",
+      "type": "city",
+      "coords": {
+        "lat": 48.1375,
+        "lon": 11.575
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q1726",
+      "wikipedia_title": "Monaco di Baviera",
+      "wikipedia_title_en": "Munich",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "napoli",
+      "name": "Napoli",
+      "country": "IT",
+      "type": "city",
+      "coords": {
+        "lat": 40.8358,
+        "lon": 14.2486
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q2634",
+      "wikipedia_title": "Napoli",
+      "wikipedia_title_en": "Naples",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "nizza",
+      "name": "Nizza",
+      "country": "FR",
+      "type": "city",
+      "coords": {
+        "lat": 43.7019,
+        "lon": 7.2683
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q33959",
+      "wikipedia_title": "Nizza",
+      "wikipedia_title_en": "Nice",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "oslo",
+      "name": "Oslo",
+      "country": "NO",
+      "type": "city",
+      "coords": {
+        "lat": 59.9133,
+        "lon": 10.7389
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q585",
+      "wikipedia_title": "Oslo",
+      "wikipedia_title_en": "Oslo",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "palermo",
+      "name": "Palermo",
+      "country": "IT",
+      "type": "city",
+      "coords": {
+        "lat": 38.1157,
+        "lon": 13.3613
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q2656",
+      "wikipedia_title": "Palermo",
+      "wikipedia_title_en": "Palermo",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
     },
     {
       "id": "parigi",
@@ -2637,6 +3708,48 @@
       ]
     },
     {
+      "id": "peloponneso",
+      "name": "Peloponneso",
+      "country": "GR",
+      "type": "area",
+      "coords": {
+        "lat": 37.4,
+        "lon": 22.3
+      },
+      "radius_km": 90,
+      "wikidata_id": "Q78967",
+      "wikipedia_title": "Peloponneso",
+      "wikipedia_title_en": "Peloponnese",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "porto",
+      "name": "Porto",
+      "country": "PT",
+      "type": "city",
+      "coords": {
+        "lat": 41.15,
+        "lon": -8.6108
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q36433",
+      "wikipedia_title": "Porto (Portogallo)",
+      "wikipedia_title_en": "Porto",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
       "id": "praga",
       "name": "Praga",
       "country": "CZ",
@@ -2795,6 +3908,90 @@
         "gotico",
         "medievale"
       ]
+    },
+    {
+      "id": "provenza",
+      "name": "Provenza",
+      "country": "FR",
+      "type": "area",
+      "coords": {
+        "lat": 44,
+        "lon": 6
+      },
+      "radius_km": 90,
+      "wikidata_id": "Q101081",
+      "wikipedia_title": "Provenza",
+      "wikipedia_title_en": "Provence",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "reykjavik",
+      "name": "Reykjavík",
+      "country": "IS",
+      "type": "city",
+      "coords": {
+        "lat": 64.1475,
+        "lon": -21.935
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q1764",
+      "wikipedia_title": "Reykjavík",
+      "wikipedia_title_en": "Reykjavík",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "riga",
+      "name": "Riga",
+      "country": "LV",
+      "type": "city",
+      "coords": {
+        "lat": 56.9475,
+        "lon": 24.1069
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q1773",
+      "wikipedia_title": "Riga",
+      "wikipedia_title_en": "Riga",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "rodi",
+      "name": "Rodi",
+      "country": "GR",
+      "type": "island",
+      "coords": {
+        "lat": 36.17,
+        "lon": 27.92
+      },
+      "radius_km": 60,
+      "wikidata_id": "Q43048",
+      "wikipedia_title": "Rodi",
+      "wikipedia_title_en": "Rhodes",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
     },
     {
       "id": "roma",
@@ -2962,6 +4159,69 @@
         "archeologico",
         "romantico"
       ]
+    },
+    {
+      "id": "salento",
+      "name": "Salento",
+      "country": "IT",
+      "type": "area",
+      "coords": {
+        "lat": 40.3333,
+        "lon": 18
+      },
+      "radius_km": 90,
+      "wikidata_id": "Q735628",
+      "wikipedia_title": "Salento",
+      "wikipedia_title_en": "Salento",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "salisburgo",
+      "name": "Salisburgo",
+      "country": "AT",
+      "type": "city",
+      "coords": {
+        "lat": 47.8,
+        "lon": 13.045
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q34713",
+      "wikipedia_title": "Salisburgo",
+      "wikipedia_title_en": "Salzburg",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "salonicco",
+      "name": "Salonicco",
+      "country": "GR",
+      "type": "city",
+      "coords": {
+        "lat": 40.6403,
+        "lon": 22.9356
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q17151",
+      "wikipedia_title": "Salonicco",
+      "wikipedia_title_en": "Thessaloniki",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
     },
     {
       "id": "san-sebastian",
@@ -3285,6 +4545,174 @@
       ]
     },
     {
+      "id": "sarajevo",
+      "name": "Sarajevo",
+      "country": "BA",
+      "type": "city",
+      "coords": {
+        "lat": 43.8564,
+        "lon": 18.4131
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q11194",
+      "wikipedia_title": "Sarajevo",
+      "wikipedia_title_en": "Sarajevo",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "sardegna",
+      "name": "Sardegna",
+      "country": "IT",
+      "type": "island",
+      "coords": {
+        "lat": 40,
+        "lon": 9
+      },
+      "radius_km": 60,
+      "wikidata_id": "Q1462",
+      "wikipedia_title": "Sardegna",
+      "wikipedia_title_en": "Sardinia",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "sicilia",
+      "name": "Sicilia",
+      "country": "IT",
+      "type": "island",
+      "coords": {
+        "lat": 37.6,
+        "lon": 14.0167
+      },
+      "radius_km": 60,
+      "wikidata_id": "Q1460",
+      "wikipedia_title": "Sicilia",
+      "wikipedia_title_en": "Sicily",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "siena",
+      "name": "Siena",
+      "country": "IT",
+      "type": "city",
+      "coords": {
+        "lat": 43.3183,
+        "lon": 11.3314
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q2751",
+      "wikipedia_title": "Siena",
+      "wikipedia_title_en": "Siena",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "siviglia",
+      "name": "Siviglia",
+      "country": "ES",
+      "type": "city",
+      "coords": {
+        "lat": 37.3886,
+        "lon": -5.995
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q8717",
+      "wikipedia_title": "Siviglia",
+      "wikipedia_title_en": "Seville",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "sofia",
+      "name": "Sofia",
+      "country": "BG",
+      "type": "city",
+      "coords": {
+        "lat": 42.6979,
+        "lon": 23.3217
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q472",
+      "wikipedia_title": "Sofia",
+      "wikipedia_title_en": "Sofia",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "spalato",
+      "name": "Spalato",
+      "country": "HR",
+      "type": "city",
+      "coords": {
+        "lat": 43.51,
+        "lon": 16.44
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q1663",
+      "wikipedia_title": "Spalato",
+      "wikipedia_title_en": "Split, Croatia",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "stoccolma",
+      "name": "Stoccolma",
+      "country": "SE",
+      "type": "city",
+      "coords": {
+        "lat": 59.3294,
+        "lon": 18.0686
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q1754",
+      "wikipedia_title": "Stoccolma",
+      "wikipedia_title_en": "Stockholm",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
       "id": "tallinn",
       "name": "Tallinn",
       "country": "EE",
@@ -3443,6 +4871,48 @@
         "medievale",
         "nordico"
       ]
+    },
+    {
+      "id": "tenerife",
+      "name": "Tenerife",
+      "country": "ES",
+      "type": "island",
+      "coords": {
+        "lat": 28.2686,
+        "lon": -16.6056
+      },
+      "radius_km": 60,
+      "wikidata_id": "Q40846",
+      "wikipedia_title": "Tenerife",
+      "wikipedia_title_en": "Tenerife",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "torino",
+      "name": "Torino",
+      "country": "IT",
+      "type": "city",
+      "coords": {
+        "lat": 45.0792,
+        "lon": 7.6761
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q495",
+      "wikipedia_title": "Torino",
+      "wikipedia_title_en": "Turin",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
     },
     {
       "id": "transilvania",
@@ -3613,6 +5083,132 @@
       ]
     },
     {
+      "id": "trieste",
+      "name": "Trieste",
+      "country": "IT",
+      "type": "city",
+      "coords": {
+        "lat": 45.6503,
+        "lon": 13.7703
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q546",
+      "wikipedia_title": "Trieste",
+      "wikipedia_title_en": "Trieste",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "val-d-orcia",
+      "name": "Val d'Orcia",
+      "country": "IT",
+      "type": "area",
+      "coords": {
+        "lat": 43.0667,
+        "lon": 11.55
+      },
+      "radius_km": 90,
+      "wikidata_id": "Q217449",
+      "wikipedia_title": "Val d'Orcia",
+      "wikipedia_title_en": "Val d'Orcia",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "val-gardena",
+      "name": "Val Gardena",
+      "country": "IT",
+      "type": "area",
+      "coords": {
+        "lat": 46.56,
+        "lon": 11.7047
+      },
+      "radius_km": 90,
+      "wikidata_id": "Q384885",
+      "wikipedia_title": "Val Gardena",
+      "wikipedia_title_en": "Val Gardena",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "valencia",
+      "name": "Valencia",
+      "country": "ES",
+      "type": "city",
+      "coords": {
+        "lat": 39.47,
+        "lon": -0.3764
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q8818",
+      "wikipedia_title": "Valencia",
+      "wikipedia_title_en": "Valencia",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "venezia",
+      "name": "Venezia",
+      "country": "IT",
+      "type": "city",
+      "coords": {
+        "lat": 45.4397,
+        "lon": 12.3319
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q641",
+      "wikipedia_title": "Venezia",
+      "wikipedia_title_en": "Venice",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "verona",
+      "name": "Verona",
+      "country": "IT",
+      "type": "city",
+      "coords": {
+        "lat": 45.4386,
+        "lon": 10.9928
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q2028",
+      "wikipedia_title": "Verona",
+      "wikipedia_title_en": "Verona",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
       "id": "vienna",
       "name": "Vienna",
       "country": "AT",
@@ -3771,6 +5367,69 @@
         "imperiale",
         "gotico"
       ]
+    },
+    {
+      "id": "vilnius",
+      "name": "Vilnius",
+      "country": "LT",
+      "type": "city",
+      "coords": {
+        "lat": 54.6872,
+        "lon": 25.28
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q216",
+      "wikipedia_title": "Vilnius",
+      "wikipedia_title_en": "Vilnius",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "zagabria",
+      "name": "Zagabria",
+      "country": "HR",
+      "type": "city",
+      "coords": {
+        "lat": 45.8131,
+        "lon": 15.9772
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q1435",
+      "wikipedia_title": "Zagabria",
+      "wikipedia_title_en": "Zagreb",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
+    },
+    {
+      "id": "zara",
+      "name": "Zara",
+      "country": "HR",
+      "type": "city",
+      "coords": {
+        "lat": 44.1142,
+        "lon": 15.2275
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q3370",
+      "wikipedia_title": "Zara",
+      "wikipedia_title_en": "Zadar",
+      "airports": [],
+      "scores_source": "todo",
+      "climate_source": "todo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null
     }
   ]
 }

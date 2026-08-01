@@ -204,6 +204,8 @@ a { color: var(--brand-600); }
 }
 .destlist__row:hover { border-color: var(--border-strong); background: var(--surface-2); }
 .destlist__row--touched { border-left: 3px solid var(--brand-600); }
+/* Ambra e non rosso: non è un errore, è lavoro che aspetta. */
+.destlist__row--todo { border-left: 3px solid var(--accent); }
 .destlist__pick {
   flex: 1; min-width: 0;
   display: flex; flex-direction: column; gap: 2px;

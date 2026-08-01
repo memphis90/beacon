@@ -12,6 +12,7 @@ import {
   setOverride,
 } from '../lib/store.js'
 import { countryName } from '../lib/format.js'
+import { isUnscored } from '../lib/scoring.js'
 import { IconChevron, IconSearch, IconTrash } from './Icons.jsx'
 
 const typeLabel = (key) => DESTINATION_TYPES.find((t) => t.key === key)?.label || key
@@ -117,10 +118,18 @@ export function ParametersPage({ merged, overrides, onOverridesChange, onPick, o
       destination: d,
       campi: countOverriddenFields(overrides, d.id),
       nuova: !seedById(d.id),
+      daValutare: isUnscored(d),
     }))
-    .sort((a, b) => (b.campi > 0) - (a.campi > 0) || a.destination.name.localeCompare(b.destination.name, 'it'))
+    /* Da valutare in cima, poi le corrette, poi il resto. È l'ordine del
+       lavoro: quelle importate dagli script non compaiono nei risultati
+       finché qualcuno non le guarda, quindi sono la coda da smaltire. */
+    .sort((a, b) =>
+      (b.daValutare) - (a.daValutare)
+      || (b.campi > 0) - (a.campi > 0)
+      || a.destination.name.localeCompare(b.destination.name, 'it'))
 
   const modificate = elenco.filter((r) => r.campi > 0).length
+  const daValutare = elenco.filter((r) => r.daValutare).length
 
   const createDestination = (event) => {
     event.preventDefault()
@@ -208,15 +217,25 @@ export function ParametersPage({ merged, overrides, onOverridesChange, onPick, o
         {modificate === 0
           ? `${merged.length} destinazioni, nessuna ancora corretta. I punteggi del seed sono stime: correggere quelle che conosci è il lavoro che rende utile il ranking.`
           : `${modificate} ${modificate === 1 ? 'destinazione corretta' : 'destinazioni corrette'} su ${merged.length}. Sono in cima all’elenco.`}
+        {daValutare > 0 && (
+          <>
+            {' '}<strong>{daValutare} sono da valutare</strong>: hanno solo l’anagrafica importata
+            dagli script e restano fuori dai risultati finché non ricevono i punteggi.
+          </>
+        )}
       </p>
 
       <ul className="destlist">
-        {elenco.map(({ destination: d, campi, nuova }) => (
-          <li key={d.id} className={campi > 0 ? 'destlist__row destlist__row--touched' : 'destlist__row'}>
+        {elenco.map(({ destination: d, campi, nuova, daValutare: manca }) => (
+          <li
+            key={d.id}
+            className={`destlist__row${campi > 0 ? ' destlist__row--touched' : ''}${manca ? ' destlist__row--todo' : ''}`}
+          >
             <button type="button" className="destlist__pick" onClick={() => onPick(d.id)}>
               <span className="destlist__name">
                 {d.name}
-                {nuova && <span className="badge badge--edit">creata da te</span>}
+                {manca && <span className="badge badge--warn">da valutare</span>}
+                {nuova && !manca && <span className="badge badge--edit">creata da te</span>}
                 {!nuova && campi > 0 && (
                   <span className="badge badge--edit">
                     {campi} {campi === 1 ? 'campo' : 'campi'}
