@@ -342,9 +342,9 @@ export default function App({ startedInitially = false }) {
         onLogout={azzera}
         nav={{
           onNewSearch: () => { setRailOpen(false); setStarted(false) },
-          onlyFavourites,
-          favouritesCount: favourites.length,
-          onFavourites: () => { setOnlyFavourites(!onlyFavourites); setRailOpen(false) },
+          // Niente Preferiti qui: è un filtro sui risultati, e sta nella
+          // barra dei risultati insieme all'ordinamento. Nel menu prometteva
+          // una sezione propria e invece cambiava la lista alle spalle.
           compareCount: compareIds.length,
           onCompare: () => { setCompareOpen(true); setRailOpen(false) },
           overriddenCount,
@@ -409,6 +409,9 @@ export default function App({ startedInitially = false }) {
             count={visible.length}
             total={merged.length}
             criteria={criteria}
+            onlyFavourites={onlyFavourites}
+            favouritesCount={favourites.length}
+            onFavourites={() => setOnlyFavourites(!onlyFavourites)}
             onSort={(sortBy) => setCriteria({ ...criteria, sortBy })}
           />
 

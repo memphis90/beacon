@@ -402,6 +402,20 @@ textarea.control { height: auto; padding: 8px 10px; resize: vertical; }
   background: var(--brand-tint); border-color: var(--brand-600); color: var(--brand-800);
 }
 
+/* Il filtro preferiti, accanto all'ordinamento: entrambi agiscono su questa
+   lista, e stare vicini lo dice senza spiegarlo. */
+.results__fav { display: inline-flex; align-items: center; gap: 6px; }
+.results__favcount {
+  min-width: 18px; padding: 0 5px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-3); color: var(--ink-2);
+  font-size: 10px; line-height: 16px; font-weight: 700;
+}
+.results__fav[aria-pressed='true'] .results__favcount {
+  background: color-mix(in srgb, var(--on-primary) 28%, transparent);
+  color: inherit;
+}
+
 /* ---------- Avvisi ---------- */
 
 .notice {

@@ -42,6 +42,18 @@ export const FILTER_LABEL = {
 export const isUnscored = (destination) =>
   destination?.scores_source === 'todo' || !destination?.scores
 
+/**
+ * Punteggi scritti dall'assistente, non da chi usa lo strumento.
+ *
+ * Entrano nel ranking come tutti gli altri — un'opinione informata è meglio di
+ * una destinazione invisibile — ma la provenienza resta scritta, perché la
+ * domanda del §9 è se il ranking regge il confronto con il giudizio di CHI
+ * CERCA, e su queste il confronto non è ancora stato fatto. Ogni correzione
+ * dal pannello Parametri le porta a `manual`, cioè le fa diventare tue.
+ */
+export const isAssistantScored = (destination) =>
+  destination?.scores_source === 'assistant'
+
 /** Costo stimato per persona, per notte. Restituisce sempre una fascia. */
 export function nightlyCost(destination) {
   const c = destination.costs

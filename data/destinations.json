@@ -181,12 +181,12 @@
       "wikipedia_title": "Amburgo",
       "wikipedia_title_en": "Hamburg",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Hamburg%2C_Landungsbr%C3%BCcken_--_2016_--_3131-7.jpg/1280px-Hamburg%2C_Landungsbr%C3%BCcken_--_2016_--_3131-7.jpg",
+      "image_credit": "Dietmar Rabich · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 3,
@@ -260,7 +260,36 @@
           "rain_days": 14,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 35,
+        "culture": 72,
+        "sea": 20,
+        "food": 75,
+        "nightlife": 82,
+        "outdoor": 35,
+        "family": 58,
+        "offbeat": 35
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "amsterdam",
@@ -435,12 +464,12 @@
       "wikipedia_title": "Atene",
       "wikipedia_title_en": "Athens",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Monastiraki_Square_and_Acropolis_in_Athens_%2844149181684%29.jpg/1280px-Monastiraki_Square_and_Acropolis_in_Athens_%2844149181684%29.jpg",
+      "image_credit": "dronepicr · CC BY 2.0",
       "climate": {
         "1": {
           "temp_avg": 9,
@@ -514,7 +543,36 @@
           "rain_days": 8,
           "sea_temp": 18
         }
-      }
+      },
+      "scores": {
+        "nature": 30,
+        "culture": 97,
+        "sea": 45,
+        "food": 85,
+        "nightlife": 82,
+        "outdoor": 32,
+        "family": 52,
+        "offbeat": 15
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 6,
+          "high": 11
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "baia-di-kotor",
@@ -856,12 +914,12 @@
       "wikipedia_title": "Baviera",
       "wikipedia_title_en": "Bavaria",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Schloss_Neuschwanstein_2013.jpg/1280px-Schloss_Neuschwanstein_2013.jpg",
+      "image_credit": "Thomas Wolf, www.foto-tw.de · CC BY-SA 3.0 de",
       "climate": {
         "1": {
           "temp_avg": 0,
@@ -935,7 +993,36 @@
           "rain_days": 14,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 82,
+        "culture": 72,
+        "sea": 0,
+        "food": 78,
+        "nightlife": 30,
+        "outdoor": 78,
+        "family": 75,
+        "offbeat": 32
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 7,
+          "mid": 14,
+          "high": 25
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "belgrado",
@@ -951,12 +1038,12 @@
       "wikipedia_title": "Belgrado",
       "wikipedia_title_en": "Belgrade",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Panorama_Belgrad.jpg/1280px-Panorama_Belgrad.jpg",
+      "image_credit": "ZlatanJovanovic · CC BY 3.0",
       "climate": {
         "1": {
           "temp_avg": 1,
@@ -1030,7 +1117,36 @@
           "rain_days": 10,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 32,
+        "culture": 65,
+        "sea": 0,
+        "food": 72,
+        "nightlife": 92,
+        "outdoor": 35,
+        "family": 48,
+        "offbeat": 58
+      },
+      "costs": {
+        "accommodation": {
+          "low": 30,
+          "mid": 52,
+          "high": 90
+        },
+        "food_per_day": {
+          "low": 13,
+          "mid": 22,
+          "high": 38
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 5,
+          "high": 9
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "berlino",
@@ -1046,12 +1162,12 @@
       "wikipedia_title": "Berlino",
       "wikipedia_title_en": "Berlin",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Museumsinsel_Berlin_Juli_2021_1_%28cropped%29_b.jpg/1280px-Museumsinsel_Berlin_Juli_2021_1_%28cropped%29_b.jpg",
+      "image_credit": "File:Museumsinsel Berlin Juli 2021 1 (cropped).jpg: Kasa Fue derivative work: Georgfotoart · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 2,
@@ -1125,7 +1241,36 @@
           "rain_days": 13,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 35,
+        "culture": 88,
+        "sea": 0,
+        "food": 78,
+        "nightlife": 95,
+        "outdoor": 35,
+        "family": 55,
+        "offbeat": 30
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "bilbao",
@@ -1141,12 +1286,12 @@
       "wikipedia_title": "Bilbao",
       "wikipedia_title_en": "Bilbao",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Museo_Guggenheim%2C_Bilbao_%2831273245344%29.jpg/1280px-Museo_Guggenheim%2C_Bilbao_%2831273245344%29.jpg",
+      "image_credit": "Naotake Murayama · CC BY 2.0",
       "climate": {
         "1": {
           "temp_avg": 9,
@@ -1220,7 +1365,36 @@
           "rain_days": 14,
           "sea_temp": 15
         }
-      }
+      },
+      "scores": {
+        "nature": 45,
+        "culture": 78,
+        "sea": 45,
+        "food": 92,
+        "nightlife": 62,
+        "outdoor": 50,
+        "family": 58,
+        "offbeat": 42
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "bologna",
@@ -1236,12 +1410,12 @@
       "wikipedia_title": "Bologna",
       "wikipedia_title_en": "Bologna",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Torri_di_Bologna%2C_Bologna.jpg/1280px-Torri_di_Bologna%2C_Bologna.jpg",
+      "image_credit": "Fabio Ciminelli · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 4,
@@ -1315,7 +1489,36 @@
           "rain_days": 8,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 30,
+        "culture": 82,
+        "sea": 0,
+        "food": 95,
+        "nightlife": 75,
+        "outdoor": 28,
+        "family": 58,
+        "offbeat": 30
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "bordeaux",
@@ -1331,12 +1534,12 @@
       "wikipedia_title": "Bordeaux",
       "wikipedia_title_en": "Bordeaux",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Bordeaux_Place_de_la_Bourse_de_nuit.jpg/1280px-Bordeaux_Place_de_la_Bourse_de_nuit.jpg",
+      "image_credit": "Mariette · Public domain",
       "climate": {
         "1": {
           "temp_avg": 7,
@@ -1410,7 +1613,36 @@
           "rain_days": 13,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 42,
+        "culture": 78,
+        "sea": 0,
+        "food": 92,
+        "nightlife": 65,
+        "outdoor": 40,
+        "family": 58,
+        "offbeat": 30
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "bratislava",
@@ -1426,12 +1658,12 @@
       "wikipedia_title": "Bratislava",
       "wikipedia_title_en": "Bratislava",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Slovakia_bratislava.jpg/1280px-Slovakia_bratislava.jpg",
+      "image_credit": "Arne Müseler · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 1,
@@ -1505,7 +1737,36 @@
           "rain_days": 9,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 40,
+        "culture": 68,
+        "sea": 0,
+        "food": 65,
+        "nightlife": 68,
+        "outdoor": 38,
+        "family": 55,
+        "offbeat": 55
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 6,
+          "high": 11
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "bretagna",
@@ -1521,12 +1782,12 @@
       "wikipedia_title": "Bretagna",
       "wikipedia_title_en": "Brittany",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Saintmalo.jpg",
+      "image_credit": "CC BY-SA 3.0",
       "climate": {
         "1": {
           "temp_avg": 6,
@@ -1600,7 +1861,36 @@
           "rain_days": 13,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 85,
+        "culture": 62,
+        "sea": 55,
+        "food": 78,
+        "nightlife": 32,
+        "outdoor": 72,
+        "family": 65,
+        "offbeat": 45
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 7,
+          "mid": 14,
+          "high": 25
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "bruges",
@@ -1616,12 +1906,12 @@
       "wikipedia_title": "Bruges",
       "wikipedia_title_en": "Bruges",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Br%C3%BCgge_Blick_vom_Belfried_4.jpg/1280px-Br%C3%BCgge_Blick_vom_Belfried_4.jpg",
+      "image_credit": "Zairon · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 5,
@@ -1695,7 +1985,36 @@
           "rain_days": 15,
           "sea_temp": 7
         }
-      }
+      },
+      "scores": {
+        "nature": 40,
+        "culture": 88,
+        "sea": 0,
+        "food": 72,
+        "nightlife": 40,
+        "outdoor": 32,
+        "family": 62,
+        "offbeat": 15
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "bucarest",
@@ -1711,12 +2030,12 @@
       "wikipedia_title": "Bucarest",
       "wikipedia_title_en": "Bucharest",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Bucharest_University_Square_%28cropped%29.jpg/1280px-Bucharest_University_Square_%28cropped%29.jpg",
+      "image_credit": "Madalin Pentelie · CC0",
       "climate": {
         "1": {
           "temp_avg": 0,
@@ -1790,7 +2109,36 @@
           "rain_days": 8,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 30,
+        "culture": 65,
+        "sea": 0,
+        "food": 72,
+        "nightlife": 82,
+        "outdoor": 30,
+        "family": 45,
+        "offbeat": 62
+      },
+      "costs": {
+        "accommodation": {
+          "low": 30,
+          "mid": 52,
+          "high": 90
+        },
+        "food_per_day": {
+          "low": 13,
+          "mid": 22,
+          "high": 38
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 5,
+          "high": 9
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "budapest",
@@ -1973,12 +2321,12 @@
       "wikipedia_title": "Cattaro",
       "wikipedia_title_en": "Kotor",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/20090719_Crkva_Gospa_od_Zdravlja_Kotor_Bay_Montenegro.jpg/1280px-20090719_Crkva_Gospa_od_Zdravlja_Kotor_Bay_Montenegro.jpg",
+      "image_credit": "User:Ggia · CC BY-SA 3.0",
       "climate": {
         "1": {
           "temp_avg": 8,
@@ -2052,7 +2400,36 @@
           "rain_days": 12,
           "sea_temp": 17
         }
-      }
+      },
+      "scores": {
+        "nature": 80,
+        "culture": 72,
+        "sea": 70,
+        "food": 60,
+        "nightlife": 45,
+        "outdoor": 70,
+        "family": 52,
+        "offbeat": 55
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 6,
+          "high": 11
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "cinque-terre",
@@ -2068,12 +2445,12 @@
       "wikipedia_title": "Cinque Terre",
       "wikipedia_title_en": "Cinque Terre",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Cinque_Terre_%28Italy%2C_October_2020%29_-_24_%2850543603956%29.jpg/1280px-Cinque_Terre_%28Italy%2C_October_2020%29_-_24_%2850543603956%29.jpg",
+      "image_credit": "Bruno Rijsman · CC BY-SA 2.0",
       "climate": {
         "1": {
           "temp_avg": 7,
@@ -2147,7 +2524,36 @@
           "rain_days": 13,
           "sea_temp": 16
         }
-      }
+      },
+      "scores": {
+        "nature": 85,
+        "culture": 60,
+        "sea": 70,
+        "food": 75,
+        "nightlife": 25,
+        "outdoor": 72,
+        "family": 50,
+        "offbeat": 12
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 7,
+          "mid": 14,
+          "high": 25
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "cipro",
@@ -2163,12 +2569,12 @@
       "wikipedia_title": "Cipro",
       "wikipedia_title_en": "Cyprus",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Roca_de_Afrodita%2C_Chipre%2C_2021-12-10%2C_DD_65.jpg/1280px-Roca_de_Afrodita%2C_Chipre%2C_2021-12-10%2C_DD_65.jpg",
+      "image_credit": "Diego Delso · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 8,
@@ -2242,7 +2648,36 @@
           "rain_days": 11,
           "sea_temp": 20
         }
-      }
+      },
+      "scores": {
+        "nature": 58,
+        "culture": 72,
+        "sea": 88,
+        "food": 70,
+        "nightlife": 62,
+        "outdoor": 55,
+        "family": 70,
+        "offbeat": 32
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 5,
+          "mid": 10,
+          "high": 18
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "copenaghen",
@@ -2258,12 +2693,12 @@
       "wikipedia_title": "Copenaghen",
       "wikipedia_title_en": "Copenhagen",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/2018_-_Christiansborg_from_the_Marble_Bridge.jpg/1280px-2018_-_Christiansborg_from_the_Marble_Bridge.jpg",
+      "image_credit": "Moahim · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 2,
@@ -2337,7 +2772,36 @@
           "rain_days": 13,
           "sea_temp": 5
         }
-      }
+      },
+      "scores": {
+        "nature": 42,
+        "culture": 80,
+        "sea": 25,
+        "food": 92,
+        "nightlife": 78,
+        "outdoor": 48,
+        "family": 72,
+        "offbeat": 20
+      },
+      "costs": {
+        "accommodation": {
+          "low": 70,
+          "mid": 115,
+          "high": 190
+        },
+        "food_per_day": {
+          "low": 25,
+          "mid": 44,
+          "high": 74
+        },
+        "transport_local_day": {
+          "low": 5,
+          "mid": 9,
+          "high": 16
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "corfu",
@@ -2353,12 +2817,12 @@
       "wikipedia_title": "Corfù",
       "wikipedia_title_en": "Corfu",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Pontikonisi.jpg/1280px-Pontikonisi.jpg",
+      "image_credit": "StefanosKozanis · Public domain",
       "climate": {
         "1": {
           "temp_avg": 10,
@@ -2432,7 +2896,36 @@
           "rain_days": 13,
           "sea_temp": 18
         }
-      }
+      },
+      "scores": {
+        "nature": 72,
+        "culture": 65,
+        "sea": 85,
+        "food": 70,
+        "nightlife": 62,
+        "outdoor": 55,
+        "family": 68,
+        "offbeat": 30
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 5,
+          "mid": 10,
+          "high": 18
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "costa-azzurra",
@@ -2448,12 +2941,12 @@
       "wikipedia_title": "Costa Azzurra",
       "wikipedia_title_en": "French Riviera",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/%C3%88ze_Alpes_Maritimes_France_%28261171069%29.jpeg/1280px-%C3%88ze_Alpes_Maritimes_France_%28261171069%29.jpeg",
+      "image_credit": "Jean Pierre Lozi · CC BY-SA 3.0",
       "climate": {
         "1": {
           "temp_avg": 9,
@@ -2527,7 +3020,36 @@
           "rain_days": 7,
           "sea_temp": 16
         }
-      }
+      },
+      "scores": {
+        "nature": 62,
+        "culture": 65,
+        "sea": 80,
+        "food": 78,
+        "nightlife": 72,
+        "outdoor": 55,
+        "family": 60,
+        "offbeat": 10
+      },
+      "costs": {
+        "accommodation": {
+          "low": 70,
+          "mid": 115,
+          "high": 190
+        },
+        "food_per_day": {
+          "low": 25,
+          "mid": 44,
+          "high": 74
+        },
+        "transport_local_day": {
+          "low": 9,
+          "mid": 16,
+          "high": 29
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "costiera-amalfitana",
@@ -2709,12 +3231,12 @@
       "wikipedia_title": "Cracovia",
       "wikipedia_title_en": "Kraków",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Krakow_Rynek_Glowny_panorama_2.jpg/1280px-Krakow_Rynek_Glowny_panorama_2.jpg",
+      "image_credit": "Andrzej Otrębski · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 0,
@@ -2788,7 +3310,36 @@
           "rain_days": 13,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 40,
+        "culture": 92,
+        "sea": 0,
+        "food": 78,
+        "nightlife": 82,
+        "outdoor": 35,
+        "family": 58,
+        "offbeat": 32
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 6,
+          "high": 11
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "creta",
@@ -3138,12 +3689,12 @@
       "wikipedia_title": "Dresda",
       "wikipedia_title_en": "Dresden",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/HFBK_Dresden_2024_Luftbild_Toni_Klemm_2500px.jpg/1280px-HFBK_Dresden_2024_Luftbild_Toni_Klemm_2500px.jpg",
+      "image_credit": "Toniklemm · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 2,
@@ -3217,7 +3768,36 @@
           "rain_days": 13,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 40,
+        "culture": 85,
+        "sea": 0,
+        "food": 65,
+        "nightlife": 55,
+        "outdoor": 35,
+        "family": 58,
+        "offbeat": 45
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 6,
+          "high": 11
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "dublino",
@@ -3233,12 +3813,12 @@
       "wikipedia_title": "Dublino",
       "wikipedia_title_en": "Dublin",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Dublin_-_aerial_-_2025-07-07_01.jpg/1280px-Dublin_-_aerial_-_2025-07-07_01.jpg",
+      "image_credit": "瑞丽江的河水 · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 6,
@@ -3312,7 +3892,36 @@
           "rain_days": 15,
           "sea_temp": 8
         }
-      }
+      },
+      "scores": {
+        "nature": 45,
+        "culture": 78,
+        "sea": 15,
+        "food": 72,
+        "nightlife": 88,
+        "outdoor": 45,
+        "family": 58,
+        "offbeat": 25
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "dubrovnik",
@@ -3487,12 +4096,12 @@
       "wikipedia_title": "Edimburgo",
       "wikipedia_title_en": "Edinburgh",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Skyline_of_Edinburgh.jpg/1280px-Skyline_of_Edinburgh.jpg",
+      "image_credit": "Andrew Colin · CC BY 2.0",
       "climate": {
         "1": {
           "temp_avg": 4,
@@ -3566,7 +4175,36 @@
           "rain_days": 16,
           "sea_temp": 7
         }
-      }
+      },
+      "scores": {
+        "nature": 55,
+        "culture": 92,
+        "sea": 0,
+        "food": 72,
+        "nightlife": 75,
+        "outdoor": 55,
+        "family": 62,
+        "offbeat": 22
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "f-r-er",
@@ -3582,12 +4220,12 @@
       "wikipedia_title": "Fær Øer",
       "wikipedia_title_en": "Faroe Islands",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/G%C3%A1sadalur_%2851256491640%29.jpg/1280px-G%C3%A1sadalur_%2851256491640%29.jpg",
+      "image_credit": "Mike Maguire · CC BY 2.0",
       "climate": {
         "1": {
           "temp_avg": 5,
@@ -3661,7 +4299,36 @@
           "rain_days": 22,
           "sea_temp": 8
         }
-      }
+      },
+      "scores": {
+        "nature": 97,
+        "culture": 35,
+        "sea": 15,
+        "food": 45,
+        "nightlife": 10,
+        "outdoor": 88,
+        "family": 40,
+        "offbeat": 92
+      },
+      "costs": {
+        "accommodation": {
+          "low": 90,
+          "mid": 148,
+          "high": 245
+        },
+        "food_per_day": {
+          "low": 30,
+          "mid": 55,
+          "high": 92
+        },
+        "transport_local_day": {
+          "low": 10,
+          "mid": 19,
+          "high": 34
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "firenze",
@@ -3677,12 +4344,12 @@
       "wikipedia_title": "Firenze",
       "wikipedia_title_en": "Florence",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Firenze_-_Piazzale_Michelangelo%2C_Firenze%2C_Italy_-_April_6%2C_2015_02.jpg/1280px-Firenze_-_Piazzale_Michelangelo%2C_Firenze%2C_Italy_-_April_6%2C_2015_02.jpg",
+      "image_credit": "Giorgio Galeotti · CC BY 4.0",
       "climate": {
         "1": {
           "temp_avg": 6,
@@ -3756,7 +4423,36 @@
           "rain_days": 12,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 30,
+        "culture": 96,
+        "sea": 0,
+        "food": 88,
+        "nightlife": 55,
+        "outdoor": 30,
+        "family": 58,
+        "offbeat": 5
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "foresta-nera",
@@ -3772,12 +4468,12 @@
       "wikipedia_title": "Foresta Nera",
       "wikipedia_title_en": "Black Forest",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Triberg%2C_VS_-_Wallfahrtstr_-_Triberg_v_W.jpg/1280px-Triberg%2C_VS_-_Wallfahrtstr_-_Triberg_v_W.jpg",
+      "image_credit": "Flodur63 · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 1,
@@ -3851,7 +4547,36 @@
           "rain_days": 15,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 88,
+        "culture": 45,
+        "sea": 0,
+        "food": 72,
+        "nightlife": 15,
+        "outdoor": 82,
+        "family": 72,
+        "offbeat": 42
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 7,
+          "mid": 14,
+          "high": 25
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "formentera",
@@ -3867,7 +4592,7 @@
       "wikipedia_title": "Formentera",
       "wikipedia_title_en": "Formentera",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
@@ -3946,7 +4671,36 @@
           "rain_days": 5,
           "sea_temp": 18
         }
-      }
+      },
+      "scores": {
+        "nature": 62,
+        "culture": 20,
+        "sea": 92,
+        "food": 60,
+        "nightlife": 35,
+        "outdoor": 45,
+        "family": 55,
+        "offbeat": 35
+      },
+      "costs": {
+        "accommodation": {
+          "low": 70,
+          "mid": 115,
+          "high": 190
+        },
+        "food_per_day": {
+          "low": 25,
+          "mid": 44,
+          "high": 74
+        },
+        "transport_local_day": {
+          "low": 8,
+          "mid": 14,
+          "high": 26
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "gand",
@@ -3962,12 +4716,12 @@
       "wikipedia_title": "Gand",
       "wikipedia_title_en": "Ghent",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Gent%2C_de_Graslei_vanaf_de_Korenlei_met_oeg24758tm61%2B25159_IMG_0447_2021-08-13_18.37.jpg/1280px-Gent%2C_de_Graslei_vanaf_de_Korenlei_met_oeg24758tm61%2B25159_IMG_0447_2021-08-13_18.37.jpg",
+      "image_credit": "Michielverbeek · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 4,
@@ -4041,7 +4795,36 @@
           "rain_days": 14,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 38,
+        "culture": 82,
+        "sea": 0,
+        "food": 75,
+        "nightlife": 68,
+        "outdoor": 32,
+        "family": 58,
+        "offbeat": 45
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "genova",
@@ -4057,12 +4840,12 @@
       "wikipedia_title": "Genova",
       "wikipedia_title_en": "Genoa",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Piazza_de_Ferrari%2C_Genoa.jpg/1280px-Piazza_de_Ferrari%2C_Genoa.jpg",
+      "image_credit": "Julian Lupyan · CC0",
       "climate": {
         "1": {
           "temp_avg": 7,
@@ -4136,7 +4919,36 @@
           "rain_days": 11,
           "sea_temp": 16
         }
-      }
+      },
+      "scores": {
+        "nature": 40,
+        "culture": 75,
+        "sea": 55,
+        "food": 85,
+        "nightlife": 55,
+        "outdoor": 40,
+        "family": 55,
+        "offbeat": 50
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "granada",
@@ -4152,12 +4964,12 @@
       "wikipedia_title": "Granada",
       "wikipedia_title_en": "Granada",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Granada_%2825987961022%29.jpg/1280px-Granada_%2825987961022%29.jpg",
+      "image_credit": "Brett Hodnett · CC BY-SA 2.0",
       "climate": {
         "1": {
           "temp_avg": 8,
@@ -4231,7 +5043,36 @@
           "rain_days": 7,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 58,
+        "culture": 95,
+        "sea": 0,
+        "food": 82,
+        "nightlife": 70,
+        "outdoor": 62,
+        "family": 55,
+        "offbeat": 25
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "helsinki",
@@ -4247,12 +5088,12 @@
       "wikipedia_title": "Helsinki",
       "wikipedia_title_en": "Helsinki",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Suomenlinna_%28cropped%29.jpg/1280px-Suomenlinna_%28cropped%29.jpg",
+      "image_credit": "Michal Pise, Michal.Pise · CC BY 2.0",
       "climate": {
         "1": {
           "temp_avg": -3,
@@ -4326,7 +5167,36 @@
           "rain_days": 14,
           "sea_temp": 1
         }
-      }
+      },
+      "scores": {
+        "nature": 52,
+        "culture": 72,
+        "sea": 25,
+        "food": 72,
+        "nightlife": 65,
+        "outdoor": 48,
+        "family": 65,
+        "offbeat": 45
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "ibiza",
@@ -4342,12 +5212,12 @@
       "wikipedia_title": "Ibiza (isola)",
       "wikipedia_title_en": "Ibiza",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/0/06/Ibiza_ISS035-E-007431.jpg",
+      "image_credit": "Expedition 35 crew · Public domain",
       "climate": {
         "1": {
           "temp_avg": 12,
@@ -4421,7 +5291,36 @@
           "rain_days": 4,
           "sea_temp": 17
         }
-      }
+      },
+      "scores": {
+        "nature": 50,
+        "culture": 35,
+        "sea": 85,
+        "food": 65,
+        "nightlife": 98,
+        "outdoor": 45,
+        "family": 40,
+        "offbeat": 5
+      },
+      "costs": {
+        "accommodation": {
+          "low": 70,
+          "mid": 115,
+          "high": 190
+        },
+        "food_per_day": {
+          "low": 25,
+          "mid": 44,
+          "high": 74
+        },
+        "transport_local_day": {
+          "low": 8,
+          "mid": 14,
+          "high": 26
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "innsbruck",
@@ -4437,12 +5336,12 @@
       "wikipedia_title": "Innsbruck",
       "wikipedia_title_en": "Innsbruck",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/B%C3%BCrgerstra%C3%9Fe_26%2B24_%28BT0A2830%29.jpg/1280px-B%C3%BCrgerstra%C3%9Fe_26%2B24_%28BT0A2830%29.jpg",
+      "image_credit": "Simon Legner (User:simon04) · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 1,
@@ -4516,7 +5415,36 @@
           "rain_days": 13,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 80,
+        "culture": 68,
+        "sea": 0,
+        "food": 68,
+        "nightlife": 52,
+        "outdoor": 88,
+        "family": 70,
+        "offbeat": 30
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "islanda-sud",
@@ -4698,12 +5626,12 @@
       "wikipedia_title": "Isola d'Ischia",
       "wikipedia_title_en": "Ischia",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Ischia_da_procida.jpg",
+      "image_credit": "Retaggio · CC BY-SA 3.0",
       "climate": {
         "1": {
           "temp_avg": 7,
@@ -4777,7 +5705,36 @@
           "rain_days": 9,
           "sea_temp": 18
         }
-      }
+      },
+      "scores": {
+        "nature": 62,
+        "culture": 45,
+        "sea": 82,
+        "food": 75,
+        "nightlife": 40,
+        "outdoor": 55,
+        "family": 68,
+        "offbeat": 30
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 6,
+          "mid": 13,
+          "high": 22
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "isole-eolie",
@@ -4793,12 +5750,12 @@
       "wikipedia_title": "Isole Eolie",
       "wikipedia_title_en": "Aeolian Islands",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Aerial_image_of_Stromboli_%28view_from_the_northeast%29.jpg/1280px-Aerial_image_of_Stromboli_%28view_from_the_northeast%29.jpg",
+      "image_credit": "Carsten Steger · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 10,
@@ -4872,7 +5829,36 @@
           "rain_days": 11,
           "sea_temp": 18
         }
-      }
+      },
+      "scores": {
+        "nature": 85,
+        "culture": 45,
+        "sea": 85,
+        "food": 72,
+        "nightlife": 45,
+        "outdoor": 72,
+        "family": 45,
+        "offbeat": 62
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 6,
+          "mid": 13,
+          "high": 22
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "istanbul",
@@ -5055,12 +6041,12 @@
       "wikipedia_title": "Istria",
       "wikipedia_title_en": "Istria",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Rovinj%2C_Croatia.jpg",
+      "image_credit": "Florian Hirzinger - http://www.fh-ap.com · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 3,
@@ -5134,7 +6120,36 @@
           "rain_days": 10,
           "sea_temp": 14
         }
-      }
+      },
+      "scores": {
+        "nature": 68,
+        "culture": 68,
+        "sea": 78,
+        "food": 82,
+        "nightlife": 45,
+        "outdoor": 62,
+        "family": 65,
+        "offbeat": 45
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 5,
+          "mid": 11,
+          "high": 20
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "la-valletta",
@@ -5150,12 +6165,12 @@
       "wikipedia_title": "La Valletta",
       "wikipedia_title_en": "Valletta",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/St_Sebastian_Curtain_%28cropped%29.jpg/1280px-St_Sebastian_Curtain_%28cropped%29.jpg",
+      "image_credit": "Mandyy88 · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 13,
@@ -5229,7 +6244,36 @@
           "rain_days": 8,
           "sea_temp": 19
         }
-      }
+      },
+      "scores": {
+        "nature": 35,
+        "culture": 90,
+        "sea": 62,
+        "food": 70,
+        "nightlife": 58,
+        "outdoor": 35,
+        "family": 55,
+        "offbeat": 30
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 6,
+          "high": 11
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "lago-di-como",
@@ -5245,12 +6289,12 @@
       "wikipedia_title": "Lago di Como",
       "wikipedia_title_en": "Lake Como",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Sentiero_del_Viandante_DSC_6340_%2814020554463%29.jpg/1280px-Sentiero_del_Viandante_DSC_6340_%2814020554463%29.jpg",
+      "image_credit": "Luca Casartelli · CC BY-SA 2.0",
       "climate": {
         "1": {
           "temp_avg": 7,
@@ -5324,7 +6368,36 @@
           "rain_days": 7,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 88,
+        "culture": 62,
+        "sea": 0,
+        "food": 75,
+        "nightlife": 30,
+        "outdoor": 65,
+        "family": 62,
+        "offbeat": 25
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 7,
+          "mid": 14,
+          "high": 25
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "langhe",
@@ -5340,12 +6413,12 @@
       "wikipedia_title": "Langhe",
       "wikipedia_title_en": "Langhe",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/La_morra.jpg/1280px-La_morra.jpg",
+      "image_credit": "Andrea Marchisio Frukko · CC BY-SA 3.0",
       "climate": {
         "1": {
           "temp_avg": 2,
@@ -5419,7 +6492,36 @@
           "rain_days": 5,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 82,
+        "culture": 55,
+        "sea": 0,
+        "food": 97,
+        "nightlife": 20,
+        "outdoor": 58,
+        "family": 50,
+        "offbeat": 48
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 7,
+          "mid": 14,
+          "high": 25
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "lapponia",
@@ -5435,12 +6537,12 @@
       "wikipedia_title": "Lapponia",
       "wikipedia_title_en": "Sápmi",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Moskenes_Reinebringen_lub_2025-07-21_img09_Aussicht.jpg/1280px-Moskenes_Reinebringen_lub_2025-07-21_img09_Aussicht.jpg",
+      "image_credit": "Lukas Beck · CC BY 4.0",
       "climate": {
         "1": {
           "temp_avg": -5,
@@ -5514,7 +6616,36 @@
           "rain_days": 18,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 95,
+        "culture": 32,
+        "sea": 0,
+        "food": 45,
+        "nightlife": 12,
+        "outdoor": 92,
+        "family": 68,
+        "offbeat": 82
+      },
+      "costs": {
+        "accommodation": {
+          "low": 90,
+          "mid": 148,
+          "high": 245
+        },
+        "food_per_day": {
+          "low": 30,
+          "mid": 55,
+          "high": 92
+        },
+        "transport_local_day": {
+          "low": 11,
+          "mid": 22,
+          "high": 38
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "lecce",
@@ -5530,12 +6661,12 @@
       "wikipedia_title": "Lecce",
       "wikipedia_title_en": "Lecce",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Lecce_-_Santa_Croce_-_16.jpg/1280px-Lecce_-_Santa_Croce_-_16.jpg",
+      "image_credit": "Benjamin Smith · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 10,
@@ -5609,7 +6740,36 @@
           "rain_days": 7,
           "sea_temp": 16
         }
-      }
+      },
+      "scores": {
+        "nature": 40,
+        "culture": 82,
+        "sea": 60,
+        "food": 82,
+        "nightlife": 60,
+        "outdoor": 35,
+        "family": 55,
+        "offbeat": 55
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 6,
+          "high": 11
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "lione",
@@ -5625,12 +6785,12 @@
       "wikipedia_title": "Lione",
       "wikipedia_title_en": "Lyon",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Lyon-part-dieu-2023.jpg/1280px-Lyon-part-dieu-2023.jpg",
+      "image_credit": "Aldg692VX · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 4,
@@ -5704,7 +6864,36 @@
           "rain_days": 12,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 38,
+        "culture": 82,
+        "sea": 0,
+        "food": 96,
+        "nightlife": 68,
+        "outdoor": 38,
+        "family": 60,
+        "offbeat": 32
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "lisbona",
@@ -6047,12 +7236,12 @@
       "wikipedia_title": "Lubiana",
       "wikipedia_title_en": "Ljubljana",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Ljubljana_Old_Town%2C_Slovenia_%28Old_Camera%29_%2833286165680%29.jpg/1280px-Ljubljana_Old_Town%2C_Slovenia_%28Old_Camera%29_%2833286165680%29.jpg",
+      "image_credit": "Andrew Milligan Sumo · CC BY 2.0",
       "climate": {
         "1": {
           "temp_avg": 0,
@@ -6126,7 +7315,36 @@
           "rain_days": 9,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 58,
+        "culture": 72,
+        "sea": 0,
+        "food": 72,
+        "nightlife": 62,
+        "outdoor": 55,
+        "family": 65,
+        "offbeat": 52
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 6,
+          "high": 11
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "madeira",
@@ -6307,12 +7525,12 @@
       "wikipedia_title": "Madrid",
       "wikipedia_title_en": "Madrid",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Plaza_Mayor_De_Madrid_%28215862629%29_edited.jpeg/1280px-Plaza_Mayor_De_Madrid_%28215862629%29_edited.jpeg",
+      "image_credit": "Francisco Anzola · CC BY 3.0",
       "climate": {
         "1": {
           "temp_avg": 5,
@@ -6386,7 +7604,36 @@
           "rain_days": 7,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 30,
+        "culture": 88,
+        "sea": 0,
+        "food": 88,
+        "nightlife": 92,
+        "outdoor": 32,
+        "family": 62,
+        "offbeat": 12
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "maiorca",
@@ -6567,12 +7814,12 @@
       "wikipedia_title": "Malta (isola)",
       "wikipedia_title_en": "Malta (island)",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/St_Sebastian_Curtain_%28cropped%29.jpg/1280px-St_Sebastian_Curtain_%28cropped%29.jpg",
+      "image_credit": "Mandyy88 · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 14,
@@ -6646,7 +7893,36 @@
           "rain_days": 8,
           "sea_temp": 19
         }
-      }
+      },
+      "scores": {
+        "nature": 42,
+        "culture": 85,
+        "sea": 75,
+        "food": 68,
+        "nightlife": 62,
+        "outdoor": 45,
+        "family": 62,
+        "offbeat": 28
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 5,
+          "mid": 10,
+          "high": 18
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "marsiglia",
@@ -6662,12 +7938,12 @@
       "wikipedia_title": "Marsiglia",
       "wikipedia_title_en": "Marseille",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Notre-Dame_de_la_Garde_aerial_view_2020.jpeg/1280px-Notre-Dame_de_la_Garde_aerial_view_2020.jpeg",
+      "image_credit": "Earth777 · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 8,
@@ -6741,7 +8017,36 @@
           "rain_days": 7,
           "sea_temp": 15
         }
-      }
+      },
+      "scores": {
+        "nature": 50,
+        "culture": 75,
+        "sea": 70,
+        "food": 82,
+        "nightlife": 72,
+        "outdoor": 55,
+        "family": 50,
+        "offbeat": 38
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "matera",
@@ -6757,12 +8062,12 @@
       "wikipedia_title": "Matera",
       "wikipedia_title_en": "Matera",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Matera_-_View_from_Sant%27Agostino.jpg/1280px-Matera_-_View_from_Sant%27Agostino.jpg",
+      "image_credit": "Benjamin Smith · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 6,
@@ -6836,7 +8141,36 @@
           "rain_days": 6,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 50,
+        "culture": 90,
+        "sea": 0,
+        "food": 72,
+        "nightlife": 32,
+        "outdoor": 45,
+        "family": 45,
+        "offbeat": 62
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 6,
+          "high": 11
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "monaco-di-baviera",
@@ -6852,12 +8186,12 @@
       "wikipedia_title": "Monaco di Baviera",
       "wikipedia_title_en": "Munich",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/1280px-Stadtbild_M%C3%BCnchen.jpg",
+      "image_credit": "Thomas Wolf, www.foto-tw.de · CC BY-SA 3.0 de",
       "climate": {
         "1": {
           "temp_avg": 0,
@@ -6931,7 +8265,36 @@
           "rain_days": 13,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 42,
+        "culture": 80,
+        "sea": 0,
+        "food": 82,
+        "nightlife": 78,
+        "outdoor": 45,
+        "family": 68,
+        "offbeat": 22
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "napoli",
@@ -6947,12 +8310,12 @@
       "wikipedia_title": "Napoli",
       "wikipedia_title_en": "Naples",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Napoli_-_Maschio_Angioino_-_202209302342_3.jpg/1280px-Napoli_-_Maschio_Angioino_-_202209302342_3.jpg",
+      "image_credit": "Richard Nevell · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 9,
@@ -7026,7 +8389,36 @@
           "rain_days": 10,
           "sea_temp": 18
         }
-      }
+      },
+      "scores": {
+        "nature": 45,
+        "culture": 90,
+        "sea": 55,
+        "food": 95,
+        "nightlife": 72,
+        "outdoor": 35,
+        "family": 50,
+        "offbeat": 35
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "nizza",
@@ -7042,12 +8434,12 @@
       "wikipedia_title": "Nizza",
       "wikipedia_title_en": "Nice",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Promenade_des_Anglais_Nice_IMG_1255.jpg/1280px-Promenade_des_Anglais_Nice_IMG_1255.jpg",
+      "image_credit": "Alexander Migl · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 9,
@@ -7121,7 +8513,36 @@
           "rain_days": 6,
           "sea_temp": 16
         }
-      }
+      },
+      "scores": {
+        "nature": 58,
+        "culture": 68,
+        "sea": 78,
+        "food": 78,
+        "nightlife": 68,
+        "outdoor": 55,
+        "family": 62,
+        "offbeat": 15
+      },
+      "costs": {
+        "accommodation": {
+          "low": 70,
+          "mid": 115,
+          "high": 190
+        },
+        "food_per_day": {
+          "low": 25,
+          "mid": 44,
+          "high": 74
+        },
+        "transport_local_day": {
+          "low": 5,
+          "mid": 9,
+          "high": 16
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "oslo",
@@ -7137,12 +8558,12 @@
       "wikipedia_title": "Oslo",
       "wikipedia_title_en": "Oslo",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Nationaltheatret_evening.jpg/1280px-Nationaltheatret_evening.jpg",
+      "image_credit": "Orjanarvola · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": -3,
@@ -7216,7 +8637,36 @@
           "rain_days": 13,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 62,
+        "culture": 72,
+        "sea": 25,
+        "food": 70,
+        "nightlife": 62,
+        "outdoor": 62,
+        "family": 65,
+        "offbeat": 32
+      },
+      "costs": {
+        "accommodation": {
+          "low": 70,
+          "mid": 115,
+          "high": 190
+        },
+        "food_per_day": {
+          "low": 25,
+          "mid": 44,
+          "high": 74
+        },
+        "transport_local_day": {
+          "low": 5,
+          "mid": 9,
+          "high": 16
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "palermo",
@@ -7232,12 +8682,12 @@
       "wikipedia_title": "Palermo",
       "wikipedia_title_en": "Palermo",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/c/c7/Sicilia_Palermo5_tango7174.jpg",
+      "image_credit": "Tango7174 · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 11,
@@ -7311,7 +8761,36 @@
           "rain_days": 10,
           "sea_temp": 18
         }
-      }
+      },
+      "scores": {
+        "nature": 42,
+        "culture": 88,
+        "sea": 62,
+        "food": 92,
+        "nightlife": 62,
+        "outdoor": 38,
+        "family": 50,
+        "offbeat": 45
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 6,
+          "high": 11
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "parigi",
@@ -7495,12 +8974,12 @@
       "wikipedia_title": "Peloponneso",
       "wikipedia_title_en": "Peloponnese",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/%CE%94%CE%B7%CE%BC%CE%B1%CF%81%CF%87%CE%B5%CE%AF%CE%BF_%CE%9D%CE%B1%CF%85%CF%80%CE%BB%CE%AF%CE%BF%CF%85%2C_Nafplio_Town_Hall.jpg/1280px-%CE%94%CE%B7%CE%BC%CE%B1%CF%81%CF%87%CE%B5%CE%AF%CE%BF_%CE%9D%CE%B1%CF%85%CF%80%CE%BB%CE%AF%CE%BF%CF%85%2C_Nafplio_Town_Hall.jpg",
+      "image_credit": "Apaleutos25 · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 10,
@@ -7574,7 +9053,36 @@
           "rain_days": 11,
           "sea_temp": 19
         }
-      }
+      },
+      "scores": {
+        "nature": 82,
+        "culture": 88,
+        "sea": 78,
+        "food": 78,
+        "nightlife": 25,
+        "outdoor": 68,
+        "family": 58,
+        "offbeat": 58
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 5,
+          "mid": 11,
+          "high": 20
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "porto",
@@ -7590,12 +9098,12 @@
       "wikipedia_title": "Porto (Portogallo)",
       "wikipedia_title_en": "Porto",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Puente_Don_Luis_I%2C_Oporto%2C_Portugal%2C_2012-05-09%2C_DD_13.JPG/1280px-Puente_Don_Luis_I%2C_Oporto%2C_Portugal%2C_2012-05-09%2C_DD_13.JPG",
+      "image_credit": "Diego Delso · CC BY-SA 3.0",
       "climate": {
         "1": {
           "temp_avg": 10,
@@ -7669,7 +9177,36 @@
           "rain_days": 14,
           "sea_temp": 15
         }
-      }
+      },
+      "scores": {
+        "nature": 42,
+        "culture": 85,
+        "sea": 35,
+        "food": 88,
+        "nightlife": 78,
+        "outdoor": 40,
+        "family": 58,
+        "offbeat": 30
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 6,
+          "high": 11
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "praga",
@@ -7845,12 +9382,12 @@
       "wikipedia_title": "Provenza",
       "wikipedia_title_en": "Provence",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/1_gordes_pano_2016.jpg/1280px-1_gordes_pano_2016.jpg",
+      "image_credit": "Chensiyuan · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 2,
@@ -7924,7 +9461,36 @@
           "rain_days": 7,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 88,
+        "culture": 75,
+        "sea": 0,
+        "food": 88,
+        "nightlife": 30,
+        "outdoor": 62,
+        "family": 62,
+        "offbeat": 25
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 7,
+          "mid": 14,
+          "high": 25
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "reykjavik",
@@ -7940,12 +9506,12 @@
       "wikipedia_title": "Reykjavík",
       "wikipedia_title_en": "Reykjavík",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Reykjav%C3%ADk%2C_view_from_Hallgr%C3%ADmskirkja_%282%29.jpg/1280px-Reykjav%C3%ADk%2C_view_from_Hallgr%C3%ADmskirkja_%282%29.jpg",
+      "image_credit": "Olga Ernst · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": -1,
@@ -8019,7 +9585,36 @@
           "rain_days": 18,
           "sea_temp": 4
         }
-      }
+      },
+      "scores": {
+        "nature": 70,
+        "culture": 62,
+        "sea": 12,
+        "food": 68,
+        "nightlife": 72,
+        "outdoor": 78,
+        "family": 55,
+        "offbeat": 42
+      },
+      "costs": {
+        "accommodation": {
+          "low": 90,
+          "mid": 148,
+          "high": 245
+        },
+        "food_per_day": {
+          "low": 30,
+          "mid": 55,
+          "high": 92
+        },
+        "transport_local_day": {
+          "low": 6,
+          "mid": 12,
+          "high": 21
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "riga",
@@ -8035,12 +9630,12 @@
       "wikipedia_title": "Riga",
       "wikipedia_title_en": "Riga",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Riga_%2833844464828%29.jpg/1280px-Riga_%2833844464828%29.jpg",
+      "image_credit": "Jorge Franganillo from Barcelona, Spain · CC BY 2.0",
       "climate": {
         "1": {
           "temp_avg": -2,
@@ -8114,7 +9709,36 @@
           "rain_days": 14,
           "sea_temp": 3
         }
-      }
+      },
+      "scores": {
+        "nature": 45,
+        "culture": 80,
+        "sea": 35,
+        "food": 68,
+        "nightlife": 72,
+        "outdoor": 42,
+        "family": 58,
+        "offbeat": 55
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 6,
+          "high": 11
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "rodi",
@@ -8130,12 +9754,12 @@
       "wikipedia_title": "Rodi",
       "wikipedia_title_en": "Rhodes",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/20210826-Lindos-DJI_0205.jpg/1280px-20210826-Lindos-DJI_0205.jpg",
+      "image_credit": "Thomas Berwing · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 10,
@@ -8209,7 +9833,36 @@
           "rain_days": 11,
           "sea_temp": 20
         }
-      }
+      },
+      "scores": {
+        "nature": 55,
+        "culture": 78,
+        "sea": 88,
+        "food": 70,
+        "nightlife": 65,
+        "outdoor": 50,
+        "family": 68,
+        "offbeat": 22
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 5,
+          "mid": 10,
+          "high": 18
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "roma",
@@ -8392,12 +10045,12 @@
       "wikipedia_title": "Salento",
       "wikipedia_title_en": "Salento",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Otranto_-_Seafront_-_01.jpg/1280px-Otranto_-_Seafront_-_01.jpg",
+      "image_credit": "Benjamin Smith · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 10,
@@ -8471,7 +10124,36 @@
           "rain_days": 8,
           "sea_temp": 16
         }
-      }
+      },
+      "scores": {
+        "nature": 55,
+        "culture": 55,
+        "sea": 88,
+        "food": 82,
+        "nightlife": 65,
+        "outdoor": 40,
+        "family": 68,
+        "offbeat": 42
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 5,
+          "mid": 11,
+          "high": 20
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "salisburgo",
@@ -8487,12 +10169,12 @@
       "wikipedia_title": "Salisburgo",
       "wikipedia_title_en": "Salzburg",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Salzburg_%2848489551981%29.jpg/1280px-Salzburg_%2848489551981%29.jpg",
+      "image_credit": "Jorge Franganillo · CC BY 2.0",
       "climate": {
         "1": {
           "temp_avg": 0,
@@ -8566,7 +10248,36 @@
           "rain_days": 15,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 62,
+        "culture": 88,
+        "sea": 0,
+        "food": 72,
+        "nightlife": 45,
+        "outdoor": 55,
+        "family": 68,
+        "offbeat": 25
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "salonicco",
@@ -8582,12 +10293,12 @@
       "wikipedia_title": "Salonicco",
       "wikipedia_title_en": "Thessaloniki",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Tessaloniki_BW_2017-10-05_18-22-47.jpg/1280px-Tessaloniki_BW_2017-10-05_18-22-47.jpg",
+      "image_credit": "Berthold Werner · CC BY-SA 3.0",
       "climate": {
         "1": {
           "temp_avg": 6,
@@ -8661,7 +10372,36 @@
           "rain_days": 8,
           "sea_temp": 13
         }
-      }
+      },
+      "scores": {
+        "nature": 32,
+        "culture": 78,
+        "sea": 55,
+        "food": 90,
+        "nightlife": 85,
+        "outdoor": 32,
+        "family": 52,
+        "offbeat": 45
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 6,
+          "high": 11
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "san-sebastian",
@@ -8998,12 +10738,12 @@
       "wikipedia_title": "Sarajevo",
       "wikipedia_title_en": "Sarajevo",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Sarajevo_City_Panorama.JPG/1280px-Sarajevo_City_Panorama.JPG",
+      "image_credit": "Julian Nyča · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 0,
@@ -9077,7 +10817,36 @@
           "rain_days": 11,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 55,
+        "culture": 82,
+        "sea": 0,
+        "food": 78,
+        "nightlife": 55,
+        "outdoor": 58,
+        "family": 50,
+        "offbeat": 72
+      },
+      "costs": {
+        "accommodation": {
+          "low": 30,
+          "mid": 52,
+          "high": 90
+        },
+        "food_per_day": {
+          "low": 13,
+          "mid": 22,
+          "high": 38
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 5,
+          "high": 9
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "sardegna",
@@ -9093,12 +10862,12 @@
       "wikipedia_title": "Sardegna",
       "wikipedia_title_en": "Sardinia",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Costa_Smeralda_1.jpg/1280px-Costa_Smeralda_1.jpg",
+      "image_credit": "Alistair Wettin · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 11,
@@ -9172,7 +10941,36 @@
           "rain_days": 7,
           "sea_temp": 16
         }
-      }
+      },
+      "scores": {
+        "nature": 80,
+        "culture": 55,
+        "sea": 95,
+        "food": 78,
+        "nightlife": 55,
+        "outdoor": 68,
+        "family": 78,
+        "offbeat": 35
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 6,
+          "mid": 13,
+          "high": 22
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "sicilia",
@@ -9188,12 +10986,12 @@
       "wikipedia_title": "Sicilia",
       "wikipedia_title_en": "Sicily",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Aerial_image_of_the_coast_of_Taormina_%28view_from_the_southeast%29.jpg/1280px-Aerial_image_of_the_coast_of_Taormina_%28view_from_the_southeast%29.jpg",
+      "image_credit": "Carsten Steger · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 11,
@@ -9267,7 +11065,36 @@
           "rain_days": 10,
           "sea_temp": 18
         }
-      }
+      },
+      "scores": {
+        "nature": 72,
+        "culture": 92,
+        "sea": 82,
+        "food": 92,
+        "nightlife": 55,
+        "outdoor": 62,
+        "family": 65,
+        "offbeat": 30
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 5,
+          "mid": 10,
+          "high": 18
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "siena",
@@ -9283,12 +11110,12 @@
       "wikipedia_title": "Siena",
       "wikipedia_title_en": "Siena",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Siena_Cattedrale_nuova_Vista_su_la_Piazza_del_Campo_2.jpg/1280px-Siena_Cattedrale_nuova_Vista_su_la_Piazza_del_Campo_2.jpg",
+      "image_credit": "Zairon · CC BY 4.0",
       "climate": {
         "1": {
           "temp_avg": 5,
@@ -9362,7 +11189,36 @@
           "rain_days": 10,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 55,
+        "culture": 88,
+        "sea": 0,
+        "food": 82,
+        "nightlife": 35,
+        "outdoor": 45,
+        "family": 60,
+        "offbeat": 30
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "siviglia",
@@ -9378,12 +11234,12 @@
       "wikipedia_title": "Siviglia",
       "wikipedia_title_en": "Seville",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Sevilla_Cathedral_-_Southeast.jpg/1280px-Sevilla_Cathedral_-_Southeast.jpg",
+      "image_credit": "Ingo Mehling · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 11,
@@ -9457,7 +11313,36 @@
           "rain_days": 6,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 35,
+        "culture": 92,
+        "sea": 0,
+        "food": 88,
+        "nightlife": 82,
+        "outdoor": 32,
+        "family": 60,
+        "offbeat": 18
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "sofia",
@@ -9473,12 +11358,12 @@
       "wikipedia_title": "Sofia",
       "wikipedia_title_en": "Sofia",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Russian_church_%2837591925970%29.jpg/1280px-Russian_church_%2837591925970%29.jpg",
+      "image_credit": "Deensel · CC BY 2.0",
       "climate": {
         "1": {
           "temp_avg": 0,
@@ -9552,7 +11437,36 @@
           "rain_days": 10,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 58,
+        "culture": 68,
+        "sea": 0,
+        "food": 68,
+        "nightlife": 65,
+        "outdoor": 68,
+        "family": 52,
+        "offbeat": 65
+      },
+      "costs": {
+        "accommodation": {
+          "low": 30,
+          "mid": 52,
+          "high": 90
+        },
+        "food_per_day": {
+          "low": 13,
+          "mid": 22,
+          "high": 38
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 5,
+          "high": 9
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "spalato",
@@ -9568,12 +11482,12 @@
       "wikipedia_title": "Spalato",
       "wikipedia_title_en": "Split, Croatia",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Split_080620-133710-IMG_0968x.jpg/1280px-Split_080620-133710-IMG_0968x.jpg",
+      "image_credit": "Tatyana Peshkova · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 7,
@@ -9647,7 +11561,36 @@
           "rain_days": 11,
           "sea_temp": 17
         }
-      }
+      },
+      "scores": {
+        "nature": 55,
+        "culture": 78,
+        "sea": 82,
+        "food": 72,
+        "nightlife": 68,
+        "outdoor": 58,
+        "family": 58,
+        "offbeat": 25
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "stoccolma",
@@ -9663,12 +11606,12 @@
       "wikipedia_title": "Stoccolma",
       "wikipedia_title_en": "Stockholm",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Royal_Dramatic_Theatre_Stockholm.jpg/1280px-Royal_Dramatic_Theatre_Stockholm.jpg",
+      "image_credit": "Steven Lek · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": -1,
@@ -9742,7 +11685,36 @@
           "rain_days": 11,
           "sea_temp": 3
         }
-      }
+      },
+      "scores": {
+        "nature": 58,
+        "culture": 82,
+        "sea": 30,
+        "food": 78,
+        "nightlife": 75,
+        "outdoor": 50,
+        "family": 70,
+        "offbeat": 22
+      },
+      "costs": {
+        "accommodation": {
+          "low": 70,
+          "mid": 115,
+          "high": 190
+        },
+        "food_per_day": {
+          "low": 25,
+          "mid": 44,
+          "high": 74
+        },
+        "transport_local_day": {
+          "low": 5,
+          "mid": 9,
+          "high": 16
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "tallinn",
@@ -9918,12 +11890,12 @@
       "wikipedia_title": "Tenerife",
       "wikipedia_title_en": "Tenerife",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Roque_Cinchado_und_Teide.jpg/1280px-Roque_Cinchado_und_Teide.jpg",
+      "image_credit": "Thomas Wolf, www.foto-tw.de · CC BY-SA 3.0 de",
       "climate": {
         "1": {
           "temp_avg": 18,
@@ -9997,7 +11969,36 @@
           "rain_days": 6,
           "sea_temp": 22
         }
-      }
+      },
+      "scores": {
+        "nature": 82,
+        "culture": 35,
+        "sea": 78,
+        "food": 62,
+        "nightlife": 60,
+        "outdoor": 82,
+        "family": 78,
+        "offbeat": 20
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 6,
+          "mid": 13,
+          "high": 22
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "torino",
@@ -10013,12 +12014,12 @@
       "wikipedia_title": "Torino",
       "wikipedia_title_en": "Turin",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Torino_Piazza_Castello_11.jpg/1280px-Torino_Piazza_Castello_11.jpg",
+      "image_credit": "Zairon · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 2,
@@ -10092,7 +12093,36 @@
           "rain_days": 5,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 42,
+        "culture": 82,
+        "sea": 0,
+        "food": 88,
+        "nightlife": 65,
+        "outdoor": 40,
+        "family": 58,
+        "offbeat": 45
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "transilvania",
@@ -10276,12 +12306,12 @@
       "wikipedia_title": "Trieste",
       "wikipedia_title_en": "Trieste",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Trieste_%2828766391880%29.jpg/1280px-Trieste_%2828766391880%29.jpg",
+      "image_credit": "Nick Savchenko from Kiev, Ukraine · CC BY-SA 2.0",
       "climate": {
         "1": {
           "temp_avg": 5,
@@ -10355,7 +12385,36 @@
           "rain_days": 11,
           "sea_temp": 11
         }
-      }
+      },
+      "scores": {
+        "nature": 45,
+        "culture": 72,
+        "sea": 45,
+        "food": 72,
+        "nightlife": 50,
+        "outdoor": 45,
+        "family": 55,
+        "offbeat": 62
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "val-d-orcia",
@@ -10371,12 +12430,12 @@
       "wikipedia_title": "Val d'Orcia",
       "wikipedia_title_en": "Val d'Orcia",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Pienza_italy.jpg",
+      "image_credit": "https://www.flickr.com/people/sherseydc/ · CC BY-SA 2.0",
       "climate": {
         "1": {
           "temp_avg": 6,
@@ -10450,7 +12509,36 @@
           "rain_days": 9,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 92,
+        "culture": 62,
+        "sea": 0,
+        "food": 88,
+        "nightlife": 15,
+        "outdoor": 62,
+        "family": 60,
+        "offbeat": 35
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 7,
+          "mid": 14,
+          "high": 25
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "val-gardena",
@@ -10466,12 +12554,12 @@
       "wikipedia_title": "Val Gardena",
       "wikipedia_title_en": "Val Gardena",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Val_Gardena.jpg/1280px-Val_Gardena.jpg",
+      "image_credit": "Dmitry A. Mottl · CC BY-SA 3.0",
       "climate": {
         "1": {
           "temp_avg": -4,
@@ -10545,7 +12633,36 @@
           "rain_days": 7,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 92,
+        "culture": 30,
+        "sea": 0,
+        "food": 68,
+        "nightlife": 18,
+        "outdoor": 95,
+        "family": 78,
+        "offbeat": 35
+      },
+      "costs": {
+        "accommodation": {
+          "low": 70,
+          "mid": 115,
+          "high": 190
+        },
+        "food_per_day": {
+          "low": 25,
+          "mid": 44,
+          "high": 74
+        },
+        "transport_local_day": {
+          "low": 9,
+          "mid": 16,
+          "high": 29
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "valencia",
@@ -10561,12 +12678,12 @@
       "wikipedia_title": "Valencia",
       "wikipedia_title_en": "Valencia",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Malvarrosa_Beach%2C_Valencia%2C_Spain_%2829812271043%29.jpg/1280px-Malvarrosa_Beach%2C_Valencia%2C_Spain_%2829812271043%29.jpg",
+      "image_credit": "Boris Dzhingarov · CC BY 2.0",
       "climate": {
         "1": {
           "temp_avg": 11,
@@ -10640,7 +12757,36 @@
           "rain_days": 4,
           "sea_temp": 15
         }
-      }
+      },
+      "scores": {
+        "nature": 40,
+        "culture": 75,
+        "sea": 72,
+        "food": 85,
+        "nightlife": 78,
+        "outdoor": 48,
+        "family": 70,
+        "offbeat": 25
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "venezia",
@@ -10656,12 +12802,12 @@
       "wikipedia_title": "Venezia",
       "wikipedia_title_en": "Venice",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Venezia_aerial_view.jpg/1280px-Venezia_aerial_view.jpg",
+      "image_credit": "kallerna · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 4,
@@ -10735,7 +12881,36 @@
           "rain_days": 7,
           "sea_temp": 12
         }
-      }
+      },
+      "scores": {
+        "nature": 45,
+        "culture": 95,
+        "sea": 30,
+        "food": 78,
+        "nightlife": 50,
+        "outdoor": 25,
+        "family": 55,
+        "offbeat": 8
+      },
+      "costs": {
+        "accommodation": {
+          "low": 70,
+          "mid": 115,
+          "high": 190
+        },
+        "food_per_day": {
+          "low": 25,
+          "mid": 44,
+          "high": 74
+        },
+        "transport_local_day": {
+          "low": 5,
+          "mid": 9,
+          "high": 16
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "verona",
@@ -10751,12 +12926,12 @@
       "wikipedia_title": "Verona",
       "wikipedia_title_en": "Verona",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Arena-XE3F2406a.jpg/1280px-Arena-XE3F2406a.jpg",
+      "image_credit": "Claconvr · CC BY-SA 4.0",
       "climate": {
         "1": {
           "temp_avg": 4,
@@ -10830,7 +13005,36 @@
           "rain_days": 7,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 35,
+        "culture": 82,
+        "sea": 0,
+        "food": 80,
+        "nightlife": 55,
+        "outdoor": 35,
+        "family": 62,
+        "offbeat": 25
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "vienna",
@@ -11006,12 +13210,12 @@
       "wikipedia_title": "Vilnius",
       "wikipedia_title_en": "Vilnius",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/en/8/84/The_White_Bridge_and_%C5%A0nipi%C5%A1k%C4%97s_district_in_Vilnius_in_2023_by_Augustas_Did%C5%BEgalvis.jpg",
+      "image_credit": "Wikimedia Commons",
       "climate": {
         "1": {
           "temp_avg": -3,
@@ -11085,7 +13289,36 @@
           "rain_days": 15,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 45,
+        "culture": 78,
+        "sea": 0,
+        "food": 68,
+        "nightlife": 65,
+        "outdoor": 42,
+        "family": 58,
+        "offbeat": 62
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 6,
+          "high": 11
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "zagabria",
@@ -11101,12 +13334,12 @@
       "wikipedia_title": "Zagabria",
       "wikipedia_title_en": "Zagreb",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Zagreb_%2829255640143%29.jpg/1280px-Zagreb_%2829255640143%29.jpg",
+      "image_credit": "Nick Savchenko from Kiev, Ukraine · CC BY-SA 2.0",
       "climate": {
         "1": {
           "temp_avg": 1,
@@ -11180,7 +13413,36 @@
           "rain_days": 9,
           "sea_temp": null
         }
-      }
+      },
+      "scores": {
+        "nature": 42,
+        "culture": 72,
+        "sea": 0,
+        "food": 72,
+        "nightlife": 65,
+        "outdoor": 40,
+        "family": 60,
+        "offbeat": 55
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 6,
+          "high": 11
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "zara",
@@ -11196,12 +13458,12 @@
       "wikipedia_title": "Zara",
       "wikipedia_title_en": "Zadar",
       "airports": [],
-      "scores_source": "todo",
+      "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": null,
-      "image_credit": null,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Roman_Forum_in_Zadar%2C_Croatia_%2848607823862%29.jpg/1280px-Roman_Forum_in_Zadar%2C_Croatia_%2848607823862%29.jpg",
+      "image_credit": "dronepicr · CC BY 2.0",
       "climate": {
         "1": {
           "temp_avg": 6,
@@ -11275,7 +13537,36 @@
           "rain_days": 12,
           "sea_temp": 15
         }
-      }
+      },
+      "scores": {
+        "nature": 52,
+        "culture": 72,
+        "sea": 82,
+        "food": 68,
+        "nightlife": 60,
+        "outdoor": 55,
+        "family": 58,
+        "offbeat": 40
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 6,
+          "high": 11
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     }
   ]
 }

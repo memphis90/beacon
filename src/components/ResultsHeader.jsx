@@ -1,3 +1,4 @@
+import { IconHeart } from './Icons.jsx'
 import { monthName } from '../lib/format.js'
 
 /**
@@ -15,7 +16,9 @@ const TABS = [
 
 const isCost = (sort) => sort === 'cost_asc' || sort === 'cost_desc'
 
-export default function ResultsHeader({ count, total, criteria, onSort }) {
+export default function ResultsHeader({
+  count, total, criteria, onSort, onlyFavourites, favouritesCount, onFavourites,
+}) {
   const activeTab = isCost(criteria.sortBy) ? 'cost' : criteria.sortBy
 
   const pick = (key) => {
@@ -50,6 +53,24 @@ export default function ResultsHeader({ count, total, criteria, onSort }) {
             </button>
           ))}
         </div>
+
+        {/* I preferiti stanno QUI e non nel menu laterale: non sono una
+            sezione dove si va, sono un filtro su questa lista — "di tutte
+            queste, mostrami solo le mie". Nel menu, accanto a Confronta e
+            Parametri, prometteva una pagina propria e invece cambiava i
+            risultati alle spalle di chi l'aveva aperto. */}
+        <button
+          type="button"
+          className="btn btn--sm results__fav"
+          aria-pressed={onlyFavourites}
+          disabled={!onlyFavourites && favouritesCount === 0}
+          title={favouritesCount === 0 ? 'Nessun preferito salvato: usa il cuore sulle card' : undefined}
+          onClick={onFavourites}
+        >
+          <IconHeart filled={onlyFavourites} width="15" height="15" />
+          Preferiti
+          {favouritesCount > 0 && <span className="results__favcount">{favouritesCount}</span>}
+        </button>
 
         {/* Niente più selettore griglia/lista: la lista mostrava le stesse
             informazioni della griglia su una riga più larga, e la scelta fra

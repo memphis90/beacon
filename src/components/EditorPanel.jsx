@@ -12,7 +12,7 @@ import {
   setOverride,
 } from '../lib/store.js'
 import { countryName } from '../lib/format.js'
-import { isUnscored } from '../lib/scoring.js'
+import { isAssistantScored, isUnscored } from '../lib/scoring.js'
 import { IconChevron, IconSearch, IconTrash } from './Icons.jsx'
 
 const typeLabel = (key) => DESTINATION_TYPES.find((t) => t.key === key)?.label || key
@@ -119,6 +119,7 @@ export function ParametersPage({ merged, overrides, onOverridesChange, onPick, o
       campi: countOverriddenFields(overrides, d.id),
       nuova: !seedById(d.id),
       daValutare: isUnscored(d),
+      daConfermare: isAssistantScored(d) && countOverriddenFields(overrides, d.id) === 0,
     }))
     /* Da valutare in cima, poi le corrette, poi il resto. È l'ordine del
        lavoro: quelle importate dagli script non compaiono nei risultati
@@ -130,6 +131,7 @@ export function ParametersPage({ merged, overrides, onOverridesChange, onPick, o
 
   const modificate = elenco.filter((r) => r.campi > 0).length
   const daValutare = elenco.filter((r) => r.daValutare).length
+  const daConfermare = elenco.filter((r) => r.daConfermare).length
 
   const createDestination = (event) => {
     event.preventDefault()
@@ -223,10 +225,17 @@ export function ParametersPage({ merged, overrides, onOverridesChange, onPick, o
             dagli script e restano fuori dai risultati finché non ricevono i punteggi.
           </>
         )}
+        {daConfermare > 0 && (
+          <>
+            {' '}<strong>{daConfermare} sono da confermare</strong>: i punteggi li ha scritti
+            l’assistente e sono in classifica, ma nessuno li ha ancora verificati. Correggerne
+            una la fa diventare tua.
+          </>
+        )}
       </p>
 
       <ul className="destlist">
-        {elenco.map(({ destination: d, campi, nuova, daValutare: manca }) => (
+        {elenco.map(({ destination: d, campi, nuova, daValutare: manca, daConfermare }) => (
           <li
             key={d.id}
             className={`destlist__row${campi > 0 ? ' destlist__row--touched' : ''}${manca ? ' destlist__row--todo' : ''}`}
@@ -235,6 +244,10 @@ export function ParametersPage({ merged, overrides, onOverridesChange, onPick, o
               <span className="destlist__name">
                 {d.name}
                 {manca && <span className="badge badge--warn">da valutare</span>}
+                {/* La provenienza resta scritta: questi punteggi sono
+                    un'opinione dell'assistente, non un giudizio di chi cerca —
+                    e il §9 chiede il secondo. Correggerli li fa diventare tuoi. */}
+                {daConfermare && <span className="badge badge--info">da confermare</span>}
                 {nuova && !manca && <span className="badge badge--edit">creata da te</span>}
                 {!nuova && campi > 0 && (
                   <span className="badge badge--edit">

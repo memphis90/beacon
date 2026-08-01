@@ -168,13 +168,17 @@ telemetry. *Esci e azzera i dati* wipes it all.
 
 ## Status
 
-**102 European destinations.** 23 carry hand-assigned parameters — costs,
-climate and scores, all **initial estimates** labelled as such in the interface
-and correctable from the *Parametri* panel. The other 79 arrived from the
-Wikidata ingestion with **identity only**: where they are, what they are, what
-they're called. They stay **out of the ranking** until someone scores them,
-because a destination with no scores isn't a mediocre one — it's one nobody has
-looked at yet.
+**102 European destinations**, all scored and all in the ranking.
+
+Provenance is tracked per field, and the interface says which is which:
+
+- **Climate** is *measured* — ten-year monthly means (2015–2024) from
+  Open-Meteo at each destination's point.
+- **Scores and costs** are *estimates*: 23 destinations carry the original
+  hand-written ones, 79 were filled by the assistant and are flagged **"da
+  confermare"** in the *Parametri* panel. They rank like any other — an
+  informed opinion beats an invisible destination — but nobody has verified
+  them against real judgement yet. Correcting one makes it yours.
 
 Later phases bring automatic ingestion from Wikidata and OpenStreetMap
 (Phase 1), real climate and price data (Phase 2), semantic search and

@@ -29,7 +29,7 @@ const WIDTH = 1280
  * la mappa del comune di Thira.
  */
 const NOT_A_PHOTO =
-  /flag|bandeira|bandera|bandiera|coat.of.arms|stemma|wappen|escudo|seal|emblem|logo|map|mappa|mapa|karte|dimos|satellite|landsat|sentinel-\d|\.svg$/i
+  /flag|bandeira|bandera|bandiera|coat.of.arms|stemma|wappen|escudo|seal|emblem|logo|map|mappa|mapa|karte|dimos|satellite|landsat|copernicus|from.space|sentinel[-_]?\d|\besa\d|\.svg$/i
 
 /**
  * Voci la cui immagine principale rappresenta un'entità amministrativa e non
@@ -53,6 +53,31 @@ const ALTERNATES = {
   // castello di Bran è l'unico che restituisce davvero una foto del luogo —
   // ed è anche l'immagine che chi cerca la Transilvania si aspetta.
   transilvania: ['Bran Castle', 'Sighișoara Citadel', 'Sibiu', 'Brașov'],
+  /* Le isole grandi hanno per immagine guida una ripresa dallo spazio: vera,
+     e inutile per scegliere un viaggio. Si prende il posto per cui ci si va. */
+  rodi: ['Lindos', 'Rhodes (city)', 'Rhodes Old Town'],
+  tenerife: ['Teide', 'Santa Cruz de Tenerife', 'Garachico'],
+  sicilia: ['Taormina', 'Valle dei Templi', 'Cefalù'],
+  sardegna: ['Costa Smeralda', 'Cala Goloritzé', 'Alghero'],
+  cipro: ['Petra tou Romiou', 'Kyrenia', 'Paphos'],
+  malta: ['Valletta', 'Mdina', 'Blue Lagoon (Malta)'],
+  salento: ['Otranto', 'Gallipoli (Italia)', 'Santa Maria di Leuca'],
+  peloponneso: ['Nauplia', 'Monemvasia', 'Mistra'],
+  istria: ['Rovigno', 'Parenzo', 'Pola'],
+  lapponia: ['Lofoten', 'Tromsø', 'Abisko'],
+  baviera: ['Neuschwanstein', 'Berchtesgaden', 'Garmisch-Partenkirchen'],
+  bretagna: ['Saint-Malo', 'Pointe du Raz', 'Quiberon'],
+  provenza: ['Gordes', 'Roussillon (Vaucluse)', 'Valensole'],
+  'costa-azzurra': ['Èze', 'Villefranche-sur-Mer', 'Antibes'],
+  'foresta-nera': ['Triberg', 'Titisee', 'Schluchsee'],
+  'val-d-orcia': ['Pienza', 'San Quirico d’Orcia', 'Bagno Vignoni'],
+  langhe: ['Barolo (Italia)', 'La Morra', 'Neive'],
+  'isole-eolie': ['Stromboli', 'Lipari', 'Panarea'],
+  'f-r-er': ['Gásadalur', 'Saksun', 'Tórshavn'],
+  /* Un collage è un montaggio di foto piccole: tecnicamente una foto, e
+     illeggibile nel riquadro di una card. */
+  verona: ['Arena di Verona', 'Piazza delle Erbe (Verona)'],
+  bilbao: ['Museo Guggenheim Bilbao', 'Casco Viejo (Bilbao)'],
 }
 
 const UA =
