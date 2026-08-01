@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { IconChevron, IconList, IconSettings, IconSparkle } from './Icons.jsx'
+import { activeProfile, agentIsReady, endpointHost, profileIsUsable, profileLabel } from '../lib/agent.js'
 
 /**
  * Chi interpreta la frase, scelto dove la frase si scrive.
@@ -9,7 +10,12 @@ import { IconChevron, IconList, IconSettings, IconSparkle } from './Icons.jsx'
  * scrivendo. Ed è una scelta che si cambia spesso — tipicamente subito dopo
  * aver visto un'interpretazione sbagliata, cioè nel momento in cui aprire una
  * modale è esattamente l'attrito di troppo. Nelle impostazioni resta la
- * configurazione dell'endpoint, che invece si tocca una volta sola.
+ * configurazione degli endpoint, che invece si tocca di rado.
+ *
+ * Il menu elenca **tutti** i modelli configurati, non solo quello acceso: è la
+ * stessa ragione di prima portata alle sue conseguenze. Se confrontare due
+ * interpreti richiede di riaprire le impostazioni e riscrivere un URL, non lo
+ * si fa, e si tiene il primo modello che si era messo.
  */
 export default function InterpreterPicker({ agent, onChange, onConfigure }) {
   const [open, setOpen] = useState(false)
@@ -29,12 +35,14 @@ export default function InterpreterPicker({ agent, onChange, onConfigure }) {
     }
   }, [open])
 
-  const configurato = Boolean(agent.baseUrl && agent.model)
+  const profili = agent.profiles || []
   // Un `enabled` rimasto acceso su una configurazione svuotata non deve
-  // mostrare "modello" e poi fallire a ogni frase.
-  const usaModello = agent.enabled && configurato
+  // mostrare il nome di un modello e poi fallire a ogni frase.
+  const usaModello = agentIsReady(agent)
+  const attivo = activeProfile(agent)
 
-  const scegli = (enabled) => { onChange({ ...agent, enabled }); setOpen(false) }
+  const scegliRegole = () => { onChange({ ...agent, enabled: false }); setOpen(false) }
+  const scegliModello = (id) => { onChange({ ...agent, enabled: true, activeId: id }); setOpen(false) }
 
   return (
     <div className="picker" ref={ref}>
@@ -46,7 +54,7 @@ export default function InterpreterPicker({ agent, onChange, onConfigure }) {
         onClick={() => setOpen((v) => !v)}
       >
         {usaModello ? <IconSparkle width="16" height="16" /> : <IconList width="16" height="16" />}
-        <span className="picker__now">{usaModello ? agent.model : 'Regole locali'}</span>
+        <span className="picker__now">{usaModello ? profileLabel(attivo) : 'Regole locali'}</span>
         <IconChevron width="14" height="14" />
       </button>
 
@@ -56,7 +64,7 @@ export default function InterpreterPicker({ agent, onChange, onConfigure }) {
             type="button"
             role="menuitemradio"
             aria-checked={!usaModello}
-            onClick={() => scegli(false)}
+            onClick={scegliRegole}
           >
             <IconList width="17" height="17" />
             <span>
@@ -68,23 +76,39 @@ export default function InterpreterPicker({ agent, onChange, onConfigure }) {
             </span>
           </button>
 
-          <button
-            type="button"
-            role="menuitemradio"
-            aria-checked={usaModello}
-            disabled={!configurato}
-            onClick={() => scegli(true)}
-          >
-            <IconSparkle width="17" height="17" />
-            <span>
-              <strong>{configurato ? agent.model : 'Modello'}</strong>
-              <small>
-                {configurato
-                  ? 'Capisce frasi che le regole non coprono. Se non risponde si torna alle regole, e l’app lo dice.'
-                  : 'Nessun endpoint configurato: apri la configurazione qui sotto.'}
-              </small>
-            </span>
-          </button>
+          {profili.map((p) => {
+            const pronto = profileIsUsable(p)
+            const scelto = usaModello && p.id === agent.activeId
+            return (
+              <button
+                key={p.id}
+                type="button"
+                role="menuitemradio"
+                aria-checked={scelto}
+                disabled={!pronto}
+                onClick={() => scegliModello(p.id)}
+              >
+                <IconSparkle width="17" height="17" />
+                <span>
+                  <strong>{profileLabel(p)}</strong>
+                  <small>
+                    {pronto
+                      // L'host distingue due profili che girano lo stesso
+                      // modello — il caso tipico: locale contro remoto.
+                      ? `${endpointHost(p.baseUrl)}${p.label?.trim() ? ` · ${p.model}` : ''}`
+                      : 'Incompleto: manca l’endpoint o il nome del modello.'}
+                  </small>
+                </span>
+              </button>
+            )
+          })}
+
+          {profili.length === 0 && (
+            <p className="picker__empty">
+              Nessun modello configurato. Le regole locali bastano per mesi, durate, budget e
+              interessi; un modello serve per le frasi che non coprono.
+            </p>
+          )}
 
           <button
             type="button"
@@ -93,7 +117,7 @@ export default function InterpreterPicker({ agent, onChange, onConfigure }) {
             onClick={() => { setOpen(false); onConfigure() }}
           >
             <IconSettings width="16" height="16" />
-            Configura endpoint e modello…
+            {profili.length ? 'Gestisci i modelli…' : 'Configura un modello…'}
           </button>
         </div>
       )}

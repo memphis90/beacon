@@ -1,30 +1,90 @@
 import { useState } from 'react'
-import { PRESETS, interpretWithModel } from '../lib/agent.js'
+import { IconPlus, IconTrash } from './Icons.jsx'
+import {
+  PRESETS, activeProfile, agentIsReady, interpretWithModel, nextProfileId,
+  normaliseAgentConfig, profileFromPreset, profileIsUsable, profileLabel,
+} from '../lib/agent.js'
 
 /**
- * Configurazione dell'endpoint: dove gira il modello, quale, con che chiave.
+ * I modelli configurati: dove girano, quali, con che chiave.
  *
- * *Se* usarlo non si decide qui — quello sta accanto al campo di testo, in
+ * *Quale* usare non si decide qui — quello sta accanto al campo di testo, in
  * `InterpreterPicker`, perché è una scelta che si cambia spesso mentre questa
- * si tocca una volta. Tenerle insieme costringeva ad aprire una modale per
+ * si tocca di rado. Tenerle insieme costringeva ad aprire una modale per
  * ricadere sulle regole dopo un'interpretazione sbagliata.
+ *
+ * Sono più d'uno perché confrontare due interpreti è il modo normale di
+ * sceglierne uno: un modello locale piccolo e uno remoto grosso leggono la
+ * stessa frase in modi che si giudicano solo affiancandoli. Con un endpoint
+ * solo, il confronto costava riscrivere URL, nome del modello ed eventuale
+ * chiave a ogni giro — e infatti non si faceva.
  */
 export default function SettingsModal({ config, onChange, onClose }) {
-  const [draft, setDraft] = useState(config)
+  const [draft, setDraft] = useState(() => normaliseAgentConfig(config))
+  // Quale riga si sta modificando. È indipendente da `activeId`: si aggiusta
+  // un profilo senza per questo metterlo in uso.
+  const [editId, setEditId] = useState(() => activeProfile(config)?.id ?? null)
   const [probe, setProbe] = useState(null)
 
-  const preset = PRESETS.find((p) => p.id === draft.preset) || PRESETS[PRESETS.length - 1]
-  const remoto = /^https?:\/\/(?!localhost|127\.)/i.test(draft.baseUrl || '')
+  const profilo = draft.profiles.find((p) => p.id === editId) || draft.profiles[0] || null
+  const preset = PRESETS.find((p) => p.id === profilo?.preset) || PRESETS[PRESETS.length - 1]
+  const remoto = /^https?:\/\/(?!localhost|127\.)/i.test(profilo?.baseUrl || '')
+
+  /** Modifica solo il profilo aperto: gli altri restano intatti. */
+  const patch = (campi) => {
+    setDraft((d) => ({
+      ...d,
+      profiles: d.profiles.map((p) => (p.id === profilo.id ? { ...p, ...campi } : p)),
+    }))
+    setProbe(null)
+  }
 
   const pickPreset = (id) => {
     const found = PRESETS.find((p) => p.id === id)
-    setDraft((d) => ({
-      ...d,
+    patch({
       preset: id,
-      baseUrl: found && found.baseUrl ? found.baseUrl : d.baseUrl,
-      model: found && found.model ? found.model : d.model,
-    }))
+      baseUrl: found && found.baseUrl ? found.baseUrl : profilo.baseUrl,
+      model: found && found.model ? found.model : profilo.model,
+    })
+  }
+
+  /**
+   * Il profilo nuovo nasce vuoto, non copiato dal preset di default: chi
+   * aggiunge un secondo modello sta quasi sempre puntando altrove, e trovare
+   * Ollama già scritto vorrebbe dire cancellarlo prima di scrivere il proprio.
+   */
+  const aggiungi = () => {
+    const nuovo = profileFromPreset(
+      PRESETS[PRESETS.length - 1],
+      nextProfileId(draft.profiles)
+    )
+    setDraft((d) => ({ ...d, profiles: [...d.profiles, nuovo] }))
+    setEditId(nuovo.id)
     setProbe(null)
+  }
+
+  /**
+   * Togliere il profilo in uso spegne anche il modello: lasciarlo acceso su
+   * qualcos'altro sceglierebbe al posto di chi legge quale interprete usare.
+   */
+  const rimuovi = (id) => {
+    setDraft((d) => {
+      const profiles = d.profiles.filter((p) => p.id !== id)
+      const eraAttivo = d.activeId === id
+      return {
+        ...d,
+        profiles,
+        activeId: eraAttivo ? (profiles[0]?.id ?? null) : d.activeId,
+        enabled: eraAttivo ? false : d.enabled && profiles.length > 0,
+      }
+    })
+    if (editId === id) setEditId(null)
+    setProbe(null)
+  }
+
+  /** Scorciatoia: mette in uso la riga aperta senza passare dal menu. */
+  const usaQuesto = () => {
+    setDraft((d) => ({ ...d, activeId: profilo.id, enabled: true }))
   }
 
   const test = async () => {
@@ -33,9 +93,12 @@ export default function SettingsModal({ config, onChange, onClose }) {
       // Nessun timeout suo: la prova deve concedere quanto la ricerca vera,
       // altrimenti dichiara guasto un endpoint che poi funziona. Un modello
       // locale alla prima chiamata deve anche caricarsi in memoria.
+      // Senza catalogo di proposito: qui si prova che l'endpoint risponde e che
+      // il JSON è valido, non la qualità dell'interpretazione — e il prompt
+      // corto è anche il più veloce, che su un modello locale conta.
       const result = await interpretWithModel(
         '3 giorni a maggio, budget 400 €, soprattutto cultura',
-        { config: draft }
+        { config: profilo }
       )
       setProbe({
         state: 'ok',
@@ -49,13 +112,13 @@ export default function SettingsModal({ config, onChange, onClose }) {
   }
 
   /**
-   * Svuotare la configurazione spegne anche l'uso del modello: lasciarlo acceso
-   * su un endpoint che non c'è più farebbe fallire ogni frase, con la barra che
-   * continua ad annunciare un modello.
+   * Svuotare la configurazione del profilo in uso spegne anche il modello:
+   * lasciarlo acceso su un endpoint che non c'è più farebbe fallire ogni
+   * frase, con la barra che continua ad annunciare un modello.
    */
   const salva = () => {
-    const completo = Boolean(draft.baseUrl && draft.model)
-    onChange({ ...draft, enabled: draft.enabled && completo })
+    const normalizzata = normaliseAgentConfig(draft)
+    onChange({ ...normalizzata, enabled: agentIsReady(normalizzata) })
     onClose()
   }
 
@@ -69,18 +132,20 @@ export default function SettingsModal({ config, onChange, onClose }) {
         onClick={(e) => e.stopPropagation()}
       >
         <header className="panel__head">
-          <h2>Configurazione del modello</h2>
+          <h2>Modelli configurati</h2>
           <button type="button" className="panel__close" onClick={onClose} aria-label="Chiudi">×</button>
         </header>
 
         <div className="panel__body">
           <div className="section">
             <p className="infotext">
-              Dove gira il modello e come raggiungerlo. <strong>Se</strong> usarlo si sceglie
-              accanto al campo di testo, nella home: lì si torna alle regole in un clic.
+              Dove girano i modelli e come raggiungerli. Puoi tenerne più d’uno — per esempio
+              uno locale e uno remoto — e <strong>quale usare</strong> si sceglie accanto al
+              campo di testo, nella home: lì si passa da uno all’altro, o si torna alle regole,
+              in un clic.
             </p>
             <p className="infotext">
-              In entrambi i casi l’interpretazione è mostrata prima di essere applicata, con
+              In tutti i casi l’interpretazione è mostrata prima di essere applicata, con
               accanto la parola che ha fatto scattare ogni criterio. Punteggio, filtri duri e
               ranking restano calcolati qui: l’interprete traduce la frase, non decide il
               risultato.
@@ -88,49 +153,148 @@ export default function SettingsModal({ config, onChange, onClose }) {
           </div>
 
           <div className="section">
-            <div className="field">
-              <label htmlFor="ag-preset">Dove gira</label>
-              <select id="ag-preset" className="control" value={draft.preset} onChange={(e) => pickPreset(e.target.value)}>
-                {PRESETS.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
-              </select>
-              <p className="landing__note">{preset.note}</p>
+            <div className="models__head">
+              <span className="models__title">
+                {draft.profiles.length === 0
+                  ? 'Nessun modello'
+                  : `${draft.profiles.length} ${draft.profiles.length === 1 ? 'modello' : 'modelli'}`}
+              </span>
+              <button type="button" className="btn btn--sm" onClick={aggiungi}>
+                <IconPlus width="14" height="14" />
+                Aggiungi
+              </button>
             </div>
 
-            <div className="editor__grid">
-              <div className="field">
-                <label htmlFor="ag-url">Endpoint (compatibile OpenAI)</label>
-                <input
-                  id="ag-url" className="control" placeholder="http://localhost:11434/v1"
-                  value={draft.baseUrl}
-                  onChange={(e) => setDraft({ ...draft, baseUrl: e.target.value, preset: 'custom' })}
-                />
-              </div>
-
-              <div className="field">
-                <label htmlFor="ag-model">Modello</label>
-                <input
-                  id="ag-model" className="control" placeholder="llama3.2"
-                  value={draft.model}
-                  onChange={(e) => setDraft({ ...draft, model: e.target.value })}
-                />
-              </div>
-            </div>
-
-            <div className="field">
-              <label htmlFor="ag-key">Chiave API {remoto ? '' : '(non serve in locale)'}</label>
-              <input
-                id="ag-key" className="control" type="password" autoComplete="off"
-                placeholder={remoto ? 'incolla la chiave' : 'lascia vuoto'}
-                value={draft.apiKey}
-                onChange={(e) => setDraft({ ...draft, apiKey: e.target.value })}
-              />
-              <p className="landing__note">
-                Resta in <code>localStorage</code> su questa macchina: non c’è un server a cui
-                mandarla.
+            {draft.profiles.length === 0 ? (
+              <p className="hside__empty">
+                Senza modelli l’app usa le regole locali, che coprono mesi, durate, budget e
+                interessi. Aggiungine uno per le frasi che le regole non capiscono.
               </p>
-            </div>
+            ) : (
+              <ul className="models">
+                {draft.profiles.map((p) => (
+                  <li
+                    key={p.id}
+                    className={`models__row${p.id === profilo?.id ? ' models__row--open' : ''}`}
+                  >
+                    <button
+                      type="button"
+                      className="models__pick"
+                      aria-pressed={p.id === profilo?.id}
+                      onClick={() => { setEditId(p.id); setProbe(null) }}
+                    >
+                      <strong>{profileLabel(p)}</strong>
+                      <small>
+                        {profileIsUsable(p) ? p.baseUrl : 'endpoint o modello mancante'}
+                      </small>
+                    </button>
+                    {draft.enabled && p.id === draft.activeId && (
+                      <span className="models__badge">in uso</span>
+                    )}
+                    <button
+                      type="button"
+                      className="models__del"
+                      onClick={() => rimuovi(p.id)}
+                      aria-label={`Rimuovi ${profileLabel(p)}`}
+                      title="Rimuovi"
+                    >
+                      <IconTrash width="15" height="15" />
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
 
-            <div className="checkline" style={{ marginTop: 4 }}>
+          {profilo && (
+            <div className="section">
+              <div className="field">
+                <label htmlFor="ag-label">Nome</label>
+                <input
+                  id="ag-label" className="control" placeholder={profilo.model || 'come chiamarlo nel menu'}
+                  value={profilo.label}
+                  onChange={(e) => patch({ label: e.target.value })}
+                />
+                <p className="landing__note">
+                  Facoltativo: senza, nel menu compare il nome del modello.
+                </p>
+              </div>
+
+              <div className="field">
+                <label htmlFor="ag-preset">Dove gira</label>
+                <select id="ag-preset" className="control" value={profilo.preset} onChange={(e) => pickPreset(e.target.value)}>
+                  {PRESETS.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
+                </select>
+                <p className="landing__note">{preset.note}</p>
+              </div>
+
+              <div className="editor__grid">
+                <div className="field">
+                  <label htmlFor="ag-url">Endpoint (compatibile OpenAI)</label>
+                  <input
+                    id="ag-url" className="control" placeholder="http://localhost:11434/v1"
+                    value={profilo.baseUrl}
+                    onChange={(e) => patch({ baseUrl: e.target.value, preset: 'custom' })}
+                  />
+                </div>
+
+                <div className="field">
+                  <label htmlFor="ag-model">Modello</label>
+                  <input
+                    id="ag-model" className="control" placeholder="llama3.2"
+                    value={profilo.model}
+                    onChange={(e) => patch({ model: e.target.value })}
+                  />
+                </div>
+              </div>
+
+              <div className="field">
+                <label htmlFor="ag-key">Chiave API {remoto ? '' : '(non serve in locale)'}</label>
+                <input
+                  id="ag-key" className="control" type="password" autoComplete="off"
+                  placeholder={remoto ? 'incolla la chiave' : 'lascia vuoto'}
+                  value={profilo.apiKey}
+                  onChange={(e) => patch({ apiKey: e.target.value })}
+                />
+                <p className="landing__note">
+                  Resta in <code>localStorage</code> su questa macchina: non c’è un server a cui
+                  mandarla.
+                </p>
+              </div>
+
+              {remoto && (
+                <div className="notice notice--warn">
+                  <div>
+                    <strong>Endpoint remoto.</strong> La frase che scrivi esce da questo computer e
+                    arriva al fornitore del modello. Con Ollama o LM Studio non succede.
+                  </div>
+                </div>
+              )}
+
+              {probe && (
+                <div className={`notice${probe.state === 'error' ? ' notice--warn' : ''}`}>
+                  <div>{probe.state === 'loading' ? 'Provo una frase di esempio…' : probe.text}</div>
+                </div>
+              )}
+
+              <div className="models__actions">
+                <button type="button" className="btn btn--sm" onClick={test} disabled={!profileIsUsable(profilo)}>
+                  Prova la connessione
+                </button>
+                <button
+                  type="button"
+                  className="btn btn--sm"
+                  onClick={usaQuesto}
+                  disabled={!profileIsUsable(profilo) || (draft.enabled && draft.activeId === profilo.id)}
+                >
+                  {draft.enabled && draft.activeId === profilo.id ? 'Già in uso' : 'Usa questo'}
+                </button>
+              </div>
+            </div>
+          )}
+
+          <div className="section">
+            <div className="checkline">
               <input
                 id="ag-debug"
                 type="checkbox"
@@ -144,28 +308,10 @@ export default function SettingsModal({ config, onChange, onClose }) {
               stato dedotto. Serve a capire perché una ricerca ha dato quel risultato: se una
               destinazione non c'è, di solito è qui che si vede il motivo.
             </p>
-
-            {remoto && (
-              <div className="notice notice--warn">
-                <div>
-                  <strong>Endpoint remoto.</strong> La frase che scrivi esce da questo computer e
-                  arriva al fornitore del modello. Con Ollama o LM Studio non succede.
-                </div>
-              </div>
-            )}
-
-            {probe && (
-              <div className={`notice${probe.state === 'error' ? ' notice--warn' : ''}`}>
-                <div>{probe.state === 'loading' ? 'Provo una frase di esempio…' : probe.text}</div>
-              </div>
-            )}
           </div>
         </div>
 
         <footer className="panel__foot">
-          <button type="button" className="btn" onClick={test} disabled={!draft.baseUrl || !draft.model}>
-            Prova la connessione
-          </button>
           <button type="button" className="btn btn--primary" onClick={salva}>
             Salva
           </button>

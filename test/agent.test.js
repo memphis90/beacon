@@ -1,5 +1,180 @@
 import { describe, it, expect } from 'vitest'
-import { critiquePayload, sanitiseCritique, sanitisePatch, sanitiseUnderstood } from '../src/lib/agent.js'
+import {
+  activeProfile, agentIsReady, buildSystemPrompt, critiquePayload, describeRules,
+  emptyAgentConfig, nextProfileId, normaliseAgentConfig, profileLabel, sanitiseCritique,
+  sanitisePatch, sanitiseUnderstood,
+} from '../src/lib/agent.js'
+
+/**
+ * Il contesto passato al modello è calcolato dai dati, non scritto a mano:
+ * queste prove servono a garantire che resti vero quando il seed cambia. Un
+ * contesto che dichiara mesi balneabili sbagliati è peggio di nessun contesto,
+ * perché il modello lo prende per buono.
+ */
+describe('describeRules — le regole vere, dette al modello', () => {
+  const dest = (over) => ({
+    name: 'Prova', country: 'IT', type: 'island',
+    climate: Object.fromEntries(
+      Array.from({ length: 12 }, (_, i) => [String(i + 1), { sea_temp: 10 }])
+    ),
+    costs: {
+      accommodation: { low: 50, mid: 80, high: 120 },
+      food_per_day: { low: 20, mid: 30, high: 50 },
+      transport_local_day: { low: 5, mid: 10, high: 15 },
+    },
+    ...over,
+  })
+
+  const caldo = dest({
+    name: 'Caldo', country: 'GR', type: 'island',
+    climate: Object.fromEntries(
+      Array.from({ length: 12 }, (_, i) => [String(i + 1), { sea_temp: i + 1 === 8 ? 26 : 15 }])
+    ),
+  })
+  const freddo = dest({ name: 'Freddo', country: 'NO', type: 'city' })
+
+  it('elenca ogni destinazione con paese e tipo', () => {
+    const testo = describeRules([caldo, freddo])
+    expect(testo).toContain('Caldo (Grecia, isola)')
+    expect(testo).toContain('Freddo (Norvegia, città)')
+    expect(testo).toContain('2 destinazioni')
+  })
+
+  it('conta quante destinazioni superano la soglia del mare, mese per mese', () => {
+    const testo = describeRules([caldo, freddo])
+    expect(testo).toContain('agosto 1')
+    expect(testo).toContain('luglio 0')
+    // I mesi senza nemmeno una destinazione vanno detti: sono quelli in cui
+    // seaRequired svuota la ricerca.
+    expect(testo).toMatch(/In gennaio.*non ne passa NESSUNA/)
+    expect(testo).not.toMatch(/In gennaio[^.]*agosto[^.]*non ne passa NESSUNA/)
+  })
+
+  it('ricava la fascia di costo dai costi veri', () => {
+    // 80 + 30 + 10 = 120 € a notte per entrambe le destinazioni di prova.
+    expect(describeRules([caldo, freddo])).toContain('fra 120 € e 120 €')
+  })
+
+  it('elenca i temi con quante destinazioni li portano', () => {
+    const gotica = dest({ name: 'Gotica', themes: ['gotico'] })
+    const testo = describeRules([gotica, caldo, freddo])
+    expect(testo).toContain('- gotico:')
+    expect(testo).toContain('(1 destinazioni)')
+    // Il conteggio deve dire anche quando un tema è vuoto: al modello serve
+    // per non sceglierlo.
+    expect(testo).toContain('(0 destinazioni)')
+  })
+
+  it('non rivela quale destinazione porta quale tema', () => {
+    const gotica = dest({ name: 'Gotica', themes: ['gotico'] })
+    const righeTemi = describeRules([gotica, caldo]).split('TEMI DISPONIBILI')[1]
+    expect(righeTemi).not.toContain('Gotica')
+  })
+
+  it('rispetta una soglia del mare diversa', () => {
+    expect(describeRules([caldo, freddo], { seaTempMin: 30 })).toContain('almeno 30 °C')
+  })
+
+  it('senza catalogo non inventa un contesto', () => {
+    expect(describeRules(undefined)).toBe('')
+    expect(describeRules([])).toBe('')
+    expect(buildSystemPrompt('')).toBe(buildSystemPrompt(undefined))
+  })
+
+  it('il contesto si aggiunge al prompt, non lo sostituisce', () => {
+    const prompt = buildSystemPrompt(describeRules([caldo]))
+    expect(prompt).toContain('Rispondi SOLO con JSON valido')
+    expect(prompt).toContain('CONTESTO')
+  })
+})
+
+/**
+ * La configurazione è passata da un endpoint solo a una lista di profili.
+ * Queste prove coprono le due cose che si rompono in silenzio: la vecchia
+ * configurazione che va travasata senza perdere niente, e un `activeId` che
+ * punta a un profilo non più esistente.
+ */
+describe('normaliseAgentConfig — più modelli, uno attivo', () => {
+  it('travasa la configurazione a modello singolo nel primo profilo', () => {
+    const migrata = normaliseAgentConfig({
+      enabled: true, preset: 'ollama', baseUrl: 'http://localhost:11434/v1',
+      model: 'llama3.2', apiKey: '', debug: true,
+    })
+    expect(migrata.profiles).toHaveLength(1)
+    expect(migrata.profiles[0].baseUrl).toBe('http://localhost:11434/v1')
+    expect(migrata.profiles[0].model).toBe('llama3.2')
+    expect(migrata.activeId).toBe(migrata.profiles[0].id)
+    expect(migrata.enabled).toBe(true)
+    expect(migrata.debug).toBe(true)
+  })
+
+  it('tiene la lista e il profilo attivo scelto', () => {
+    const config = normaliseAgentConfig({
+      enabled: true,
+      activeId: 'm2',
+      profiles: [
+        { id: 'm1', baseUrl: 'http://localhost:11434/v1', model: 'llama3.2', preset: 'ollama' },
+        { id: 'm2', label: 'Groq', baseUrl: 'https://api.groq.com/openai/v1', model: 'llama-3.1-8b-instant', preset: 'groq' },
+      ],
+    })
+    expect(config.profiles).toHaveLength(2)
+    expect(activeProfile(config).model).toBe('llama-3.1-8b-instant')
+    expect(profileLabel(activeProfile(config))).toBe('Groq')
+  })
+
+  it('ricade sul primo profilo se l’attivo è stato cancellato', () => {
+    const config = normaliseAgentConfig({
+      enabled: true, activeId: 'sparito',
+      profiles: [{ id: 'm1', baseUrl: 'http://x/v1', model: 'a' }],
+    })
+    expect(config.activeId).toBe('m1')
+  })
+
+  it('rispetta una lista svuotata invece di rimettere il preset di default', () => {
+    const config = normaliseAgentConfig({ enabled: true, profiles: [] })
+    expect(config.profiles).toHaveLength(0)
+    expect(config.activeId).toBeNull()
+    expect(config.enabled).toBe(false)
+  })
+
+  it('assegna un id ai profili che non ce l’hanno, senza duplicarli', () => {
+    const config = normaliseAgentConfig({
+      profiles: [{ baseUrl: 'http://a/v1', model: 'a' }, { id: 'm1', baseUrl: 'http://b/v1', model: 'b' }],
+    })
+    const ids = config.profiles.map((p) => p.id)
+    expect(new Set(ids).size).toBe(ids.length)
+  })
+
+  it('non esplode su una configurazione illeggibile', () => {
+    expect(normaliseAgentConfig(null)).toEqual(emptyAgentConfig())
+    expect(normaliseAgentConfig('boh').profiles).toHaveLength(1)
+  })
+
+  it('nextProfileId non riusa un identificatore già assegnato', () => {
+    expect(nextProfileId([{ id: 'm1' }, { id: 'm4' }])).toBe('m5')
+    expect(nextProfileId([])).toBe('m1')
+  })
+})
+
+describe('agentIsReady — acceso non basta, deve anche essere configurato', () => {
+  it('è falso su un profilo attivo a metà', () => {
+    const config = normaliseAgentConfig({
+      enabled: true, activeId: 'm1', profiles: [{ id: 'm1', baseUrl: 'http://x/v1', model: '' }],
+    })
+    expect(agentIsReady(config)).toBe(false)
+  })
+
+  it('è vero solo con endpoint, modello e interruttore acceso', () => {
+    const profiles = [{ id: 'm1', baseUrl: 'http://x/v1', model: 'a' }]
+    expect(agentIsReady(normaliseAgentConfig({ enabled: false, profiles }))).toBe(false)
+    expect(agentIsReady(normaliseAgentConfig({ enabled: true, profiles }))).toBe(true)
+  })
+
+  it('profileLabel ripiega sul nome del modello quando manca l’etichetta', () => {
+    expect(profileLabel({ label: '  ', model: 'llama3.2' })).toBe('llama3.2')
+    expect(profileLabel({ label: 'Il grosso', model: 'llama3.2' })).toBe('Il grosso')
+  })
+})
 
 /**
  * Un modello sbaglia, allucina campi e a volte restituisce stringhe dove ci
@@ -61,6 +236,25 @@ describe('sanitisePatch — l’output del modello non è creduto sulla parola',
   it('tronca una query lunghissima invece di accettarla', () => {
     const { patch } = sanitisePatch({ query: 'x'.repeat(500) })
     expect(patch.query.length).toBeLessThanOrEqual(60)
+  })
+
+  it('tiene i temi del vocabolario e scarta gli inventati', () => {
+    const { patch, rejected } = sanitisePatch({ themes: ['gotico', 'spettrale'] })
+    expect(patch.themes).toEqual(['gotico'])
+    expect(rejected.some((r) => r.includes('spettrale'))).toBe(true)
+  })
+
+  it('normalizza maiuscole e spazi nei temi, senza duplicarli', () => {
+    expect(sanitisePatch({ themes: [' Gotico ', 'GOTICO'] }).patch.themes).toEqual(['gotico'])
+  })
+
+  it('taglia a due i temi: il tetto al bonus è lo stesso', () => {
+    const { patch } = sanitisePatch({ themes: ['gotico', 'medievale', 'imperiale'] })
+    expect(patch.themes).toHaveLength(2)
+  })
+
+  it('non mette il campo temi quando nessuno è riconosciuto', () => {
+    expect(sanitisePatch({ themes: ['spettrale'] }).patch.themes).toBeUndefined()
   })
 
   it('non esplode su risposte non oggetto', () => {

@@ -1,4 +1,7 @@
 import { AXES, AXIS_KEYS } from './axes.js'
+import { THEMES, THEME_BONUS, THEME_BONUS_MAX, THEME_KEYS } from './themes.js'
+import { countryName } from './format.js'
+import { seaTemperature, tripCost } from './scoring.js'
 
 /**
  * Interpretazione della frase tramite un modello linguistico.
@@ -19,7 +22,14 @@ import { AXES, AXIS_KEYS } from './axes.js'
  *    risultato strano viene dallo scoring o dall'interpretazione.
  */
 
-export const AGENT_KEY = 'destination-finder:agent:v1'
+export const AGENT_KEY = 'destination-finder:agent:v2'
+
+/**
+ * La chiave della configurazione a modello singolo. Letta una volta sola, per
+ * travasare la vecchia configurazione nel primo profilo della lista: chi aveva
+ * già un endpoint funzionante non deve riscriverlo.
+ */
+export const LEGACY_AGENT_KEY = 'destination-finder:agent:v1'
 
 export const PRESETS = [
   {
@@ -53,13 +63,53 @@ export const PRESETS = [
   { id: 'custom', label: 'Altro endpoint', baseUrl: '', model: '', note: 'Qualsiasi server compatibile OpenAI.' },
 ]
 
+/* --------------------------------------------------------------------------
+   I modelli configurati sono una lista, non uno.
+
+   Un endpoint solo costringeva a riscrivere URL e nome del modello ogni volta
+   che si voleva confrontare due interpreti — ed è esattamente la cosa che si fa
+   spesso, perché quale modello legge la frase si giudica solo vedendolo
+   sbagliare su una frase vera. Ora la configurazione tiene un elenco di profili
+   e un `activeId`: cambiare interprete torna a essere un clic nel menu accanto
+   al campo, che è dove la scelta si prende.
+
+   Chi usa la configurazione non deve sapere se il profilo attivo è il primo o
+   il quarto: passa l'intera configurazione e `activeProfile` risolve. La stessa
+   funzione accetta anche un profilo singolo, così la prova di connessione nelle
+   impostazioni può lavorare sulla riga che si sta modificando, che non è ancora
+   quella attiva.
+   -------------------------------------------------------------------------- */
+
+/** Un profilo nuovo, ricavato da un preset. */
+export function profileFromPreset(preset, id) {
+  return {
+    id,
+    // Vuoto di proposito: finché non serve, il nome visibile è quello del
+    // modello. Un "Modello 1" prestampato sarebbe un'etichetta che non
+    // distingue nulla e che nessuno riscrive.
+    label: '',
+    preset: preset.id,
+    baseUrl: preset.baseUrl,
+    model: preset.model,
+    apiKey: '',
+  }
+}
+
+/** Identificatore libero: progressivo sul massimo già assegnato, mai riusato. */
+export function nextProfileId(profiles = []) {
+  const massimo = profiles.reduce((acc, p) => {
+    const n = Number(String(p?.id ?? '').replace(/^m/, ''))
+    return Number.isFinite(n) ? Math.max(acc, n) : acc
+  }, 0)
+  return `m${massimo + 1}`
+}
+
 export function emptyAgentConfig() {
+  const primo = profileFromPreset(PRESETS[0], 'm1')
   return {
     enabled: false,
-    preset: 'ollama',
-    baseUrl: PRESETS[0].baseUrl,
-    model: PRESETS[0].model,
-    apiKey: '',
+    activeId: primo.id,
+    profiles: [primo],
     // Mostra come la frase è stata letta prima di applicarla. Spento di
     // default: è materiale da messa a punto, e in uso normale occupa il posto
     // sotto il campo con una tabella che non si guarda.
@@ -67,10 +117,100 @@ export function emptyAgentConfig() {
   }
 }
 
+const asProfile = (raw, id) => ({
+  id,
+  label: typeof raw?.label === 'string' ? raw.label : '',
+  preset: PRESETS.some((p) => p.id === raw?.preset) ? raw.preset : 'custom',
+  baseUrl: typeof raw?.baseUrl === 'string' ? raw.baseUrl : '',
+  model: typeof raw?.model === 'string' ? raw.model : '',
+  apiKey: typeof raw?.apiKey === 'string' ? raw.apiKey : '',
+})
+
+/**
+ * Riporta alla forma corrente qualunque cosa arrivi da `localStorage`, inclusa
+ * la configurazione a modello singolo di prima. Un `activeId` che punta a un
+ * profilo cancellato ricade sul primo: meglio un interprete diverso da quello
+ * atteso che una configurazione che non risolve e fallisce a ogni frase.
+ */
+export function normaliseAgentConfig(raw) {
+  if (!raw || typeof raw !== 'object') return emptyAgentConfig()
+
+  const lista = Array.isArray(raw.profiles)
+    // Una lista vuota è una scelta — l'ultimo profilo cancellato — e va
+    // rispettata: rimettere il preset di default farebbe ricomparire da solo
+    // un modello appena tolto.
+    ? raw.profiles
+    : (raw.baseUrl || raw.model ? [raw] : emptyAgentConfig().profiles)
+
+  const profiles = []
+  for (const item of lista) {
+    if (!item || typeof item !== 'object') continue
+    const id = typeof item.id === 'string' && item.id && !profiles.some((p) => p.id === item.id)
+      ? item.id
+      : nextProfileId(profiles)
+    profiles.push(asProfile(item, id))
+  }
+
+  return {
+    enabled: Boolean(raw.enabled) && profiles.length > 0,
+    activeId: profiles.some((p) => p.id === raw.activeId) ? raw.activeId : (profiles[0]?.id ?? null),
+    profiles,
+    debug: Boolean(raw.debug),
+  }
+}
+
+/** Un profilo utilizzabile ha almeno endpoint e nome del modello. */
+export const profileIsUsable = (profile) => Boolean(profile?.baseUrl && profile?.model)
+
+/** Come si chiama nel menu: il nome dato, o il modello, che è già distintivo. */
+export function profileLabel(profile) {
+  if (!profile) return ''
+  const nome = typeof profile.label === 'string' ? profile.label.trim() : ''
+  return nome || profile.model || 'Senza nome'
+}
+
+/** L'host dell'endpoint: distingue due profili sullo stesso modello. */
+export function endpointHost(baseUrl) {
+  try {
+    return new URL(baseUrl).host
+  } catch {
+    return String(baseUrl || '')
+  }
+}
+
+export const isLocalEndpoint = (baseUrl) => /^https?:\/\/(localhost|127\.|\[::1\])/i.test(baseUrl || '')
+
+/**
+ * Il profilo su cui si lavora. Accetta sia la configurazione intera sia un
+ * profilo singolo, così tutte le chiamate passano di qui senza sapere quale
+ * delle due hanno in mano.
+ */
+export function activeProfile(config) {
+  if (!config || typeof config !== 'object') return null
+  if (Array.isArray(config.profiles)) {
+    return config.profiles.find((p) => p.id === config.activeId) || config.profiles[0] || null
+  }
+  return config.baseUrl || config.model ? config : null
+}
+
+/** Acceso *e* configurato: un `enabled` su un profilo vuoto non è un modello. */
+export const agentIsReady = (config) =>
+  Boolean(config?.enabled && profileIsUsable(activeProfile(config)))
+
 export function loadAgentConfig() {
   try {
     const raw = localStorage.getItem(AGENT_KEY)
-    return raw ? { ...emptyAgentConfig(), ...JSON.parse(raw) } : emptyAgentConfig()
+    if (raw) return normaliseAgentConfig(JSON.parse(raw))
+
+    const legacy = localStorage.getItem(LEGACY_AGENT_KEY)
+    if (legacy) {
+      const migrata = normaliseAgentConfig(JSON.parse(legacy))
+      saveAgentConfig(migrata)
+      try { localStorage.removeItem(LEGACY_AGENT_KEY) } catch { /* resta lì, innocua */ }
+      return migrata
+    }
+
+    return emptyAgentConfig()
   } catch {
     return emptyAgentConfig()
   }
@@ -146,6 +286,24 @@ export function sanitisePatch(raw) {
 
   if (typeof raw.query === 'string' && raw.query.trim()) patch.query = raw.query.trim().slice(0, 60)
 
+  /**
+   * I temi passano solo se stanno nel vocabolario chiuso. Un tema inventato non
+   * corrisponderebbe a nessuna etichetta del seed e sparirebbe in silenzio: chi
+   * legge vedrebbe un chip "tema: spettrale" che non ha spostato niente, cioè
+   * la peggiore delle due possibilità — sembra che l'abbia capito, e invece no.
+   */
+  if (Array.isArray(raw.themes)) {
+    const themes = []
+    for (const value of raw.themes) {
+      const key = typeof value === 'string' ? value.trim().toLowerCase() : ''
+      if (!THEME_KEYS.includes(key)) { rejected.push(`tema sconosciuto "${value}"`); continue }
+      if (!themes.includes(key)) themes.push(key)
+    }
+    // Due bastano: il tetto al bonus è lo stesso, e un elenco più lungo è un
+    // modello che sta buttando dentro tutto quello che gli somiglia.
+    if (themes.length) patch.themes = themes.slice(0, 2)
+  }
+
   return { patch, rejected }
 }
 
@@ -172,20 +330,117 @@ Schema:
   "nights": intero >= 1,
   "budgetMax": intero in euro, costo A TERRA per persona (alloggio+cibo+trasporti locali, volo ESCLUSO),
   "weights": { asse: 0-10 },
-  "seaRequired": true SOLO se la frase pone il mare come condizione necessaria ("voglio il mare", "balneabile"); un semplice interesse per il mare NON basta,
+  "seaRequired": true SOLO se la frase pone il mare come condizione NECESSARIA ("voglio il mare", "deve essere balneabile"). ATTENZIONE: è un filtro che CANCELLA le destinazioni troppo fredde nel mese chiesto, e nei mesi freddi le cancella tutte. "sul mare", "mare tranquillo", "snorkeling", "spiagge" sono interessi: per quelli ometti il campo e alza il peso "sea",
   "allowedTypes": sottoinsieme di ["city","area","island"],
   "query": nome di una destinazione o di un paese se esplicitamente nominato,
+  "themes": sottoinsieme dell'elenco dei temi, al massimo 2. Serve quando la frase evoca un CARATTERE che gli assi non sanno dire — "Halloween" non chiede più cultura, chiede atmosfera gotica. Non escludono niente: danno un bonus a chi ha quell'etichetta. Ometti il campo se la frase parla solo di interessi,
   "understood": [ { "label": "...", "value": "...", "from": "la parola esatta della frase da cui l'hai dedotto", "note": "opzionale" } ]
 }
 
 Assi ammessi: nature (paesaggio da guardare), culture, sea, food, nightlife, outdoor (attività: trekking, sci, sport), family, offbeat (poco turistico).
 
+Assi e temi rispondono a due domande diverse: l'asse dice QUANTO ti interessa una cosa, il tema dice CHE COSA deve essere il posto. "Halloween" è tema gotico e assi cultura/vita notturna insieme, non l'uno al posto degli altri.
+
 Regole:
 - Scala dei pesi: menzione semplice 7, enfasi ("soprattutto", "molto") 9, attenuazione ("un po' di") 3, negazione ("senza") 0.
 - Includi SOLO gli assi effettivamente nominati.
 - "5 giorni" significa nights 5.
+- Una festa o una ricorrenza nominata FISSA il mese, ed è l'unico modo che hai per collocarla nel tempo: capodanno 1, San Valentino 2, carnevale 2, Pasqua 4, 25 aprile 4, primo maggio 5, ferragosto 8, Halloween 10, Ognissanti 11, Natale 12. "Ponte del 2 giugno" è 6. Se la ricorrenza non è in questo elenco ma ha una data fissa che conosci, usa quella; se cade a cavallo di due mesi, scegli quello in cui cade il giorno principale.
+- Una festa dice anche CHE TIPO di viaggio è, e va tradotta anche in pesi: sono due deduzioni diverse dalla stessa parola, non una alternativa all'altra.
+- Un tema NON sostituisce i pesi. Il tema vale pochi punti e serve a distinguere fra destinazioni vicine; sono i pesi a decidere l'ordine. Se metti un tema senza pesi, il risultato è la classifica generica di sempre con uno scarto minimo: includi SEMPRE anche gli assi che quel carattere implica.
 - Il campo "from" è obbligatorio per ogni voce di "understood" e deve contenere parole prese TESTUALMENTE dalla frase.
-- Non inventare criteri non presenti nella frase.`
+- Non inventare criteri non presenti nella frase.
+- Se metti "seaRequired": true, in "understood" ci deve essere una voce con label "Mare obbligatorio" e "from" con le parole esatte che lo rendono una condizione. Se non riesci a citarle, non è una condizione: ometti il campo.
+
+Esempio. Frase: "qualche giorno sul mare ad aprile, con buon vino"
+{"month":4,"weights":{"sea":7,"food":7},"understood":[{"label":"Mare","value":"interesse, non requisito","from":"sul mare"},{"label":"Cibo","value":"7","from":"buon vino"}]}
+Niente "seaRequired": "sul mare" dice che il mare piace, non che senza mare la vacanza non va bene. Il peso a 7 porta comunque il mare in cima ai risultati, senza cancellare le altre destinazioni.
+
+Esempio con un tema. Frase: "una fuga fra geyser e sorgenti calde a marzo"
+{"month":3,"weights":{"nature":9,"outdoor":7},"themes":["vulcanico","termale"],"understood":[{"label":"Natura","value":"9","from":"geyser"},{"label":"Tema","value":"vulcanico, termale","from":"geyser e sorgenti calde"}]}
+I temi ci sono E i pesi anche: il tema dice che carattere deve avere il posto, i pesi dicono su cosa ordinarli. Un tema da solo lascia la classifica generica.`
+
+const TIPO_IT = { city: 'città', area: 'area', island: 'isola' }
+const MESI_IT = [
+  'gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno',
+  'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre',
+]
+
+/**
+ * Il catalogo e le conseguenze dei campi, calcolati dai dati veri.
+ *
+ * Nasce da una campagna di prove sul modello locale: gli errori che facevano
+ * male non erano disobbedienze ma decisioni prese al buio. `seaRequired: true`
+ * su "una meta sul mare a maggio" svuotava i risultati — non perché il modello
+ * ignorasse l'istruzione, ma perché non poteva sapere che quel campo è un
+ * filtro duro e che a maggio non c'è una sola destinazione sopra i 21 °C. Lo
+ * stesso per `query: "isola greca"`, che è un confronto testuale contro nomi
+ * che quella frase non contiene.
+ *
+ * Quindi invece di correggere l'output a valle con altre euristiche, il
+ * contesto dice al modello **cosa esiste e cosa succede**: sono le stesse
+ * regole che poi applica `scoring.js`, lette dagli stessi dati, così non
+ * possono divergere da sole quando il seed cambia.
+ *
+ * Quello che il contesto NON è: un invito a scegliere la destinazione. Il
+ * catalogo serve a sapere quali nomi esistono, non a selezionarne uno — la
+ * scelta resta del punteggio, che è verificabile.
+ */
+export function describeRules(destinations, { seaTempMin = 21 } = {}) {
+  if (!Array.isArray(destinations) || destinations.length === 0) return ''
+
+  const catalogo = destinations
+    .map((d) => `${d.name} (${countryName(d.country)}, ${TIPO_IT[d.type] || d.type})`)
+    .join(' · ')
+
+  const perTipo = Object.entries(
+    destinations.reduce((acc, d) => ({ ...acc, [d.type]: (acc[d.type] || 0) + 1 }), {})
+  ).map(([tipo, n]) => `${n} ${TIPO_IT[tipo] || tipo}`).join(', ')
+
+  const perMese = MESI_IT.map((nome, i) => {
+    const quante = destinations.filter((d) => {
+      const t = seaTemperature(d, i + 1)
+      return t != null && t >= seaTempMin
+    }).length
+    return `${nome} ${quante}`
+  }).join(', ')
+
+  const mesiVuoti = MESI_IT.filter((_, i) =>
+    destinations.every((d) => {
+      const t = seaTemperature(d, i + 1)
+      return t == null || t < seaTempMin
+    })
+  )
+
+  const notti = destinations.map((d) => tripCost(d, 1).mid).sort((a, b) => a - b)
+  const minimo = Math.round(notti[0])
+  const massimo = Math.round(notti[notti.length - 1])
+
+  // I temi arrivano col loro conteggio, non con l'elenco di chi li porta: al
+  // modello serve sapere che "gotico" non è un'etichetta vuota, non quali
+  // destinazioni scegliere — quello resta lavoro del punteggio.
+  const elencoTemi = THEMES.map((t) => {
+    const quante = destinations.filter((d) => (d.themes || []).includes(t.key)).length
+    return `- ${t.key}: ${t.hint} (${quante} destinazioni)`
+  }).join('\n')
+
+  return `CONTESTO — il catalogo su cui la tua risposta sarà applicata. Sono ${destinations.length} destinazioni (${perTipo}) e non ne esistono altre:
+${catalogo}
+
+COSA FA OGNI CAMPO. "month", "nights" e "weights" ordinano soltanto e non tolgono niente. Gli altri tre ESCLUDONO: una destinazione esclusa sparisce dai risultati, e se escludono tutto la persona vede una schermata vuota.
+
+- "query" è un confronto testuale su nome e paese, e va usato quando la frase nomina un luogo: "cinque notti in Grecia" → "Grecia", "un weekend a Lisbona" → "Lisbona", "un'isola greca" → "Grecia" insieme ad allowedTypes ["island"]. Il luogo deve comparire nell'elenco qui sopra, come nome o come paese: se non c'è, il confronto non trova niente e i risultati sono zero. Una descrizione che non è un luogo ("una capitale del nord", "una meta romantica", "un posto tranquillo") non va MAI in "query": per quella usa "allowedTypes" e i pesi. Il catalogo ti dice quali nomi esistono, non quale destinazione proporre: la scelta non è tua.
+- "allowedTypes" tiene solo i tipi elencati.
+- "seaRequired": true tiene solo chi ha il mare ad almeno ${seaTempMin} °C NEL MESE CHIESTO. Quante destinazioni lo superano, mese per mese: ${perMese}.${mesiVuoti.length ? ` In ${mesiVuoti.join(', ')} non ne passa NESSUNA: metterlo a true su uno di quei mesi svuota la ricerca.` : ''} Se la frase non pone il mare come condizione necessaria, ometti il campo e alza il peso "sea": ottieni le stesse destinazioni in cima senza cancellare le altre.
+- "budgetMax" è il costo a terra per persona per l'INTERO soggiorno, confrontato con la stima media del catalogo. Una notte costa fra ${minimo} € e ${massimo} €: un budget sotto ${minimo} € per notte non lascia passare niente. Se la frase dice "economico" senza una cifra, non inventarla — usa il campo solo quando un numero c'è.
+
+TEMI DISPONIBILI, con quante destinazioni li portano. Un tema che corrisponde vale ${THEME_BONUS} punti in più sul punteggio (massimo ${THEME_BONUS_MAX}): sposta l'ordine fra destinazioni vicine, non ribalta una differenza vera, e non esclude nessuno. Usa SOLO queste parole, al massimo due, e solo se la frase evoca davvero quel carattere:
+${elencoTemi}`
+}
+
+/** Il prompt di sistema, con il contesto in coda se il chiamante lo fornisce. */
+export const buildSystemPrompt = (contesto) =>
+  contesto ? `${SYSTEM_PROMPT}\n\n${contesto}` : SYSTEM_PROMPT
 
 /**
  * Una chiamata al server, con il JSON già estratto e verificato.
@@ -193,22 +448,25 @@ Regole:
  * sulle regole invece di fallire in silenzio.
  */
 async function askForJson(system, user, { config, signal, timeout }) {
-  if (!config?.baseUrl || !config?.model) throw new Error('Endpoint o modello non configurati')
+  // `config` può essere la configurazione intera o il singolo profilo che si
+  // sta provando nelle impostazioni: risolve `activeProfile`.
+  const profile = activeProfile(config)
+  if (!profileIsUsable(profile)) throw new Error('Endpoint o modello non configurati')
 
   const controller = new AbortController()
   const timer = setTimeout(() => controller.abort(), timeout)
   if (signal) signal.addEventListener('abort', () => controller.abort(), { once: true })
 
   try {
-    const response = await fetch(`${config.baseUrl.replace(/\/+$/, '')}/chat/completions`, {
+    const response = await fetch(`${profile.baseUrl.replace(/\/+$/, '')}/chat/completions`, {
       method: 'POST',
       signal: controller.signal,
       headers: {
         'Content-Type': 'application/json',
-        ...(config.apiKey ? { Authorization: `Bearer ${config.apiKey}` } : {}),
+        ...(profile.apiKey ? { Authorization: `Bearer ${profile.apiKey}` } : {}),
       },
       body: JSON.stringify({
-        model: config.model,
+        model: profile.model,
         temperature: 0,
         response_format: { type: 'json_object' },
         messages: [
@@ -240,9 +498,25 @@ async function askForJson(system, user, { config, signal, timeout }) {
   }
 }
 
-/** Chiede al modello di interpretare la frase. */
-export async function interpretWithModel(text, { config, signal, timeout = 60000 } = {}) {
-  const parsed = await askForJson(SYSTEM_PROMPT, text, { config, signal, timeout })
+/**
+ * Chiede al modello di interpretare la frase.
+ *
+ * Il timeout è tre minuti, non uno: misurato, un modello locale di taglia
+ * media impiega una decina di secondi, ma `gemma4:26b` sulla stessa macchina
+ * ne mette 98 — e la prima chiamata dopo l'avvio deve anche caricare i pesi in
+ * memoria. Un minuto dichiarava guasto un endpoint che stava solo lavorando, e
+ * chi aspettava aveva già l'Annulla per decidere da sé quando è troppo.
+ *
+ * `destinations` è facoltativo ma cambia la qualità della risposta: senza, il
+ * modello decide senza sapere cosa esiste nel catalogo né quali campi
+ * escludono. Vedi `describeRules`.
+ */
+export async function interpretWithModel(
+  text,
+  { config, signal, timeout = 180000, destinations, seaTempMin } = {}
+) {
+  const system = buildSystemPrompt(describeRules(destinations, { seaTempMin }))
+  const parsed = await askForJson(system, text, { config, signal, timeout })
   const { patch, rejected } = sanitisePatch(parsed)
   return { patch, understood: sanitiseUnderstood(parsed.understood), rejected, source: 'model' }
 }
@@ -336,7 +610,7 @@ export function critiquePayload({ text, entries, weights }) {
   })
 }
 
-export async function critiqueRanking({ text, entries, weights, config, signal, timeout = 60000 }) {
+export async function critiqueRanking({ text, entries, weights, config, signal, timeout = 180000 }) {
   const parsed = await askForJson(
     CRITIQUE_PROMPT,
     critiquePayload({ text, entries, weights }),
