@@ -4,12 +4,17 @@ import {
   clearDestinationOverrides,
   clearOverride,
   countOverriddenDestinations,
+  countOverriddenFields,
   downloadOverrides,
   isOverridden,
   parseOverridesFile,
   seedById,
   setOverride,
 } from '../lib/store.js'
+import { countryName } from '../lib/format.js'
+import { IconChevron, IconSearch, IconTrash } from './Icons.jsx'
+
+const typeLabel = (key) => DESTINATION_TYPES.find((t) => t.key === key)?.label || key
 
 const slugify = (text) =>
   text
@@ -84,21 +89,50 @@ const COST_ROWS = [
 ]
 
 export default function EditorPanel({ merged, overrides, onOverridesChange, initialId, onClose }) {
-  const [id, setId] = useState(initialId || merged[0]?.id)
+  /**
+   * `null` significa "mostra l'elenco", e apre così quando si entra dal menu.
+   *
+   * Prima partiva dalla prima destinazione del catalogo, con una tendina per
+   * cambiarla: chi aveva corretto tre destinazioni su ventitré riapriva il
+   * pannello e ne trovava una sola, senza un posto dove vedere le altre due.
+   * Il lavoro fatto non era da nessuna parte. Dal dettaglio di una
+   * destinazione si continua ad arrivare dritti alla sua scheda, che lì è
+   * quello che si sta chiedendo.
+   */
+  const [id, setId] = useState(initialId || null)
+  const [filtro, setFiltro] = useState('')
   const [newName, setNewName] = useState('')
   const [message, setMessage] = useState(null)
   const fileInput = useRef(null)
 
-  const destination = merged.find((d) => d.id === id) || merged[0]
-  if (!destination) return null
+  const destination = id ? merged.find((d) => d.id === id) : null
 
-  const fromSeed = Boolean(seedById(destination.id))
+  const fromSeed = destination ? Boolean(seedById(destination.id)) : false
   const read = (path) => path.reduce((node, key) => (node == null ? undefined : node[key]), destination)
   // Per una destinazione creata ex novo tutto vive nell'override: marcare ogni
   // campo come "modificato" sarebbe rumore senza informazione.
   const changed = (path) => fromSeed && isOverridden(overrides, destination.id, path)
   const write = (path, value) => onOverridesChange(setOverride(overrides, destination.id, path, value))
   const reset = (path) => onOverridesChange(clearOverride(overrides, destination.id, path))
+
+  /**
+   * L'elenco: le modificate in cima, poi le altre in ordine alfabetico.
+   *
+   * Non è un vezzo di ordinamento — è la risposta alla domanda con cui si apre
+   * questo pannello, "cosa ho già corretto". In fondo a un elenco alfabetico
+   * di ventitré voci, tre destinazioni toccate sono invisibili.
+   */
+  const cercato = filtro.trim().toLowerCase()
+  const elenco = merged
+    .filter((d) => !cercato || `${d.name} ${countryName(d.country)}`.toLowerCase().includes(cercato))
+    .map((d) => ({
+      destination: d,
+      campi: countOverriddenFields(overrides, d.id),
+      nuova: !seedById(d.id),
+    }))
+    .sort((a, b) => (b.campi > 0) - (a.campi > 0) || a.destination.name.localeCompare(b.destination.name, 'it'))
+
+  const modificate = elenco.filter((r) => r.campi > 0).length
 
   const numberOrNull = (raw) => (raw === '' ? null : Number(raw))
 
@@ -148,10 +182,13 @@ export default function EditorPanel({ merged, overrides, onOverridesChange, init
       >
         <header className="panel__head">
           <div>
-            <h2>Editor</h2>
+            <h2>
+              {destination ? destination.name : 'Parametri delle destinazioni'}
+            </h2>
             <p>
-              Le modifiche restano in un layer separato: <code>data/destinations.json</code> non
-              viene mai riscritto dall’app.
+              {destination
+                ? 'Punteggi, costi e clima di questa destinazione. Ogni campo corretto resta segnato.'
+                : 'Le modifiche restano in un layer separato: data/destinations.json non viene mai riscritto dall’app.'}
             </p>
           </div>
           <button type="button" className="panel__close" onClick={onClose} aria-label="Chiudi">×</button>
@@ -162,44 +199,107 @@ export default function EditorPanel({ merged, overrides, onOverridesChange, init
             <div className={`notice${message.tone === 'warn' ? ' notice--warn' : ''}`}>{message.text}</div>
           )}
 
-          <div className="section">
-            <div className="inline inline--wrap" style={{ marginBottom: 12 }}>
-              <label htmlFor="ed-dest" className="visually-hidden">Destinazione</label>
-              <select
-                id="ed-dest"
-                className="control"
-                style={{ width: 'auto', minWidth: 240 }}
-                value={destination.id}
-                onChange={(e) => { setId(e.target.value); setMessage(null) }}
-              >
-                {merged.map((d) => (
-                  <option key={d.id} value={d.id}>
-                    {d.name}
-                    {overrides.destinations[d.id] ? ' •' : ''}
-                  </option>
-                ))}
-              </select>
-              {!fromSeed && <span className="badge badge--edit">creata da te</span>}
-              {fromSeed && overrides.destinations[destination.id] && (
-                <span className="badge badge--edit">modificata</span>
-              )}
-              <form onSubmit={createDestination} className="inline" style={{ marginLeft: 'auto' }}>
-                <label htmlFor="ed-new" className="visually-hidden">Nome nuova destinazione</label>
-                <input
-                  id="ed-new"
-                  className="control"
-                  style={{ width: 200 }}
-                  placeholder="Nome nuova destinazione"
-                  value={newName}
-                  onChange={(e) => setNewName(e.target.value)}
-                />
-                <button type="submit" className="btn btn--accent" disabled={!newName.trim()}>
-                  Aggiungi
-                </button>
-              </form>
-            </div>
-          </div>
+          {!destination && (
+            <div className="section">
+              <div className="inline inline--wrap" style={{ marginBottom: 12 }}>
+                <label htmlFor="ed-filtro" className="visually-hidden">Cerca una destinazione</label>
+                <span className="filters__search" style={{ flex: 1, minWidth: 200 }}>
+                  <IconSearch />
+                  <input
+                    id="ed-filtro"
+                    type="search"
+                    className="control"
+                    placeholder="Cerca per nome o paese…"
+                    value={filtro}
+                    onChange={(e) => setFiltro(e.target.value)}
+                  />
+                </span>
+                <form onSubmit={createDestination} className="inline" style={{ marginLeft: 'auto' }}>
+                  <label htmlFor="ed-new" className="visually-hidden">Nome nuova destinazione</label>
+                  <input
+                    id="ed-new"
+                    className="control"
+                    style={{ width: 200 }}
+                    placeholder="Nome nuova destinazione"
+                    value={newName}
+                    onChange={(e) => setNewName(e.target.value)}
+                  />
+                  <button type="submit" className="btn btn--accent" disabled={!newName.trim()}>
+                    Aggiungi
+                  </button>
+                </form>
+              </div>
 
+              <p className="filters__note" style={{ marginBottom: 12 }}>
+                {modificate === 0
+                  ? `${merged.length} destinazioni, nessuna ancora corretta. I punteggi del seed sono stime: correggere quelle che conosci è il lavoro che rende utile il ranking.`
+                  : `${modificate} ${modificate === 1 ? 'destinazione corretta' : 'destinazioni corrette'} su ${merged.length}. Sono in cima all’elenco.`}
+              </p>
+
+              <ul className="destlist">
+                {elenco.map(({ destination: d, campi, nuova }) => (
+                  <li key={d.id} className={campi > 0 ? 'destlist__row destlist__row--touched' : 'destlist__row'}>
+                    <button
+                      type="button"
+                      className="destlist__pick"
+                      onClick={() => { setId(d.id); setMessage(null) }}
+                    >
+                      <span className="destlist__name">
+                        {d.name}
+                        {nuova && <span className="badge badge--edit">creata da te</span>}
+                        {!nuova && campi > 0 && (
+                          <span className="badge badge--edit">
+                            {campi} {campi === 1 ? 'campo' : 'campi'}
+                          </span>
+                        )}
+                      </span>
+                      <small>{countryName(d.country)} · {typeLabel(d.type)}</small>
+                    </button>
+
+                    {/* Il ripristino sta qui e non solo dentro la scheda: da qui
+                        si vede cosa si è toccato, ed è il momento in cui viene
+                        da disfare una correzione sbagliata. */}
+                    {campi > 0 && (
+                      <button
+                        type="button"
+                        className="destlist__reset"
+                        title={`Riporta ${d.name} ai valori del seed`}
+                        aria-label={`Riporta ${d.name} ai valori del seed`}
+                        onClick={() => onOverridesChange(clearDestinationOverrides(overrides, d.id))}
+                      >
+                        <IconTrash width="15" height="15" />
+                      </button>
+                    )}
+
+                    <IconChevron width="16" height="16" className="destlist__go" />
+                  </li>
+                ))}
+              </ul>
+
+              {elenco.length === 0 && (
+                <p className="hside__empty">Nessuna destinazione corrisponde a “{filtro.trim()}”.</p>
+              )}
+            </div>
+          )}
+
+          {destination && (
+            <div className="section">
+              <div className="inline inline--wrap" style={{ marginBottom: 12 }}>
+                <button type="button" className="btn" onClick={() => { setId(null); setMessage(null) }}>
+                  ← Tutte le destinazioni
+                </button>
+                {!fromSeed && <span className="badge badge--edit">creata da te</span>}
+                {fromSeed && countOverriddenFields(overrides, destination.id) > 0 && (
+                  <span className="badge badge--edit">
+                    {countOverriddenFields(overrides, destination.id)} campi corretti
+                  </span>
+                )}
+              </div>
+            </div>
+          )}
+
+          {destination && (
+          <>
           <div className="section">
             <h3>Anagrafica</h3>
             <div className="editor__grid">
@@ -409,6 +509,8 @@ export default function EditorPanel({ merged, overrides, onOverridesChange, init
               />
             </OField>
           </div>
+          </>
+          )}
         </div>
 
         <footer className="panel__foot">
@@ -425,6 +527,9 @@ export default function EditorPanel({ merged, overrides, onOverridesChange, init
             hidden
             onChange={importFile}
           />
+          {/* Solo dentro una scheda: dall'elenco il ripristino sta su ogni
+              riga, dove si vede a cosa si applica. */}
+          {destination && (
           <button
             type="button"
             className="btn"
@@ -432,12 +537,15 @@ export default function EditorPanel({ merged, overrides, onOverridesChange, init
             onClick={() => {
               const wasNew = !fromSeed
               onOverridesChange(clearDestinationOverrides(overrides, destination.id))
-              if (wasNew) setId(merged.find((d) => d.id !== destination.id)?.id)
+              // Una destinazione creata da te, eliminata, non esiste più:
+              // restare sulla sua scheda mostrerebbe una pagina vuota.
+              if (wasNew) setId(null)
               setMessage({ tone: 'info', text: wasNew ? 'Destinazione eliminata.' : 'Valori riportati al seed.' })
             }}
           >
             {fromSeed ? 'Ripristina dal seed' : 'Elimina destinazione'}
           </button>
+          )}
           <button type="button" className="btn" style={{ marginLeft: 'auto' }} onClick={onClose}>
             Chiudi
           </button>

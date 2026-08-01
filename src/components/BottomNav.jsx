@@ -12,7 +12,7 @@ export default function BottomNav({
     { key: 'search', label: 'Cerca', Icon: IconSearch, active: !onlyFavourites, onClick: onSearch },
     { key: 'fav', label: 'Preferiti', Icon: IconHeart, fillable: true, active: onlyFavourites, badge: favouritesCount, onClick: onFavourites },
     { key: 'cmp', label: 'Confronta', Icon: IconScale, badge: compareCount, disabled: compareCount < 2, onClick: onCompare },
-    { key: 'edit', label: 'Editor', Icon: IconEdit, onClick: onEditor },
+    { key: 'edit', label: 'Parametri', Icon: IconEdit, onClick: onEditor },
   ]
 
   return (

@@ -125,6 +125,31 @@ export function clearDestinationOverrides(overrides, id) {
   return next
 }
 
+/**
+ * Quanti campi sono stati toccati su una destinazione: le foglie del patch.
+ *
+ * Serve all'elenco dell'editor, dove "modificata" da solo non dice se hai
+ * corretto un punteggio o riscritto mezza scheda — ed è la differenza fra
+ * ricordarsi cosa si è fatto e doverla riaprire per scoprirlo.
+ */
+export function countOverriddenFields(overrides, id) {
+  const patch = overrides?.destinations?.[id]
+  if (!isPlainObject(patch)) return 0
+
+  let foglie = 0
+  const visita = (node) => {
+    for (const [key, value] of Object.entries(node)) {
+      // Marcatore interno delle destinazioni create ex novo: non è un campo
+      // che l'utente ha compilato.
+      if (key === '__new') continue
+      if (isPlainObject(value)) visita(value)
+      else foglie += 1
+    }
+  }
+  visita(patch)
+  return foglie
+}
+
 export function countOverriddenDestinations(overrides) {
   return Object.keys(overrides?.destinations || {}).length
 }

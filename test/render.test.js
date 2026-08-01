@@ -114,6 +114,31 @@ describe('render — l’app si disegna senza riferimenti penzolanti', () => {
     })
   })
 
+  /**
+   * Il pannello dei parametri si apre sull'ELENCO, non su una destinazione:
+   * prima partiva dalla prima del catalogo, e chi ne aveva corrette tre non
+   * aveva un posto dove ritrovarle.
+   */
+  it('i parametri si aprono sull’elenco, e su una scheda se la nomini', async () => {
+    const { default: seed } = await import('../data/destinations.json', { with: { type: 'json' } })
+    const { emptyOverrides } = await import('../src/lib/store.js')
+    const props = {
+      merged: seed.destinations,
+      overrides: emptyOverrides(),
+      onOverridesChange: () => {},
+      onClose: () => {},
+    }
+
+    const elenco = await renderizza('../src/components/EditorPanel.jsx', props)
+    expect(elenco).toContain('Parametri delle destinazioni')
+    expect(elenco).toContain('Creta')
+    expect(elenco).toContain('Transilvania')
+
+    const scheda = await renderizza('../src/components/EditorPanel.jsx', { ...props, initialId: 'creta' })
+    expect(scheda).toContain('Tutte le destinazioni')
+    expect(scheda).toContain('Anagrafica')
+  })
+
   it('il pannello della critica non si disegna senza un modello attivo', async () => {
     const html = await renderizza('../src/components/RankingCritique.jsx', {
       phrase: 'meta per halloween',

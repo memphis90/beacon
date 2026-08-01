@@ -120,7 +120,11 @@ export default function SideRail({
             count={nav.compareCount} disabled={nav.compareCount < 2}
             onClick={nav.onCompare}
           />
-          <Voce Icon={IconEdit} label="Editor" count={nav.overriddenCount} onClick={nav.onEditor} />
+          {/* "Parametri" e non "Editor": dice cosa si cambia là dentro —
+              punteggi, costi, clima — mentre "Editor" dice solo che si può
+              scrivere. E non "Configurazioni", che si confonderebbe con le
+              Impostazioni del modello, che sono un'altra cosa. */}
+          <Voce Icon={IconEdit} label="Parametri" count={nav.overriddenCount} onClick={nav.onEditor} />
         </nav>
       )}
 
