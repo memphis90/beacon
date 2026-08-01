@@ -103,7 +103,7 @@ plug in a language model. **Any OpenAI-compatible endpoint** works:
 |---|---|---|---|
 | **Ollama** | locally | no | **no** |
 | **LM Studio** | locally | no | **no** |
-| Google AI Studio (Gemma) | remote, free, no card | yes | yes |
+| Google AI Studio (Gemini) | remote, free, no card | yes | yes |
 | Groq | remote, free tier | yes | yes |
 | OpenRouter (`:free` models) | remote | yes | yes |
 | Any OpenAI-compatible server | depends | depends | depends |

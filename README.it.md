@@ -102,7 +102,7 @@ endpoint compatibile con l'API OpenAI**:
 |---|---|---|---|
 | **Ollama** | in locale | no | **no** |
 | **LM Studio** | in locale | no | **no** |
-| Google AI Studio (Gemma) | remoto, gratuito senza carta | sì | sì |
+| Google AI Studio (Gemini) | remoto, gratuito senza carta | sì | sì |
 | Groq | remoto, piano gratuito | sì | sì |
 | OpenRouter (modelli `:free`) | remoto | sì | sì |
 | Qualsiasi server OpenAI-compatibile | dipende | dipende | dipende |

@@ -48,9 +48,20 @@ export const PRESETS = [
   },
   {
     id: 'google',
-    label: 'Google AI Studio (Gemma, gratis)',
+    label: 'Google AI Studio (Gemini, gratis)',
     baseUrl: 'https://generativelanguage.googleapis.com/v1beta/openai',
-    model: 'gemma-3-27b-it',
+    /**
+     * Gemini, non Gemma. Il livello di compatibilità OpenAI di Google espone i
+     * modelli Gemini; Gemma vive nell'API nativa, che parla un dialetto
+     * diverso e questa app non lo parla. Avevo scritto "gemma-3-27b-it"
+     * ragionando sul modello invece che sull'endpoint: l'indirizzo era giusto
+     * e il nome no, che è il modo più fastidioso di sbagliare — sembra un
+     * problema di chiave.
+     *
+     * Se questo nome invecchia, il pannello ha "Quali modelli ha?": chiede
+     * l'elenco alla tua chiave, che è l'unica fonte che non invecchia.
+     */
+    model: 'gemini-3.6-flash',
     note: 'Remoto, gratuito entro quota e senza carta. Chiave da aistudio.google.com/apikey. La frase esce dal tuo computer.',
   },
   {
@@ -603,6 +614,18 @@ async function askForJson(system, user, { config, signal, timeout }) {
         throw new Error(
           `${endpointHost(profile.baseUrl)} ha rifiutato la chiave (${response.status}). `
           + 'Controlla che sia quella giusta per questo endpoint e che non sia scaduta.'
+        )
+      }
+      /**
+       * Il 404 su un endpoint che risponde è quasi sempre un nome di modello
+       * che quel server non serve — non un indirizzo sbagliato. È il caso più
+       * insidioso perché somiglia a un problema di chiave, e la risposta ce
+       * l'ha l'endpoint stesso.
+       */
+      if (response.status === 404) {
+        throw new Error(
+          `${endpointHost(profile.baseUrl)} non conosce il modello "${profile.model}" (404). `
+          + 'Nelle impostazioni, "Quali modelli ha?" chiede l’elenco alla tua chiave.'
         )
       }
       throw new Error(`Il modello ha risposto ${response.status}${body ? `: ${body.slice(0, 120)}` : ''}`)
