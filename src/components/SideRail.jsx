@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import {
-  IconClock, IconEdit, IconFilter, IconHeart, IconLogout, IconMenu, IconPlus,
+  IconClock, IconEdit, IconHeart, IconLogout, IconMenu, IconPin, IconPlus,
   IconScale, IconSettings, IconTrash, IconUser,
 } from './Icons.jsx'
 import { LogoMark } from './Logo.jsx'
@@ -138,11 +138,12 @@ export default function SideRail({
         )}
 
         {/* "Scopri le destinazioni" e non "Vai ai filtri, senza frase": la
-            seconda descriveva il meccanismo, la prima dice cosa ottieni.
-            Senza questa voce la frase sarebbe l'unico modo di entrare, e chi
-            vuole solo sfogliare il catalogo dovrebbe scriverne una finta. */}
+            seconda descriveva il meccanismo, la prima dice cosa ottieni. Il
+            segnaposto per la stessa ragione — l'imbuto del filtro raccontava
+            come ci arrivi, non dove vai, e da chiusa la barra mostra solo
+            l'icona: lì il disegno È l'etichetta. */}
         {onSkipToFilters && (
-          <Voce Icon={IconFilter} label="Scopri le destinazioni" onClick={onSkipToFilters} />
+          <Voce Icon={IconPin} label="Scopri le destinazioni" onClick={onSkipToFilters} />
         )}
       </nav>
 
