@@ -258,6 +258,28 @@ export function parseQuery(input, { destinations = [] } = {}) {
     })
   }
 
+  /* Il requisito principale, quando la frase lo dichiara da sola.
+   *
+   * Le regole non "capiscono" una gerarchia, ma una gerarchia scritta la
+   * riconoscono: "soprattutto il mare" mette il mare sopra gli altri, e la
+   * scala dei pesi lo registrava già portandolo a 9. Se un asse solo arriva a
+   * 9 mentre gli altri stanno più in basso, quello è il padrone della frase.
+   * Se ce ne sono due, non c'è gerarchia: sono due cose importanti uguali, e
+   * inventarne una sarebbe peggio che non averla. */
+  const forti = Object.keys(weights).filter((k) => weights[k] >= 9)
+  const secondari = Object.keys(weights).filter((k) => weights[k] > 0 && weights[k] < 9)
+  if (forti.length === 1 && secondari.length > 0) {
+    patch.primary = forti[0]
+    understood.push({
+      key: 'primary', label: 'Requisito principale', value: AXIS_LABELS[forti[0]],
+      // Le parole vere della frase, prese dalla voce che ha alzato quel peso:
+      // "requisito principale: mare <- soprattutto il mare" si verifica, la
+      // chiave dell'asse no.
+      from: understood.find((u) => u.key === `axis:${forti[0]}`)?.from || forti[0],
+      hint: 'chi non lo soddisfa esce, non viene solo penalizzato',
+    })
+  }
+
   const risparmio = RISPARMIO_NEGATO.exec(text)
   if (risparmio) {
     weights.value = 8

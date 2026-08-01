@@ -63,6 +63,9 @@ function baseCriteria() {
     // I veti espressi nella frase ("ma non in Sardegna"). Vuoti di default:
     // azzerare i criteri deve ridare tutto il catalogo.
     excluded: [],
+    // L'asse che comanda la ricerca, quando la frase ne dichiara uno. Null di
+    // default: senza gerarchia esplicita nessun asse deve escludere gli altri.
+    primary: null,
     // I temi non sono un filtro: nessuna destinazione viene esclusa perché non
     // è gotica. Sono un bonus sul punteggio, e partono vuoti perché una
     // ricerca senza tema non deve favorire nessuno.
@@ -246,6 +249,7 @@ export default function App({ startedInitially = false }) {
     (criteria.allowedTypes.length !== 3 ? 1 : 0) +
     (criteria.query.trim() ? 1 : 0) +
     (criteria.excluded?.length || 0) +
+    (criteria.primary ? 1 : 0) +
     (criteria.themes?.length || 0) +
     Object.keys(criteria.weights).filter((k) => criteria.weights[k] !== defaults.weights[k]).length
 

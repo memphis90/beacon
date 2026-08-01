@@ -1,7 +1,7 @@
 import { AXES, AXIS_KEYS } from './axes.js'
 import { THEMES, THEME_BONUS, THEME_BONUS_MAX, THEME_KEYS } from './themes.js'
 import { countryName } from './format.js'
-import { isUnscored, seaTemperature, tripCost } from './scoring.js'
+import { isUnscored, seaTemperature, tripCost, PRIMARY_MIN } from './scoring.js'
 
 /**
  * Interpretazione della frase tramite un modello linguistico.
@@ -369,6 +369,22 @@ export function sanitisePatch(raw) {
 
   if ('seaRequired' in raw) patch.seaRequired = Boolean(raw.seaRequired)
 
+  /**
+   * Il requisito principale, e il peso che ne consegue.
+   *
+   * Dichiarare un asse principale e poi lasciargli il peso di tutti gli altri
+   * sarebbe una contraddizione: il campo dice "questa è LA cosa", quindi il
+   * peso lo diventa. Alzarlo qui invece di chiederlo al modello toglie un modo
+   * di sbagliare, e resta visibile nella scomposizione del punteggio.
+   */
+  if (typeof raw.primary === 'string' && AXIS_KEYS.includes(raw.primary)) {
+    patch.primary = raw.primary
+    const pesi = patch.weights || {}
+    patch.weights = { ...pesi, [raw.primary]: Math.max(Number(pesi[raw.primary]) || 0, 9) }
+  } else if (raw.primary != null) {
+    rejected.push('requisito principale non riconosciuto')
+  }
+
   /* I veti sono testo libero come `query`, e come `query` non ci si fida:
      ripuliti, tagliati e limitati a cinque — un elenco più lungo di così non
      è una richiesta, è un modello che ha frainteso la frase. */
@@ -435,6 +451,7 @@ Schema:
   "seaRequired": true quando il mare è una CONDIZIONE ("voglio il mare", "deve essere balneabile") oppure il TIPO di destinazione ("una località di mare", "una meta balneare", "un posto al mare", "vacanza al mare"): in quel secondo caso il mare non è un gusto, è la categoria del posto, e una città che ha l'oceano a mezz'ora non la soddisfa. ATTENZIONE: è un filtro che CANCELLA le destinazioni troppo fredde nel mese chiesto, e nei mesi freddi le cancella tutte. Restano interessi, da tradurre nel peso "sea" senza questo campo: "mare tranquillo", "snorkeling", "spiagge", "con vista sul mare",
   "allowedTypes": sottoinsieme di ["city","area","island"],
   "query": nome di una destinazione o di un paese se esplicitamente nominato E VOLUTO,
+  "primary": UN SOLO asse fra quelli ammessi, quello senza cui la vacanza sarebbe sbagliata e non solo meno bella. Omettilo se la frase elenca gusti senza gerarchia,
   "excluded": elenco di nomi di destinazione o di paese che la frase RIFIUTA ("ma non in Sardegna", "niente Grecia", "tranne la Spagna"). Sono veti: spariscono dai risultati. Un nome rifiutato non va MAI anche in "query",
   "themes": sottoinsieme dell'elenco dei temi, al massimo 2. Serve quando la frase evoca un CARATTERE che gli assi non sanno dire — "Halloween" non chiede più cultura, chiede atmosfera gotica. Non escludono niente: danno un bonus a chi ha quell'etichetta. Ometti il campo se la frase parla solo di interessi,
   "understood": [ { "label": "...", "value": "...", "from": "la parola esatta della frase da cui l'hai dedotto", "note": "opzionale" } ]
@@ -546,6 +563,7 @@ ${catalogo}
 COSA FA OGNI CAMPO. "month", "nights" e "weights" ordinano soltanto e non tolgono niente. Gli altri quattro ESCLUDONO: una destinazione esclusa sparisce dai risultati, e se escludono tutto la persona vede una schermata vuota.
 
 - "query" è un confronto testuale su nome e paese, e va usato quando la frase nomina un luogo: "cinque notti in Grecia" → "Grecia", "un weekend a Lisbona" → "Lisbona", "un'isola greca" → "Grecia" insieme ad allowedTypes ["island"]. Il luogo deve comparire nell'elenco qui sopra, come nome o come paese: se non c'è, il confronto non trova niente e i risultati sono zero. Una descrizione che non è un luogo ("una capitale del nord", "una meta romantica", "un posto tranquillo") non va MAI in "query": per quella usa "allowedTypes" e i pesi. Il catalogo ti dice quali nomi esistono, non quale destinazione proporre: la scelta non è tua.
+- "primary" esclude chi sta sotto ${PRIMARY_MIN} su 100 in quell'asse. Serve quando la frase elenca molte cose ma una sola le comanda: "mare bellissimo, poca folla, ristoranti, borghi, trekking leggero" chiede cinque cose, e senza mare la vacanza è sbagliata mentre senza borghi è solo meno bella. Senza questo campo i cinque pesi si equivalgono e il mare vale un quinto, cioè una destinazione fortissima sulle altre quattro vince una ricerca sul mare. Mettilo SOLO quando la gerarchia è nella frase; se sono gusti messi in fila, omettilo — è un filtro, e su un elenco senza padrone taglierebbe risultati buoni.
 - "excluded" toglie chi corrisponde, col confronto testuale di "query" ma al contrario: "Grecia" fra gli esclusi toglie tutte le destinazioni greche, non una sola. È l'unico modo di rispettare un rifiuto — abbassare un peso non basta, perché una destinazione molto forte sugli altri assi tornerebbe comunque in cima. Se la frase nomina un luogo per rifiutarlo, il nome va QUI e non in "query": metterlo in "query" produce l'esatto contrario di quel che è stato chiesto.
 - "allowedTypes" tiene solo i tipi elencati.
 - "seaRequired": true tiene solo chi ha il mare ad almeno ${seaTempMin} °C NEL MESE CHIESTO. Quante destinazioni lo superano, mese per mese: ${perMese}.${mesiVuoti.length ? ` In ${mesiVuoti.join(', ')} non ne passa NESSUNA: metterlo a true su uno di quei mesi svuota la ricerca.` : ''} Se la frase non pone il mare come condizione necessaria, ometti il campo e alza il peso "sea": ottieni le stesse destinazioni in cima senza cancellare le altre.

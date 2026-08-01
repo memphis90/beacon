@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { IconSearch } from './Icons.jsx'
 import { AXES, DESTINATION_TYPES, MONTHS, emptyWeights } from '../lib/axes.js'
+import { PRIMARY_MIN } from '../lib/scoring.js'
 import { THEMES, THEME_BONUS, THEME_BONUS_MAX } from '../lib/themes.js'
 import { periodFromDates } from '../lib/period.js'
 
@@ -139,6 +140,27 @@ export default function FilterPanel({ criteria, onChange, open = false, onClose,
             campo per scriverli, ma devono essere visibili e togliibili. Un
             filtro che toglie destinazioni senza comparire da nessuna parte è
             esattamente la scatola nera che l'app evita. */}
+        {criteria.primary && (
+          <div className="field">
+            <span className="filters__label">Requisito principale</span>
+            <div className="chips">
+              <button
+                type="button"
+                className="chip chip--removable"
+                onClick={() => set({ primary: null })}
+                title="Torna a trattarlo come un interesse fra gli altri"
+              >
+                {AXES.find((a) => a.key === criteria.primary)?.label || criteria.primary}
+                {' '}<span aria-hidden="true">×</span>
+                <span className="visually-hidden">, togli il requisito</span>
+              </button>
+            </div>
+            <p className="filters__note">
+              Chi sta sotto <strong>{PRIMARY_MIN}</strong> su questo asse è escluso, non solo penalizzato.
+            </p>
+          </div>
+        )}
+
         {criteria.excluded?.length > 0 && (
           <div className="field">
             <span className="filters__label">Escluse dalla tua frase</span>

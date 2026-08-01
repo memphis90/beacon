@@ -13,6 +13,7 @@ import { countryName } from './format.js'
 export const FILTER = {
   QUERY: 'query',
   EXCLUDED: 'excluded',
+  PRIMARY: 'primary',
   TYPE: 'type',
   SEA: 'sea',
   BUDGET: 'budget',
@@ -22,6 +23,7 @@ export const FILTER = {
 export const FILTER_LABEL = {
   [FILTER.QUERY]: 'ricerca testuale',
   [FILTER.EXCLUDED]: 'esclusa dalla richiesta',
+  [FILTER.PRIMARY]: 'requisito principale',
   [FILTER.TYPE]: 'tipo di destinazione',
   [FILTER.SEA]: 'temperatura del mare',
   [FILTER.BUDGET]: 'budget massimo',
@@ -143,6 +145,16 @@ export function sumWeights(weights) {
  * esclusa venga attribuita al primo filtro che la respinge. L'attribuzione
  * serve alla UI per spiegare l'esclusione all'utente.
  */
+/**
+ * La soglia sotto la quale una destinazione non soddisfa il requisito principale.
+ *
+ * Un numero solo, dichiarato, e non una formula: chi legge "esclusa perché il
+ * mare è il requisito principale e qui vale 40 su 100" capisce il motivo e sa
+ * come cambiarlo. 55 è appena sopra la media, cioè "questa cosa la fa in modo
+ * almeno decente": non chiede l'eccellenza, esclude chi quella cosa non la fa.
+ */
+export const PRIMARY_MIN = 55
+
 export function applyHardFilters(destinations, criteria) {
   const {
     query = '',
@@ -154,6 +166,8 @@ export function applyHardFilters(destinations, criteria) {
     seaRequired = false,
     allowedTypes = null,
     excluded: escluse = null,
+    primary = null,
+    primaryMin = PRIMARY_MIN,
   } = criteria || {}
 
   const veti = (Array.isArray(escluse) ? escluse : [])
@@ -173,6 +187,19 @@ export function applyHardFilters(destinations, criteria) {
    * Interesse e requisito sono cose diverse e ora sono due controlli diversi.
    */
   const seaRequested = Boolean(seaRequired)
+
+  /**
+   * Il requisito principale, quando c'è, è un cancello e non un peso.
+   *
+   * "Mare bellissimo, poca folla, ristoranti, borghi, trekking leggero" chiede
+   * sei cose, ma una sola le governa: senza mare quella vacanza è sbagliata,
+   * senza borghi è solo meno bella. Trattate tutte come pesi, il mare vale un
+   * sesto e una destinazione fortissima sulle altre cinque vince una ricerca
+   * sul mare — che è come l'app perdeva contro sé stessa.
+   */
+  const assePrimario = AXIS_KEYS.includes(primary) ? primary : null
+  const soglia = Number.isFinite(primaryMin) ? primaryMin : PRIMARY_MIN
+  const fascia = assePrimario === 'value' ? costRange(destinations) : null
 
   const kept = []
   const excluded = []
@@ -203,6 +230,21 @@ export function applyHardFilters(destinations, criteria) {
       const veto = veti.find((v) => haystack.includes(v))
       if (veto) {
         excluded.push({ destination, filter: FILTER.EXCLUDED, detail: `hai escluso "${veto}"` })
+        continue
+      }
+    }
+
+    if (assePrimario) {
+      const punteggio = assePrimario === 'value'
+        ? cheapness(destination, fascia)
+        : Number(destination.scores?.[assePrimario]) || 0
+      if (punteggio < soglia) {
+        const etichetta = AXES.find((a) => a.key === assePrimario)?.label || assePrimario
+        excluded.push({
+          destination,
+          filter: FILTER.PRIMARY,
+          detail: `${etichetta.toLowerCase()} è il requisito principale e qui vale ${punteggio}`,
+        })
         continue
       }
     }
