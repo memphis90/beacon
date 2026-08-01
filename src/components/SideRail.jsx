@@ -104,7 +104,13 @@ export default function SideRail({
           <span className="hside__burger"><IconMenu width="22" height="22" /></span>
           <span className="visually-hidden">{open ? 'Chiudi la barra' : 'Apri la barra'}</span>
         </button>
-        <span className="hside__label landing__phase">Fase 0</span>
+        {/* La pastiglia "Fase 0" non c'è più: era vera quando il catalogo
+            aveva ventitré destinazioni stimate a mano, e diceva a chi guardava
+            di non fidarsi troppo. Ora il clima è misurato e il catalogo è di
+            centocinquantanove: dichiarare una fase interna di sviluppo, in
+            cima alla barra, è raccontare a chi cerca una vacanza un dettaglio
+            del nostro processo. Lo stato del progetto sta nel README, che è
+            dove lo si va a cercare. */}
       </div>
 
       {/* Un blocco solo, e ogni voce compare se il chiamante la passa: due

@@ -118,3 +118,86 @@ Malta (isola) | island
 Cipro | island
 Peloponneso | area
 Istria | area | HR
+
+# ==========================================================================
+# Seconda tornata. I buchi che si vedevano cercando: mancava Milano, mancava
+# tutta la Svizzera, mancavano le isole greche minori e l'Inghilterra fuori
+# da Londra. Le voci qui sotto non sono "altre destinazioni": sono le assenze
+# che rendevano certe ricerche senza risposta.
+# ==========================================================================
+
+# --- Italia, i vuoti più evidenti -----------------------------------------
+Milano | city
+Bergamo | city
+Mantova | city
+Ravenna | city
+Ferrara | city
+Assisi | city
+Perugia | city
+Urbino | city
+Isola di Capri | island
+Procida | island
+Isola d'Elba | island
+Gargano | area
+Cilento | area
+Valle d'Aosta | area
+
+# --- Grecia, oltre le due isole già presenti ------------------------------
+Mykonos | island
+Paros | island
+Naxos (isola) | island
+Zante | island
+Cefalonia | island
+Meteora | area
+
+# --- Penisola iberica -----------------------------------------------------
+Toledo (Spagna) | city
+Cordova | city
+Málaga | city
+Santiago di Compostela | city
+Minorca | island
+Sintra | city
+Azzorre | island
+Lanzarote | island
+
+# --- Francia --------------------------------------------------------------
+Strasburgo | city
+Annecy | city
+Carcassonne | city
+Mont Saint-Michel | city
+Corsica | island
+Camargue | area
+
+# --- Regno Unito e Irlanda ------------------------------------------------
+Londra | city
+Bath | city
+Cornovaglia | area
+Highlands | area
+Galway | city
+
+# --- Arco alpino ----------------------------------------------------------
+Zurigo | city
+Lucerna | city
+Interlaken | city
+Zermatt | city
+Chamonix-Mont-Blanc | city
+
+# --- Nord -----------------------------------------------------------------
+Bergen | city
+Tromsø | city
+Göteborg | city
+Aarhus | city
+
+# --- Est e Balcani --------------------------------------------------------
+Varsavia | city
+Danzica | city
+Brno | city
+Bled | city
+Parco nazionale dei laghi di Plitvice | area
+Mostar | city
+Ocrida | city
+Plovdiv | city
+
+# --- Turchia --------------------------------------------------------------
+Cappadocia | area
+Adalia | city

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { IconSearch } from './Icons.jsx'
 import { AXES, DESTINATION_TYPES, MONTHS, emptyWeights } from '../lib/axes.js'
 import { THEMES, THEME_BONUS, THEME_BONUS_MAX } from '../lib/themes.js'
+import { periodFromDates } from '../lib/period.js'
 
 /**
  * Scorciatoie a chip, come nel mockup desktop.
@@ -76,6 +77,23 @@ export default function FilterPanel({ criteria, onChange, open = false, onClose,
   }
 
   /**
+   * Le date scrivono mese e notti, non li affiancano.
+   *
+   * `month` e `nights` restano il modello su cui gira tutto il calcolo: le
+   * date sono un modo comodo di compilarli, non un terzo criterio. Tenerle
+   * come dato separato avrebbe voluto dire due verità sullo stesso periodo,
+   * che prima o poi divergono.
+   */
+  const periodo = periodFromDates(criteria.dateFrom, criteria.dateTo)
+
+  const applicaDate = (from, to) => {
+    const p = periodFromDates(from, to)
+    set(p
+      ? { dateFrom: from, dateTo: to, month: p.month, nights: p.nights }
+      : { dateFrom: from || null, dateTo: to || null })
+  }
+
+  /**
    * Il terzo tema scaccia il più vecchio invece di essere rifiutato in
    * silenzio: il tetto al bonus è di due temi, e un bottone che si preme senza
    * che succeda niente è peggio di un limite dichiarato dal comportamento.
@@ -119,13 +137,53 @@ export default function FilterPanel({ criteria, onChange, open = false, onClose,
       </Group>
 
       <Group title="Periodo e durata">
+        {/* Le date sono il modo in cui si pensa a un viaggio, e danno due
+            informazioni al prezzo di una: quando e per quanto. Ma i dati
+            climatici hanno risoluzione mensile — di "12-19 agosto" sappiamo
+            quanto sappiamo di tutto agosto — quindi la riga sotto dichiara su
+            che cosa si sta davvero rispondendo, invece di lasciar credere a
+            una precisione che non c'è.
+            I due controlli qui sotto restano per chi le date non le ha
+            ancora: non sono un doppione, sono l'altro stato in cui si arriva
+            a cercare una vacanza. */}
+        <div className="field">
+          <span className="field__label">Date, se le hai</span>
+          <div className="filters__dates">
+            <label htmlFor="f-from" className="visually-hidden">Dal</label>
+            <input
+              id="f-from" type="date" className="control"
+              value={criteria.dateFrom || ''}
+              onChange={(e) => applicaDate(e.target.value, criteria.dateTo)}
+            />
+            <span aria-hidden="true">→</span>
+            <label htmlFor="f-to" className="visually-hidden">Al</label>
+            <input
+              id="f-to" type="date" className="control"
+              value={criteria.dateTo || ''}
+              min={criteria.dateFrom || undefined}
+              onChange={(e) => applicaDate(criteria.dateFrom, e.target.value)}
+            />
+          </div>
+          {periodo && <p className="filters__note filters__note--ok">{periodo.label}</p>}
+          {criteria.dateFrom && criteria.dateTo && !periodo && (
+            <p className="filters__note filters__note--warn">
+              La seconda data deve venire dopo la prima.
+            </p>
+          )}
+        </div>
+
         <div className="field">
           <label htmlFor="f-month">Mese del viaggio</label>
           <select
             id="f-month"
             className="control"
             value={criteria.month ?? ''}
-            onChange={(e) => set({ month: e.target.value === '' ? null : Number(e.target.value) })}
+            /* Scegliere il mese a mano toglie le date: erano il modo per
+               ricavarlo, e lasciarle lì direbbe una cosa che non è più vera. */
+            onChange={(e) => set({
+              month: e.target.value === '' ? null : Number(e.target.value),
+              dateFrom: null, dateTo: null,
+            })}
           >
             {/* Senza un mese il filtro di stagionalità non sparisce: cambia
                 domanda, e chiede se il mare arriva mai a essere caldo. */}
@@ -144,7 +202,10 @@ export default function FilterPanel({ criteria, onChange, open = false, onClose,
             min="1"
             max="60"
             value={criteria.nights}
-            onChange={(e) => set({ nights: Math.max(1, Number(e.target.value) || 1) })}
+            onChange={(e) => set({
+              nights: Math.max(1, Number(e.target.value) || 1),
+              dateFrom: null, dateTo: null,
+            })}
           />
         </div>
       </Group>

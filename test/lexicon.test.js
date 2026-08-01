@@ -86,6 +86,19 @@ describe('lexicon — l’inglese senza riscrivere le regole', () => {
     expect(parseQuery('quindici giorni a luglio').patch.nights).toBe(15)
   })
 
+  /**
+   * "Località di mare" non è un interesse per il mare: è la categoria della
+   * destinazione. Trattarlo come un peso faceva comparire città che il mare
+   * ce l'hanno vicino senza esserne fatte.
+   */
+  it('“località di mare” accende il requisito, “vista sul mare” no', () => {
+    expect(parseQuery('una località di mare a luglio').patch.seaRequired).toBe(true)
+    expect(parseQuery('cerco una meta balneare ad agosto').patch.seaRequired).toBe(true)
+    expect(parseQuery('un posto al mare a giugno').patch.seaRequired).toBe(true)
+    expect(parseQuery('una casa con vista sul mare').patch.seaRequired).toBeUndefined()
+    expect(parseQuery('un po’ di mare e molta cultura').patch.seaRequired).toBeUndefined()
+  })
+
   it('restoreOriginal lascia stare ciò che non ha tradotto', () => {
     const { origini } = toItalian('museums and beaches in july')
     expect(restoreOriginal('ottobre', origini)).toBe('ottobre')

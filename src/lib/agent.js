@@ -421,7 +421,7 @@ Schema:
   "nights": intero >= 1,
   "budgetMax": intero in euro, costo A TERRA per persona (alloggio+cibo+trasporti locali, volo ESCLUSO),
   "weights": { asse: 0-10 },
-  "seaRequired": true SOLO se la frase pone il mare come condizione NECESSARIA ("voglio il mare", "deve essere balneabile"). ATTENZIONE: è un filtro che CANCELLA le destinazioni troppo fredde nel mese chiesto, e nei mesi freddi le cancella tutte. "sul mare", "mare tranquillo", "snorkeling", "spiagge" sono interessi: per quelli ometti il campo e alza il peso "sea",
+  "seaRequired": true quando il mare è una CONDIZIONE ("voglio il mare", "deve essere balneabile") oppure il TIPO di destinazione ("una località di mare", "una meta balneare", "un posto al mare", "vacanza al mare"): in quel secondo caso il mare non è un gusto, è la categoria del posto, e una città che ha l'oceano a mezz'ora non la soddisfa. ATTENZIONE: è un filtro che CANCELLA le destinazioni troppo fredde nel mese chiesto, e nei mesi freddi le cancella tutte. Restano interessi, da tradurre nel peso "sea" senza questo campo: "mare tranquillo", "snorkeling", "spiagge", "con vista sul mare",
   "allowedTypes": sottoinsieme di ["city","area","island"],
   "query": nome di una destinazione o di un paese se esplicitamente nominato,
   "themes": sottoinsieme dell'elenco dei temi, al massimo 2. Serve quando la frase evoca un CARATTERE che gli assi non sanno dire — "Halloween" non chiede più cultura, chiede atmosfera gotica. Non escludono niente: danno un bonus a chi ha quell'etichetta. Ometti il campo se la frase parla solo di interessi,

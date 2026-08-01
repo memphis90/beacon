@@ -3,6 +3,254 @@
   "schema_version": 1,
   "destinations": [
     {
+      "id": "aarhus",
+      "name": "Aarhus",
+      "country": "DK",
+      "type": "city",
+      "coords": {
+        "lat": 56.1564,
+        "lon": 10.2097
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q25319",
+      "wikipedia_title": "Aarhus",
+      "wikipedia_title_en": "Aarhus",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 2,
+          "temp_max": 4,
+          "rain_days": 13,
+          "sea_temp": 4
+        },
+        "2": {
+          "temp_avg": 3,
+          "temp_max": 5,
+          "rain_days": 11,
+          "sea_temp": 4
+        },
+        "3": {
+          "temp_avg": 4,
+          "temp_max": 7,
+          "rain_days": 12,
+          "sea_temp": 4
+        },
+        "4": {
+          "temp_avg": 7,
+          "temp_max": 11,
+          "rain_days": 11,
+          "sea_temp": 7
+        },
+        "5": {
+          "temp_avg": 12,
+          "temp_max": 15,
+          "rain_days": 12,
+          "sea_temp": 12
+        },
+        "6": {
+          "temp_avg": 16,
+          "temp_max": 19,
+          "rain_days": 12,
+          "sea_temp": 16
+        },
+        "7": {
+          "temp_avg": 17,
+          "temp_max": 20,
+          "rain_days": 14,
+          "sea_temp": 17
+        },
+        "8": {
+          "temp_avg": 17,
+          "temp_max": 20,
+          "rain_days": 14,
+          "sea_temp": 18
+        },
+        "9": {
+          "temp_avg": 14,
+          "temp_max": 17,
+          "rain_days": 12,
+          "sea_temp": 17
+        },
+        "10": {
+          "temp_avg": 10,
+          "temp_max": 13,
+          "rain_days": 14,
+          "sea_temp": 13
+        },
+        "11": {
+          "temp_avg": 6,
+          "temp_max": 8,
+          "rain_days": 13,
+          "sea_temp": 9
+        },
+        "12": {
+          "temp_avg": 4,
+          "temp_max": 6,
+          "rain_days": 15,
+          "sea_temp": 5
+        }
+      },
+      "scores": {
+        "nature": 52,
+        "culture": 72,
+        "sea": 35,
+        "food": 78,
+        "nightlife": 68,
+        "outdoor": 50,
+        "family": 68,
+        "offbeat": 52
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
+      "id": "adalia",
+      "name": "Adalia",
+      "country": "TR",
+      "type": "city",
+      "coords": {
+        "lat": 36.9081,
+        "lon": 30.6956
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q6487",
+      "wikipedia_title": "Adalia",
+      "wikipedia_title_en": "Antalya",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 9,
+          "temp_max": 14,
+          "rain_days": 12,
+          "sea_temp": 20
+        },
+        "2": {
+          "temp_avg": 11,
+          "temp_max": 16,
+          "rain_days": 9,
+          "sea_temp": 19
+        },
+        "3": {
+          "temp_avg": 13,
+          "temp_max": 18,
+          "rain_days": 10,
+          "sea_temp": 18
+        },
+        "4": {
+          "temp_avg": 16,
+          "temp_max": 22,
+          "rain_days": 6,
+          "sea_temp": 19
+        },
+        "5": {
+          "temp_avg": 21,
+          "temp_max": 27,
+          "rain_days": 7,
+          "sea_temp": 22
+        },
+        "6": {
+          "temp_avg": 25,
+          "temp_max": 31,
+          "rain_days": 5,
+          "sea_temp": 26
+        },
+        "7": {
+          "temp_avg": 30,
+          "temp_max": 36,
+          "rain_days": 2,
+          "sea_temp": 29
+        },
+        "8": {
+          "temp_avg": 29,
+          "temp_max": 35,
+          "rain_days": 2,
+          "sea_temp": 31
+        },
+        "9": {
+          "temp_avg": 26,
+          "temp_max": 32,
+          "rain_days": 3,
+          "sea_temp": 29
+        },
+        "10": {
+          "temp_avg": 21,
+          "temp_max": 27,
+          "rain_days": 5,
+          "sea_temp": 26
+        },
+        "11": {
+          "temp_avg": 16,
+          "temp_max": 21,
+          "rain_days": 8,
+          "sea_temp": 24
+        },
+        "12": {
+          "temp_avg": 11,
+          "temp_max": 16,
+          "rain_days": 12,
+          "sea_temp": 21
+        }
+      },
+      "scores": {
+        "nature": 62,
+        "culture": 68,
+        "sea": 85,
+        "food": 75,
+        "nightlife": 68,
+        "outdoor": 62,
+        "family": 75,
+        "offbeat": 32
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 6,
+          "high": 11
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
       "id": "algarve",
       "name": "Algarve",
       "country": "PT",
@@ -451,6 +699,254 @@
       ]
     },
     {
+      "id": "annecy",
+      "name": "Annecy",
+      "country": "FR",
+      "type": "city",
+      "coords": {
+        "lat": 45.8992,
+        "lon": 6.1294
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q50189",
+      "wikipedia_title": "Annecy",
+      "wikipedia_title_en": "Annecy",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 3,
+          "temp_max": 6,
+          "rain_days": 14,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": 4,
+          "temp_max": 9,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": 7,
+          "temp_max": 12,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 10,
+          "temp_max": 15,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 14,
+          "temp_max": 18,
+          "rain_days": 15,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 19,
+          "temp_max": 23,
+          "rain_days": 15,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 21,
+          "temp_max": 26,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 21,
+          "temp_max": 26,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 17,
+          "temp_max": 21,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 13,
+          "temp_max": 17,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 7,
+          "temp_max": 10,
+          "rain_days": 14,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": 4,
+          "temp_max": 8,
+          "rain_days": 13,
+          "sea_temp": null
+        }
+      },
+      "scores": {
+        "nature": 88,
+        "culture": 62,
+        "sea": 0,
+        "food": 80,
+        "nightlife": 45,
+        "outdoor": 82,
+        "family": 72,
+        "offbeat": 32
+      },
+      "costs": {
+        "accommodation": {
+          "low": 70,
+          "mid": 115,
+          "high": 190
+        },
+        "food_per_day": {
+          "low": 25,
+          "mid": 44,
+          "high": 74
+        },
+        "transport_local_day": {
+          "low": 5,
+          "mid": 9,
+          "high": 16
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
+      "id": "assisi",
+      "name": "Assisi",
+      "country": "IT",
+      "type": "city",
+      "coords": {
+        "lat": 43.0708,
+        "lon": 12.615
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q20103",
+      "wikipedia_title": "Assisi",
+      "wikipedia_title_en": "Assisi",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 4,
+          "temp_max": 9,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": 6,
+          "temp_max": 11,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": 8,
+          "temp_max": 13,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 11,
+          "temp_max": 17,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 16,
+          "temp_max": 21,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 21,
+          "temp_max": 27,
+          "rain_days": 7,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 25,
+          "temp_max": 31,
+          "rain_days": 4,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 24,
+          "temp_max": 31,
+          "rain_days": 6,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 19,
+          "temp_max": 25,
+          "rain_days": 9,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 15,
+          "temp_max": 20,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 10,
+          "temp_max": 14,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": 6,
+          "temp_max": 10,
+          "rain_days": 10,
+          "sea_temp": null
+        }
+      },
+      "scores": {
+        "nature": 62,
+        "culture": 90,
+        "sea": 0,
+        "food": 75,
+        "nightlife": 25,
+        "outdoor": 52,
+        "family": 58,
+        "offbeat": 35
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
       "id": "atene",
       "name": "Atene",
       "country": "GR",
@@ -569,6 +1065,130 @@
           "low": 3,
           "mid": 6,
           "high": 11
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
+      "id": "azzorre",
+      "name": "Azzorre",
+      "country": "PT",
+      "type": "island",
+      "coords": {
+        "lat": 38.624,
+        "lon": -28.031
+      },
+      "radius_km": 60,
+      "wikidata_id": "Q25263",
+      "wikipedia_title": "Azzorre",
+      "wikipedia_title_en": "Azores",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 12,
+          "temp_max": 13,
+          "rain_days": 14,
+          "sea_temp": 16
+        },
+        "2": {
+          "temp_avg": 11,
+          "temp_max": 12,
+          "rain_days": 12,
+          "sea_temp": 16
+        },
+        "3": {
+          "temp_avg": 11,
+          "temp_max": 13,
+          "rain_days": 13,
+          "sea_temp": 16
+        },
+        "4": {
+          "temp_avg": 12,
+          "temp_max": 13,
+          "rain_days": 16,
+          "sea_temp": 17
+        },
+        "5": {
+          "temp_avg": 13,
+          "temp_max": 15,
+          "rain_days": 14,
+          "sea_temp": 18
+        },
+        "6": {
+          "temp_avg": 15,
+          "temp_max": 17,
+          "rain_days": 12,
+          "sea_temp": 20
+        },
+        "7": {
+          "temp_avg": 18,
+          "temp_max": 19,
+          "rain_days": 13,
+          "sea_temp": 23
+        },
+        "8": {
+          "temp_avg": 19,
+          "temp_max": 21,
+          "rain_days": 13,
+          "sea_temp": 25
+        },
+        "9": {
+          "temp_avg": 18,
+          "temp_max": 20,
+          "rain_days": 12,
+          "sea_temp": 23
+        },
+        "10": {
+          "temp_avg": 16,
+          "temp_max": 17,
+          "rain_days": 15,
+          "sea_temp": 22
+        },
+        "11": {
+          "temp_avg": 14,
+          "temp_max": 15,
+          "rain_days": 15,
+          "sea_temp": 20
+        },
+        "12": {
+          "temp_avg": 12,
+          "temp_max": 14,
+          "rain_days": 16,
+          "sea_temp": 18
+        }
+      },
+      "scores": {
+        "nature": 95,
+        "culture": 42,
+        "sea": 62,
+        "food": 65,
+        "nightlife": 25,
+        "outdoor": 90,
+        "family": 60,
+        "offbeat": 78
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 6,
+          "mid": 13,
+          "high": 22
         },
         "currency": "EUR"
       },
@@ -901,6 +1521,130 @@
       ]
     },
     {
+      "id": "bath",
+      "name": "Bath",
+      "country": "GB",
+      "type": "city",
+      "coords": {
+        "lat": 51.3814,
+        "lon": -2.3597
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q22889",
+      "wikipedia_title": "Bath",
+      "wikipedia_title_en": "Bath, Somerset",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 5,
+          "temp_max": 7,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": 6,
+          "temp_max": 9,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": 7,
+          "temp_max": 10,
+          "rain_days": 15,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 9,
+          "temp_max": 13,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 12,
+          "temp_max": 16,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 15,
+          "temp_max": 19,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 17,
+          "temp_max": 21,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 17,
+          "temp_max": 20,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 14,
+          "temp_max": 18,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 11,
+          "temp_max": 15,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 8,
+          "temp_max": 10,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": 7,
+          "temp_max": 9,
+          "rain_days": 15,
+          "sea_temp": null
+        }
+      },
+      "scores": {
+        "nature": 55,
+        "culture": 90,
+        "sea": 0,
+        "food": 72,
+        "nightlife": 45,
+        "outdoor": 48,
+        "family": 60,
+        "offbeat": 32
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
       "id": "baviera",
       "name": "Baviera",
       "country": "DE",
@@ -1149,6 +1893,254 @@
       "costs_source": "assistant"
     },
     {
+      "id": "bergamo",
+      "name": "Bergamo",
+      "country": "IT",
+      "type": "city",
+      "coords": {
+        "lat": 45.695,
+        "lon": 9.67
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q628",
+      "wikipedia_title": "Bergamo",
+      "wikipedia_title_en": "Bergamo",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 3,
+          "temp_max": 7,
+          "rain_days": 7,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": 5,
+          "temp_max": 10,
+          "rain_days": 8,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": 8,
+          "temp_max": 13,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 12,
+          "temp_max": 17,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 16,
+          "temp_max": 20,
+          "rain_days": 19,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 21,
+          "temp_max": 26,
+          "rain_days": 15,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 24,
+          "temp_max": 28,
+          "rain_days": 15,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 23,
+          "temp_max": 28,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 18,
+          "temp_max": 23,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 14,
+          "temp_max": 18,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 8,
+          "temp_max": 12,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": 4,
+          "temp_max": 8,
+          "rain_days": 7,
+          "sea_temp": null
+        }
+      },
+      "scores": {
+        "nature": 48,
+        "culture": 75,
+        "sea": 0,
+        "food": 82,
+        "nightlife": 48,
+        "outdoor": 45,
+        "family": 58,
+        "offbeat": 38
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
+      "id": "bergen",
+      "name": "Bergen",
+      "country": "NO",
+      "type": "city",
+      "coords": {
+        "lat": 60.3925,
+        "lon": 5.3233
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q26793",
+      "wikipedia_title": "Bergen",
+      "wikipedia_title_en": "Bergen",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 1,
+          "temp_max": 3,
+          "rain_days": 21,
+          "sea_temp": 6
+        },
+        "2": {
+          "temp_avg": 1,
+          "temp_max": 4,
+          "rain_days": 19,
+          "sea_temp": 6
+        },
+        "3": {
+          "temp_avg": 3,
+          "temp_max": 6,
+          "rain_days": 18,
+          "sea_temp": 6
+        },
+        "4": {
+          "temp_avg": 5,
+          "temp_max": 9,
+          "rain_days": 15,
+          "sea_temp": 7
+        },
+        "5": {
+          "temp_avg": 10,
+          "temp_max": 13,
+          "rain_days": 15,
+          "sea_temp": 11
+        },
+        "6": {
+          "temp_avg": 13,
+          "temp_max": 17,
+          "rain_days": 16,
+          "sea_temp": 14
+        },
+        "7": {
+          "temp_avg": 14,
+          "temp_max": 17,
+          "rain_days": 19,
+          "sea_temp": 16
+        },
+        "8": {
+          "temp_avg": 14,
+          "temp_max": 17,
+          "rain_days": 21,
+          "sea_temp": 16
+        },
+        "9": {
+          "temp_avg": 12,
+          "temp_max": 15,
+          "rain_days": 17,
+          "sea_temp": 15
+        },
+        "10": {
+          "temp_avg": 8,
+          "temp_max": 10,
+          "rain_days": 21,
+          "sea_temp": 12
+        },
+        "11": {
+          "temp_avg": 4,
+          "temp_max": 6,
+          "rain_days": 18,
+          "sea_temp": 10
+        },
+        "12": {
+          "temp_avg": 2,
+          "temp_max": 4,
+          "rain_days": 22,
+          "sea_temp": 7
+        }
+      },
+      "scores": {
+        "nature": 88,
+        "culture": 68,
+        "sea": 20,
+        "food": 70,
+        "nightlife": 55,
+        "outdoor": 82,
+        "family": 62,
+        "offbeat": 42
+      },
+      "costs": {
+        "accommodation": {
+          "low": 70,
+          "mid": 115,
+          "high": 190
+        },
+        "food_per_day": {
+          "low": 25,
+          "mid": 44,
+          "high": 74
+        },
+        "transport_local_day": {
+          "low": 5,
+          "mid": 9,
+          "high": 16
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
       "id": "berlino",
       "name": "Berlino",
       "country": "DE",
@@ -1391,6 +2383,130 @@
           "low": 4,
           "mid": 8,
           "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
+      "id": "bled",
+      "name": "Bled",
+      "country": "SI",
+      "type": "city",
+      "coords": {
+        "lat": 46.3683,
+        "lon": 14.1147
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q202852",
+      "wikipedia_title": "Bled",
+      "wikipedia_title_en": "Bled",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 1,
+          "temp_max": 5,
+          "rain_days": 9,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": 3,
+          "temp_max": 7,
+          "rain_days": 9,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": 6,
+          "temp_max": 10,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 10,
+          "temp_max": 15,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 14,
+          "temp_max": 18,
+          "rain_days": 19,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 19,
+          "temp_max": 24,
+          "rain_days": 14,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 21,
+          "temp_max": 26,
+          "rain_days": 16,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 21,
+          "temp_max": 25,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 16,
+          "temp_max": 20,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 12,
+          "temp_max": 16,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 6,
+          "temp_max": 10,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": 2,
+          "temp_max": 6,
+          "rain_days": 8,
+          "sea_temp": null
+        }
+      },
+      "scores": {
+        "nature": 92,
+        "culture": 62,
+        "sea": 0,
+        "food": 68,
+        "nightlife": 25,
+        "outdoor": 82,
+        "family": 78,
+        "offbeat": 35
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 6,
+          "high": 11
         },
         "currency": "EUR"
       },
@@ -1893,6 +3009,130 @@
       "costs_source": "assistant"
     },
     {
+      "id": "brno",
+      "name": "Brno",
+      "country": "CZ",
+      "type": "city",
+      "coords": {
+        "lat": 49.1953,
+        "lon": 16.6083
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q14960",
+      "wikipedia_title": "Brno",
+      "wikipedia_title_en": "Brno",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 0,
+          "temp_max": 3,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": 2,
+          "temp_max": 6,
+          "rain_days": 7,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": 5,
+          "temp_max": 10,
+          "rain_days": 8,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 10,
+          "temp_max": 15,
+          "rain_days": 9,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 15,
+          "temp_max": 19,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 20,
+          "temp_max": 25,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 21,
+          "temp_max": 27,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 21,
+          "temp_max": 26,
+          "rain_days": 9,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 16,
+          "temp_max": 21,
+          "rain_days": 9,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 11,
+          "temp_max": 15,
+          "rain_days": 8,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 5,
+          "temp_max": 8,
+          "rain_days": 9,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": 1,
+          "temp_max": 4,
+          "rain_days": 9,
+          "sea_temp": null
+        }
+      },
+      "scores": {
+        "nature": 42,
+        "culture": 72,
+        "sea": 0,
+        "food": 72,
+        "nightlife": 72,
+        "outdoor": 45,
+        "family": 55,
+        "offbeat": 62
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 6,
+          "high": 11
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
       "id": "bruges",
       "name": "Bruges",
       "country": "BE",
@@ -2308,108 +3548,232 @@
       ]
     },
     {
-      "id": "cattaro",
-      "name": "Cattaro",
-      "country": "ME",
-      "type": "city",
+      "id": "camargue",
+      "name": "Camargue",
+      "country": "FR",
+      "type": "area",
       "coords": {
-        "lat": 42.4254,
-        "lon": 18.7712
+        "lat": 43.5333,
+        "lon": 4.5
       },
-      "radius_km": 25,
-      "wikidata_id": "Q171080",
-      "wikipedia_title": "Cattaro",
-      "wikipedia_title_en": "Kotor",
+      "radius_km": 90,
+      "wikidata_id": "Q218151",
+      "wikipedia_title": "Camargue",
+      "wikipedia_title_en": "Camargue",
       "airports": [],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
       "notes": "",
-      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/20090719_Crkva_Gospa_od_Zdravlja_Kotor_Bay_Montenegro.jpg/1280px-20090719_Crkva_Gospa_od_Zdravlja_Kotor_Bay_Montenegro.jpg",
-      "image_credit": "User:Ggia · CC BY-SA 3.0",
+      "image_url": null,
+      "image_credit": null,
       "climate": {
         "1": {
           "temp_avg": 8,
           "temp_max": 11,
-          "rain_days": 13,
-          "sea_temp": 15
+          "rain_days": 6,
+          "sea_temp": 11
         },
         "2": {
-          "temp_avg": 10,
-          "temp_max": 13,
-          "rain_days": 11,
-          "sea_temp": 14
+          "temp_avg": 9,
+          "temp_max": 14,
+          "rain_days": 6,
+          "sea_temp": 11
         },
         "3": {
-          "temp_avg": 11,
-          "temp_max": 14,
-          "rain_days": 13,
-          "sea_temp": 15
+          "temp_avg": 12,
+          "temp_max": 16,
+          "rain_days": 7,
+          "sea_temp": 13
         },
         "4": {
-          "temp_avg": 15,
-          "temp_max": 18,
-          "rain_days": 12,
-          "sea_temp": 17
+          "temp_avg": 14,
+          "temp_max": 19,
+          "rain_days": 7,
+          "sea_temp": 15
         },
         "5": {
-          "temp_avg": 19,
-          "temp_max": 22,
-          "rain_days": 14,
-          "sea_temp": 20
+          "temp_avg": 18,
+          "temp_max": 23,
+          "rain_days": 8,
+          "sea_temp": 18
         },
         "6": {
-          "temp_avg": 24,
-          "temp_max": 27,
-          "rain_days": 9,
-          "sea_temp": 25
+          "temp_avg": 23,
+          "temp_max": 28,
+          "rain_days": 7,
+          "sea_temp": 22
         },
         "7": {
-          "temp_avg": 27,
-          "temp_max": 30,
-          "rain_days": 5,
-          "sea_temp": 27
+          "temp_avg": 26,
+          "temp_max": 32,
+          "rain_days": 2,
+          "sea_temp": 24
         },
         "8": {
-          "temp_avg": 27,
-          "temp_max": 30,
-          "rain_days": 7,
-          "sea_temp": 27
+          "temp_avg": 25,
+          "temp_max": 31,
+          "rain_days": 4,
+          "sea_temp": 24
         },
         "9": {
-          "temp_avg": 22,
+          "temp_avg": 21,
           "temp_max": 26,
-          "rain_days": 9,
-          "sea_temp": 25
+          "rain_days": 6,
+          "sea_temp": 22
         },
         "10": {
-          "temp_avg": 18,
+          "temp_avg": 17,
           "temp_max": 21,
-          "rain_days": 11,
-          "sea_temp": 23
-        },
-        "11": {
-          "temp_avg": 14,
-          "temp_max": 17,
-          "rain_days": 13,
+          "rain_days": 8,
           "sea_temp": 20
         },
+        "11": {
+          "temp_avg": 12,
+          "temp_max": 16,
+          "rain_days": 9,
+          "sea_temp": 15
+        },
         "12": {
-          "temp_avg": 10,
+          "temp_avg": 9,
           "temp_max": 13,
-          "rain_days": 12,
-          "sea_temp": 17
+          "rain_days": 8,
+          "sea_temp": 12
         }
       },
       "scores": {
-        "nature": 80,
-        "culture": 72,
-        "sea": 70,
-        "food": 60,
-        "nightlife": 45,
-        "outdoor": 70,
-        "family": 52,
-        "offbeat": 55
+        "nature": 88,
+        "culture": 52,
+        "sea": 62,
+        "food": 72,
+        "nightlife": 20,
+        "outdoor": 68,
+        "family": 60,
+        "offbeat": 62
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 7,
+          "mid": 14,
+          "high": 25
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
+      "id": "cappadocia",
+      "name": "Cappadocia",
+      "country": "TR",
+      "type": "area",
+      "coords": {
+        "lat": 38.6706,
+        "lon": 34.8392
+      },
+      "radius_km": 90,
+      "wikidata_id": "Q217265",
+      "wikipedia_title": "Cappadocia",
+      "wikipedia_title_en": "Cappadocia",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 0,
+          "temp_max": 5,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": 2,
+          "temp_max": 8,
+          "rain_days": 7,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": 6,
+          "temp_max": 12,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 12,
+          "temp_max": 18,
+          "rain_days": 7,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 16,
+          "temp_max": 22,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 20,
+          "temp_max": 27,
+          "rain_days": 7,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 24,
+          "temp_max": 31,
+          "rain_days": 1,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 24,
+          "temp_max": 31,
+          "rain_days": 1,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 20,
+          "temp_max": 27,
+          "rain_days": 2,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 14,
+          "temp_max": 21,
+          "rain_days": 3,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 7,
+          "temp_max": 14,
+          "rain_days": 5,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": 3,
+          "temp_max": 8,
+          "rain_days": 8,
+          "sea_temp": null
+        }
+      },
+      "scores": {
+        "nature": 92,
+        "culture": 88,
+        "sea": 0,
+        "food": 72,
+        "nightlife": 35,
+        "outdoor": 82,
+        "family": 68,
+        "offbeat": 58
       },
       "costs": {
         "accommodation": {
@@ -2423,9 +3787,505 @@
           "high": 46
         },
         "transport_local_day": {
-          "low": 3,
-          "mid": 6,
-          "high": 11
+          "low": 5,
+          "mid": 11,
+          "high": 20
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
+      "id": "carcassonne",
+      "name": "Carcassonne",
+      "country": "FR",
+      "type": "city",
+      "coords": {
+        "lat": 43.2158,
+        "lon": 2.3514
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q6582",
+      "wikipedia_title": "Carcassonne",
+      "wikipedia_title_en": "Carcassonne",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 7,
+          "temp_max": 10,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": 8,
+          "temp_max": 12,
+          "rain_days": 9,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": 10,
+          "temp_max": 15,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 13,
+          "temp_max": 18,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 16,
+          "temp_max": 21,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 21,
+          "temp_max": 27,
+          "rain_days": 8,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 24,
+          "temp_max": 30,
+          "rain_days": 4,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 24,
+          "temp_max": 30,
+          "rain_days": 5,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 20,
+          "temp_max": 25,
+          "rain_days": 7,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 16,
+          "temp_max": 20,
+          "rain_days": 9,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 11,
+          "temp_max": 15,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": 9,
+          "temp_max": 12,
+          "rain_days": 8,
+          "sea_temp": null
+        }
+      },
+      "scores": {
+        "nature": 50,
+        "culture": 90,
+        "sea": 0,
+        "food": 75,
+        "nightlife": 30,
+        "outdoor": 48,
+        "family": 62,
+        "offbeat": 38
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
+      "id": "cefalonia",
+      "name": "Cefalonia",
+      "country": "GR",
+      "type": "island",
+      "coords": {
+        "lat": 38.265,
+        "lon": 20.5525
+      },
+      "radius_km": 60,
+      "wikidata_id": "Q178488",
+      "wikipedia_title": "Cefalonia",
+      "wikipedia_title_en": "Cephalonia",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 4,
+          "temp_max": 6,
+          "rain_days": 16,
+          "sea_temp": 17
+        },
+        "2": {
+          "temp_avg": 5,
+          "temp_max": 7,
+          "rain_days": 10,
+          "sea_temp": 16
+        },
+        "3": {
+          "temp_avg": 6,
+          "temp_max": 9,
+          "rain_days": 12,
+          "sea_temp": 16
+        },
+        "4": {
+          "temp_avg": 9,
+          "temp_max": 13,
+          "rain_days": 8,
+          "sea_temp": 17
+        },
+        "5": {
+          "temp_avg": 13,
+          "temp_max": 17,
+          "rain_days": 7,
+          "sea_temp": 19
+        },
+        "6": {
+          "temp_avg": 18,
+          "temp_max": 22,
+          "rain_days": 4,
+          "sea_temp": 24
+        },
+        "7": {
+          "temp_avg": 21,
+          "temp_max": 25,
+          "rain_days": 2,
+          "sea_temp": 27
+        },
+        "8": {
+          "temp_avg": 21,
+          "temp_max": 25,
+          "rain_days": 3,
+          "sea_temp": 27
+        },
+        "9": {
+          "temp_avg": 17,
+          "temp_max": 21,
+          "rain_days": 7,
+          "sea_temp": 26
+        },
+        "10": {
+          "temp_avg": 13,
+          "temp_max": 16,
+          "rain_days": 9,
+          "sea_temp": 24
+        },
+        "11": {
+          "temp_avg": 9,
+          "temp_max": 12,
+          "rain_days": 14,
+          "sea_temp": 22
+        },
+        "12": {
+          "temp_avg": 6,
+          "temp_max": 8,
+          "rain_days": 13,
+          "sea_temp": 19
+        }
+      },
+      "scores": {
+        "nature": 78,
+        "culture": 42,
+        "sea": 90,
+        "food": 68,
+        "nightlife": 45,
+        "outdoor": 60,
+        "family": 68,
+        "offbeat": 48
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 5,
+          "mid": 10,
+          "high": 18
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
+      "id": "chamonix-mont-blanc",
+      "name": "Chamonix-Mont-Blanc",
+      "country": "FR",
+      "type": "city",
+      "coords": {
+        "lat": 45.9222,
+        "lon": 6.8689
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q83236",
+      "wikipedia_title": "Chamonix-Mont-Blanc",
+      "wikipedia_title_en": "Chamonix",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": -1,
+          "temp_max": 4,
+          "rain_days": 15,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": 1,
+          "temp_max": 6,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": 4,
+          "temp_max": 8,
+          "rain_days": 15,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 7,
+          "temp_max": 12,
+          "rain_days": 15,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 11,
+          "temp_max": 15,
+          "rain_days": 19,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 16,
+          "temp_max": 20,
+          "rain_days": 18,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 18,
+          "temp_max": 23,
+          "rain_days": 14,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 18,
+          "temp_max": 23,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 14,
+          "temp_max": 18,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 10,
+          "temp_max": 15,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 4,
+          "temp_max": 9,
+          "rain_days": 14,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": 1,
+          "temp_max": 5,
+          "rain_days": 14,
+          "sea_temp": null
+        }
+      },
+      "scores": {
+        "nature": 95,
+        "culture": 40,
+        "sea": 0,
+        "food": 72,
+        "nightlife": 45,
+        "outdoor": 96,
+        "family": 65,
+        "offbeat": 25
+      },
+      "costs": {
+        "accommodation": {
+          "low": 90,
+          "mid": 148,
+          "high": 245
+        },
+        "food_per_day": {
+          "low": 30,
+          "mid": 55,
+          "high": 92
+        },
+        "transport_local_day": {
+          "low": 6,
+          "mid": 12,
+          "high": 21
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
+      "id": "cilento",
+      "name": "Cilento",
+      "country": "IT",
+      "type": "area",
+      "coords": {
+        "lat": 40.3333,
+        "lon": 15.25
+      },
+      "radius_km": 90,
+      "wikidata_id": "Q842184",
+      "wikipedia_title": "Cilento",
+      "wikipedia_title_en": "Cilento",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 5,
+          "temp_max": 9,
+          "rain_days": 14,
+          "sea_temp": 16
+        },
+        "2": {
+          "temp_avg": 7,
+          "temp_max": 11,
+          "rain_days": 12,
+          "sea_temp": 15
+        },
+        "3": {
+          "temp_avg": 8,
+          "temp_max": 13,
+          "rain_days": 14,
+          "sea_temp": 15
+        },
+        "4": {
+          "temp_avg": 11,
+          "temp_max": 16,
+          "rain_days": 12,
+          "sea_temp": 17
+        },
+        "5": {
+          "temp_avg": 15,
+          "temp_max": 20,
+          "rain_days": 14,
+          "sea_temp": 20
+        },
+        "6": {
+          "temp_avg": 20,
+          "temp_max": 25,
+          "rain_days": 8,
+          "sea_temp": 24
+        },
+        "7": {
+          "temp_avg": 23,
+          "temp_max": 29,
+          "rain_days": 5,
+          "sea_temp": 28
+        },
+        "8": {
+          "temp_avg": 23,
+          "temp_max": 28,
+          "rain_days": 10,
+          "sea_temp": 28
+        },
+        "9": {
+          "temp_avg": 19,
+          "temp_max": 24,
+          "rain_days": 11,
+          "sea_temp": 26
+        },
+        "10": {
+          "temp_avg": 15,
+          "temp_max": 20,
+          "rain_days": 12,
+          "sea_temp": 24
+        },
+        "11": {
+          "temp_avg": 11,
+          "temp_max": 15,
+          "rain_days": 15,
+          "sea_temp": 21
+        },
+        "12": {
+          "temp_avg": 7,
+          "temp_max": 11,
+          "rain_days": 12,
+          "sea_temp": 18
+        }
+      },
+      "scores": {
+        "nature": 82,
+        "culture": 62,
+        "sea": 85,
+        "food": 78,
+        "nightlife": 30,
+        "outdoor": 68,
+        "family": 65,
+        "offbeat": 62
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 5,
+          "mid": 11,
+          "high": 20
         },
         "currency": "EUR"
       },
@@ -2804,6 +4664,130 @@
       "costs_source": "assistant"
     },
     {
+      "id": "cordova",
+      "name": "Cordova",
+      "country": "ES",
+      "type": "city",
+      "coords": {
+        "lat": 37.89,
+        "lon": -4.78
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q5818",
+      "wikipedia_title": "Cordova",
+      "wikipedia_title_en": "Córdoba, Spain",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 9,
+          "temp_max": 15,
+          "rain_days": 7,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": 11,
+          "temp_max": 17,
+          "rain_days": 6,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": 14,
+          "temp_max": 20,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 16,
+          "temp_max": 22,
+          "rain_days": 8,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 21,
+          "temp_max": 28,
+          "rain_days": 5,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 26,
+          "temp_max": 33,
+          "rain_days": 2,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 30,
+          "temp_max": 38,
+          "rain_days": 0,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 30,
+          "temp_max": 37,
+          "rain_days": 1,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 25,
+          "temp_max": 31,
+          "rain_days": 3,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 20,
+          "temp_max": 26,
+          "rain_days": 7,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 14,
+          "temp_max": 19,
+          "rain_days": 7,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": 11,
+          "temp_max": 16,
+          "rain_days": 6,
+          "sea_temp": null
+        }
+      },
+      "scores": {
+        "nature": 42,
+        "culture": 95,
+        "sea": 0,
+        "food": 85,
+        "nightlife": 58,
+        "outdoor": 38,
+        "family": 55,
+        "offbeat": 30
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 6,
+          "high": 11
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
       "id": "corfu",
       "name": "Corfù",
       "country": "GR",
@@ -2922,6 +4906,254 @@
           "low": 5,
           "mid": 10,
           "high": 18
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
+      "id": "cornovaglia",
+      "name": "Cornovaglia",
+      "country": "GB",
+      "type": "area",
+      "coords": {
+        "lat": 50.3,
+        "lon": -4.9
+      },
+      "radius_km": 90,
+      "wikidata_id": "Q23148",
+      "wikipedia_title": "Cornovaglia",
+      "wikipedia_title_en": "Cornwall",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 7,
+          "temp_max": 9,
+          "rain_days": 14,
+          "sea_temp": 10
+        },
+        "2": {
+          "temp_avg": 7,
+          "temp_max": 9,
+          "rain_days": 14,
+          "sea_temp": 10
+        },
+        "3": {
+          "temp_avg": 8,
+          "temp_max": 10,
+          "rain_days": 16,
+          "sea_temp": 10
+        },
+        "4": {
+          "temp_avg": 9,
+          "temp_max": 12,
+          "rain_days": 11,
+          "sea_temp": 11
+        },
+        "5": {
+          "temp_avg": 12,
+          "temp_max": 15,
+          "rain_days": 13,
+          "sea_temp": 13
+        },
+        "6": {
+          "temp_avg": 15,
+          "temp_max": 18,
+          "rain_days": 13,
+          "sea_temp": 15
+        },
+        "7": {
+          "temp_avg": 16,
+          "temp_max": 19,
+          "rain_days": 12,
+          "sea_temp": 15
+        },
+        "8": {
+          "temp_avg": 16,
+          "temp_max": 19,
+          "rain_days": 14,
+          "sea_temp": 16
+        },
+        "9": {
+          "temp_avg": 15,
+          "temp_max": 17,
+          "rain_days": 13,
+          "sea_temp": 17
+        },
+        "10": {
+          "temp_avg": 13,
+          "temp_max": 15,
+          "rain_days": 15,
+          "sea_temp": 15
+        },
+        "11": {
+          "temp_avg": 10,
+          "temp_max": 12,
+          "rain_days": 17,
+          "sea_temp": 13
+        },
+        "12": {
+          "temp_avg": 9,
+          "temp_max": 10,
+          "rain_days": 17,
+          "sea_temp": 12
+        }
+      },
+      "scores": {
+        "nature": 85,
+        "culture": 55,
+        "sea": 62,
+        "food": 75,
+        "nightlife": 32,
+        "outdoor": 78,
+        "family": 72,
+        "offbeat": 42
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 7,
+          "mid": 14,
+          "high": 25
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
+      "id": "corsica",
+      "name": "Corsica",
+      "country": "FR",
+      "type": "island",
+      "coords": {
+        "lat": 42.15,
+        "lon": 9.0833
+      },
+      "radius_km": 60,
+      "wikidata_id": "Q14112",
+      "wikipedia_title": "Corsica",
+      "wikipedia_title_en": "Corsica",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 9,
+          "temp_max": 13,
+          "rain_days": 12,
+          "sea_temp": 15
+        },
+        "2": {
+          "temp_avg": 10,
+          "temp_max": 14,
+          "rain_days": 11,
+          "sea_temp": 15
+        },
+        "3": {
+          "temp_avg": 11,
+          "temp_max": 16,
+          "rain_days": 11,
+          "sea_temp": 15
+        },
+        "4": {
+          "temp_avg": 14,
+          "temp_max": 19,
+          "rain_days": 9,
+          "sea_temp": 16
+        },
+        "5": {
+          "temp_avg": 18,
+          "temp_max": 22,
+          "rain_days": 9,
+          "sea_temp": 19
+        },
+        "6": {
+          "temp_avg": 22,
+          "temp_max": 27,
+          "rain_days": 6,
+          "sea_temp": 23
+        },
+        "7": {
+          "temp_avg": 26,
+          "temp_max": 30,
+          "rain_days": 2,
+          "sea_temp": 26
+        },
+        "8": {
+          "temp_avg": 25,
+          "temp_max": 30,
+          "rain_days": 4,
+          "sea_temp": 26
+        },
+        "9": {
+          "temp_avg": 22,
+          "temp_max": 26,
+          "rain_days": 10,
+          "sea_temp": 24
+        },
+        "10": {
+          "temp_avg": 18,
+          "temp_max": 22,
+          "rain_days": 12,
+          "sea_temp": 22
+        },
+        "11": {
+          "temp_avg": 14,
+          "temp_max": 17,
+          "rain_days": 13,
+          "sea_temp": 20
+        },
+        "12": {
+          "temp_avg": 11,
+          "temp_max": 14,
+          "rain_days": 13,
+          "sea_temp": 17
+        }
+      },
+      "scores": {
+        "nature": 90,
+        "culture": 55,
+        "sea": 88,
+        "food": 75,
+        "nightlife": 35,
+        "outdoor": 85,
+        "family": 68,
+        "offbeat": 52
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 6,
+          "mid": 13,
+          "high": 22
         },
         "currency": "EUR"
       },
@@ -3068,14 +5300,14 @@
         "NAP"
       ],
       "scores": {
-        "nature": 72,
-        "culture": 70,
-        "sea": 88,
+        "nature": 88,
+        "culture": 78,
+        "sea": 52,
         "food": 85,
         "nightlife": 40,
         "outdoor": 65,
-        "family": 45,
-        "offbeat": 20
+        "family": 32,
+        "offbeat": 6
       },
       "scores_source": "manual",
       "climate_source": "open-meteo",
@@ -3209,7 +5441,7 @@
           "kind": "spiaggia"
         }
       ],
-      "notes": "family basso non per ostilità ai bambini ma per la logistica: scale ovunque, strade strette, spostamenti lenti. Costi alti e in aumento a luglio-agosto.",
+      "notes": "family basso non per ostilità ai bambini ma per la logistica: scale ovunque, strade strette, spostamenti lenti. Costi alti e in aumento a luglio-agosto. Spiagge poche e piccole, affollamento alto, prezzi elevati: vale come meta panoramica e culturale, non come destinazione balneare.",
       "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Amalfi_Coast_%28Italy%2C_October_2020%29_-_75_%2850558355441%29.jpg/1280px-Amalfi_Coast_%28Italy%2C_October_2020%29_-_75_%2850558355441%29.jpg",
       "image_credit": "Bruno Rijsman · CC BY-SA 2.0",
       "themes": [
@@ -3507,6 +5739,130 @@
         "archeologico",
         "balneare"
       ]
+    },
+    {
+      "id": "danzica",
+      "name": "Danzica",
+      "country": "PL",
+      "type": "city",
+      "coords": {
+        "lat": 54.3483,
+        "lon": 18.654
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q1792",
+      "wikipedia_title": "Danzica",
+      "wikipedia_title_en": "Gdańsk",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 1,
+          "temp_max": 3,
+          "rain_days": 14,
+          "sea_temp": 2
+        },
+        "2": {
+          "temp_avg": 2,
+          "temp_max": 4,
+          "rain_days": 11,
+          "sea_temp": 3
+        },
+        "3": {
+          "temp_avg": 4,
+          "temp_max": 8,
+          "rain_days": 10,
+          "sea_temp": 4
+        },
+        "4": {
+          "temp_avg": 8,
+          "temp_max": 12,
+          "rain_days": 9,
+          "sea_temp": 7
+        },
+        "5": {
+          "temp_avg": 13,
+          "temp_max": 17,
+          "rain_days": 11,
+          "sea_temp": 12
+        },
+        "6": {
+          "temp_avg": 18,
+          "temp_max": 22,
+          "rain_days": 12,
+          "sea_temp": 18
+        },
+        "7": {
+          "temp_avg": 19,
+          "temp_max": 22,
+          "rain_days": 14,
+          "sea_temp": 20
+        },
+        "8": {
+          "temp_avg": 19,
+          "temp_max": 23,
+          "rain_days": 11,
+          "sea_temp": 21
+        },
+        "9": {
+          "temp_avg": 16,
+          "temp_max": 19,
+          "rain_days": 10,
+          "sea_temp": 19
+        },
+        "10": {
+          "temp_avg": 10,
+          "temp_max": 14,
+          "rain_days": 11,
+          "sea_temp": 14
+        },
+        "11": {
+          "temp_avg": 6,
+          "temp_max": 8,
+          "rain_days": 11,
+          "sea_temp": 9
+        },
+        "12": {
+          "temp_avg": 3,
+          "temp_max": 4,
+          "rain_days": 13,
+          "sea_temp": 5
+        }
+      },
+      "scores": {
+        "nature": 52,
+        "culture": 85,
+        "sea": 45,
+        "food": 75,
+        "nightlife": 68,
+        "outdoor": 45,
+        "family": 65,
+        "offbeat": 45
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 6,
+          "high": 11
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
     },
     {
       "id": "dolomiti",
@@ -4331,6 +6687,130 @@
       "costs_source": "assistant"
     },
     {
+      "id": "ferrara",
+      "name": "Ferrara",
+      "country": "IT",
+      "type": "city",
+      "coords": {
+        "lat": 44.8392,
+        "lon": 11.6175
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q13362",
+      "wikipedia_title": "Ferrara",
+      "wikipedia_title_en": "Ferrara",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 4,
+          "temp_max": 8,
+          "rain_days": 6,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": 6,
+          "temp_max": 11,
+          "rain_days": 8,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": 10,
+          "temp_max": 15,
+          "rain_days": 9,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 14,
+          "temp_max": 19,
+          "rain_days": 9,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 18,
+          "temp_max": 23,
+          "rain_days": 14,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 24,
+          "temp_max": 29,
+          "rain_days": 8,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 27,
+          "temp_max": 32,
+          "rain_days": 8,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 26,
+          "temp_max": 31,
+          "rain_days": 9,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 21,
+          "temp_max": 26,
+          "rain_days": 9,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 16,
+          "temp_max": 21,
+          "rain_days": 9,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 10,
+          "temp_max": 14,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": 5,
+          "temp_max": 9,
+          "rain_days": 8,
+          "sea_temp": null
+        }
+      },
+      "scores": {
+        "nature": 42,
+        "culture": 82,
+        "sea": 0,
+        "food": 78,
+        "nightlife": 42,
+        "outdoor": 45,
+        "family": 58,
+        "offbeat": 55
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
       "id": "firenze",
       "name": "Firenze",
       "country": "IT",
@@ -4703,6 +7183,130 @@
       "costs_source": "assistant"
     },
     {
+      "id": "galway",
+      "name": "Galway",
+      "country": "IE",
+      "type": "city",
+      "coords": {
+        "lat": 53.2719,
+        "lon": -9.0488
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q129610",
+      "wikipedia_title": "Galway",
+      "wikipedia_title_en": "Galway",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 6,
+          "temp_max": 8,
+          "rain_days": 16,
+          "sea_temp": 7
+        },
+        "2": {
+          "temp_avg": 7,
+          "temp_max": 9,
+          "rain_days": 17,
+          "sea_temp": 8
+        },
+        "3": {
+          "temp_avg": 7,
+          "temp_max": 10,
+          "rain_days": 16,
+          "sea_temp": 9
+        },
+        "4": {
+          "temp_avg": 9,
+          "temp_max": 13,
+          "rain_days": 13,
+          "sea_temp": 11
+        },
+        "5": {
+          "temp_avg": 12,
+          "temp_max": 15,
+          "rain_days": 15,
+          "sea_temp": 14
+        },
+        "6": {
+          "temp_avg": 14,
+          "temp_max": 17,
+          "rain_days": 16,
+          "sea_temp": 16
+        },
+        "7": {
+          "temp_avg": 15,
+          "temp_max": 18,
+          "rain_days": 17,
+          "sea_temp": 17
+        },
+        "8": {
+          "temp_avg": 15,
+          "temp_max": 18,
+          "rain_days": 19,
+          "sea_temp": 18
+        },
+        "9": {
+          "temp_avg": 14,
+          "temp_max": 17,
+          "rain_days": 16,
+          "sea_temp": 17
+        },
+        "10": {
+          "temp_avg": 11,
+          "temp_max": 14,
+          "rain_days": 18,
+          "sea_temp": 13
+        },
+        "11": {
+          "temp_avg": 8,
+          "temp_max": 11,
+          "rain_days": 16,
+          "sea_temp": 11
+        },
+        "12": {
+          "temp_avg": 7,
+          "temp_max": 9,
+          "rain_days": 19,
+          "sea_temp": 8
+        }
+      },
+      "scores": {
+        "nature": 68,
+        "culture": 68,
+        "sea": 45,
+        "food": 72,
+        "nightlife": 82,
+        "outdoor": 62,
+        "family": 58,
+        "offbeat": 55
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
       "id": "gand",
       "name": "Gand",
       "country": "BE",
@@ -4827,6 +7431,130 @@
       "costs_source": "assistant"
     },
     {
+      "id": "gargano",
+      "name": "Gargano",
+      "country": "IT",
+      "type": "area",
+      "coords": {
+        "lat": 41.733,
+        "lon": 15.75
+      },
+      "radius_km": 90,
+      "wikidata_id": "Q763332",
+      "wikipedia_title": "Gargano",
+      "wikipedia_title_en": "Gargano",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 4,
+          "temp_max": 7,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": 5,
+          "temp_max": 9,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": 7,
+          "temp_max": 11,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 10,
+          "temp_max": 15,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 15,
+          "temp_max": 19,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 20,
+          "temp_max": 24,
+          "rain_days": 9,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 23,
+          "temp_max": 28,
+          "rain_days": 6,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 22,
+          "temp_max": 27,
+          "rain_days": 8,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 18,
+          "temp_max": 22,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 14,
+          "temp_max": 18,
+          "rain_days": 9,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 9,
+          "temp_max": 12,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": 6,
+          "temp_max": 9,
+          "rain_days": 9,
+          "sea_temp": null
+        }
+      },
+      "scores": {
+        "nature": 80,
+        "culture": 55,
+        "sea": 82,
+        "food": 72,
+        "nightlife": 35,
+        "outdoor": 65,
+        "family": 68,
+        "offbeat": 52
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 5,
+          "mid": 11,
+          "high": 20
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
       "id": "genova",
       "name": "Genova",
       "country": "IT",
@@ -4929,6 +7657,130 @@
         "outdoor": 40,
         "family": 55,
         "offbeat": 50
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
+      "id": "goteborg",
+      "name": "Göteborg",
+      "country": "SE",
+      "type": "city",
+      "coords": {
+        "lat": 57.7075,
+        "lon": 11.9675
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q25287",
+      "wikipedia_title": "Göteborg",
+      "wikipedia_title_en": "Gothenburg",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 1,
+          "temp_max": 3,
+          "rain_days": 15,
+          "sea_temp": 2
+        },
+        "2": {
+          "temp_avg": 1,
+          "temp_max": 3,
+          "rain_days": 12,
+          "sea_temp": 3
+        },
+        "3": {
+          "temp_avg": 3,
+          "temp_max": 6,
+          "rain_days": 13,
+          "sea_temp": 4
+        },
+        "4": {
+          "temp_avg": 6,
+          "temp_max": 11,
+          "rain_days": 10,
+          "sea_temp": 7
+        },
+        "5": {
+          "temp_avg": 12,
+          "temp_max": 16,
+          "rain_days": 13,
+          "sea_temp": 14
+        },
+        "6": {
+          "temp_avg": 16,
+          "temp_max": 19,
+          "rain_days": 13,
+          "sea_temp": 18
+        },
+        "7": {
+          "temp_avg": 17,
+          "temp_max": 20,
+          "rain_days": 17,
+          "sea_temp": 19
+        },
+        "8": {
+          "temp_avg": 16,
+          "temp_max": 20,
+          "rain_days": 17,
+          "sea_temp": 19
+        },
+        "9": {
+          "temp_avg": 14,
+          "temp_max": 17,
+          "rain_days": 14,
+          "sea_temp": 17
+        },
+        "10": {
+          "temp_avg": 9,
+          "temp_max": 11,
+          "rain_days": 17,
+          "sea_temp": 12
+        },
+        "11": {
+          "temp_avg": 5,
+          "temp_max": 7,
+          "rain_days": 15,
+          "sea_temp": 7
+        },
+        "12": {
+          "temp_avg": 2,
+          "temp_max": 4,
+          "rain_days": 16,
+          "sea_temp": 3
+        }
+      },
+      "scores": {
+        "nature": 58,
+        "culture": 68,
+        "sea": 35,
+        "food": 78,
+        "nightlife": 68,
+        "outdoor": 52,
+        "family": 68,
+        "offbeat": 45
       },
       "costs": {
         "accommodation": {
@@ -5199,6 +8051,130 @@
       "costs_source": "assistant"
     },
     {
+      "id": "highlands",
+      "name": "Highlands",
+      "country": "GB",
+      "type": "area",
+      "coords": {
+        "lat": 57.12,
+        "lon": -4.71
+      },
+      "radius_km": 90,
+      "wikidata_id": "Q106652",
+      "wikipedia_title": "Highlands",
+      "wikipedia_title_en": "Scottish Highlands",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 3,
+          "temp_max": 5,
+          "rain_days": 19,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": 4,
+          "temp_max": 6,
+          "rain_days": 19,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": 5,
+          "temp_max": 8,
+          "rain_days": 18,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 7,
+          "temp_max": 11,
+          "rain_days": 15,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 11,
+          "temp_max": 14,
+          "rain_days": 17,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 13,
+          "temp_max": 16,
+          "rain_days": 18,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 14,
+          "temp_max": 17,
+          "rain_days": 20,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 14,
+          "temp_max": 17,
+          "rain_days": 21,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 12,
+          "temp_max": 15,
+          "rain_days": 17,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 9,
+          "temp_max": 12,
+          "rain_days": 20,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 6,
+          "temp_max": 8,
+          "rain_days": 18,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": 4,
+          "temp_max": 6,
+          "rain_days": 21,
+          "sea_temp": null
+        }
+      },
+      "scores": {
+        "nature": 97,
+        "culture": 48,
+        "sea": 25,
+        "food": 58,
+        "nightlife": 15,
+        "outdoor": 92,
+        "family": 55,
+        "offbeat": 68
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 7,
+          "mid": 14,
+          "high": 25
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
       "id": "ibiza",
       "name": "Ibiza",
       "country": "ES",
@@ -5447,6 +8423,130 @@
       "costs_source": "assistant"
     },
     {
+      "id": "interlaken",
+      "name": "Interlaken",
+      "country": "CH",
+      "type": "city",
+      "coords": {
+        "lat": 46.6872,
+        "lon": 7.8649
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q68103",
+      "wikipedia_title": "Interlaken",
+      "wikipedia_title_en": "Interlaken",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 3,
+          "temp_max": 6,
+          "rain_days": 17,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": 5,
+          "temp_max": 8,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": 7,
+          "temp_max": 11,
+          "rain_days": 15,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 10,
+          "temp_max": 14,
+          "rain_days": 16,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 13,
+          "temp_max": 17,
+          "rain_days": 20,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 18,
+          "temp_max": 23,
+          "rain_days": 18,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 20,
+          "temp_max": 25,
+          "rain_days": 18,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 20,
+          "temp_max": 24,
+          "rain_days": 15,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 17,
+          "temp_max": 20,
+          "rain_days": 15,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 13,
+          "temp_max": 17,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 8,
+          "temp_max": 11,
+          "rain_days": 14,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": 5,
+          "temp_max": 8,
+          "rain_days": 15,
+          "sea_temp": null
+        }
+      },
+      "scores": {
+        "nature": 92,
+        "culture": 45,
+        "sea": 0,
+        "food": 65,
+        "nightlife": 40,
+        "outdoor": 92,
+        "family": 72,
+        "offbeat": 22
+      },
+      "costs": {
+        "accommodation": {
+          "low": 90,
+          "mid": 148,
+          "high": 245
+        },
+        "food_per_day": {
+          "low": 30,
+          "mid": 55,
+          "high": 92
+        },
+        "transport_local_day": {
+          "low": 6,
+          "mid": 12,
+          "high": 21
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
       "id": "islanda-sud",
       "name": "Islanda del Sud",
       "country": "IS",
@@ -5613,6 +8713,130 @@
       ]
     },
     {
+      "id": "isola-d-elba",
+      "name": "Isola d'Elba",
+      "country": "IT",
+      "type": "island",
+      "coords": {
+        "lat": 42.78,
+        "lon": 10.275
+      },
+      "radius_km": 60,
+      "wikidata_id": "Q45328",
+      "wikipedia_title": "Isola d'Elba",
+      "wikipedia_title_en": "Elba",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 9,
+          "temp_max": 11,
+          "rain_days": 7,
+          "sea_temp": 16
+        },
+        "2": {
+          "temp_avg": 10,
+          "temp_max": 12,
+          "rain_days": 8,
+          "sea_temp": 15
+        },
+        "3": {
+          "temp_avg": 11,
+          "temp_max": 14,
+          "rain_days": 8,
+          "sea_temp": 15
+        },
+        "4": {
+          "temp_avg": 13,
+          "temp_max": 16,
+          "rain_days": 8,
+          "sea_temp": 16
+        },
+        "5": {
+          "temp_avg": 17,
+          "temp_max": 20,
+          "rain_days": 9,
+          "sea_temp": 19
+        },
+        "6": {
+          "temp_avg": 22,
+          "temp_max": 25,
+          "rain_days": 5,
+          "sea_temp": 23
+        },
+        "7": {
+          "temp_avg": 25,
+          "temp_max": 28,
+          "rain_days": 2,
+          "sea_temp": 27
+        },
+        "8": {
+          "temp_avg": 25,
+          "temp_max": 28,
+          "rain_days": 4,
+          "sea_temp": 28
+        },
+        "9": {
+          "temp_avg": 21,
+          "temp_max": 24,
+          "rain_days": 8,
+          "sea_temp": 25
+        },
+        "10": {
+          "temp_avg": 17,
+          "temp_max": 20,
+          "rain_days": 11,
+          "sea_temp": 22
+        },
+        "11": {
+          "temp_avg": 13,
+          "temp_max": 15,
+          "rain_days": 11,
+          "sea_temp": 20
+        },
+        "12": {
+          "temp_avg": 11,
+          "temp_max": 13,
+          "rain_days": 9,
+          "sea_temp": 17
+        }
+      },
+      "scores": {
+        "nature": 72,
+        "culture": 42,
+        "sea": 85,
+        "food": 68,
+        "nightlife": 40,
+        "outdoor": 68,
+        "family": 75,
+        "offbeat": 38
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 6,
+          "mid": 13,
+          "high": 22
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
       "id": "isola-d-ischia",
       "name": "isola d'Ischia",
       "country": "IT",
@@ -5731,6 +8955,130 @@
           "low": 6,
           "mid": 13,
           "high": 22
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
+      "id": "isola-di-capri",
+      "name": "Isola di Capri",
+      "country": "IT",
+      "type": "island",
+      "coords": {
+        "lat": 40.55,
+        "lon": 14.2333
+      },
+      "radius_km": 60,
+      "wikidata_id": "Q173292",
+      "wikipedia_title": "Isola di Capri",
+      "wikipedia_title_en": "Capri",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 11,
+          "temp_max": 12,
+          "rain_days": 13,
+          "sea_temp": 17
+        },
+        "2": {
+          "temp_avg": 11,
+          "temp_max": 12,
+          "rain_days": 10,
+          "sea_temp": 15
+        },
+        "3": {
+          "temp_avg": 12,
+          "temp_max": 13,
+          "rain_days": 11,
+          "sea_temp": 15
+        },
+        "4": {
+          "temp_avg": 14,
+          "temp_max": 15,
+          "rain_days": 8,
+          "sea_temp": 16
+        },
+        "5": {
+          "temp_avg": 17,
+          "temp_max": 18,
+          "rain_days": 9,
+          "sea_temp": 19
+        },
+        "6": {
+          "temp_avg": 21,
+          "temp_max": 23,
+          "rain_days": 3,
+          "sea_temp": 24
+        },
+        "7": {
+          "temp_avg": 25,
+          "temp_max": 26,
+          "rain_days": 2,
+          "sea_temp": 28
+        },
+        "8": {
+          "temp_avg": 25,
+          "temp_max": 26,
+          "rain_days": 3,
+          "sea_temp": 28
+        },
+        "9": {
+          "temp_avg": 22,
+          "temp_max": 24,
+          "rain_days": 9,
+          "sea_temp": 25
+        },
+        "10": {
+          "temp_avg": 19,
+          "temp_max": 20,
+          "rain_days": 10,
+          "sea_temp": 24
+        },
+        "11": {
+          "temp_avg": 16,
+          "temp_max": 17,
+          "rain_days": 15,
+          "sea_temp": 20
+        },
+        "12": {
+          "temp_avg": 13,
+          "temp_max": 14,
+          "rain_days": 11,
+          "sea_temp": 18
+        }
+      },
+      "scores": {
+        "nature": 72,
+        "culture": 55,
+        "sea": 85,
+        "food": 75,
+        "nightlife": 45,
+        "outdoor": 55,
+        "family": 45,
+        "offbeat": 8
+      },
+      "costs": {
+        "accommodation": {
+          "low": 70,
+          "mid": 115,
+          "high": 190
+        },
+        "food_per_day": {
+          "low": 25,
+          "mid": 44,
+          "high": 74
+        },
+        "transport_local_day": {
+          "low": 8,
+          "mid": 14,
+          "high": 26
         },
         "currency": "EUR"
       },
@@ -6276,6 +9624,130 @@
       "costs_source": "assistant"
     },
     {
+      "id": "parco-nazionale-dei-laghi-di-plitvice",
+      "name": "Laghi di Plitvice",
+      "country": "HR",
+      "type": "area",
+      "coords": {
+        "lat": 44.8804,
+        "lon": 15.616
+      },
+      "radius_km": 90,
+      "wikidata_id": "Q189849",
+      "wikipedia_title": "Parco nazionale dei laghi di Plitvice",
+      "wikipedia_title_en": "Plitvice Lakes National Park",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 2,
+          "temp_max": 5,
+          "rain_days": 14,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": 4,
+          "temp_max": 8,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": 6,
+          "temp_max": 10,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 10,
+          "temp_max": 15,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 14,
+          "temp_max": 18,
+          "rain_days": 17,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 19,
+          "temp_max": 24,
+          "rain_days": 14,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 21,
+          "temp_max": 26,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 21,
+          "temp_max": 26,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 16,
+          "temp_max": 20,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 12,
+          "temp_max": 16,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 7,
+          "temp_max": 10,
+          "rain_days": 14,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": 3,
+          "temp_max": 7,
+          "rain_days": 12,
+          "sea_temp": null
+        }
+      },
+      "scores": {
+        "nature": 97,
+        "culture": 30,
+        "sea": 0,
+        "food": 55,
+        "nightlife": 8,
+        "outdoor": 82,
+        "family": 72,
+        "offbeat": 32
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 5,
+          "mid": 11,
+          "high": 20
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
       "id": "lago-di-como",
       "name": "lago di Como",
       "country": "IT",
@@ -6518,6 +9990,130 @@
           "low": 7,
           "mid": 14,
           "high": 25
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
+      "id": "lanzarote",
+      "name": "Lanzarote",
+      "country": "ES",
+      "type": "island",
+      "coords": {
+        "lat": 29.035,
+        "lon": -13.635
+      },
+      "radius_km": 60,
+      "wikidata_id": "Q182432",
+      "wikipedia_title": "Lanzarote",
+      "wikipedia_title_en": "Lanzarote",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 14,
+          "temp_max": 17,
+          "rain_days": 4,
+          "sea_temp": 20
+        },
+        "2": {
+          "temp_avg": 14,
+          "temp_max": 17,
+          "rain_days": 6,
+          "sea_temp": 19
+        },
+        "3": {
+          "temp_avg": 15,
+          "temp_max": 18,
+          "rain_days": 6,
+          "sea_temp": 19
+        },
+        "4": {
+          "temp_avg": 16,
+          "temp_max": 19,
+          "rain_days": 4,
+          "sea_temp": 20
+        },
+        "5": {
+          "temp_avg": 17,
+          "temp_max": 19,
+          "rain_days": 3,
+          "sea_temp": 20
+        },
+        "6": {
+          "temp_avg": 18,
+          "temp_max": 21,
+          "rain_days": 4,
+          "sea_temp": 21
+        },
+        "7": {
+          "temp_avg": 19,
+          "temp_max": 22,
+          "rain_days": 2,
+          "sea_temp": 21
+        },
+        "8": {
+          "temp_avg": 20,
+          "temp_max": 23,
+          "rain_days": 1,
+          "sea_temp": 22
+        },
+        "9": {
+          "temp_avg": 20,
+          "temp_max": 23,
+          "rain_days": 3,
+          "sea_temp": 23
+        },
+        "10": {
+          "temp_avg": 20,
+          "temp_max": 23,
+          "rain_days": 5,
+          "sea_temp": 23
+        },
+        "11": {
+          "temp_avg": 17,
+          "temp_max": 20,
+          "rain_days": 4,
+          "sea_temp": 22
+        },
+        "12": {
+          "temp_avg": 16,
+          "temp_max": 18,
+          "rain_days": 4,
+          "sea_temp": 21
+        }
+      },
+      "scores": {
+        "nature": 82,
+        "culture": 38,
+        "sea": 82,
+        "food": 62,
+        "nightlife": 48,
+        "outdoor": 75,
+        "family": 72,
+        "offbeat": 42
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 6,
+          "mid": 13,
+          "high": 22
         },
         "currency": "EUR"
       },
@@ -7223,6 +10819,130 @@
       ]
     },
     {
+      "id": "londra",
+      "name": "Londra",
+      "country": "GB",
+      "type": "city",
+      "coords": {
+        "lat": 51.5072,
+        "lon": -0.1275
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q84",
+      "wikipedia_title": "Londra",
+      "wikipedia_title_en": "London",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 5,
+          "temp_max": 8,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": 6,
+          "temp_max": 9,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": 7,
+          "temp_max": 11,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 9,
+          "temp_max": 14,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 13,
+          "temp_max": 17,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 16,
+          "temp_max": 21,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 18,
+          "temp_max": 23,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 18,
+          "temp_max": 22,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 16,
+          "temp_max": 20,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 12,
+          "temp_max": 16,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 8,
+          "temp_max": 11,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": 7,
+          "temp_max": 9,
+          "rain_days": 12,
+          "sea_temp": null
+        }
+      },
+      "scores": {
+        "nature": 35,
+        "culture": 95,
+        "sea": 0,
+        "food": 85,
+        "nightlife": 92,
+        "outdoor": 32,
+        "family": 68,
+        "offbeat": 5
+      },
+      "costs": {
+        "accommodation": {
+          "low": 70,
+          "mid": 115,
+          "high": 190
+        },
+        "food_per_day": {
+          "low": 25,
+          "mid": 44,
+          "high": 74
+        },
+        "transport_local_day": {
+          "low": 5,
+          "mid": 9,
+          "high": 16
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
       "id": "lubiana",
       "name": "Lubiana",
       "country": "SI",
@@ -7341,6 +11061,130 @@
           "low": 3,
           "mid": 6,
           "high": 11
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
+      "id": "lucerna",
+      "name": "Lucerna",
+      "country": "CH",
+      "type": "city",
+      "coords": {
+        "lat": 47.0523,
+        "lon": 8.3059
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q4191",
+      "wikipedia_title": "Lucerna",
+      "wikipedia_title_en": "Lucerne",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 2,
+          "temp_max": 4,
+          "rain_days": 16,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": 3,
+          "temp_max": 7,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": 6,
+          "temp_max": 10,
+          "rain_days": 14,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 9,
+          "temp_max": 14,
+          "rain_days": 14,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 13,
+          "temp_max": 17,
+          "rain_days": 18,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 18,
+          "temp_max": 22,
+          "rain_days": 16,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 20,
+          "temp_max": 24,
+          "rain_days": 17,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 20,
+          "temp_max": 24,
+          "rain_days": 15,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 16,
+          "temp_max": 19,
+          "rain_days": 14,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 11,
+          "temp_max": 15,
+          "rain_days": 14,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 6,
+          "temp_max": 9,
+          "rain_days": 14,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": 3,
+          "temp_max": 6,
+          "rain_days": 14,
+          "sea_temp": null
+        }
+      },
+      "scores": {
+        "nature": 82,
+        "culture": 72,
+        "sea": 0,
+        "food": 72,
+        "nightlife": 42,
+        "outdoor": 72,
+        "family": 70,
+        "offbeat": 25
+      },
+      "costs": {
+        "accommodation": {
+          "low": 70,
+          "mid": 115,
+          "high": 190
+        },
+        "food_per_day": {
+          "low": 25,
+          "mid": 44,
+          "high": 74
+        },
+        "transport_local_day": {
+          "low": 5,
+          "mid": 9,
+          "high": 16
         },
         "currency": "EUR"
       },
@@ -7801,6 +11645,130 @@
       ]
     },
     {
+      "id": "malaga",
+      "name": "Malaga",
+      "country": "ES",
+      "type": "city",
+      "coords": {
+        "lat": 36.7167,
+        "lon": -4.4167
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q8851",
+      "wikipedia_title": "Malaga",
+      "wikipedia_title_en": "Málaga",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 13,
+          "temp_max": 17,
+          "rain_days": 6,
+          "sea_temp": 15
+        },
+        "2": {
+          "temp_avg": 14,
+          "temp_max": 17,
+          "rain_days": 5,
+          "sea_temp": 15
+        },
+        "3": {
+          "temp_avg": 15,
+          "temp_max": 19,
+          "rain_days": 10,
+          "sea_temp": 15
+        },
+        "4": {
+          "temp_avg": 17,
+          "temp_max": 21,
+          "rain_days": 8,
+          "sea_temp": 17
+        },
+        "5": {
+          "temp_avg": 21,
+          "temp_max": 24,
+          "rain_days": 4,
+          "sea_temp": 19
+        },
+        "6": {
+          "temp_avg": 24,
+          "temp_max": 28,
+          "rain_days": 2,
+          "sea_temp": 21
+        },
+        "7": {
+          "temp_avg": 27,
+          "temp_max": 31,
+          "rain_days": 0,
+          "sea_temp": 25
+        },
+        "8": {
+          "temp_avg": 27,
+          "temp_max": 31,
+          "rain_days": 1,
+          "sea_temp": 26
+        },
+        "9": {
+          "temp_avg": 24,
+          "temp_max": 28,
+          "rain_days": 4,
+          "sea_temp": 25
+        },
+        "10": {
+          "temp_avg": 21,
+          "temp_max": 24,
+          "rain_days": 6,
+          "sea_temp": 20
+        },
+        "11": {
+          "temp_avg": 16,
+          "temp_max": 20,
+          "rain_days": 6,
+          "sea_temp": 18
+        },
+        "12": {
+          "temp_avg": 14,
+          "temp_max": 18,
+          "rain_days": 5,
+          "sea_temp": 17
+        }
+      },
+      "scores": {
+        "nature": 45,
+        "culture": 72,
+        "sea": 80,
+        "food": 82,
+        "nightlife": 82,
+        "outdoor": 48,
+        "family": 68,
+        "offbeat": 20
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 6,
+          "high": 11
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
       "id": "malta",
       "name": "Malta",
       "country": "MT",
@@ -7919,6 +11887,130 @@
           "low": 5,
           "mid": 10,
           "high": 18
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
+      "id": "mantova",
+      "name": "Mantova",
+      "country": "IT",
+      "type": "city",
+      "coords": {
+        "lat": 45.1564,
+        "lon": 10.7911
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q6247",
+      "wikipedia_title": "Mantova",
+      "wikipedia_title_en": "Mantua",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 3,
+          "temp_max": 8,
+          "rain_days": 6,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": 6,
+          "temp_max": 11,
+          "rain_days": 7,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": 10,
+          "temp_max": 15,
+          "rain_days": 8,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 14,
+          "temp_max": 19,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 18,
+          "temp_max": 23,
+          "rain_days": 15,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 23,
+          "temp_max": 28,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 26,
+          "temp_max": 31,
+          "rain_days": 9,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 25,
+          "temp_max": 31,
+          "rain_days": 8,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 20,
+          "temp_max": 25,
+          "rain_days": 8,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 15,
+          "temp_max": 20,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 9,
+          "temp_max": 13,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": 4,
+          "temp_max": 8,
+          "rain_days": 7,
+          "sea_temp": null
+        }
+      },
+      "scores": {
+        "nature": 45,
+        "culture": 82,
+        "sea": 0,
+        "food": 82,
+        "nightlife": 38,
+        "outdoor": 40,
+        "family": 55,
+        "offbeat": 52
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
         },
         "currency": "EUR"
       },
@@ -8173,6 +12265,254 @@
       "costs_source": "assistant"
     },
     {
+      "id": "milano",
+      "name": "Milano",
+      "country": "IT",
+      "type": "city",
+      "coords": {
+        "lat": 45.4669,
+        "lon": 9.19
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q490",
+      "wikipedia_title": "Milano",
+      "wikipedia_title_en": "Milan",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 3,
+          "temp_max": 8,
+          "rain_days": 6,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": 6,
+          "temp_max": 11,
+          "rain_days": 8,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": 9,
+          "temp_max": 14,
+          "rain_days": 9,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 13,
+          "temp_max": 18,
+          "rain_days": 9,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 17,
+          "temp_max": 22,
+          "rain_days": 16,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 22,
+          "temp_max": 27,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 25,
+          "temp_max": 30,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 24,
+          "temp_max": 29,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 20,
+          "temp_max": 24,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 15,
+          "temp_max": 19,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 8,
+          "temp_max": 12,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": 4,
+          "temp_max": 8,
+          "rain_days": 7,
+          "sea_temp": null
+        }
+      },
+      "scores": {
+        "nature": 25,
+        "culture": 78,
+        "sea": 0,
+        "food": 85,
+        "nightlife": 88,
+        "outdoor": 28,
+        "family": 52,
+        "offbeat": 10
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
+      "id": "minorca",
+      "name": "Minorca",
+      "country": "ES",
+      "type": "island",
+      "coords": {
+        "lat": 39.9667,
+        "lon": 4.0833
+      },
+      "radius_km": 60,
+      "wikidata_id": "Q52636",
+      "wikipedia_title": "Minorca",
+      "wikipedia_title_en": "Menorca",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 11,
+          "temp_max": 14,
+          "rain_days": 8,
+          "sea_temp": 16
+        },
+        "2": {
+          "temp_avg": 12,
+          "temp_max": 15,
+          "rain_days": 6,
+          "sea_temp": 15
+        },
+        "3": {
+          "temp_avg": 13,
+          "temp_max": 16,
+          "rain_days": 7,
+          "sea_temp": 15
+        },
+        "4": {
+          "temp_avg": 15,
+          "temp_max": 18,
+          "rain_days": 7,
+          "sea_temp": 16
+        },
+        "5": {
+          "temp_avg": 18,
+          "temp_max": 22,
+          "rain_days": 6,
+          "sea_temp": 19
+        },
+        "6": {
+          "temp_avg": 23,
+          "temp_max": 27,
+          "rain_days": 4,
+          "sea_temp": 23
+        },
+        "7": {
+          "temp_avg": 26,
+          "temp_max": 30,
+          "rain_days": 1,
+          "sea_temp": 26
+        },
+        "8": {
+          "temp_avg": 26,
+          "temp_max": 30,
+          "rain_days": 3,
+          "sea_temp": 28
+        },
+        "9": {
+          "temp_avg": 23,
+          "temp_max": 26,
+          "rain_days": 8,
+          "sea_temp": 26
+        },
+        "10": {
+          "temp_avg": 20,
+          "temp_max": 23,
+          "rain_days": 8,
+          "sea_temp": 24
+        },
+        "11": {
+          "temp_avg": 16,
+          "temp_max": 18,
+          "rain_days": 10,
+          "sea_temp": 20
+        },
+        "12": {
+          "temp_avg": 13,
+          "temp_max": 16,
+          "rain_days": 6,
+          "sea_temp": 18
+        }
+      },
+      "scores": {
+        "nature": 72,
+        "culture": 45,
+        "sea": 90,
+        "food": 70,
+        "nightlife": 42,
+        "outdoor": 62,
+        "family": 82,
+        "offbeat": 38
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 6,
+          "mid": 13,
+          "high": 22
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
       "id": "monaco-di-baviera",
       "name": "Monaco di Baviera",
       "country": "DE",
@@ -8291,6 +12631,378 @@
           "low": 4,
           "mid": 8,
           "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
+      "id": "mont-saint-michel",
+      "name": "Mont Saint-Michel",
+      "country": "FR",
+      "type": "city",
+      "coords": {
+        "lat": 48.6361,
+        "lon": -1.5114
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q20883",
+      "wikipedia_title": "Mont Saint-Michel",
+      "wikipedia_title_en": null,
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 6,
+          "temp_max": 9,
+          "rain_days": 17,
+          "sea_temp": 8
+        },
+        "2": {
+          "temp_avg": 7,
+          "temp_max": 10,
+          "rain_days": 13,
+          "sea_temp": 8
+        },
+        "3": {
+          "temp_avg": 9,
+          "temp_max": 12,
+          "rain_days": 16,
+          "sea_temp": 9
+        },
+        "4": {
+          "temp_avg": 11,
+          "temp_max": 15,
+          "rain_days": 11,
+          "sea_temp": 12
+        },
+        "5": {
+          "temp_avg": 14,
+          "temp_max": 17,
+          "rain_days": 13,
+          "sea_temp": 16
+        },
+        "6": {
+          "temp_avg": 17,
+          "temp_max": 21,
+          "rain_days": 12,
+          "sea_temp": 19
+        },
+        "7": {
+          "temp_avg": 19,
+          "temp_max": 22,
+          "rain_days": 11,
+          "sea_temp": 20
+        },
+        "8": {
+          "temp_avg": 19,
+          "temp_max": 22,
+          "rain_days": 12,
+          "sea_temp": 21
+        },
+        "9": {
+          "temp_avg": 17,
+          "temp_max": 20,
+          "rain_days": 13,
+          "sea_temp": 20
+        },
+        "10": {
+          "temp_avg": 14,
+          "temp_max": 17,
+          "rain_days": 13,
+          "sea_temp": 16
+        },
+        "11": {
+          "temp_avg": 10,
+          "temp_max": 12,
+          "rain_days": 15,
+          "sea_temp": 12
+        },
+        "12": {
+          "temp_avg": 8,
+          "temp_max": 10,
+          "rain_days": 16,
+          "sea_temp": 8
+        }
+      },
+      "scores": {
+        "nature": 65,
+        "culture": 95,
+        "sea": 40,
+        "food": 65,
+        "nightlife": 15,
+        "outdoor": 42,
+        "family": 60,
+        "offbeat": 20
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
+      "id": "mostar",
+      "name": "Mostar",
+      "country": "BA",
+      "type": "city",
+      "coords": {
+        "lat": 43.3436,
+        "lon": 17.8075
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q93347",
+      "wikipedia_title": "Mostar",
+      "wikipedia_title_en": "Mostar",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 5,
+          "temp_max": 9,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": 7,
+          "temp_max": 12,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": 10,
+          "temp_max": 15,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 13,
+          "temp_max": 19,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 18,
+          "temp_max": 23,
+          "rain_days": 14,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 23,
+          "temp_max": 28,
+          "rain_days": 9,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 26,
+          "temp_max": 32,
+          "rain_days": 5,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 26,
+          "temp_max": 32,
+          "rain_days": 5,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 21,
+          "temp_max": 26,
+          "rain_days": 9,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 16,
+          "temp_max": 21,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 11,
+          "temp_max": 16,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": 7,
+          "temp_max": 11,
+          "rain_days": 13,
+          "sea_temp": null
+        }
+      },
+      "scores": {
+        "nature": 65,
+        "culture": 85,
+        "sea": 0,
+        "food": 72,
+        "nightlife": 35,
+        "outdoor": 58,
+        "family": 52,
+        "offbeat": 62
+      },
+      "costs": {
+        "accommodation": {
+          "low": 30,
+          "mid": 52,
+          "high": 90
+        },
+        "food_per_day": {
+          "low": 13,
+          "mid": 22,
+          "high": 38
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 5,
+          "high": 9
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
+      "id": "mykonos",
+      "name": "Mykonos",
+      "country": "GR",
+      "type": "island",
+      "coords": {
+        "lat": 37.45,
+        "lon": 25.3333
+      },
+      "radius_km": 60,
+      "wikidata_id": "Q190210",
+      "wikipedia_title": "Mykonos",
+      "wikipedia_title_en": "Mykonos",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 12,
+          "temp_max": 14,
+          "rain_days": 12,
+          "sea_temp": 16
+        },
+        "2": {
+          "temp_avg": 13,
+          "temp_max": 15,
+          "rain_days": 7,
+          "sea_temp": 16
+        },
+        "3": {
+          "temp_avg": 14,
+          "temp_max": 16,
+          "rain_days": 8,
+          "sea_temp": 16
+        },
+        "4": {
+          "temp_avg": 16,
+          "temp_max": 19,
+          "rain_days": 4,
+          "sea_temp": 17
+        },
+        "5": {
+          "temp_avg": 20,
+          "temp_max": 22,
+          "rain_days": 4,
+          "sea_temp": 19
+        },
+        "6": {
+          "temp_avg": 24,
+          "temp_max": 26,
+          "rain_days": 2,
+          "sea_temp": 22
+        },
+        "7": {
+          "temp_avg": 26,
+          "temp_max": 28,
+          "rain_days": 0,
+          "sea_temp": 25
+        },
+        "8": {
+          "temp_avg": 26,
+          "temp_max": 28,
+          "rain_days": 1,
+          "sea_temp": 26
+        },
+        "9": {
+          "temp_avg": 24,
+          "temp_max": 26,
+          "rain_days": 1,
+          "sea_temp": 25
+        },
+        "10": {
+          "temp_avg": 20,
+          "temp_max": 22,
+          "rain_days": 3,
+          "sea_temp": 23
+        },
+        "11": {
+          "temp_avg": 17,
+          "temp_max": 19,
+          "rain_days": 7,
+          "sea_temp": 20
+        },
+        "12": {
+          "temp_avg": 14,
+          "temp_max": 15,
+          "rain_days": 9,
+          "sea_temp": 17
+        }
+      },
+      "scores": {
+        "nature": 45,
+        "culture": 40,
+        "sea": 88,
+        "food": 68,
+        "nightlife": 96,
+        "outdoor": 40,
+        "family": 35,
+        "offbeat": 5
+      },
+      "costs": {
+        "accommodation": {
+          "low": 70,
+          "mid": 115,
+          "high": 190
+        },
+        "food_per_day": {
+          "low": 25,
+          "mid": 44,
+          "high": 74
+        },
+        "transport_local_day": {
+          "low": 8,
+          "mid": 14,
+          "high": 26
         },
         "currency": "EUR"
       },
@@ -8421,6 +13133,130 @@
       "costs_source": "assistant"
     },
     {
+      "id": "nasso",
+      "name": "Nasso (Naxos)",
+      "country": "GR",
+      "type": "island",
+      "coords": {
+        "lat": 37.0833,
+        "lon": 25.4667
+      },
+      "radius_km": 60,
+      "wikidata_id": "Q188527",
+      "wikipedia_title": "Nasso (isola)",
+      "wikipedia_title_en": "Naxos",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 9,
+          "temp_max": 11,
+          "rain_days": 14,
+          "sea_temp": 17
+        },
+        "2": {
+          "temp_avg": 10,
+          "temp_max": 12,
+          "rain_days": 8,
+          "sea_temp": 16
+        },
+        "3": {
+          "temp_avg": 11,
+          "temp_max": 13,
+          "rain_days": 9,
+          "sea_temp": 17
+        },
+        "4": {
+          "temp_avg": 14,
+          "temp_max": 17,
+          "rain_days": 4,
+          "sea_temp": 17
+        },
+        "5": {
+          "temp_avg": 18,
+          "temp_max": 21,
+          "rain_days": 4,
+          "sea_temp": 19
+        },
+        "6": {
+          "temp_avg": 22,
+          "temp_max": 25,
+          "rain_days": 2,
+          "sea_temp": 23
+        },
+        "7": {
+          "temp_avg": 24,
+          "temp_max": 27,
+          "rain_days": 0,
+          "sea_temp": 24
+        },
+        "8": {
+          "temp_avg": 24,
+          "temp_max": 27,
+          "rain_days": 1,
+          "sea_temp": 26
+        },
+        "9": {
+          "temp_avg": 21,
+          "temp_max": 24,
+          "rain_days": 2,
+          "sea_temp": 25
+        },
+        "10": {
+          "temp_avg": 17,
+          "temp_max": 20,
+          "rain_days": 3,
+          "sea_temp": 23
+        },
+        "11": {
+          "temp_avg": 14,
+          "temp_max": 16,
+          "rain_days": 7,
+          "sea_temp": 20
+        },
+        "12": {
+          "temp_avg": 11,
+          "temp_max": 13,
+          "rain_days": 11,
+          "sea_temp": 18
+        }
+      },
+      "scores": {
+        "nature": 65,
+        "culture": 52,
+        "sea": 88,
+        "food": 75,
+        "nightlife": 52,
+        "outdoor": 58,
+        "family": 70,
+        "offbeat": 42
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 5,
+          "mid": 10,
+          "high": 18
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
       "id": "nizza",
       "name": "Nizza",
       "country": "FR",
@@ -8539,6 +13375,130 @@
           "low": 5,
           "mid": 9,
           "high": 16
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
+      "id": "comune-di-ocrida",
+      "name": "Ocrida",
+      "country": "MK",
+      "type": "city",
+      "coords": {
+        "lat": 41.1406,
+        "lon": 20.8025
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q1125333",
+      "wikipedia_title": "Ocrida",
+      "wikipedia_title_en": "Ohrid Municipality",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 3,
+          "temp_max": 6,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": 5,
+          "temp_max": 9,
+          "rain_days": 8,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": 7,
+          "temp_max": 11,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 11,
+          "temp_max": 15,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 15,
+          "temp_max": 19,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 20,
+          "temp_max": 24,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 24,
+          "temp_max": 28,
+          "rain_days": 5,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 24,
+          "temp_max": 28,
+          "rain_days": 7,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 19,
+          "temp_max": 23,
+          "rain_days": 9,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 14,
+          "temp_max": 18,
+          "rain_days": 7,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 10,
+          "temp_max": 13,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": 5,
+          "temp_max": 8,
+          "rain_days": 9,
+          "sea_temp": null
+        }
+      },
+      "scores": {
+        "nature": 82,
+        "culture": 82,
+        "sea": 55,
+        "food": 68,
+        "nightlife": 42,
+        "outdoor": 65,
+        "family": 62,
+        "offbeat": 72
+      },
+      "costs": {
+        "accommodation": {
+          "low": 30,
+          "mid": 52,
+          "high": 90
+        },
+        "food_per_day": {
+          "low": 13,
+          "mid": 22,
+          "high": 38
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 5,
+          "high": 9
         },
         "currency": "EUR"
       },
@@ -8961,6 +13921,130 @@
       ]
     },
     {
+      "id": "paro",
+      "name": "Paro (Paros)",
+      "country": "GR",
+      "type": "island",
+      "coords": {
+        "lat": 37.05,
+        "lon": 25.1833
+      },
+      "radius_km": 60,
+      "wikidata_id": "Q201272",
+      "wikipedia_title": "Paro (Grecia)",
+      "wikipedia_title_en": "Paros",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 8,
+          "temp_max": 10,
+          "rain_days": 12,
+          "sea_temp": 17
+        },
+        "2": {
+          "temp_avg": 9,
+          "temp_max": 11,
+          "rain_days": 8,
+          "sea_temp": 16
+        },
+        "3": {
+          "temp_avg": 10,
+          "temp_max": 12,
+          "rain_days": 8,
+          "sea_temp": 17
+        },
+        "4": {
+          "temp_avg": 13,
+          "temp_max": 15,
+          "rain_days": 3,
+          "sea_temp": 17
+        },
+        "5": {
+          "temp_avg": 16,
+          "temp_max": 19,
+          "rain_days": 3,
+          "sea_temp": 19
+        },
+        "6": {
+          "temp_avg": 20,
+          "temp_max": 23,
+          "rain_days": 2,
+          "sea_temp": 22
+        },
+        "7": {
+          "temp_avg": 22,
+          "temp_max": 25,
+          "rain_days": 0,
+          "sea_temp": 24
+        },
+        "8": {
+          "temp_avg": 22,
+          "temp_max": 24,
+          "rain_days": 0,
+          "sea_temp": 26
+        },
+        "9": {
+          "temp_avg": 20,
+          "temp_max": 22,
+          "rain_days": 2,
+          "sea_temp": 25
+        },
+        "10": {
+          "temp_avg": 17,
+          "temp_max": 18,
+          "rain_days": 3,
+          "sea_temp": 23
+        },
+        "11": {
+          "temp_avg": 13,
+          "temp_max": 15,
+          "rain_days": 6,
+          "sea_temp": 20
+        },
+        "12": {
+          "temp_avg": 10,
+          "temp_max": 12,
+          "rain_days": 10,
+          "sea_temp": 18
+        }
+      },
+      "scores": {
+        "nature": 55,
+        "culture": 45,
+        "sea": 88,
+        "food": 70,
+        "nightlife": 72,
+        "outdoor": 48,
+        "family": 62,
+        "offbeat": 30
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 5,
+          "mid": 10,
+          "high": 18
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
       "id": "peloponneso",
       "name": "Peloponneso",
       "country": "GR",
@@ -9079,6 +14163,254 @@
           "low": 5,
           "mid": 11,
           "high": 20
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
+      "id": "perugia",
+      "name": "Perugia",
+      "country": "IT",
+      "type": "city",
+      "coords": {
+        "lat": 43.1119,
+        "lon": 12.3885
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q3437",
+      "wikipedia_title": "Perugia",
+      "wikipedia_title_en": "Perugia",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 4,
+          "temp_max": 8,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": 5,
+          "temp_max": 10,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": 7,
+          "temp_max": 13,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 11,
+          "temp_max": 17,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 15,
+          "temp_max": 21,
+          "rain_days": 14,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 21,
+          "temp_max": 27,
+          "rain_days": 8,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 24,
+          "temp_max": 30,
+          "rain_days": 5,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 24,
+          "temp_max": 30,
+          "rain_days": 7,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 18,
+          "temp_max": 24,
+          "rain_days": 9,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 14,
+          "temp_max": 19,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 9,
+          "temp_max": 13,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": 5,
+          "temp_max": 9,
+          "rain_days": 10,
+          "sea_temp": null
+        }
+      },
+      "scores": {
+        "nature": 55,
+        "culture": 82,
+        "sea": 0,
+        "food": 82,
+        "nightlife": 58,
+        "outdoor": 48,
+        "family": 58,
+        "offbeat": 45
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
+      "id": "plovdiv",
+      "name": "Plovdiv",
+      "country": "BG",
+      "type": "city",
+      "coords": {
+        "lat": 42.1421,
+        "lon": 24.7415
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q459",
+      "wikipedia_title": "Plovdiv",
+      "wikipedia_title_en": "Plovdiv",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 3,
+          "temp_max": 7,
+          "rain_days": 8,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": 6,
+          "temp_max": 10,
+          "rain_days": 7,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": 8,
+          "temp_max": 13,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 13,
+          "temp_max": 19,
+          "rain_days": 9,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 18,
+          "temp_max": 23,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 23,
+          "temp_max": 28,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 26,
+          "temp_max": 31,
+          "rain_days": 5,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 26,
+          "temp_max": 31,
+          "rain_days": 3,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 21,
+          "temp_max": 26,
+          "rain_days": 4,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 15,
+          "temp_max": 20,
+          "rain_days": 6,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 9,
+          "temp_max": 13,
+          "rain_days": 7,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": 5,
+          "temp_max": 9,
+          "rain_days": 8,
+          "sea_temp": null
+        }
+      },
+      "scores": {
+        "nature": 52,
+        "culture": 85,
+        "sea": 0,
+        "food": 78,
+        "nightlife": 68,
+        "outdoor": 55,
+        "family": 55,
+        "offbeat": 68
+      },
+      "costs": {
+        "accommodation": {
+          "low": 30,
+          "mid": 52,
+          "high": 90
+        },
+        "food_per_day": {
+          "low": 13,
+          "mid": 22,
+          "high": 38
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 5,
+          "high": 9
         },
         "currency": "EUR"
       },
@@ -9369,6 +14701,130 @@
       ]
     },
     {
+      "id": "procida",
+      "name": "Procida",
+      "country": "IT",
+      "type": "island",
+      "coords": {
+        "lat": 40.7611,
+        "lon": 14.0193
+      },
+      "radius_km": 60,
+      "wikidata_id": "Q72432",
+      "wikipedia_title": "Procida",
+      "wikipedia_title_en": "Procida",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 11,
+          "temp_max": 13,
+          "rain_days": 12,
+          "sea_temp": 16
+        },
+        "2": {
+          "temp_avg": 11,
+          "temp_max": 14,
+          "rain_days": 10,
+          "sea_temp": 15
+        },
+        "3": {
+          "temp_avg": 12,
+          "temp_max": 15,
+          "rain_days": 12,
+          "sea_temp": 15
+        },
+        "4": {
+          "temp_avg": 15,
+          "temp_max": 18,
+          "rain_days": 9,
+          "sea_temp": 16
+        },
+        "5": {
+          "temp_avg": 19,
+          "temp_max": 21,
+          "rain_days": 9,
+          "sea_temp": 19
+        },
+        "6": {
+          "temp_avg": 23,
+          "temp_max": 26,
+          "rain_days": 3,
+          "sea_temp": 24
+        },
+        "7": {
+          "temp_avg": 26,
+          "temp_max": 29,
+          "rain_days": 2,
+          "sea_temp": 27
+        },
+        "8": {
+          "temp_avg": 27,
+          "temp_max": 29,
+          "rain_days": 3,
+          "sea_temp": 28
+        },
+        "9": {
+          "temp_avg": 23,
+          "temp_max": 26,
+          "rain_days": 9,
+          "sea_temp": 25
+        },
+        "10": {
+          "temp_avg": 20,
+          "temp_max": 22,
+          "rain_days": 10,
+          "sea_temp": 23
+        },
+        "11": {
+          "temp_avg": 16,
+          "temp_max": 18,
+          "rain_days": 15,
+          "sea_temp": 20
+        },
+        "12": {
+          "temp_avg": 13,
+          "temp_max": 15,
+          "rain_days": 9,
+          "sea_temp": 18
+        }
+      },
+      "scores": {
+        "nature": 58,
+        "culture": 52,
+        "sea": 82,
+        "food": 72,
+        "nightlife": 35,
+        "outdoor": 42,
+        "family": 55,
+        "offbeat": 55
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 6,
+          "mid": 13,
+          "high": 22
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
       "id": "provenza",
       "name": "Provenza",
       "country": "FR",
@@ -9487,6 +14943,130 @@
           "low": 7,
           "mid": 14,
           "high": 25
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
+      "id": "ravenna",
+      "name": "Ravenna",
+      "country": "IT",
+      "type": "city",
+      "coords": {
+        "lat": 44.4161,
+        "lon": 12.2017
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q13364",
+      "wikipedia_title": "Ravenna",
+      "wikipedia_title_en": "Ravenna",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 5,
+          "temp_max": 9,
+          "rain_days": 7,
+          "sea_temp": 7
+        },
+        "2": {
+          "temp_avg": 7,
+          "temp_max": 11,
+          "rain_days": 9,
+          "sea_temp": 8
+        },
+        "3": {
+          "temp_avg": 10,
+          "temp_max": 14,
+          "rain_days": 9,
+          "sea_temp": 12
+        },
+        "4": {
+          "temp_avg": 13,
+          "temp_max": 17,
+          "rain_days": 8,
+          "sea_temp": 15
+        },
+        "5": {
+          "temp_avg": 18,
+          "temp_max": 21,
+          "rain_days": 11,
+          "sea_temp": 19
+        },
+        "6": {
+          "temp_avg": 23,
+          "temp_max": 27,
+          "rain_days": 7,
+          "sea_temp": 24
+        },
+        "7": {
+          "temp_avg": 26,
+          "temp_max": 30,
+          "rain_days": 6,
+          "sea_temp": 28
+        },
+        "8": {
+          "temp_avg": 25,
+          "temp_max": 29,
+          "rain_days": 6,
+          "sea_temp": 29
+        },
+        "9": {
+          "temp_avg": 21,
+          "temp_max": 25,
+          "rain_days": 9,
+          "sea_temp": 25
+        },
+        "10": {
+          "temp_avg": 16,
+          "temp_max": 20,
+          "rain_days": 9,
+          "sea_temp": 20
+        },
+        "11": {
+          "temp_avg": 11,
+          "temp_max": 14,
+          "rain_days": 10,
+          "sea_temp": 15
+        },
+        "12": {
+          "temp_avg": 6,
+          "temp_max": 10,
+          "rain_days": 8,
+          "sea_temp": 10
+        }
+      },
+      "scores": {
+        "nature": 40,
+        "culture": 88,
+        "sea": 45,
+        "food": 75,
+        "nightlife": 42,
+        "outdoor": 38,
+        "family": 58,
+        "offbeat": 45
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
         },
         "currency": "EUR"
       },
@@ -10565,6 +16145,130 @@
       ]
     },
     {
+      "id": "santiago-di-compostela",
+      "name": "Santiago di Compostela",
+      "country": "ES",
+      "type": "city",
+      "coords": {
+        "lat": 42.8833,
+        "lon": -8.5333
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q14314",
+      "wikipedia_title": "Santiago di Compostela",
+      "wikipedia_title_en": "Santiago de Compostela",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 8,
+          "temp_max": 12,
+          "rain_days": 14,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": 9,
+          "temp_max": 13,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": 10,
+          "temp_max": 14,
+          "rain_days": 15,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 12,
+          "temp_max": 17,
+          "rain_days": 14,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 15,
+          "temp_max": 20,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 17,
+          "temp_max": 22,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 20,
+          "temp_max": 25,
+          "rain_days": 6,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 20,
+          "temp_max": 26,
+          "rain_days": 6,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 18,
+          "temp_max": 23,
+          "rain_days": 9,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 15,
+          "temp_max": 19,
+          "rain_days": 15,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 11,
+          "temp_max": 15,
+          "rain_days": 16,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": 10,
+          "temp_max": 13,
+          "rain_days": 15,
+          "sea_temp": null
+        }
+      },
+      "scores": {
+        "nature": 55,
+        "culture": 92,
+        "sea": 0,
+        "food": 82,
+        "nightlife": 62,
+        "outdoor": 52,
+        "family": 55,
+        "offbeat": 42
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 6,
+          "high": 11
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
       "id": "santorini",
       "name": "Santorini",
       "country": "GR",
@@ -11221,6 +16925,130 @@
       "costs_source": "assistant"
     },
     {
+      "id": "sintra",
+      "name": "Sintra",
+      "country": "PT",
+      "type": "city",
+      "coords": {
+        "lat": 38.7974,
+        "lon": -9.3904
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q190187",
+      "wikipedia_title": "Sintra",
+      "wikipedia_title_en": "Sintra",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 11,
+          "temp_max": 14,
+          "rain_days": 10,
+          "sea_temp": 15
+        },
+        "2": {
+          "temp_avg": 12,
+          "temp_max": 15,
+          "rain_days": 8,
+          "sea_temp": 15
+        },
+        "3": {
+          "temp_avg": 12,
+          "temp_max": 16,
+          "rain_days": 11,
+          "sea_temp": 15
+        },
+        "4": {
+          "temp_avg": 14,
+          "temp_max": 18,
+          "rain_days": 11,
+          "sea_temp": 16
+        },
+        "5": {
+          "temp_avg": 16,
+          "temp_max": 20,
+          "rain_days": 7,
+          "sea_temp": 16
+        },
+        "6": {
+          "temp_avg": 18,
+          "temp_max": 22,
+          "rain_days": 7,
+          "sea_temp": 18
+        },
+        "7": {
+          "temp_avg": 20,
+          "temp_max": 24,
+          "rain_days": 2,
+          "sea_temp": 17
+        },
+        "8": {
+          "temp_avg": 20,
+          "temp_max": 24,
+          "rain_days": 1,
+          "sea_temp": 16
+        },
+        "9": {
+          "temp_avg": 19,
+          "temp_max": 23,
+          "rain_days": 5,
+          "sea_temp": 17
+        },
+        "10": {
+          "temp_avg": 18,
+          "temp_max": 21,
+          "rain_days": 11,
+          "sea_temp": 19
+        },
+        "11": {
+          "temp_avg": 14,
+          "temp_max": 17,
+          "rain_days": 12,
+          "sea_temp": 18
+        },
+        "12": {
+          "temp_avg": 12,
+          "temp_max": 15,
+          "rain_days": 11,
+          "sea_temp": 16
+        }
+      },
+      "scores": {
+        "nature": 78,
+        "culture": 90,
+        "sea": 0,
+        "food": 72,
+        "nightlife": 30,
+        "outdoor": 58,
+        "family": 62,
+        "offbeat": 25
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
       "id": "siviglia",
       "name": "Siviglia",
       "country": "ES",
@@ -11717,6 +17545,130 @@
       "costs_source": "assistant"
     },
     {
+      "id": "strasburgo",
+      "name": "Strasburgo",
+      "country": "FR",
+      "type": "city",
+      "coords": {
+        "lat": 48.5733,
+        "lon": 7.7522
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q6602",
+      "wikipedia_title": "Strasburgo",
+      "wikipedia_title_en": "Strasbourg",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 3,
+          "temp_max": 6,
+          "rain_days": 15,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": 4,
+          "temp_max": 9,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": 7,
+          "temp_max": 12,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 10,
+          "temp_max": 16,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 15,
+          "temp_max": 20,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 20,
+          "temp_max": 25,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 21,
+          "temp_max": 26,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 21,
+          "temp_max": 26,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 17,
+          "temp_max": 22,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 12,
+          "temp_max": 16,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 7,
+          "temp_max": 10,
+          "rain_days": 14,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": 4,
+          "temp_max": 7,
+          "rain_days": 14,
+          "sea_temp": null
+        }
+      },
+      "scores": {
+        "nature": 42,
+        "culture": 88,
+        "sea": 0,
+        "food": 88,
+        "nightlife": 58,
+        "outdoor": 40,
+        "family": 65,
+        "offbeat": 35
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
       "id": "tallinn",
       "name": "Tallinn",
       "country": "EE",
@@ -11995,6 +17947,130 @@
           "low": 6,
           "mid": 13,
           "high": 22
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
+      "id": "toledo",
+      "name": "Toledo",
+      "country": "ES",
+      "type": "city",
+      "coords": {
+        "lat": 39.8667,
+        "lon": -4.0333
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q5836",
+      "wikipedia_title": "Toledo",
+      "wikipedia_title_en": "Toledo, Spain",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 6,
+          "temp_max": 11,
+          "rain_days": 6,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": 8,
+          "temp_max": 14,
+          "rain_days": 5,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": 11,
+          "temp_max": 17,
+          "rain_days": 9,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 14,
+          "temp_max": 20,
+          "rain_days": 9,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 19,
+          "temp_max": 25,
+          "rain_days": 6,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 24,
+          "temp_max": 30,
+          "rain_days": 4,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 29,
+          "temp_max": 36,
+          "rain_days": 1,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 28,
+          "temp_max": 35,
+          "rain_days": 2,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 22,
+          "temp_max": 28,
+          "rain_days": 3,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 17,
+          "temp_max": 23,
+          "rain_days": 8,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 11,
+          "temp_max": 16,
+          "rain_days": 8,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": 8,
+          "temp_max": 13,
+          "rain_days": 6,
+          "sea_temp": null
+        }
+      },
+      "scores": {
+        "nature": 45,
+        "culture": 95,
+        "sea": 0,
+        "food": 78,
+        "nightlife": 40,
+        "outdoor": 42,
+        "family": 55,
+        "offbeat": 32
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 6,
+          "high": 11
         },
         "currency": "EUR"
       },
@@ -12417,6 +18493,254 @@
       "costs_source": "assistant"
     },
     {
+      "id": "troms",
+      "name": "Tromsø",
+      "country": "NO",
+      "type": "city",
+      "coords": {
+        "lat": 69.6496,
+        "lon": 18.957
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q26087",
+      "wikipedia_title": "Tromsø",
+      "wikipedia_title_en": "Tromsø Municipality",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": -6,
+          "temp_max": -4,
+          "rain_days": 16,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": -5,
+          "temp_max": -3,
+          "rain_days": 15,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": -3,
+          "temp_max": -1,
+          "rain_days": 18,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 0,
+          "temp_max": 3,
+          "rain_days": 16,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 5,
+          "temp_max": 8,
+          "rain_days": 18,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 10,
+          "temp_max": 13,
+          "rain_days": 19,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 14,
+          "temp_max": 17,
+          "rain_days": 15,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 13,
+          "temp_max": 16,
+          "rain_days": 18,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 9,
+          "temp_max": 11,
+          "rain_days": 18,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 3,
+          "temp_max": 5,
+          "rain_days": 17,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": -2,
+          "temp_max": 0,
+          "rain_days": 16,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": -4,
+          "temp_max": -2,
+          "rain_days": 16,
+          "sea_temp": null
+        }
+      },
+      "scores": {
+        "nature": 92,
+        "culture": 52,
+        "sea": 18,
+        "food": 62,
+        "nightlife": 48,
+        "outdoor": 88,
+        "family": 55,
+        "offbeat": 72
+      },
+      "costs": {
+        "accommodation": {
+          "low": 90,
+          "mid": 148,
+          "high": 245
+        },
+        "food_per_day": {
+          "low": 30,
+          "mid": 55,
+          "high": 92
+        },
+        "transport_local_day": {
+          "low": 6,
+          "mid": 12,
+          "high": 21
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
+      "id": "urbino",
+      "name": "Urbino",
+      "country": "IT",
+      "type": "city",
+      "coords": {
+        "lat": 43.7252,
+        "lon": 12.6372
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q2759",
+      "wikipedia_title": "Urbino",
+      "wikipedia_title_en": "Urbino",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 4,
+          "temp_max": 8,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": 6,
+          "temp_max": 10,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": 8,
+          "temp_max": 12,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 11,
+          "temp_max": 16,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 15,
+          "temp_max": 20,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 21,
+          "temp_max": 26,
+          "rain_days": 8,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 24,
+          "temp_max": 30,
+          "rain_days": 6,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 23,
+          "temp_max": 29,
+          "rain_days": 8,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 18,
+          "temp_max": 23,
+          "rain_days": 9,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 14,
+          "temp_max": 19,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 9,
+          "temp_max": 13,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": 6,
+          "temp_max": 10,
+          "rain_days": 9,
+          "sea_temp": null
+        }
+      },
+      "scores": {
+        "nature": 58,
+        "culture": 88,
+        "sea": 0,
+        "food": 72,
+        "nightlife": 30,
+        "outdoor": 48,
+        "family": 52,
+        "offbeat": 62
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 4,
+          "mid": 8,
+          "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
       "id": "val-d-orcia",
       "name": "Val d'Orcia",
       "country": "IT",
@@ -12783,6 +19107,254 @@
           "low": 4,
           "mid": 8,
           "high": 14
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
+      "id": "valle-d-aosta",
+      "name": "Valle d'Aosta",
+      "country": "IT",
+      "type": "area",
+      "coords": {
+        "lat": 45.7167,
+        "lon": 7.3667
+      },
+      "radius_km": 90,
+      "wikidata_id": "Q1222",
+      "wikipedia_title": "Valle d'Aosta",
+      "wikipedia_title_en": "Aosta Valley",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": -1,
+          "temp_max": 3,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": 1,
+          "temp_max": 5,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": 3,
+          "temp_max": 7,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 6,
+          "temp_max": 10,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 11,
+          "temp_max": 15,
+          "rain_days": 16,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 17,
+          "temp_max": 21,
+          "rain_days": 15,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 20,
+          "temp_max": 25,
+          "rain_days": 9,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 19,
+          "temp_max": 24,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 14,
+          "temp_max": 19,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 11,
+          "temp_max": 15,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 4,
+          "temp_max": 8,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": 1,
+          "temp_max": 4,
+          "rain_days": 10,
+          "sea_temp": null
+        }
+      },
+      "scores": {
+        "nature": 92,
+        "culture": 48,
+        "sea": 0,
+        "food": 75,
+        "nightlife": 20,
+        "outdoor": 92,
+        "family": 72,
+        "offbeat": 45
+      },
+      "costs": {
+        "accommodation": {
+          "low": 55,
+          "mid": 92,
+          "high": 150
+        },
+        "food_per_day": {
+          "low": 20,
+          "mid": 35,
+          "high": 58
+        },
+        "transport_local_day": {
+          "low": 7,
+          "mid": 14,
+          "high": 25
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
+      "id": "varsavia",
+      "name": "Varsavia",
+      "country": "PL",
+      "type": "city",
+      "coords": {
+        "lat": 52.23,
+        "lon": 21.0111
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q270",
+      "wikipedia_title": "Varsavia",
+      "wikipedia_title_en": "Warsaw",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 0,
+          "temp_max": 2,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": 1,
+          "temp_max": 5,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": 4,
+          "temp_max": 9,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 9,
+          "temp_max": 14,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 14,
+          "temp_max": 19,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 19,
+          "temp_max": 24,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 20,
+          "temp_max": 25,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 20,
+          "temp_max": 25,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 16,
+          "temp_max": 20,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 10,
+          "temp_max": 14,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 5,
+          "temp_max": 7,
+          "rain_days": 10,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": 2,
+          "temp_max": 4,
+          "rain_days": 12,
+          "sea_temp": null
+        }
+      },
+      "scores": {
+        "nature": 38,
+        "culture": 82,
+        "sea": 0,
+        "food": 75,
+        "nightlife": 78,
+        "outdoor": 35,
+        "family": 58,
+        "offbeat": 42
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 3,
+          "mid": 6,
+          "high": 11
         },
         "currency": "EUR"
       },
@@ -13445,6 +20017,130 @@
       "costs_source": "assistant"
     },
     {
+      "id": "zante",
+      "name": "Zante",
+      "country": "GR",
+      "type": "island",
+      "coords": {
+        "lat": 37.8,
+        "lon": 20.75
+      },
+      "radius_km": 60,
+      "wikidata_id": "Q144880",
+      "wikipedia_title": "Zante",
+      "wikipedia_title_en": "Zakynthos",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 8,
+          "temp_max": 10,
+          "rain_days": 15,
+          "sea_temp": 17
+        },
+        "2": {
+          "temp_avg": 9,
+          "temp_max": 11,
+          "rain_days": 10,
+          "sea_temp": 17
+        },
+        "3": {
+          "temp_avg": 10,
+          "temp_max": 12,
+          "rain_days": 13,
+          "sea_temp": 17
+        },
+        "4": {
+          "temp_avg": 12,
+          "temp_max": 15,
+          "rain_days": 6,
+          "sea_temp": 17
+        },
+        "5": {
+          "temp_avg": 16,
+          "temp_max": 19,
+          "rain_days": 6,
+          "sea_temp": 19
+        },
+        "6": {
+          "temp_avg": 21,
+          "temp_max": 25,
+          "rain_days": 3,
+          "sea_temp": 24
+        },
+        "7": {
+          "temp_avg": 24,
+          "temp_max": 28,
+          "rain_days": 1,
+          "sea_temp": 27
+        },
+        "8": {
+          "temp_avg": 24,
+          "temp_max": 28,
+          "rain_days": 2,
+          "sea_temp": 27
+        },
+        "9": {
+          "temp_avg": 21,
+          "temp_max": 24,
+          "rain_days": 6,
+          "sea_temp": 26
+        },
+        "10": {
+          "temp_avg": 17,
+          "temp_max": 20,
+          "rain_days": 8,
+          "sea_temp": 24
+        },
+        "11": {
+          "temp_avg": 13,
+          "temp_max": 16,
+          "rain_days": 14,
+          "sea_temp": 22
+        },
+        "12": {
+          "temp_avg": 10,
+          "temp_max": 12,
+          "rain_days": 12,
+          "sea_temp": 19
+        }
+      },
+      "scores": {
+        "nature": 68,
+        "culture": 38,
+        "sea": 90,
+        "food": 65,
+        "nightlife": 72,
+        "outdoor": 52,
+        "family": 65,
+        "offbeat": 30
+      },
+      "costs": {
+        "accommodation": {
+          "low": 40,
+          "mid": 68,
+          "high": 115
+        },
+        "food_per_day": {
+          "low": 16,
+          "mid": 27,
+          "high": 46
+        },
+        "transport_local_day": {
+          "low": 5,
+          "mid": 10,
+          "high": 18
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
       "id": "zara",
       "name": "Zara",
       "country": "HR",
@@ -13563,6 +20259,254 @@
           "low": 3,
           "mid": 6,
           "high": 11
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
+      "id": "zermatt",
+      "name": "Zermatt",
+      "country": "CH",
+      "type": "city",
+      "coords": {
+        "lat": 46.0193,
+        "lon": 7.7461
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q27494",
+      "wikipedia_title": "Zermatt",
+      "wikipedia_title_en": "Zermatt",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": -4,
+          "temp_max": -1,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": -2,
+          "temp_max": 1,
+          "rain_days": 11,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": -1,
+          "temp_max": 3,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 2,
+          "temp_max": 5,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 6,
+          "temp_max": 9,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 12,
+          "temp_max": 16,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 15,
+          "temp_max": 19,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 14,
+          "temp_max": 19,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 10,
+          "temp_max": 14,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 6,
+          "temp_max": 10,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 1,
+          "temp_max": 4,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": -2,
+          "temp_max": 1,
+          "rain_days": 12,
+          "sea_temp": null
+        }
+      },
+      "scores": {
+        "nature": 95,
+        "culture": 40,
+        "sea": 0,
+        "food": 70,
+        "nightlife": 35,
+        "outdoor": 95,
+        "family": 68,
+        "offbeat": 28
+      },
+      "costs": {
+        "accommodation": {
+          "low": 90,
+          "mid": 148,
+          "high": 245
+        },
+        "food_per_day": {
+          "low": 30,
+          "mid": 55,
+          "high": 92
+        },
+        "transport_local_day": {
+          "low": 6,
+          "mid": 12,
+          "high": 21
+        },
+        "currency": "EUR"
+      },
+      "costs_source": "assistant"
+    },
+    {
+      "id": "zurigo",
+      "name": "Zurigo",
+      "country": "CH",
+      "type": "city",
+      "coords": {
+        "lat": 47.3744,
+        "lon": 8.5411
+      },
+      "radius_km": 25,
+      "wikidata_id": "Q72",
+      "wikipedia_title": "Zurigo",
+      "wikipedia_title_en": "Zurich",
+      "airports": [],
+      "scores_source": "assistant",
+      "climate_source": "open-meteo",
+      "pois": [],
+      "notes": "",
+      "image_url": null,
+      "image_credit": null,
+      "climate": {
+        "1": {
+          "temp_avg": 1,
+          "temp_max": 4,
+          "rain_days": 15,
+          "sea_temp": null
+        },
+        "2": {
+          "temp_avg": 3,
+          "temp_max": 7,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "3": {
+          "temp_avg": 6,
+          "temp_max": 11,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "4": {
+          "temp_avg": 9,
+          "temp_max": 15,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "5": {
+          "temp_avg": 13,
+          "temp_max": 18,
+          "rain_days": 18,
+          "sea_temp": null
+        },
+        "6": {
+          "temp_avg": 18,
+          "temp_max": 23,
+          "rain_days": 15,
+          "sea_temp": null
+        },
+        "7": {
+          "temp_avg": 20,
+          "temp_max": 25,
+          "rain_days": 15,
+          "sea_temp": null
+        },
+        "8": {
+          "temp_avg": 20,
+          "temp_max": 25,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "9": {
+          "temp_avg": 16,
+          "temp_max": 20,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "10": {
+          "temp_avg": 11,
+          "temp_max": 15,
+          "rain_days": 12,
+          "sea_temp": null
+        },
+        "11": {
+          "temp_avg": 6,
+          "temp_max": 9,
+          "rain_days": 13,
+          "sea_temp": null
+        },
+        "12": {
+          "temp_avg": 3,
+          "temp_max": 6,
+          "rain_days": 14,
+          "sea_temp": null
+        }
+      },
+      "scores": {
+        "nature": 52,
+        "culture": 72,
+        "sea": 0,
+        "food": 78,
+        "nightlife": 62,
+        "outdoor": 55,
+        "family": 62,
+        "offbeat": 15
+      },
+      "costs": {
+        "accommodation": {
+          "low": 90,
+          "mid": 148,
+          "high": 245
+        },
+        "food_per_day": {
+          "low": 30,
+          "mid": 55,
+          "high": 92
+        },
+        "transport_local_day": {
+          "low": 6,
+          "mid": 12,
+          "high": 21
         },
         "currency": "EUR"
       },

@@ -230,6 +230,12 @@ a { color: var(--brand-600); }
 
 /* La lente dentro il campo, come stava nella barra in alto: è il segno che
    dice "qui si scrive un nome", e senza il campo si confonde con gli altri. */
+.filters__dates { display: flex; align-items: center; gap: 8px; }
+.filters__dates .control { flex: 1; min-width: 0; }
+.filters__dates span { flex: none; color: var(--ink-3); }
+.filters__note--ok { color: var(--ink-2); font-weight: 600; }
+.filters__note--warn { color: var(--crit); font-weight: 600; }
+
 .filters__search { position: relative; display: block; }
 .filters__search .control { padding-left: 34px; }
 .filters__search > svg {
@@ -454,6 +460,15 @@ textarea.control { height: auto; padding: 8px 10px; resize: vertical; }
   display: grid; gap: var(--stack-gap);
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
+
+/* Il seguito della classifica, dietro un gesto esplicito. Il conteggio
+   accanto al bottone evita la domanda che il tetto altrimenti solleva:
+   "quante ne sto vedendo davvero". */
+.grid__more {
+  display: flex; align-items: center; justify-content: center; gap: var(--stack-gap);
+  margin-top: var(--container-margin);
+}
+.grid__more span { font-size: 12px; color: var(--ink-3); }
 
 /* ---------- Card ---------- */
 

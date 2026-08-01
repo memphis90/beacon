@@ -129,6 +129,81 @@ const PUNTEGGI = {
   cipro:              [58, 72, 88, 70, 62, 55, 70, 32],
   peloponneso:        [82, 88, 78, 78, 25, 68, 58, 58],
   istria:             [68, 68, 78, 82, 45, 62, 65, 45],
+
+  // --- Seconda tornata: Italia -------------------------------------------
+  milano:             [25, 78,  0, 85, 88, 28, 52, 10],
+  bergamo:            [48, 75,  0, 82, 48, 45, 58, 38],
+  mantova:            [45, 82,  0, 82, 38, 40, 55, 52],
+  ravenna:            [40, 88, 45, 75, 42, 38, 58, 45],
+  ferrara:            [42, 82,  0, 78, 42, 45, 58, 55],
+  assisi:             [62, 90,  0, 75, 25, 52, 58, 35],
+  perugia:            [55, 82,  0, 82, 58, 48, 58, 45],
+  urbino:             [58, 88,  0, 72, 30, 48, 52, 62],
+  'isola-di-capri':   [72, 55, 85, 75, 45, 55, 45, 8],
+  procida:            [58, 52, 82, 72, 35, 42, 55, 55],
+  'isola-d-elba':     [72, 42, 85, 68, 40, 68, 75, 38],
+  gargano:            [80, 55, 82, 72, 35, 65, 68, 52],
+  cilento:            [82, 62, 85, 78, 30, 68, 65, 62],
+  'valle-d-aosta':    [92, 48,  0, 75, 20, 92, 72, 45],
+
+  // --- Grecia -------------------------------------------------------------
+  mykonos:            [45, 40, 88, 68, 96, 40, 35, 5],
+  paro:              [55, 45, 88, 70, 72, 48, 62, 30],
+  nasso:              [65, 52, 88, 75, 52, 58, 70, 42],
+  zante:              [68, 38, 90, 65, 72, 52, 65, 30],
+  cefalonia:          [78, 42, 90, 68, 45, 60, 68, 48],
+
+  // --- Penisola iberica ---------------------------------------------------
+  toledo:             [45, 95,  0, 78, 40, 42, 55, 32],
+  cordova:            [42, 95,  0, 85, 58, 38, 55, 30],
+  malaga:           [45, 72, 80, 82, 82, 48, 68, 20],
+  'santiago-di-compostela': [55, 92, 0, 82, 62, 52, 55, 42],
+  minorca:            [72, 45, 90, 70, 42, 62, 82, 38],
+  sintra:             [78, 90,  0, 72, 30, 58, 62, 25],
+  azzorre:            [95, 42, 62, 65, 25, 90, 60, 78],
+  lanzarote:          [82, 38, 82, 62, 48, 75, 72, 42],
+
+  // --- Francia ------------------------------------------------------------
+  strasburgo:         [42, 88,  0, 88, 58, 40, 65, 35],
+  annecy:             [88, 62,  0, 80, 45, 82, 72, 32],
+  carcassonne:        [50, 90,  0, 75, 30, 48, 62, 38],
+  'mont-saint-michel':[65, 95, 40, 65, 15, 42, 60, 20],
+  corsica:            [90, 55, 88, 75, 35, 85, 68, 52],
+  camargue:           [88, 52, 62, 72, 20, 68, 60, 62],
+
+  // --- Regno Unito e Irlanda ----------------------------------------------
+  londra:             [35, 95,  0, 85, 92, 32, 68, 5],
+  bath:               [55, 90,  0, 72, 45, 48, 60, 32],
+  cornovaglia:        [85, 55, 62, 75, 32, 78, 72, 42],
+  highlands:          [97, 48, 25, 58, 15, 92, 55, 68],
+  galway:             [68, 68, 45, 72, 82, 62, 58, 55],
+
+  // --- Arco alpino --------------------------------------------------------
+  zurigo:             [52, 72,  0, 78, 62, 55, 62, 15],
+  lucerna:            [82, 72,  0, 72, 42, 72, 70, 25],
+  interlaken:         [92, 45,  0, 65, 40, 92, 72, 22],
+  zermatt:            [95, 40,  0, 70, 35, 95, 68, 28],
+  'chamonix-mont-blanc': [95, 40, 0, 72, 45, 96, 65, 25],
+
+  // --- Nord ---------------------------------------------------------------
+  bergen:             [88, 68, 20, 70, 55, 82, 62, 42],
+  troms:           [92, 52, 18, 62, 48, 88, 55, 72],
+  goteborg:         [58, 68, 35, 78, 68, 52, 68, 45],
+  aarhus:             [52, 72, 35, 78, 68, 50, 68, 52],
+
+  // --- Est e Balcani ------------------------------------------------------
+  varsavia:           [38, 82,  0, 75, 78, 35, 58, 42],
+  danzica:            [52, 85, 45, 75, 68, 45, 65, 45],
+  brno:               [42, 72,  0, 72, 72, 45, 55, 62],
+  bled:               [92, 62,  0, 68, 25, 82, 78, 35],
+  'parco-nazionale-dei-laghi-di-plitvice': [97, 30, 0, 55, 8, 82, 72, 32],
+  mostar:             [65, 85,  0, 72, 35, 58, 52, 62],
+  'comune-di-ocrida':             [82, 82, 55, 68, 42, 65, 62, 72],
+  plovdiv:            [52, 85,  0, 78, 68, 55, 55, 68],
+
+  // --- Turchia ------------------------------------------------------------
+  cappadocia:         [92, 88,  0, 72, 35, 82, 68, 58],
+  adalia:             [62, 68, 85, 75, 68, 62, 75, 32],
 }
 
 /**
@@ -181,6 +256,29 @@ const FASCIA = {
   stoccolma: 'alta', oslo: 'alta', ibiza: 'alta', formentera: 'alta', 'val-gardena': 'alta',
   // altissima
   reykjavik: 'altissima', lapponia: 'altissima', 'f-r-er': 'altissima',
+
+  // --- Seconda tornata ---------------------------------------------------
+  // economica
+  mostar: 'economica', 'comune-di-ocrida': 'economica', plovdiv: 'economica',
+  // contenuta
+  varsavia: 'contenuta', danzica: 'contenuta', brno: 'contenuta', bled: 'contenuta',
+  'parco-nazionale-dei-laghi-di-plitvice': 'contenuta', cappadocia: 'contenuta',
+  adalia: 'contenuta', toledo: 'contenuta', cordova: 'contenuta', malaga: 'contenuta',
+  'santiago-di-compostela': 'contenuta', paro: 'contenuta', nasso: 'contenuta',
+  zante: 'contenuta', cefalonia: 'contenuta', gargano: 'contenuta', cilento: 'contenuta',
+  // media
+  milano: 'media', bergamo: 'media', mantova: 'media', ravenna: 'media', ferrara: 'media',
+  assisi: 'media', perugia: 'media', urbino: 'media', 'isola-d-elba': 'media',
+  procida: 'media', 'valle-d-aosta': 'media', minorca: 'media', sintra: 'media',
+  lanzarote: 'media', strasburgo: 'media', carcassonne: 'media', 'mont-saint-michel': 'media',
+  corsica: 'media', camargue: 'media', bath: 'media', cornovaglia: 'media',
+  highlands: 'media', galway: 'media', azzorre: 'media', 'goteborg': 'media', aarhus: 'media',
+  // alta
+  'isola-di-capri': 'alta', mykonos: 'alta', londra: 'alta', annecy: 'alta',
+  lucerna: 'alta', bergen: 'alta',
+  // altissima
+  zurigo: 'altissima', zermatt: 'altissima', interlaken: 'altissima',
+  'chamonix-mont-blanc': 'altissima', troms: 'altissima',
 }
 
 const arrotonda = (v) => Math.round(v)

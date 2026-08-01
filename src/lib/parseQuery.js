@@ -231,11 +231,31 @@ export function parseQuery(input, { destinations = [] } = {}) {
   }
   if (Object.keys(weights).length) patch.weights = weights
 
-  // ---- il mare come requisito, non come interesse ---------------------
-  // Solo con formule esplicite: "un po' di mare" resta un gusto, non un veto.
-  if (/\b(voglio|cerco|serve|deve esserci|solo)\b[^.]{0,20}\bmare\b|\bbalneabil\w+\b|\bfare il bagno\b|\bmare calda?\b|\bacqua calda\b/.test(text)) {
+  /* ---- il mare come requisito, non come interesse ---------------------
+   *
+   * Due famiglie di formule, ed è la seconda quella che mancava.
+   *
+   * La prima è il desiderio esplicito: "voglio il mare", "balneabile", "fare
+   * il bagno". La seconda è il TIPO di posto — "una località di mare", "una
+   * meta balneare", "un posto al mare": lì il mare non è un gusto fra gli
+   * altri, è la categoria della destinazione, e trattarlo come un semplice
+   * peso faceva comparire città che il mare ce l'hanno vicino senza esserne
+   * fatte. Lisbona ha l'oceano a mezz'ora e non è una località di mare. */
+  const MARE_REQUISITO =
+    /\b(voglio|cerco|serve|deve esserci|solo)\b[^.]{0,20}\bmare\b|\bbalneabil\w+\b|\bfare il bagno\b|\bmare calda?\b|\bacqua calda\b/
+  /* Nessun `\b` dopo il gruppo: in JavaScript è ASCII, e dopo la "à" di
+     "località" — che word char non è — seguita da uno spazio non c'è alcun
+     confine. La regola sembrava giusta e non scattava mai proprio sulla frase
+     più comune. */
+  const MARE_CATEGORIA =
+    /\b(localit[àa]|meta|mete|destinazion\w+|posto|posti|luogo|luoghi|vacanza|vacanze)[^.]{0,15}(di |sul |al )?\bmare\b|\bmeta balneare\b|\bvacanza balneare\b|\bal mare\b/
+
+  if (MARE_REQUISITO.test(text) || MARE_CATEGORIA.test(text)) {
     patch.seaRequired = true
-    understood.push({ key: 'seaRequired', label: 'Requisito', value: 'mare balneabile', from: 'mare' })
+    understood.push({
+      key: 'seaRequired', label: 'Requisito', value: 'mare balneabile',
+      from: (MARE_CATEGORIA.exec(text) || MARE_REQUISITO.exec(text) || [])[0]?.trim() || 'mare',
+    })
   }
 
   // ---- nomi di destinazione o paese -----------------------------------

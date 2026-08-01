@@ -30,6 +30,11 @@ import {
   saveOverrides,
 } from './lib/store.js'
 
+/* Quante card per volta. Ventiquattro riempiono due o tre schermate su
+   desktop: abbastanza da non sembrare un elenco troncato, poche abbastanza da
+   non chiedere al browser centocinquantanove immagini remote in un colpo. */
+const PAGINA = 24
+
 const CRITERIA_KEY = 'destination-finder:criteria:v1'
 const FAVOURITES_KEY = 'destination-finder:favourites:v1'
 const MAX_COMPARE = 4
@@ -44,6 +49,10 @@ function baseCriteria() {
     query: '',
     month: new Date().getMonth() + 1,
     nights: 5,
+    // Le date, quando ci sono, sono il modo in cui mese e notti sono stati
+    // compilati: servono a ricostruire il campo, non al calcolo.
+    dateFrom: null,
+    dateTo: null,
     weights: emptyWeights(5),
     budgetMax: null,
     seaTempMin: 21,
@@ -89,6 +98,10 @@ export default function App({ startedInitially = false }) {
   // si consulta — resta lì, non interrompe niente — e la scheda di una singola
   // destinazione si apre, si cambia e si chiude. Una modale sull'elenco diceva
   // "fai in fretta e torna indietro" a un'attività che è il lavoro principale.
+  // Quante se ne stanno mostrando. Torna al tetto a ogni cambio di criteri o
+  // di filtro preferiti: dopo una ricerca nuova, restare a novanta card
+  // aperte è la coda della ricerca precedente.
+  const [mostrate, setMostrate] = useState(PAGINA)
   const [parametri, setParametri] = useState(false)
   const [editor, setEditor] = useState(null)
   const [filtersOpen, setFiltersOpen] = useState(false)
@@ -126,6 +139,7 @@ export default function App({ startedInitially = false }) {
   const { items: toasts, push: pushToast, dismiss: dismissToast } = useToasts()
 
   useEffect(() => { localStorage.setItem(CRITERIA_KEY, JSON.stringify(criteria)) }, [criteria])
+  useEffect(() => { setMostrate(PAGINA) }, [criteria, onlyFavourites])
   useEffect(() => { localStorage.setItem(FAVOURITES_KEY, JSON.stringify(favourites)) }, [favourites])
 
   const applyOverrides = (next) => { setOverrides(next); saveOverrides(next) }
@@ -451,27 +465,51 @@ export default function App({ startedInitially = false }) {
               )}
             </div>
           ) : (
-            <div className="grid">
-              {visible.map((entry, index) => (
-                <DestinationCard
-                  key={entry.destination.id}
-                  entry={entry}
-                  rank={index + 1}
-                  criteria={criteria}
-                  isFavourite={favourites.includes(entry.destination.id)}
-                  onToggleFavourite={() => toggleFavourite(entry.destination)}
-                  inCompare={compareIds.includes(entry.destination.id)}
-                  onToggleCompare={() => toggleCompare(entry.destination.id)}
-                  onOpen={() => setDetailId(entry.destination.id)}
-                />
-              ))}
-            </div>
+            <>
+              <div className="grid">
+                {visible.slice(0, mostrate).map((entry, index) => (
+                  <DestinationCard
+                    key={entry.destination.id}
+                    entry={entry}
+                    rank={index + 1}
+                    criteria={criteria}
+                    isFavourite={favourites.includes(entry.destination.id)}
+                    onToggleFavourite={() => toggleFavourite(entry.destination)}
+                    inCompare={compareIds.includes(entry.destination.id)}
+                    onToggleCompare={() => toggleCompare(entry.destination.id)}
+                    onOpen={() => setDetailId(entry.destination.id)}
+                  />
+                ))}
+              </div>
+
+              {/* Un tetto e un bottone, non lo scroll infinito né le pagine.
+                  Questa è una classifica: la risposta buona sta in cima, e chi
+                  scorre fino in fondo non sta cercando, sta sfogliando. Lo
+                  scroll infinito renderebbe irraggiungibile il piede della
+                  pagina e toglierebbe il "quanti sono", che invece è scritto
+                  qui sopra; le pagine chiederebbero di navigare una lista che
+                  nessuno vuole navigare. */}
+              {visible.length > mostrate && (
+                <div className="grid__more">
+                  <button
+                    type="button"
+                    className="btn"
+                    onClick={() => setMostrate((n) => n + PAGINA)}
+                  >
+                    Mostra altre {Math.min(PAGINA, visible.length - mostrate)}
+                  </button>
+                  <span>
+                    ne vedi {mostrate} di {visible.length}
+                  </span>
+                </div>
+              )}
+            </>
           )}
 
           <p style={{ margin: '20px 0 0', fontSize: 12, color: 'var(--ink-3)', lineHeight: 1.6 }}>
-            Strumento informativo: nessuna prenotazione, nessun prezzo in tempo reale. Costi e clima
-            sono stime iniziali da calibrare con l’editor. Il costo del volo non è modellato in
-            Fase 0.
+            Strumento informativo: nessuna prenotazione, nessun prezzo in tempo reale. Il clima è
+            misurato; i costi e i punteggi sono stime, correggibili da <em>Parametri</em>. Il costo
+            del volo non è modellato.
           </p>
         </main>
 

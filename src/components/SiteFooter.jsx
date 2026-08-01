@@ -57,7 +57,9 @@ export default function SiteFooter() {
             </button>
           ))}
         </nav>
-        <p>Strumento personale · Fase 0 · nessun dato lascia questo computer</p>
+        {/* Cosa lo strumento è e cosa fa dei tuoi dati, non a che punto è il
+            suo sviluppo: la fase interessa chi contribuisce, e sta nel README. */}
+        <p>Strumento informativo · nessuna prenotazione · nessun dato lascia questo computer</p>
       </footer>
 
       {current && (
