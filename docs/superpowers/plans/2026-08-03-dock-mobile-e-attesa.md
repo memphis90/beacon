@@ -10,7 +10,7 @@
 
 ## Global Constraints
 
-- **Solo mobile.** Ogni regola CSS di questo piano vive dentro `@media (max-width: 900px)`, tranne dove indicato. Sopra i 901px non deve cambiare nulla: la dock è `display: none`, la topbar è già chiara.
+- **Sopra i 901px non deve cambiare nulla.** La dock è `display: none`, la topbar è già chiara, i pannelli non ricevono `tabs`. Le regole CSS che riguardano la dock e la topbar vivono dentro `@media (max-width: 900px)`; quelle dell'attesa e delle schede **no**, e non è una svista: il velo dell'attesa compare a ogni larghezza, e le schede esistono dove vengono montate. Ogni task dice quale dei due casi è il suo.
 - **Spec di riferimento:** `docs/superpowers/specs/2026-08-03-dock-mobile-e-attesa-design.md`. In caso di conflitto vince la spec.
 - **Nessuna dipendenza nuova.** Né librerie di testing, né di animazione, né di icone: `IconSparkle`, `IconSearch`, `IconList`, `IconHeart`, `IconScale`, `IconSettings` esistono già in `src/components/Icons.jsx`.
 - **Testo in italiano**, come tutto il resto dell'interfaccia.
@@ -107,6 +107,18 @@ const base = {
 }
 const dock = (over = {}) => renderToStaticMarkup(createElement(BottomNav, { ...base, ...over }))
 
+/**
+ * Il bottone che porta questa etichetta, isolato dal resto del markup.
+ *
+ * Senza jsdom si lavora sulla stringa, ma contare le occorrenze di "disabled"
+ * nell'intera pagina si romperebbe al primo bottone spento aggiunto altrove,
+ * per ragioni che non c'entrano con ciò che si sta provando.
+ */
+const bottone = (html, etichetta) =>
+  html.match(new RegExp(`<button(?:(?!</button>).)*?${etichetta}</button>`))?.[0] ?? ''
+
+const spento = (html, etichetta) => / disabled(=|>| )/.test(bottone(html, etichetta))
+
 describe('BottomNav — cinque slot, il centro è l’azione', () => {
   it('disegna le cinque voci, con Impostazioni al posto di Parametri', () => {
     const html = dock()
@@ -129,15 +141,27 @@ describe('BottomNav — cinque slot, il centro è l’azione', () => {
     expect(dock()).toContain('bottomnav__ask')
   })
 
-  it('senza risultati i tre slot di vista sono disattivi, il centro no', () => {
+  it('senza risultati i tre slot di vista sono disattivi, gli altri due no', () => {
     const html = dock({ hasResults: false })
-    // Tre bottoni disabilitati: Elenco, Preferiti, Confronta.
-    expect(html.match(/disabled/g)?.length).toBe(3)
-    expect(html).toContain('bottomnav__ask')
+    expect(spento(html, 'Elenco')).toBe(true)
+    expect(spento(html, 'Preferiti')).toBe(true)
+    expect(spento(html, 'Confronta')).toBe(true)
+    // Il centro e le impostazioni sono le uniche due cose che in quel momento
+    // si possono fare davvero.
+    expect(spento(html, 'Chiedi')).toBe(false)
+    expect(spento(html, 'Impostazioni')).toBe(false)
+  })
+
+  it('con risultati solo Confronta resta spento, e solo sotto le due selezioni', () => {
+    const html = dock({ hasResults: true, compareCount: 1 })
+    expect(spento(html, 'Elenco')).toBe(false)
+    expect(spento(html, 'Confronta')).toBe(true)
+    expect(spento(dock({ hasResults: true, compareCount: 2 }), 'Confronta')).toBe(false)
   })
 
   it('il centro si disattiva quando non c’è niente da chiedere', () => {
-    expect(dock({ askDisabled: true })).toMatch(/bottomnav__ask[^>]*disabled|disabled[^>]*bottomnav__ask/)
+    expect(spento(dock({ askDisabled: true }), 'Chiedi')).toBe(true)
+    expect(spento(dock({ askDisabled: false }), 'Chiedi')).toBe(false)
   })
 
   it('i badge compaiono solo se c’è qualcosa da contare', () => {
@@ -418,8 +442,11 @@ describe('ricerca — la stessa dock, e un invio solo', () => {
   it('la home monta la dock, spenta dove non c’è ancora niente', () => {
     const html = renderToStaticMarkup(createElement(App))
     expect(html).toContain('bottomnav__ask')
-    // Elenco, Preferiti e Confronta: nessun ranking esiste ancora.
-    expect(html.match(/disabled/g)?.length).toBeGreaterThanOrEqual(3)
+    // Nessun ranking esiste ancora: i tre slot che ci lavorano sopra sono spenti.
+    expect(spento(html, 'Elenco')).toBe(true)
+    expect(spento(html, 'Preferiti')).toBe(true)
+    expect(spento(html, 'Confronta')).toBe(true)
+    expect(spento(html, 'Impostazioni')).toBe(false)
   })
 
   /**
@@ -449,6 +476,11 @@ In `src/App.jsx`, nel `return` dentro `if (!started)`, aggiungi a `<Landing>` (m
         onList={() => { setOnlyFavourites(false); setStarted(true) }}
         onFavourites={() => { setOnlyFavourites(true); setStarted(true) }}
         onCompare={() => { setCompareOpen(true); setStarted(true) }}
+        /* Servono al Task 4: il pannello delle impostazioni ha una scheda
+           Parametri anche qui, e senza questi due sarebbe una scheda morta.
+           `merged` la home ce l'ha già, si chiama `destinations`. */
+        overrides={overrides}
+        onOverridesChange={applyOverrides}
 ```
 
 - [ ] **Step 4: Monta la dock in `Landing` e togli la freccia**
@@ -683,24 +715,63 @@ Aggiungi l'import in cima a `App.jsx`:
 import PanelTabs from './components/PanelTabs.jsx'
 ```
 
-- [ ] **Step 6: Lo stesso in `Landing.jsx`**
+- [ ] **Step 6: Lo stesso in `Landing.jsx`, e con due schede vere**
 
-`Landing` ha già `settingsOpen` e monta `SettingsModal`. Dagli le schede sostituendo quel blocco:
+`Landing` ha già `settingsOpen` e monta `SettingsModal`. Deve avere **entrambe** le schede funzionanti come nei risultati, o la dock aprirebbe due pannelli diversi nelle due schermate — che è esattamente ciò che questo piano sta togliendo.
+
+**6a.** Estendi la firma con le due props aggiunte nel Task 3:
 
 ```jsx
-      {settingsOpen && (
+export default function Landing({
+  destinations, agent, onAgentChange, onApply, onSkip, onLogout,
+  phrase = '', favouritesCount = 0, compareCount = 0, hasResults = false,
+  onList, onFavourites, onCompare,
+  overrides = {}, onOverridesChange = () => {},
+}) {
+```
+
+**6b.** Sostituisci `settingsOpen` (booleano) con lo stesso stato a tre valori che ha `App`. Cerca `const [settingsOpen, setSettingsOpen] = useState(false)` e mettici:
+
+```jsx
+  /* Quale scheda del pannello è aperta: 'parametri' | 'modello' | null.
+     Come in App: è la dock ad aprirlo, e la dock è la stessa. */
+  const [mobilePanel, setMobilePanel] = useState(null)
+```
+
+Poi aggiorna i tre punti che usavano `setSettingsOpen(true)` — l'`onConfigure` dell'`InterpreterPicker`, la voce del menu laterale `onOpenSettings`, e l'`onSettings` della dock del Task 3 — passando a `setMobilePanel('modello')` per i primi due e `setMobilePanel('parametri')` per la dock.
+
+**6c.** Sostituisci il blocco `{settingsOpen && …}` con i due pannelli:
+
+```jsx
+      {mobilePanel === 'parametri' && (
+        <EditorPanel
+          merged={destinations}
+          overrides={overrides}
+          onOverridesChange={onOverridesChange}
+          initialId={null}
+          onClose={() => setMobilePanel(null)}
+          tabs={<PanelTabs active="parametri" onPick={setMobilePanel} />}
+        />
+      )}
+
+      {mobilePanel === 'modello' && (
         <SettingsModal
           config={agent}
           onChange={applyAgent}
-          onClose={() => setSettingsOpen(false)}
-          tabs={<PanelTabs active="modello" onPick={() => {}} />}
+          onClose={() => setMobilePanel(null)}
+          tabs={<PanelTabs active="modello" onPick={setMobilePanel} />}
         />
       )}
 ```
 
-**Perché `onPick` non fa niente qui:** nella schermata di ricerca l'editor dei parametri non ha dati su cui lavorare — `merged` e `overrides` vivono in `App` e la home non li riceve. La scheda «Parametri» resta visibile ma inerte. **Se questa mezza misura non ti convince**, l'alternativa è passare anche a `Landing` `merged`/`overrides`/`onOverridesChange` e montare `EditorPanel` lì: è più prop drilling, ed è una decisione da prendere guardando la schermata, non ora.
+**6d.** Aggiungi gli import mancanti in `Landing.jsx`:
 
-Aggiungi l'import `PanelTabs` anche in `Landing.jsx`.
+```jsx
+import EditorPanel from './EditorPanel.jsx'
+import PanelTabs from './PanelTabs.jsx'
+```
+
+**Attenzione:** `EditorPanel` importa Leaflet nella sua catena? Verificalo con `grep -n "leaflet" src/components/EditorPanel.jsx src/components/DetailMap.jsx`. Se `EditorPanel` tira dentro la mappa, il mock `vi.mock('leaflet')` in `dock.test.js` copre già il caso — ma segnalalo nel report.
 
 - [ ] **Step 7: Il CSS della striscia**
 
@@ -1043,5 +1114,4 @@ git commit -m "La spec della dock è implementata"
 ## Cosa questo piano non fa
 
 - **La cronologia resta dietro l'hamburger che scorre via.** È il limite noto del §7 della spec, accettato consapevolmente per non allargare la dock a sei slot. Se si presenterà nell'uso, la strada è rendere `.topbar` sticky su mobile — non aggiungere una voce.
-- **La scheda «Parametri» è inerte nella schermata di ricerca** (Task 4, Step 6). `merged` e `overrides` vivono in `App` e la home non li riceve. Da guardare a schermo prima di decidere se vale il prop drilling.
 - **Nessun test di comportamento.** `renderToStaticMarkup` non esegue effetti né gestori: si prova che il markup contenga ciò che deve. I clic si verificano a mano nel Task 7. Aggiungere jsdom per questo sarebbe una dipendenza nuova per una schermata sola.
