@@ -632,6 +632,8 @@ textarea.control { height: auto; padding: 8px 10px; resize: vertical; }
 .btn--grow { flex: 1; }
 .btn[aria-pressed='true'] { background: var(--brand-tint); border-color: var(--brand-600); color: var(--brand-800); }
 .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn--danger { border-color: var(--crit); color: var(--crit); }
+.btn--danger:hover { background: var(--error-container); }
 
 /* ---------- Barra segmentata del punteggio ---------- */
 /* Un segmento per asse, sempre nello stesso ordine: la posizione porta
@@ -724,6 +726,11 @@ textarea.control { height: auto; padding: 8px 10px; resize: vertical; }
   color: var(--primary);
   display: flex; align-items: center; gap: var(--inline-gap); flex-wrap: wrap;
 }
+
+/* L'unica azione distruttiva dell'app: separata da un filo, non da un colore
+   di sfondo che griderebbe anche quando non serve guardarla. */
+.section--danger { padding-top: 20px; border-top: 1px solid var(--border); }
+.section--danger > h3 { color: var(--crit); }
 
 .badge {
   display: inline-flex; align-items: center; gap: 5px;

@@ -26,7 +26,7 @@ const chiaviDove = {
   groq: 'https://console.groq.com/keys',
 }
 
-export default function SettingsModal({ config, onChange, onClose, tabs }) {
+export default function SettingsModal({ config, onChange, onClose, tabs, onReset }) {
   const [draft, setDraft] = useState(() => normaliseAgentConfig(config))
   // Quale riga si sta modificando. È indipendente da `activeId`: si aggiusta
   // un profilo senza per questo metterlo in uso.
@@ -403,6 +403,26 @@ export default function SettingsModal({ config, onChange, onClose, tabs }) {
               destinazione non c'è, di solito è qui che si vede il motivo.
             </p>
           </div>
+
+          {/* In fondo e per conto suo: è l'unica azione distruttiva dell'app,
+              e va dove la si cerca apposta — non infilata fra i campi di un
+              modello, dove ci si inciamperebbe premendola per sbaglio. La
+              conferma la chiede ancora `azzera()`, in `App.jsx`: qui c'è solo
+              il bottone che la richiama. */}
+          {onReset && (
+            <div className="section section--danger">
+              <h3>Azzeramento</h3>
+              <p className="infotext">
+                Cancella da questo computer i criteri di ricerca, i preferiti, la cronologia e i
+                modelli configurati qui sopra, comprese le modifiche fatte nell’editor non ancora
+                esportate in <code>overrides.json</code>. Non si può annullare.
+              </p>
+              <button type="button" className="btn btn--danger" onClick={onReset}>
+                <IconTrash width="15" height="15" />
+                Azzera tutti i dati salvati qui
+              </button>
+            </div>
+          )}
         </div>
 
         <footer className="panel__foot">

@@ -622,6 +622,7 @@ export default function App({ startedInitially = false }) {
           config={agent}
           onChange={applyAgent}
           onClose={() => setSettingsOpen(false)}
+          onReset={azzera}
         />
       )}
 
@@ -645,6 +646,7 @@ export default function App({ startedInitially = false }) {
           onChange={applyAgent}
           onClose={() => setMobilePanel(null)}
           tabs={<PanelTabs active="modello" onPick={cambiaScheda} />}
+          onReset={azzera}
         />
       )}
 

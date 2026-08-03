@@ -339,6 +339,54 @@ describe('ParametersPage — `overlay` sceglie il contenitore, non il contenuto'
 })
 
 /**
+ * L'azzeramento (Task 2) entra nel pannello Impostazioni, che è la sua nuova
+ * casa: prima arrivava solo dal menu laterale, che su mobile sta per sparire.
+ * `onReset` è opzionale di proposito — un pannello senza modo di azzerare non
+ * deve inventarsi una sezione vuota.
+ *
+ * Non si prova che premere il bottone cancelli davvero i dati:
+ * `renderToStaticMarkup` non esegue i gestori, quindi da qui si vede solo che
+ * l'azione COMPARE nel markup quando la prop c'è e non quando manca — non che
+ * il suo `onClick` faccia la cosa giusta. Quella parte resta non provata.
+ */
+describe('SettingsModal — l’azzeramento entra nel pannello', () => {
+  const modal = (over = {}) =>
+    renderToStaticMarkup(
+      createElement(SettingsModal, {
+        config: emptyAgentConfig(),
+        onChange: nulla,
+        onClose: nulla,
+        ...over,
+      }),
+    )
+
+  it('compare quando `onReset` è passata', () => {
+    const html = modal({ onReset: nulla })
+    expect(html).toContain('Azzera tutti i dati salvati qui')
+    expect(html).toContain('section--danger')
+  })
+
+  it('non compare quando `onReset` manca', () => {
+    const html = modal()
+    expect(html).not.toContain('Azzera tutti i dati salvati qui')
+    expect(html).not.toContain('section--danger')
+  })
+
+  /**
+   * "In fondo" non è un dettaglio estetico: è l'unica azione distruttiva
+   * dell'app, e deve stare dove la si cerca apposta — dopo tutto il resto,
+   * non incastrata fra i campi di un modello dove ci si inciamperebbe.
+   */
+  it('sta in fondo al corpo del pannello, dopo la sezione debug', () => {
+    const html = modal({ onReset: nulla })
+    const debug = html.indexOf('ag-debug')
+    const azzeramento = html.indexOf('section--danger')
+    expect(debug).toBeGreaterThan(-1)
+    expect(azzeramento).toBeGreaterThan(debug)
+  })
+})
+
+/**
  * Il pannello Impostazioni della home ha due strade, e non sono la stessa cosa.
  *
  * Il menu laterale e il «configura» del selettore esistono a **ogni**

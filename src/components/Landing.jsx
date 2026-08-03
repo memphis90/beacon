@@ -469,6 +469,7 @@ export default function Landing({
           onChange={applyAgent}
           onClose={() => setMobilePanel(null)}
           tabs={<PanelTabs active="modello" onPick={cambiaScheda} />}
+          onReset={onLogout}
         />
       )}
 
@@ -480,6 +481,7 @@ export default function Landing({
           config={agent}
           onChange={applyAgent}
           onClose={() => setSettingsOpen(false)}
+          onReset={onLogout}
         />
       )}
 
