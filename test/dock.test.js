@@ -6,6 +6,7 @@ import PanelTabs from '../src/components/PanelTabs.jsx'
 import { ParametersPage } from '../src/components/EditorPanel.jsx'
 import App from '../src/App.jsx'
 import { mergedDestinations } from '../src/lib/store.js'
+import { LogoMark } from '../src/components/Logo.jsx'
 
 /**
  * Due difese copiate da render.test.js, e servono entrambe dal Task 2 in poi,
@@ -179,6 +180,14 @@ describe('ParametersPage — la scheda «Parametri» mostra l’elenco vero', ()
  * è la prop esplicita che sceglie il contenitore, senza toccare né il corpo
  * né la pagina desktop che la monta senza questa prop.
  */
+describe('il faro ha un appiglio per l’animazione', () => {
+  it('la lanterna e i fasci hanno una classe propria', () => {
+    const html = renderToStaticMarkup(createElement(LogoMark, {}))
+    expect(html).toContain('logo__light')
+    expect(html).toContain('logo__beams')
+  })
+})
+
 describe('ParametersPage — `overlay` sceglie il contenitore, non il contenuto', () => {
   const monta = (overlay) =>
     renderToStaticMarkup(

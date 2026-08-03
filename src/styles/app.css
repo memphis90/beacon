@@ -1938,22 +1938,27 @@ input[type='range']:disabled { opacity: 0.45; }
 .thinking--lg .thinking__dots { margin-left: 8px; vertical-align: middle; }
 .thinking--lg .thinking__dots i { width: 6px; height: 6px; }
 
-/* Attesa in primo piano: durante la chiamata non c'è nient'altro da fare in
-   questa schermata, e l'Annulla deve essere l'unica cosa premibile. */
-.thinkbox {
-  width: min(460px, 92vw);
-  display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
-  padding: calc(var(--container-margin) * 1.5);
-  border: 1px solid var(--border); border-radius: var(--radius);
-  background: var(--surface-container-lowest);
-  box-shadow: var(--shadow-3);
+/* L'attesa: velo, faro, frase. Niente scatola. */
+.attesa__box {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 16px; padding: 24px; max-width: 420px; text-align: center;
 }
-.thinkbox__phrase {
-  margin: 0; font-size: 14px; line-height: 21px; color: var(--ink);
-  border-left: 2px solid var(--border-strong); padding-left: 10px;
+.attesa__meta { margin: 0; font-size: 11px; line-height: 16px; color: var(--ink-3); }
+
+/* La lanterna respira: opacità e alone, ciclo lento. Nessuna rotazione — un
+   raggio che gira si legge come spinner, e uno spinner promette avanzamento.
+   È lo stesso motivo per cui la frase d'attesa è ferma e non scorre. */
+.attesa__faro .logo__light { animation: faro 2s ease-in-out infinite; transform-origin: 16px 12.2px; }
+.attesa__faro .logo__beams { animation: faro-fasci 2s ease-in-out infinite; }
+
+@keyframes faro {
+  0%, 100% { opacity: 0.55; filter: none; }
+  50%      { opacity: 1; filter: drop-shadow(0 0 4px var(--accent)); }
 }
-.thinkbox__meta { margin: 0; font-size: 11px; line-height: 16px; color: var(--ink-3); }
-.thinkbox .btn { margin-top: 4px; }
+@keyframes faro-fasci {
+  0%, 100% { opacity: 0.25; }
+  50%      { opacity: 1; }
+}
 
 @keyframes thinking-shimmer {
   from { background-position: 100% 0; }
@@ -1971,6 +1976,11 @@ input[type='range']:disabled { opacity: 0.45; }
     color: var(--ink-2);
   }
   .thinking__dots i { animation: none; opacity: 0.6; }
+
+  /* Il faro resta acceso, smette solo di respirare: un faro spento non è un
+     faro, ma nemmeno una luce che pulsa a chi ha chiesto meno movimento. */
+  .attesa__faro .logo__light,
+  .attesa__faro .logo__beams { animation: none; opacity: 1; }
 }
 
 .landing__ignored {

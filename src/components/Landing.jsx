@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import BottomNav from './BottomNav.jsx'
 import EditorPanel, { ParametersPage } from './EditorPanel.jsx'
 import InterpreterPicker from './InterpreterPicker.jsx'
+import { LogoMark } from './Logo.jsx'
 import PanelTabs from './PanelTabs.jsx'
 import SettingsModal from './SettingsModal.jsx'
 import SideRail from './SideRail.jsx'
@@ -370,26 +371,29 @@ export default function Landing({
 
       {/* In primo piano, non in un angolo: finché il modello non risponde non
           c'è niente da fare in questa schermata, e un'attesa da dieci secondi
-          nascosta sotto il campo si legge come un clic andato a vuoto. */}
+          nascosta sotto il campo si legge come un clic andato a vuoto.
+          Il riquadro bianco è sparito: il faro acceso dice già tutto quello
+          che una scatola diceva col bordo. */}
       {inCorso && (
-        <div className="overlay overlay--center overlay--veil" role="presentation">
-          <div className="thinkbox" role="dialog" aria-modal="true" aria-label="Interpretazione in corso">
+        <div className="overlay overlay--center overlay--veil attesa" role="presentation">
+          <div className="attesa__box" role="dialog" aria-modal="true" aria-label="Interpretazione in corso">
+            <LogoMark className="attesa__faro" width="72" height="72" />
+
             <p className="thinking thinking--lg" role="status" aria-live="polite">
               <span className="thinking__label">{frasi[frase]}</span>
               <span className="thinking__dots" aria-hidden="true"><i /><i /><i /></span>
             </p>
 
-            <p className="thinkbox__phrase">“{text.trim()}”</p>
-            {/* Il modello che sta rispondendo, per nome: con più di uno
-                configurato, sapere quale è al lavoro è metà del motivo per cui
-                se ne tiene più di uno. L'avvertenza sul primo caricamento vale
-                solo in locale — su un endpoint remoto sarebbe una scusa per
-                un'attesa che ha altre cause. */}
-            <p className="thinkbox__meta">
+            {/* Quale modello sta rispondendo, e perché in locale può metterci
+                molto. Senza questa riga novanta secondi non sono lunghi:
+                sembrano rotti. La frase dell'utente invece è sparita —
+                l'ha scritta due secondi fa. */}
+            <p className="attesa__meta">
               {profileLabel(interprete)} · {isLocalEndpoint(interprete?.baseUrl)
                 ? 'in locale. La prima chiamata dopo l’avvio deve anche caricare il modello in memoria, e può metterci più di un minuto.'
                 : 'endpoint remoto: la frase è uscita da questo computer.'}
             </p>
+
             <button type="button" className="btn btn--sm" onClick={annulla}>Annulla</button>
           </div>
         </div>

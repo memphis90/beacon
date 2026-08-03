@@ -54,13 +54,13 @@ export function LogoMark({ width = 28, height = 28, beams = true, ...rest }) {
 
       {/* La luce. Unico elemento pieno e unico colore fisso di tutto il
           marchio: è la parte che porta il nome. */}
-      <circle cx="16" cy="12.2" r="1.7" fill="var(--accent)" stroke="none" />
+      <circle className="logo__light" cx="16" cy="12.2" r="1.7" fill="var(--accent)" stroke="none" />
 
       {/* I fasci. Si tolgono con `beams={false}` dove il disegno è piccolo:
           sotto una certa dimensione due trattini obliqui non si leggono come
           luce, si leggono come sporco. */}
       {beams && (
-        <g stroke="var(--accent)" strokeWidth="1.7">
+        <g className="logo__beams" stroke="var(--accent)" strokeWidth="1.7">
           <path d="M20.4 11.1 24.6 9.4" />
           <path d="M11.6 11.1 7.4 9.4" />
         </g>
