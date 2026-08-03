@@ -690,14 +690,19 @@ describe('Landing — il marchio si scambia con la scritta sotto i 901px', () =>
     expect(html).toContain('logo__light')
     // "Beacon" sta nel testo, non nel faro: la ricerca è ristretta al primo,
     // o la prova passerebbe anche se il nome fosse finito nel posto sbagliato.
-    const testo = html.slice(html.indexOf('landing__brandtext'), html.indexOf('landing__brandmark'))
-    expect(testo).toContain('Beacon')
+    // "Beacon" sta nel testo, non nel faro: la ricerca parte dopo il marchio,
+    // o la prova passerebbe anche se il nome fosse finito nel posto sbagliato.
+    expect(html.slice(html.indexOf('landing__brandtext'))).toContain('Beacon')
+    // Il faro sta a SINISTRA del nome: nel markup viene prima.
+    expect(html.indexOf('landing__brandmark')).toBeLessThan(html.indexOf('landing__brandtext'))
   })
 
-  it('sotto i 900px il faro sostituisce la scritta', () => {
+  it('sotto i 900px il faro si affianca alla scritta, non la sostituisce', () => {
     expect(cssMobile).not.toBe('')
-    expect(cssMobile).toMatch(/\.landing__brandtext\s*\{\s*display:\s*none;\s*\}/)
     expect(cssMobile).toMatch(/\.landing__brandmark\s*\{[^}]*display:\s*inline-flex/)
+    // La regola che spegneva il nome non deve tornare: è ciò che distingue
+    // "affiancati" da "alternativi".
+    expect(cssMobile).not.toMatch(/\.landing__brandtext\s*\{[^}]*display:\s*none/)
   })
 
   it('sopra i 901px resta la scritta: il faro è spento fuori dal blocco mobile', () => {

@@ -2098,11 +2098,11 @@ input[type='range']:disabled { opacity: 0.45; }
 @media (max-width: 900px) {
   .landing__recent { display: block; }
 
-  /* Il marchio si scambia con la scritta, non le si affianca: sotto i 901px
-     il faro prende il posto di "Beacon", perché senza cassetto la barra
-     laterale — dove il faro vive — non si apre più, e resterebbe
-     irraggiungibile. */
-  .landing__brandtext { display: none; }
+  /* Il marchio si affianca alla scritta, non la sostituisce: sotto i 901px il
+     faro scende qui perché senza cassetto la barra laterale — dove vive — non
+     si apre più, e resterebbe irraggiungibile. Faro a sinistra e nome accanto
+     sono un marchio solo; il divieto di ripeterli, in `App.jsx`, parlava di
+     due elementi in due posti diversi. */
   .landing__brandmark { display: inline-flex; color: var(--primary); }
 }
 

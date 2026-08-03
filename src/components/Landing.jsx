@@ -218,19 +218,20 @@ export default function Landing({
           <span className="visually-hidden">Apri cronologia e menu</span>
         </button>
 
-        {/* Sopra i 901px, il nome: il faro sta in cima alla barra laterale,
-            che lì è la colonna permanente e resta raggiungibile.
+        {/* Sopra i 901px, il solo nome: il faro sta in cima alla barra
+            laterale, che lì è la colonna permanente e resta raggiungibile.
             Sotto i 901px il cassetto non c'è più (vedi app.css), e con lui
-            sparisce l'unico modo di raggiungere quel faro: il marchio prende
-            il posto della scritta, non le sta accanto. I due, testo e
-            marchio, sono sempre nel markup — la CSS sceglie quale mostrare,
-            come per `.landing__recent`/gli esempi qui sotto.
+            sparisce l'unico modo di raggiungere quel faro — quindi scende qui,
+            **accanto** al nome e non al suo posto: affiancati e allineati sono
+            un marchio solo, che è la forma in cui un marchio si presenta. Il
+            divieto di ripetere marchio e nome, in `App.jsx`, parlava di due
+            elementi in due posti diversi, non di questo.
             `beams={false}`, come il faro della barra laterale (`SideRail.jsx`)
             alla stessa dimensione: sotto una certa taglia i due fasci non si
             leggono come luce, si leggono come sporco (vedi `Logo.jsx`). */}
         <div className="landing__brand">
-          <span className="landing__brandtext">Beacon</span>
           <LogoMark className="landing__brandmark" width="26" height="26" beams={false} />
+          <span className="landing__brandtext">Beacon</span>
         </div>
 
         {/* Anche qui, non solo nei risultati: è la prima schermata che vede
