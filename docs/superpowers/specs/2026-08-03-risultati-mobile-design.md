@@ -72,52 +72,100 @@ Su desktop la barra laterale resta esattamente com'è.
 
 ---
 
-## 3. Il suggeritore esce dall'angolo
+## 3. Il suggeritore entra nel pannello dei filtri
 
-Il pulsante flottante lascia il posto a una **card in linea**, sopra il primo
-risultato:
+> **Rivisto il 2026-08-03**, guardando l'app a schermo. La versione precedente
+> — una card in linea sopra il primo risultato — è descritta in fondo alla
+> sezione con il motivo per cui è stata abbandonata.
+
+Il pulsante flottante sparisce. La proposta del modello va **in cima al
+pannello dei filtri**, sopra gli slider dei pesi:
 
 ```
-┌──────────────────────────────┐
-│ ✨ Il modello osserva      ✕ │
-│ Hai chiesto natura ma il      │
-│ peso è basso: alzo a 8?       │
-│ [Applica]   Ignora            │
-└──────────────────────────────┘
+┌────────────────────────┐
+│ Filtri              ✕ │
+├────────────────────────┤
+│ ✨ Il modello osserva   │
+│ Hai chiesto natura ma   │
+│ il peso è basso: 8?     │
+│ [Applica]    Ignora     │
+│ ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ │
+│ Natura     ●──── 7      │
+│ Cultura  ──●──── 5      │
+└────────────────────────┘
 ```
 
-### La condizione che rende questo diverso dall'ultima volta
+**Perché lì e non altrove.** Il suggeritore propone **pesi**, e i pesi vivono
+in quel pannello: la proposta finisce accanto allo slider che cambierebbe,
+dove chi la accetta può vederne subito l'effetto e chi la rifiuta ha la mano
+già sul comando alternativo. Ed è l'unico posto dove una frase intera più due
+pulsanti ci stanno senza comprimere nient'altro — in una barra alta 48px ci
+sta un'icona, non un'osservazione.
 
-Il riquadro in linea **c'era già ed è stato rimosso di proposito**. Il commento
-in cima a `RankingCritique.jsx` spiega perché, e l'obiezione è valida:
+Sparendo il pulsante flottante si chiude anche il problema del §1: due
+elementi galleggianti non si contendono più l'unico angolo dove arriva il
+pollice.
+
+### Come si fa sapere che c'è
+
+Nascosto dietro un pannello, il suggerimento va annunciato, o esiste solo per
+chi apre i filtri per caso. Il pulsante «Filtri» porta già un badge col numero
+dei filtri attivi: **non va riusato** — un badge che conta due cose diverse non
+conta niente.
+
+Serve un secondo segno, distinto e più piccolo: un punto con la scintilla sul
+pulsante «Filtri», presente solo finché c'è una proposta non ancora vista.
+Sparisce quando il pannello viene aperto, non quando la proposta viene
+accettata: dice «c'è qualcosa da leggere», non «c'è qualcosa da fare».
+
+### Quando esiste e quando no
+
+| stato | cosa compare |
+|---|---|
+| in attesa della risposta | **niente**, né sezione né segno |
+| risposta arrivata, nessun rilievo | **niente** |
+| errore o modello non configurato | **niente** |
+| una o più proposte di peso | la sezione, e il segno sul pulsante |
+
+Nessun segnaposto, nessuna rotella, nessuna sezione «nessun rilievo». Se il
+modello non ha niente da dire, quello spazio non esiste e il pannello si apre
+sugli slider come oggi.
+
+### Perché non la card in linea
+
+Era la versione precedente di questa sezione, e aveva un vantaggio: si legge
+senza toccare niente. L'ha persa perché quel posto era già stato provato e
+abbandonato, e il commento in cima a `RankingCritique.jsx` dice perché:
 
 > Il riquadro occupava il posto migliore della pagina — quello dove si guarda
 > per primo — con un contenuto che arriva dieci secondi dopo e che spesso è
 > "niente da ridire": i risultati scendevano sotto la piega per fare spazio a
 > un'attesa.
 
-**Quindi la card si monta solo quando c'è una proposta concreta da mostrare.**
-Non esiste in nessuno degli altri stati:
+La condizione «si monta solo quando c'è una proposta» avrebbe neutralizzato
+l'obiezione, ma resta che la card ruba una fascia sopra i risultati proprio
+mentre il §1 di questa spec sta cercando di liberarne. Il pannello dei filtri
+non ruba niente a nessuno.
 
-| stato | cosa compare |
-|---|---|
-| in attesa della risposta | **niente** |
-| risposta arrivata, nessun rilievo | **niente** |
-| errore o modello non configurato | **niente** |
-| una o più proposte di peso | la card |
-
-Nessun segnaposto, nessuna rotella, nessuna card «nessun rilievo». Se il
-modello non ha niente da dire, quello spazio non esiste e i risultati partono
-da sotto la barra. È questa condizione — non la posizione — a decidere se
-questa scelta ripete l'errore o lo evita.
-
-La `✕` chiude la card per quella ricerca. Riapparirà alla ricerca successiva se
-avrà qualcosa da dire: non è una preferenza da ricordare, è un congedo.
+**Il costo, dichiarato:** la proposta ora sta a due tocchi invece che a vista.
+Chi non apre mai i filtri non la leggerà — ed è il motivo per cui il segno sul
+pulsante non è un dettaglio ma un requisito.
 
 **Quello che il suggeritore continua a non fare** resta invariato e non è
 negoziabile: propone dei pesi, non riordina niente. Il §5 del planning vuole
 che il punteggio resti aritmetica visibile e che sia l'utente ad applicare la
 modifica.
+
+### Sopra i 901px non cambia niente
+
+Su desktop i filtri **non sono un pannello a scomparsa**: sono una colonna
+sempre visibile accanto ai risultati. «Dentro il pannello dei filtri» lì
+significherebbe una cosa diversa, e soprattutto non c'è nessun problema da
+risolvere — il pulsante flottante non contende l'angolo a nessuna barra
+inferiore, perché sopra i 901px la barra inferiore non esiste.
+
+Quindi il suggeritore su desktop **resta esattamente dov'è oggi**, pulsante
+flottante compreso. Tutto il §3 vive dentro `@media (max-width: 900px)`.
 
 ---
 
@@ -166,12 +214,29 @@ che servono.
 ### Sparisce l'hamburger, arriva il faro
 
 La barra della home mobile perde il pulsante del menu — come tutte le
-schermate, §2 — e sostituisce la scritta «Beacon» con il **marchio**
-(`LogoMark`). Le due cose vanno insieme: il faro vive in cima alla barra
-laterale, e senza hamburger quella barra non si apre — il marchio resterebbe
-irraggiungibile su mobile. Portandolo nella barra si recupera, e il commento
-di `App.jsx` che vietava di ripetere marchio e nome a due centimetri di
-distanza resta rispettato, perché adesso ce n'è uno solo.
+schermate, §2 — e guadagna il **marchio** (`LogoMark`), perché il faro vive in
+cima alla barra laterale e senza hamburger quella barra non si apre più:
+resterebbe irraggiungibile su mobile.
+
+**Marchio e nome stanno insieme**, faro a sinistra e «Beacon» accanto:
+
+```
+🗼 Beacon
+```
+
+> **Rivisto il 2026-08-03** guardando l'app a schermo. La prima versione faceva
+> *sostituire* la scritta dal marchio, ed è stata implementata così (i due sono
+> resi mutuamente esclusivi in `Landing.jsx` e `app.css`). Va cambiato: si
+> affiancano.
+
+Non contraddice il commento di `App.jsx` che vietava «due volte lo stesso
+marchio a due centimetri di distanza»: quello parlava del faro in cima alla
+barra laterale **più** il nome nella barra in alto, cioè due elementi separati
+in due posti. Affiancati e allineati sono una cosa sola — un lockup — ed è la
+forma in cui un marchio si presenta normalmente.
+
+**Solo sotto i 901px.** Sopra, la barra della home resta come oggi: la scritta
+nella barra in alto e il faro in cima alla colonna laterale, che lì c'è ancora.
 
 ### Dove vanno le voci del menu
 
