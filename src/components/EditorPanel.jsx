@@ -170,25 +170,21 @@ export function ParametersPage({ merged, overrides, onOverridesChange, onPick, o
   }
 
   /*
-   * La testata, il corpo e il piede sono condivisi fra le due presentazioni:
-   * pagina in flusso (su desktop, dove `App` la monta al posto dei
-   * risultati) e overlay a tutto schermo (dove la monta il pannello mobile
-   * delle impostazioni, accanto a `SettingsModal`). Cambia solo il
-   * contenitore che li avvolge — mai il contenuto — così le due schede del
-   * pannello mobile restano la stessa superficie, senza toccare la pagina
-   * desktop che già esisteva.
+   * Il corpo e il piede sono condivisi fra le due presentazioni: pagina in
+   * flusso (su desktop, dove `App` la monta al posto dei risultati) e overlay
+   * a tutto schermo (dove la monta il pannello mobile delle impostazioni,
+   * accanto a `SettingsModal`). Cambia solo il contenitore che li avvolge —
+   * mai il contenuto — così le due schede del pannello mobile restano la
+   * stessa superficie, senza toccare la pagina desktop che già esisteva.
    */
-  const testata = (
-    <>
-      <div>
-        <h2>Parametri delle destinazioni</h2>
-        <p>
-          Punteggi, costi e clima del catalogo. Le modifiche restano in un layer separato:
-          <code> data/destinations.json</code> non viene mai riscritto dall’app.
-        </p>
-      </div>
-      <button type="button" className="btn" onClick={onClose}>Torna ai risultati</button>
-    </>
+  const titolo = (
+    <div>
+      <h2>Parametri delle destinazioni</h2>
+      <p>
+        Punteggi, costi e clima del catalogo. Le modifiche restano in un layer separato:
+        <code> data/destinations.json</code> non viene mai riscritto dall’app.
+      </p>
+    </div>
   )
 
   const corpo = (
@@ -317,7 +313,15 @@ export function ParametersPage({ merged, overrides, onOverridesChange, onPick, o
           aria-label="Parametri delle destinazioni"
           onClick={(e) => e.stopPropagation()}
         >
-          <header className="panel__head">{testata}</header>
+          {/* La stessa chiusura di `SettingsModal`, che è l'altra scheda dello
+              stesso pannello: due schede che si chiudono in due modi diversi
+              non sono un pannello solo. «Torna ai risultati» qui mentirebbe
+              anche nel testo — da questa scheda, aperta dalla home, risultati
+              a cui tornare non ce ne sono. */}
+          <header className="panel__head">
+            {titolo}
+            <button type="button" className="panel__close" onClick={onClose} aria-label="Chiudi">×</button>
+          </header>
           {tabs}
           <div className="panel__body">{corpo}</div>
           <footer className="panel__foot">{piede}</footer>
@@ -328,7 +332,12 @@ export function ParametersPage({ merged, overrides, onOverridesChange, onPick, o
 
   return (
     <section className="page" aria-label="Parametri delle destinazioni">
-      <header className="page__head">{testata}</header>
+      {/* Solo qui il bottone etichettato: la pagina in flusso prende davvero il
+          posto dei risultati, e tornare indietro è ciò che fa. */}
+      <header className="page__head">
+        {titolo}
+        <button type="button" className="btn" onClick={onClose}>Torna ai risultati</button>
+      </header>
       {tabs}
       {corpo}
       <div className="page__foot">{piede}</div>

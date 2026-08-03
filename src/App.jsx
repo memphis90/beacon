@@ -174,6 +174,15 @@ export default function App({ startedInitially = false }) {
   const applyAgent = (next) => { setAgent(next); saveAgentConfig(next) }
 
   /**
+   * Cambiare scheda chiude anche la scheda di una destinazione.
+   *
+   * Senza `setEditor(null)` l'editor resta aperto sotto il Modello, che lo
+   * copre: chiudendo il Modello riaffiora sopra la schermata, come se lo avesse
+   * riaperto la scheda che si è appena chiusa.
+   */
+  const cambiaScheda = (scheda) => { setEditor(null); setMobilePanel(scheda) }
+
+  /**
    * "Esci" su uno strumento senza account può voler dire una cosa sola:
    * cancellare quello che è rimasto su questa macchina. Va detto e confermato,
    * perché gli override dell'editor sono lavoro che non si recupera.
@@ -286,6 +295,9 @@ export default function App({ startedInitially = false }) {
         // giusta, non `phrase`: resta vera anche quando si torna qui da una
         // ricerca fatta con `onSkip`, che la frase la azzera apposta.
         hasResults={hasEntered && ranking.hasRanking}
+        /* Il filtro vero, non un `false` scritto fisso: è la stessa dock nelle
+           due schermate, e mostrare due stati diversi la smentirebbe. */
+        onlyFavourites={onlyFavourites}
         onList={() => { setOnlyFavourites(false); setStarted(true) }}
         onFavourites={() => { setOnlyFavourites(true); setStarted(true) }}
         onCompare={() => { setCompareOpen(true); setStarted(true) }}
@@ -398,12 +410,24 @@ export default function App({ startedInitially = false }) {
         onClose={() => setRailOpen(false)}
         history={history}
         onHistoryChange={setHistory}
-        onPickHistory={() => { setRailOpen(false); setStarted(false) }}
+        /* La voce scelta va usata: qui si ignorava `entry` e si tornava alla
+           home con la frase corrente, cioè con qualunque voce si finiva sempre
+           sulla stessa. Da quando il composer si riapre solo da qui, questa è
+           l'unica strada per ritoccare una frase vecchia. */
+        onPickHistory={(entry) => { setRailOpen(false); setPhrase(entry.text); setStarted(false) }}
         agent={agent}
+        /* Il pannello SENZA schede, di proposito: questa voce esiste anche
+           sopra i 901px, dove la barra laterale è la colonna permanente. La
+           striscia delle schede è roba della dock, che lì è `display: none`, e
+           «uniformare» le due strade rimetterebbe sul desktop una scheda
+           «Parametri» che lì è una pagina in flusso. */
         onOpenSettings={() => { setRailOpen(false); setSettingsOpen(true) }}
         onLogout={azzera}
         nav={{
-          onNewSearch: () => { setRailOpen(false); setStarted(false) },
+          /* Anche la frase, non solo la schermata: senza, il campo si riapre
+             pieno della frase vecchia mentre il «+» della dock — che promette
+             lo stesso gesto — lo trova vuoto. */
+          onNewSearch: () => { setRailOpen(false); setPhrase(''); setStarted(false) },
           // Niente Preferiti qui: è un filtro sui risultati, e sta nella
           // barra dei risultati insieme all'ordinamento. Nel menu prometteva
           // una sezione propria e invece cambiava la lista alle spalle.
@@ -610,7 +634,7 @@ export default function App({ startedInitially = false }) {
           onOverridesChange={applyOverrides}
           onPick={(id) => setEditor({ id })}
           onClose={() => setMobilePanel(null)}
-          tabs={<PanelTabs active="parametri" onPick={setMobilePanel} />}
+          tabs={<PanelTabs active="parametri" onPick={cambiaScheda} />}
           overlay
         />
       )}
@@ -620,7 +644,7 @@ export default function App({ startedInitially = false }) {
           config={agent}
           onChange={applyAgent}
           onClose={() => setMobilePanel(null)}
-          tabs={<PanelTabs active="modello" onPick={setMobilePanel} />}
+          tabs={<PanelTabs active="modello" onPick={cambiaScheda} />}
         />
       )}
 
@@ -649,8 +673,22 @@ export default function App({ startedInitially = false }) {
            della voce omonima nel menu laterale. */
         onNew={() => { setPhrase(''); setStarted(false) }}
         newDisabled={false}
-        onList={() => { setOnlyFavourites(false); setDetailId(null) }}
-        onFavourites={() => setOnlyFavourites(!onlyFavourites)}
+        /* «Elenco» riporta all'elenco da QUALUNQUE pagina. La dock è montata
+           fuori dal blocco condizionale, quindi resta visibile anche sopra
+           confronto e parametri, che prendono il posto dei risultati: senza
+           spegnerli, premerla non produceva niente di visibile. */
+        onList={() => {
+          setOnlyFavourites(false)
+          setDetailId(null)
+          setCompareOpen(false)
+          setParametri(false)
+        }}
+        /* Imposta, non commuta: il ritorno all'elenco completo è lo slot
+           accanto, che serve a quello. Un tab che si spegne premendolo due
+           volte porterebbe dove porta già il suo vicino. Il toggle
+           nell'intestazione dei risultati resta dov'è: lì è un filtro fra i
+           filtri, non uno slot di navigazione. */
+        onFavourites={() => setOnlyFavourites(true)}
         onCompare={() => setCompareOpen(true)}
         onSettings={() => setMobilePanel('parametri')}
       />

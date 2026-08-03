@@ -1312,6 +1312,14 @@ input[type='range']:disabled { opacity: 0.45; }
   /* ---- Pannelli a piena larghezza / altezza ---- */
   .panel { width: 100%; height: 100%; border-radius: 0; }
   .panel--modal { width: 100%; height: 100%; border-radius: 0; }
+  /* Larghezza e altezza gliele riprende già `.panel` qui sopra — il tetto di
+     80vh no, e nessuno lo sovrascriveva. Restava una scheda «Modello» alta
+     quattro quinti dello schermo, centrata col velo sopra e sotto, accanto a
+     una scheda «Parametri» a tutto schermo: il pannello saltava cambiando
+     scheda. Sopra i 901px `.panel--info` resta la colonna centrata a
+     lunghezza di lettura che era, ed è per questo che la riga sta qui dentro
+     e non accanto alla sua classe. */
+  .panel--info { max-height: none; }
   .overlay--center { padding: 0; }
 
   /* ---- Bottom nav ---- */
@@ -1359,7 +1367,7 @@ input[type='range']:disabled { opacity: 0.45; }
     margin-top: -26px;               /* quanto sporge sopra la barra */
     border-radius: var(--radius-pill);
     background: var(--primary); color: var(--on-primary);
-    box-shadow: 0 12px 24px rgb(0 22 42 / 18%);
+    box-shadow: 0 12px 24px color-mix(in srgb, var(--primary) 18%, transparent);
   }
   .bottomnav__ask:disabled { opacity: 0.45; }
 

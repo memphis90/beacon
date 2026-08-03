@@ -55,18 +55,38 @@ const ESEMPI = [
   { Icon: IconEuro, text: 'dove vado a giugno con 400 € e voglio il mare' },
 ]
 
+/**
+ * `panelInitially` è un appiglio per le prove, non una funzionalità — lo stesso
+ * ruolo che `startedInitially` ha in `App`.
+ *
+ * I pannelli di questa schermata si aprono solo premendo qualcosa, e il render
+ * statico non preme niente: senza questo, il ramo che monta le impostazioni è
+ * irraggiungibile da una prova, ed è proprio il ramo in cui è già passata una
+ * regressione desktop (il menu laterale che apriva il pannello a schede).
+ * Vale `'impostazioni'` per il pannello del menu, `'parametri'` o `'modello'`
+ * per le due schede della dock.
+ */
 export default function Landing({
   destinations, agent, onAgentChange, onApply, onSkip, onLogout,
-  phrase = '', favouritesCount = 0, compareCount = 0, hasResults = false,
+  phrase = '', onlyFavourites = false, favouritesCount = 0, compareCount = 0,
+  hasResults = false,
   onList, onFavourites, onCompare,
   overrides = {}, onOverridesChange = () => {},
+  panelInitially = null,
 }) {
   // Arrivando dai risultati il campo è già pieno: è il centro della dock che
   // ha riportato qui, e il gesto che segue è correggere, non riscrivere.
   const [text, setText] = useState(phrase)
+  /* Il pannello Impostazioni del menu laterale, che esiste a ogni larghezza.
+     È tenuto separato da `mobilePanel` di proposito: quello monta la striscia
+     delle schede, che sopra i 901px non è mai esistita. */
+  const [settingsOpen, setSettingsOpen] = useState(panelInitially === 'impostazioni')
   /* Quale scheda del pannello è aperta: 'parametri' | 'modello' | null.
-     Come in App: è la dock ad aprirlo, e la dock è la stessa. */
-  const [mobilePanel, setMobilePanel] = useState(null)
+     Come in App: lo apre solo la dock, che sopra i 901px è `display: none`.
+     Riservato a lei, quindi: da qualunque altra strada le schede non compaiono. */
+  const [mobilePanel, setMobilePanel] = useState(
+    panelInitially === 'parametri' || panelInitially === 'modello' ? panelInitially : null
+  )
   // La scheda di una singola destinazione, sopra l'elenco dei parametri: come
   // in App, scegliere una voce dall'elenco apre questa, indipendente dalla
   // scheda del pannello mobile che resta 'parametri' sotto.
@@ -168,6 +188,15 @@ export default function Landing({
    */
   const applyAgent = (next) => onAgentChange(next)
 
+  /**
+   * Cambiare scheda chiude anche la scheda di una destinazione.
+   *
+   * Senza `setEditor(null)` l'editor resta aperto sotto il Modello, che lo
+   * copre: chiudendo il Modello riaffiora sopra la home, come se lo avesse
+   * riaperto la scheda che si è appena chiusa.
+   */
+  const cambiaScheda = (scheda) => { setEditor(null); setMobilePanel(scheda) }
+
   /** Una voce di cronologia riempie il campo: puoi ritoccarla prima di rilanciare. */
   const riprendi = (entry) => {
     setRailOpen(false)
@@ -230,7 +259,14 @@ export default function Landing({
           },
         }}
         agent={agent}
-        onOpenSettings={() => { setRailOpen(false); setMobilePanel('modello') }}
+        /* Il pannello Impostazioni SENZA schede, di proposito: questa voce è
+           raggiungibile anche sopra i 901px, dove la barra laterale è la
+           colonna permanente e non un cassetto. Aprendo di qui il pannello a
+           schede, il desktop si troverebbe una striscia che non ha mai avuto e
+           una scheda «Parametri» che lì è una pagina in flusso, non un
+           overlay. Chi volesse «uniformare» le due strade riaprirebbe proprio
+           quella regressione. */
+        onOpenSettings={() => { setRailOpen(false); setSettingsOpen(true) }}
         onSkipToFilters={() => { setRailOpen(false); onSkip() }}
         onLogout={onLogout}
       />
@@ -254,10 +290,13 @@ export default function Landing({
               />
 
               <div className="landing__boxbar">
+                {/* Il selettore sta accanto al campo a OGNI larghezza, quindi
+                    anche il suo «configura» apre il pannello senza schede: le
+                    schede sono roba della dock, che sopra i 901px non c'è. */}
                 <InterpreterPicker
                   agent={agent}
                   onChange={applyAgent}
-                  onConfigure={() => setMobilePanel('modello')}
+                  onConfigure={() => setSettingsOpen(true)}
                 />
 
                 {/* Freccia sola: l'etichetta la dà il tooltip. Il gesto è
@@ -406,7 +445,7 @@ export default function Landing({
           onOverridesChange={onOverridesChange}
           onPick={(id) => setEditor({ id })}
           onClose={() => setMobilePanel(null)}
-          tabs={<PanelTabs active="parametri" onPick={setMobilePanel} />}
+          tabs={<PanelTabs active="parametri" onPick={cambiaScheda} />}
           overlay
         />
       )}
@@ -429,12 +468,23 @@ export default function Landing({
           config={agent}
           onChange={applyAgent}
           onClose={() => setMobilePanel(null)}
-          tabs={<PanelTabs active="modello" onPick={setMobilePanel} />}
+          tabs={<PanelTabs active="modello" onPick={cambiaScheda} />}
+        />
+      )}
+
+      {/* Lo stesso pannello, senza schede: qui ci arrivano il menu laterale e
+          il «configura» del selettore, due strade che esistono anche su
+          desktop. Vedi il commento su `onOpenSettings`. */}
+      {settingsOpen && (
+        <SettingsModal
+          config={agent}
+          onChange={applyAgent}
+          onClose={() => setSettingsOpen(false)}
         />
       )}
 
       <BottomNav
-        onlyFavourites={false}
+        onlyFavourites={onlyFavourites}
         favouritesCount={favouritesCount}
         compareCount={compareCount}
         hasResults={hasResults}
