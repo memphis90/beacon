@@ -1111,6 +1111,214 @@ git commit -m "La spec della dock è implementata"
 
 ---
 
+## Task 8: Il centro diventa «+», la freccia torna nel composer
+
+> **Revisione decisa il 2026-08-03**, dopo aver visto i Task 1-3 a schermo. Va
+> eseguito **prima** del Task 7. Non annulla i tre task precedenti: corregge in
+> avanti. La motivazione sta nel §4 della spec, riscritto.
+
+**Files:**
+- Modify: `src/components/BottomNav.jsx` (lo slot centrale e la firma)
+- Modify: `src/App.jsx` (il blocco `<BottomNav>`)
+- Modify: `src/components/Landing.jsx` (freccia ripristinata, `<BottomNav>`)
+- Modify: `test/dock.test.js` (le asserzioni sul centro)
+
+**Interfaces:**
+- Produces: la firma definitiva di `BottomNav`, usata dai Task 4-7:
+
+```js
+BottomNav({
+  onlyFavourites, favouritesCount, compareCount, hasResults,
+  onNew,           // () => void  — sostituisce onAsk
+  newDisabled,     // bool        — sostituisce askDisabled
+  onList, onFavourites, onCompare, onSettings,
+})
+```
+  Spariscono `askLabel` e `askDisabled`: il centro non cambia più nome.
+
+- [ ] **Step 1: Aggiorna le prove**
+
+In `test/dock.test.js`:
+
+**1a.** Nel `describe` di `BottomNav`, sostituisci le prove che parlano di `askLabel` con:
+
+```js
+  it('il centro è «Nuova» e non cambia nome', () => {
+    const html = dock()
+    expect(html).toContain('Nuova')
+    expect(html).not.toContain('Chiedi')
+    expect(html).not.toContain('Cerca')
+  })
+
+  it('il centro è spento quando non c’è niente da azzerare', () => {
+    expect(spento(dock({ newDisabled: true }), 'Nuova')).toBe(true)
+    expect(spento(dock({ newDisabled: false }), 'Nuova')).toBe(false)
+  })
+```
+
+Aggiorna anche l'oggetto `base` in cima al file: togli `askLabel` e `askDisabled`, metti `onNew: nulla, newDisabled: false`. E nella prova «cinque voci» sostituisci `'Chiedi'` con `'Nuova'`.
+
+**1b.** La prova del giro di correzione precedente asseriva su `Chiedi`/`Cerca` via `AGENT_KEY`: non ha più senso, il centro non nomina più l'interprete. Sostituiscila con questa, che copre `newDisabled` — l'unica cosa che questo task rende osservabile nel markup statico:
+
+```js
+  it('sulla home vergine il centro è spento, nei risultati no', () => {
+    expect(spento(renderToStaticMarkup(createElement(App)), 'Nuova')).toBe(true)
+    expect(spento(renderToStaticMarkup(createElement(App, { startedInitially: true })), 'Nuova')).toBe(false)
+  })
+```
+
+Se l'import di `AGENT_KEY` e il blocco `afterEach` che lo ripulisce restano senza usi, rimuovili.
+
+**1c.** Il Task 3 aveva asserito che `landing__send` fosse sparito. Inverti:
+
+```js
+  it('il composer ha di nuovo la sua freccia', () => {
+    expect(renderToStaticMarkup(createElement(App))).toContain('landing__send')
+  })
+```
+
+- [ ] **Step 2: Esegui e verifica che falliscano**
+
+Run: `npm test -- dock`
+Expected: FAIL — «Nuova» non esiste, `landing__send` non c'è più.
+
+- [ ] **Step 3: Il centro in `BottomNav.jsx`**
+
+Sostituisci l'import delle icone e lo slot centrale. L'import diventa:
+
+```jsx
+import { IconHeart, IconList, IconPlus, IconScale, IconSettings } from './Icons.jsx'
+```
+
+La firma:
+
+```jsx
+export default function BottomNav({
+  onlyFavourites, favouritesCount, compareCount, hasResults = true,
+  onNew, newDisabled = false,
+  onList, onFavourites, onCompare, onSettings,
+}) {
+```
+
+E il blocco centrale, al posto di quello che calcolava `AskIcon`:
+
+```jsx
+      <button
+        type="button"
+        className="bottomnav__ask"
+        disabled={newDisabled}
+        onClick={onNew}
+      >
+        <span className="bottomnav__askdisc">
+          <IconPlus width="26" height="26" />
+        </span>
+        Nuova
+      </button>
+```
+
+Sostituisci anche il commento in cima al componente, che parla di un invio che non c'è più:
+
+```jsx
+/**
+ * La barra inferiore, identica nelle due schermate.
+ *
+ * Cinque slot, e quello di mezzo non è un sesto tab: è il «ricomincia», e
+ * sporge sopra il bordo perché è l'unico modo di dire "questo non è come gli
+ * altri quattro" senza scriverlo.
+ *
+ * Non è l'invio, ed è stata una scelta rivista: da invio, il centro
+ * significava "manda" sulla ricerca e "riapri il composer" nei risultati —
+ * un pulsante, due gesti. Così invece la dock è tutta navigazione, e la
+ * freccia sta nel composer, dove qualunque interfaccia a prompt la mette.
+ *
+ * `hasResults` è falso solo alla prima apertura, prima che una ricerca esista:
+ * Elenco, Preferiti e Confronta lavorano tutti sul ranking, e senza ranking non
+ * hanno niente da mostrare. Restano visibili e spenti invece di sparire —
+ * una dock che cambia forma fra le due schermate non sarebbe più la stessa
+ * dock, che è tutto il motivo per cui esiste così.
+ */
+```
+
+- [ ] **Step 4: Il collegamento in `App.jsx`**
+
+Nel blocco `<BottomNav>`, sostituisci le tre righe del centro:
+
+```jsx
+        /* Nuova ricerca vuol dire anche azzerare la frase: altrimenti quella
+           vecchia resterebbe attaccata ai risultati nuovi. È lo stesso gesto
+           della voce omonima nel menu laterale. */
+        onNew={() => { setPhrase(''); setStarted(false) }}
+        newDisabled={false}
+```
+
+togliendo `askLabel` e `askDisabled`. Se `agentIsReady` resta senza usi in `App.jsx`, rimuovilo dall'import.
+
+- [ ] **Step 5: La freccia torna in `Landing.jsx`**
+
+**5a.** Dentro `.landing__boxbar`, dopo l'`<InterpreterPicker …/>`, rimetti il pulsante d'invio:
+
+```jsx
+                {/* Freccia sola: l'etichetta la dà il tooltip. Il gesto è
+                    quello di qualunque campo prompt, e non ha bisogno di
+                    essere spiegato ogni volta che guardi la schermata. */}
+                <button
+                  type="submit"
+                  className="btn btn--primary landing__send"
+                  title="Invia prompt"
+                  aria-label="Invia prompt"
+                  disabled={conModello ? !text.trim() : parsed.empty}
+                >
+                  <IconArrowUp width="20" height="20" />
+                </button>
+```
+
+Verifica che `IconArrowUp` sia importato; se il Task 3 l'aveva tolto, rimettilo.
+
+**5b.** Nel blocco `<BottomNav>` di `Landing`, sostituisci le tre righe del centro:
+
+```jsx
+        /* Svuota il campo e ci riporta il cursore: è lo stesso gesto della
+           voce «Nuova ricerca» del menu laterale, ora a portata di pollice. */
+        onNew={() => {
+          setText('')
+          setErroreModello('')
+          document.getElementById('landing-q')?.focus()
+        }}
+        /* Niente da azzerare: campo vuoto e nessun ranking alle spalle. */
+        newDisabled={!text.trim() && !hasResults}
+```
+
+**5c.** `submit` era stato reso tollerante a essere chiamato senza evento (`e?.preventDefault?.()`). Lascialo così: non fa male, e il `<form>` lo chiama comunque con l'evento.
+
+- [ ] **Step 6: Esegui e verifica che passino**
+
+Run: `npm test`
+Expected: PASS su tutta la batteria.
+
+- [ ] **Step 7: Commit**
+
+```bash
+git add src/components/BottomNav.jsx src/App.jsx src/components/Landing.jsx test/dock.test.js
+git commit -F - <<'EOF'
+Il centro della dock diventa «+», e la freccia torna dove la si cerca
+
+Da invio, il centro significava due cose: «manda» sulla ricerca e «riapri il
+composer» nei risultati. Un pulsante, due gesti, e la parentela fra i due la
+vedeva solo chi aveva scritto il codice.
+
+Adesso è «+ nuova ricerca» e vuol dire la stessa cosa ovunque: la dock è
+tutta navigazione, cinque slot che rispondono a «dove vado» e nessuno che
+fa. La freccia d'invio torna nel composer, dove qualunque interfaccia a
+prompt la mette.
+
+Il prezzo è dichiarato nella spec: sulla schermata di ricerca il pulsante
+più grande compie l'azione meno frequente, e ritoccare una frase adesso
+passa dalla cronologia invece che da un tocco.
+EOF
+```
+
+---
+
 ## Cosa questo piano non fa
 
 - **La cronologia resta dietro l'hamburger che scorre via.** È il limite noto del §7 della spec, accettato consapevolmente per non allargare la dock a sei slot. Se si presenterà nell'uso, la strada è rendere `.topbar` sticky su mobile — non aggiungere una voce.

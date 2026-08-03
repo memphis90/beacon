@@ -104,28 +104,51 @@ due selezioni (`BottomNav.jsx:14`).
 
 ## 4. Il pulsante centrale
 
-**Nella ricerca è l'invio.** La freccia dentro il composer (`Landing.jsx:248`)
-viene rimossa: un solo comando, in basso, dove arriva il pollice.
-L'`InterpreterPicker` **resta nel box** — è una scelta, non un'azione, e le due
-cose non vanno nello stesso posto.
+> **Rivisto il 2026-08-03**, dopo aver visto i primi tre task a schermo. La
+> versione precedente — il centro come invio, con la freccia tolta dal
+> composer — è descritta in fondo a questa sezione insieme al motivo per cui
+> è stata abbandonata.
 
-L'etichetta dice chi risponderà, perché è l'unica differenza che l'utente deve
-poter vedere prima di premere:
+**È «+ nuova ricerca», e significa la stessa cosa nelle due schermate.** Icona
+`IconPlus`, etichetta «Nuova». Nella ricerca svuota il campo e vi riporta il
+cursore; nei risultati azzera la frase e riporta alla schermata di ricerca
+pulita.
 
-| stato (`agentIsReady`) | etichetta | icona |
-|---|---|---|
-| modello configurato | **Chiedi** | scintilla |
-| modalità regole | **Cerca** | lente |
+**La freccia resta nel composer** (`Landing.jsx:248`), dove sta in qualunque
+interfaccia a prompt e dove la memoria muscolare la cerca.
+L'`InterpreterPicker` le resta accanto.
 
-Disattivo con gli stessi criteri della freccia che sostituisce: `!text.trim()`
-col modello, `parsed.empty` con le regole.
+Il centro è disattivo quando non c'è niente da azzerare: campo vuoto e nessun
+ranking. Un pulsante che a premerlo non fa niente è peggio di un pulsante
+spento, perché spento almeno lo dice.
 
-**Nei risultati riapre la frase, già scritta.** Torna al composer con dentro il
-testo che ha prodotto quei risultati e il cursore in fondo, pronto da ritoccare
-— lo stesso gesto che la cronologia fa già con `riprendi()`
-(`Landing.jsx:153`). Il caso vero dopo aver letto un elenco è correggere il
-budget o il mese, non ricominciare da capo. Chi vuole ripartire pulito ha
-«Nuova ricerca» nel menu laterale, che continua a svuotare il campo.
+### Perché non l'invio
+
+La versione precedente metteva l'invio al centro, e aveva un vantaggio reale:
+il gesto principale dove arriva il pollice. L'ha persa su un difetto più
+grosso — **il centro significava due cose diverse.** Sulla ricerca «invia»,
+nei risultati «riapri il composer»: un pulsante solo, due gesti, e la
+somiglianza fra i due la vedeva solo chi aveva scritto il codice.
+
+Con il «+» la dock diventa **tutta navigazione**: cinque slot che rispondono a
+«dove vado», nessuno che fa. È un modello più netto di quattro navigazioni più
+un'azione, ed è il gesto che chiunque riconosce dalle interfacce a chat.
+
+Il prezzo è dichiarato: sulla schermata di ricerca il pulsante più grande
+compie l'azione meno frequente. Accettato consapevolmente.
+
+### La conseguenza da tenere d'occhio
+
+Con il «+» che azzera, **il percorso per ritoccare una frase passa dalla
+cronologia**: menu laterale → la voce precedente → il campo si riempie
+(`riprendi()`, `Landing.jsx:153`). Prima era un tocco solo. Dopo aver letto un
+elenco, correggere il budget o il mese è un caso frequente, e ora costa tre
+tocchi attraverso un menu che su mobile scorre via (§7).
+
+Se all'uso questo pesa, la strada **non** è rimettere l'invio al centro: è
+rendere tappabile la frase mostrata nei risultati, che riporterebbe al composer
+con il testo dentro senza togliere niente a nessuno. Fuori dal perimetro di
+questa spec.
 
 ---
 
