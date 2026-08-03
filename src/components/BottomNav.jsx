@@ -1,12 +1,16 @@
-import { IconHeart, IconList, IconScale, IconSearch, IconSettings, IconSparkle } from './Icons.jsx'
+import { IconHeart, IconList, IconPlus, IconScale, IconSettings } from './Icons.jsx'
 
 /**
  * La barra inferiore, identica nelle due schermate.
  *
- * Cinque slot, e quello di mezzo non è un sesto tab: è l'azione. Sporge sopra
- * il bordo della barra perché è l'unico modo di dire "questo non è come gli
- * altri quattro" senza scriverlo. La freccia che stava nel composer è sparita:
- * un invio solo, in basso, dove arriva il pollice.
+ * Cinque slot, e quello di mezzo non è un sesto tab: è il «ricomincia», e
+ * sporge sopra il bordo perché è l'unico modo di dire "questo non è come gli
+ * altri quattro" senza scriverlo.
+ *
+ * Non è l'invio, ed è stata una scelta rivista: da invio, il centro
+ * significava "manda" sulla ricerca e "riapri il composer" nei risultati —
+ * un pulsante, due gesti. Così invece la dock è tutta navigazione, e la
+ * freccia sta nel composer, dove qualunque interfaccia a prompt la mette.
  *
  * `hasResults` è falso solo alla prima apertura, prima che una ricerca esista:
  * Elenco, Preferiti e Confronta lavorano tutti sul ranking, e senza ranking non
@@ -16,8 +20,8 @@ import { IconHeart, IconList, IconScale, IconSearch, IconSettings, IconSparkle }
  */
 export default function BottomNav({
   onlyFavourites, favouritesCount, compareCount, hasResults = true,
-  askLabel = 'Cerca', askDisabled = false,
-  onAsk, onList, onFavourites, onCompare, onSettings,
+  onNew, newDisabled = false,
+  onList, onFavourites, onCompare, onSettings,
 }) {
   // `fillable` esiste perché solo il cuore ha una versione piena: passare
   // `filled` a tutte le icone lo faceva finire come attributo sull'`svg`, e
@@ -47,10 +51,6 @@ export default function BottomNav({
     </button>
   )
 
-  // Scintilla col modello, lente con le regole: l'icona dice chi risponderà
-  // prima ancora dell'etichetta.
-  const AskIcon = askLabel === 'Chiedi' ? IconSparkle : IconSearch
-
   return (
     <nav className="bottomnav" aria-label="Navigazione principale">
       {sinistra.map(tab)}
@@ -58,13 +58,13 @@ export default function BottomNav({
       <button
         type="button"
         className="bottomnav__ask"
-        disabled={askDisabled}
-        onClick={onAsk}
+        disabled={newDisabled}
+        onClick={onNew}
       >
         <span className="bottomnav__askdisc">
-          <AskIcon width="26" height="26" />
+          <IconPlus width="26" height="26" />
         </span>
-        {askLabel}
+        Nuova
       </button>
 
       {destra.map(tab)}

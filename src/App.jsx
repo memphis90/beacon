@@ -19,7 +19,7 @@ import { REPO_URL } from './lib/project.js'
 import { emptyWeights } from './lib/axes.js'
 import { axesFromThemes } from './lib/themes.js'
 import { rankDestinations, scoreDestination, tripCost, costRange } from './lib/scoring.js'
-import { agentIsReady, loadAgentConfig, saveAgentConfig } from './lib/agent.js'
+import { loadAgentConfig, saveAgentConfig } from './lib/agent.js'
 import { loadHistory } from './lib/history.js'
 import { useDismiss } from './lib/useDismiss.js'
 import { useToasts } from './lib/useToasts.js'
@@ -607,13 +607,11 @@ export default function App({ startedInitially = false }) {
         favouritesCount={favourites.length}
         compareCount={compareIds.length}
         hasResults
-        /* Nei risultati il modello ha già risposto: l'etichetta resta quella
-           di chi risponderebbe se ripremessi, che è anche chi ha risposto. */
-        askLabel={agentIsReady(agent) ? 'Chiedi' : 'Cerca'}
-        /* Riapre il composer con dentro la frase che ha prodotto questi
-           risultati: `phrase` non viene toccata, e Landing la ripesca. Dopo
-           aver letto un elenco si corregge il budget, non si ricomincia. */
-        onAsk={() => setStarted(false)}
+        /* Nuova ricerca vuol dire anche azzerare la frase: altrimenti quella
+           vecchia resterebbe attaccata ai risultati nuovi. È lo stesso gesto
+           della voce omonima nel menu laterale. */
+        onNew={() => { setPhrase(''); setStarted(false) }}
+        newDisabled={false}
         onList={() => { setOnlyFavourites(false); setDetailId(null) }}
         onFavourites={() => setOnlyFavourites(!onlyFavourites)}
         onCompare={() => setCompareOpen(true)}

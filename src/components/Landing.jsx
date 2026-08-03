@@ -3,7 +3,9 @@ import BottomNav from './BottomNav.jsx'
 import InterpreterPicker from './InterpreterPicker.jsx'
 import SettingsModal from './SettingsModal.jsx'
 import SideRail from './SideRail.jsx'
-import { IconEuro, IconGitHub, IconMenu, IconMountain, IconScale, IconWave } from './Icons.jsx'
+import {
+  IconArrowUp, IconEuro, IconGitHub, IconMenu, IconMountain, IconScale, IconWave,
+} from './Icons.jsx'
 import { REPO_URL } from '../lib/project.js'
 import { parseQuery } from '../lib/parseQuery.js'
 import {
@@ -247,6 +249,19 @@ export default function Landing({
                   onChange={applyAgent}
                   onConfigure={() => setSettingsOpen(true)}
                 />
+
+                {/* Freccia sola: l'etichetta la dà il tooltip. Il gesto è
+                    quello di qualunque campo prompt, e non ha bisogno di
+                    essere spiegato ogni volta che guardi la schermata. */}
+                <button
+                  type="submit"
+                  className="btn btn--primary landing__send"
+                  title="Invia prompt"
+                  aria-label="Invia prompt"
+                  disabled={conModello ? !text.trim() : parsed.empty}
+                >
+                  <IconArrowUp width="20" height="20" />
+                </button>
               </div>
             </div>
 
@@ -384,12 +399,15 @@ export default function Landing({
         favouritesCount={favouritesCount}
         compareCount={compareCount}
         hasResults={hasResults}
-        askLabel={conModello ? 'Chiedi' : 'Cerca'}
-        /* Gli stessi criteri della freccia che sostituisce: col modello serve
-           del testo, con le regole serve che le regole ci abbiano capito
-           qualcosa. */
-        askDisabled={conModello ? !text.trim() : parsed.empty}
-        onAsk={submit}
+        /* Svuota il campo e ci riporta il cursore: è lo stesso gesto della
+           voce «Nuova ricerca» del menu laterale, ora a portata di pollice. */
+        onNew={() => {
+          setText('')
+          setErroreModello('')
+          document.getElementById('landing-q')?.focus()
+        }}
+        /* Niente da azzerare: campo vuoto e nessun ranking alle spalle. */
+        newDisabled={!text.trim() && !hasResults}
         onList={onList}
         onFavourites={onFavourites}
         onCompare={onCompare}

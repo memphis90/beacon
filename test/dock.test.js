@@ -1,9 +1,8 @@
-import { describe, it, expect, beforeAll, afterEach, vi } from 'vitest'
+import { describe, it, expect, beforeAll, vi } from 'vitest'
 import { createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import BottomNav from '../src/components/BottomNav.jsx'
 import App from '../src/App.jsx'
-import { AGENT_KEY } from '../src/lib/agent.js'
 
 /**
  * Due difese copiate da render.test.js, e servono entrambe dal Task 2 in poi,
@@ -31,8 +30,8 @@ beforeAll(() => {
 const nulla = () => {}
 const base = {
   onlyFavourites: false, favouritesCount: 0, compareCount: 0, hasResults: true,
-  askLabel: 'Chiedi', askDisabled: false,
-  onAsk: nulla, onList: nulla, onFavourites: nulla, onCompare: nulla, onSettings: nulla,
+  onNew: nulla, newDisabled: false,
+  onList: nulla, onFavourites: nulla, onCompare: nulla, onSettings: nulla,
 }
 const dock = (over = {}) => renderToStaticMarkup(createElement(BottomNav, { ...base, ...over }))
 
@@ -51,15 +50,22 @@ const spento = (html, etichetta) => / disabled(=|>| )/.test(bottone(html, etiche
 describe('BottomNav — cinque slot, il centro è l’azione', () => {
   it('disegna le cinque voci, con Impostazioni al posto di Parametri', () => {
     const html = dock()
-    for (const voce of ['Elenco', 'Preferiti', 'Chiedi', 'Confronta', 'Impostazioni']) {
+    for (const voce of ['Elenco', 'Preferiti', 'Nuova', 'Confronta', 'Impostazioni']) {
       expect(html).toContain(voce)
     }
     expect(html).not.toContain('Parametri')
   })
 
-  it('il centro cambia nome secondo chi risponderà', () => {
-    expect(dock({ askLabel: 'Cerca' })).toContain('Cerca')
-    expect(dock({ askLabel: 'Cerca' })).not.toContain('Chiedi')
+  it('il centro è «Nuova» e non cambia nome', () => {
+    const html = dock()
+    expect(html).toContain('Nuova')
+    expect(html).not.toContain('Chiedi')
+    expect(html).not.toContain('Cerca')
+  })
+
+  it('il centro è spento quando non c’è niente da azzerare', () => {
+    expect(spento(dock({ newDisabled: true }), 'Nuova')).toBe(true)
+    expect(spento(dock({ newDisabled: false }), 'Nuova')).toBe(false)
   })
 
   /**
@@ -77,7 +83,7 @@ describe('BottomNav — cinque slot, il centro è l’azione', () => {
     expect(spento(html, 'Confronta')).toBe(true)
     // Il centro e le impostazioni sono le uniche due cose che in quel momento
     // si possono fare davvero.
-    expect(spento(html, 'Chiedi')).toBe(false)
+    expect(spento(html, 'Nuova')).toBe(false)
     expect(spento(html, 'Impostazioni')).toBe(false)
   })
 
@@ -86,11 +92,6 @@ describe('BottomNav — cinque slot, il centro è l’azione', () => {
     expect(spento(html, 'Elenco')).toBe(false)
     expect(spento(html, 'Confronta')).toBe(true)
     expect(spento(dock({ hasResults: true, compareCount: 2 }), 'Confronta')).toBe(false)
-  })
-
-  it('il centro si disattiva quando non c’è niente da chiedere', () => {
-    expect(spento(dock({ askDisabled: true }), 'Chiedi')).toBe(true)
-    expect(spento(dock({ askDisabled: false }), 'Chiedi')).toBe(false)
   })
 
   it('i badge compaiono solo se c’è qualcosa da contare', () => {
@@ -107,34 +108,9 @@ describe('risultati — la dock c’è e il centro riapre la frase', () => {
     expect(html).toContain('Elenco')
   })
 
-  /**
-   * L'unica cosa che il Task 2 ha introdotto e che sia osservabile nel markup
-   * statico: prima del diff `App` non passava `askLabel` a `BottomNav`, quindi
-   * valeva sempre il default `'Cerca'`. Ora lo calcola da `agentIsReady(agent)`
-   * — con un profilo locale acceso e utilizzabile deve leggersi «Chiedi», non
-   * «Cerca». Scrivo e rimuovo la chiave dentro la prova stessa: le altre
-   * prove del file montano `App` senza aspettarsi un agente configurato, e non
-   * devono trovarne uno lasciato in giro da questa.
-   */
-  describe('col profilo locale pronto', () => {
-    afterEach(() => {
-      try { localStorage.removeItem(AGENT_KEY) } catch { /* niente da fare */ }
-    })
-
-    it('il centro dice «Chiedi», non «Cerca»', () => {
-      localStorage.setItem(AGENT_KEY, JSON.stringify({
-        enabled: true,
-        activeId: 'm1',
-        profiles: [{
-          id: 'm1', label: '', preset: 'ollama',
-          baseUrl: 'http://localhost:11434/v1', model: 'llama3.2', apiKey: '',
-        }],
-        debug: false,
-      }))
-      const html = renderToStaticMarkup(createElement(App, { startedInitially: true }))
-      expect(bottone(html, 'Chiedi')).not.toBe('')
-      expect(bottone(html, 'Cerca')).toBe('')
-    })
+  it('sulla home vergine il centro è spento, nei risultati no', () => {
+    expect(spento(renderToStaticMarkup(createElement(App)), 'Nuova')).toBe(true)
+    expect(spento(renderToStaticMarkup(createElement(App, { startedInitially: true })), 'Nuova')).toBe(false)
   })
 })
 
@@ -149,11 +125,7 @@ describe('ricerca — la stessa dock, e un invio solo', () => {
     expect(spento(html, 'Impostazioni')).toBe(false)
   })
 
-  /**
-   * La freccia del composer deve sparire, o l'invio resta in due posti a un
-   * centimetro di distanza. `landing__send` era la sua classe.
-   */
-  it('il composer non ha più la sua freccia', () => {
-    expect(renderToStaticMarkup(createElement(App))).not.toContain('landing__send')
+  it('il composer ha di nuovo la sua freccia', () => {
+    expect(renderToStaticMarkup(createElement(App))).toContain('landing__send')
   })
 })
