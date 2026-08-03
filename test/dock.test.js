@@ -703,4 +703,47 @@ describe('Landing — il marchio si scambia con la scritta sotto i 901px', () =>
   it('sopra i 901px resta la scritta: il faro è spento fuori dal blocco mobile', () => {
     expect(cssResto).toMatch(/\.landing__brandmark\s*\{\s*display:\s*none;\s*\}/)
   })
+
+  it('il faro sulla home non ha i fasci, come quello della barra laterale alla stessa taglia', () => {
+    // `SideRail.jsx` usa `beams={false}` a 26px perché sotto una certa taglia
+    // i due fasci si leggono come sporco, non come luce (vedi `Logo.jsx`). Il
+    // faro che sostituisce "Beacon" è alla stessa dimensione: deve avere la
+    // stessa scelta, non la scelta di default del componente.
+    const html = landing()
+    const inizio = html.indexOf('landing__brandmark')
+    const fine = html.indexOf('</svg>', inizio)
+    expect(html.slice(inizio, fine)).not.toContain('logo__beams')
+  })
+})
+
+/**
+ * Fix round 1 (revisione): la fessura fra 900 e 901px.
+ *
+ * `.topbar__menu` e `.landing__menu` erano nascosti da due media query
+ * complementari (`max-width: 900px` e `min-width: 901px`), che a una
+ * larghezza frazionaria non coprono né l'una né l'altra. Qui si verifica che
+ * ciascuno abbia una base propria — fuori da ENTRAMBE le media query — che
+ * resta `display: none` a prescindere.
+ */
+describe('via l’hamburger — niente fessura fra 900 e 901px', () => {
+  it('`.landing__menu` ha una base `display: none`, non `inline-flex`', () => {
+    expect(cssResto).toMatch(/\.landing__menu\s*\{\s*display:\s*none;/)
+  })
+
+  it('`.topbar__menu` ha una base `display: none`', () => {
+    expect(cssResto).toMatch(/\.topbar__menu\s*\{\s*display:\s*none;/)
+  })
+})
+
+/**
+ * Fix round 1: `.landing__recentclear` («Svuota la cronologia») era alto
+ * ~36px — sotto i 42px di `.hside__nav button` e sotto i 44px della × che le
+ * sta sopra nella stessa lista, pur essendo la riga più distruttiva delle
+ * due.
+ */
+describe('via l’hamburger — «Svuota la cronologia» ha un bersaglio vero', () => {
+  it('`.landing__recentclear` dichiara almeno 44px di altezza minima', () => {
+    const blocco = cssResto.match(/\.landing__recentclear\s*\{[^}]*\}/)?.[0] ?? ''
+    expect(blocco).toMatch(/min-height:\s*4[4-9]px|min-height:\s*[5-9]\dpx/)
+  })
 })

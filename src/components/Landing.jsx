@@ -224,10 +224,13 @@ export default function Landing({
             sparisce l'unico modo di raggiungere quel faro: il marchio prende
             il posto della scritta, non le sta accanto. I due, testo e
             marchio, sono sempre nel markup — la CSS sceglie quale mostrare,
-            come per `.landing__recent`/gli esempi qui sotto. */}
+            come per `.landing__recent`/gli esempi qui sotto.
+            `beams={false}`, come il faro della barra laterale (`SideRail.jsx`)
+            alla stessa dimensione: sotto una certa taglia i due fasci non si
+            leggono come luce, si leggono come sporco (vedi `Logo.jsx`). */}
         <div className="landing__brand">
           <span className="landing__brandtext">Beacon</span>
-          <LogoMark className="landing__brandmark" width="26" height="26" />
+          <LogoMark className="landing__brandmark" width="26" height="26" beams={false} />
         </div>
 
         {/* Anche qui, non solo nei risultati: è la prima schermata che vede

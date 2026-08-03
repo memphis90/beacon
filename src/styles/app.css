@@ -1704,11 +1704,15 @@ input[type='range']:disabled { opacity: 0.45; }
 /* Hamburger della home, stesso gesto dei risultati, stesso lato — ma non più
    in servizio a nessuna larghezza: la bottom nav (in fondo a questa stessa
    schermata) copre già le stesse voci, e senza cassetto da aprire non
-   avrebbe più niente da fare. Nascosto sotto i 900px come sopra i 901px: la
-   regola che lo tiene invisibile a ogni larghezza vive più sotto, accanto a
-   quella gemella di `.topbar__menu`. */
+   avrebbe più niente da fare.
+   `display: none` qui in base, non solo nei due blocchi mobile/desktop più
+   sotto che lo ripetono: quei due sono complementari (`max-width: 900px` e
+   `min-width: 901px`) e a una larghezza frazionaria — zoom del browser,
+   certi rapporti di pixel — non coprono né l'una né l'altra. Senza una base
+   propria, in quella fessura l'elemento sarebbe ricomparso con lo stile di
+   prima. */
 .landing__menu {
-  display: inline-flex; align-items: center; justify-content: center;
+  display: none; align-items: center; justify-content: center;
   flex: none; width: 40px; height: 40px; padding: 0;
   border: 0; border-radius: var(--radius-sm);
   background: none; color: var(--ink);
@@ -2073,9 +2077,15 @@ input[type='range']:disabled { opacity: 0.45; }
 .landing__recentremove:hover { background: var(--surface-2); color: var(--crit); }
 
 /* In coda alla lista: stessa riga delle altre voci, non un bottone a parte
-   fuori dall'elenco. */
+   fuori dall'elenco.
+   `min-height: 44px`: è la riga distruttiva delle due (cancella tutta la
+   cronologia, non una voce sola), e senza un'altezza dichiarata il solo
+   padding la fermava a ~36px — sotto i 42px di `.hside__nav button` e sotto
+   i 44px della × che le sta sopra nella lista. `display: flex` centra il
+   testo dentro quei 44px invece di lasciarlo a galla in alto. */
 .landing__recentclear {
-  width: 100%; padding: 10px var(--card-inset);
+  width: 100%; min-height: 44px; padding: 10px var(--card-inset);
+  display: flex; align-items: center;
   border: 0; background: none; text-align: left;
   color: var(--ink-2); font-size: 13px; font-weight: 600;
 }
@@ -2411,8 +2421,14 @@ input[type='range']:disabled { opacity: 0.45; }
 /* Icona a destra del testo nel bottone principale, come nel prototipo. */
 .landing__boxbar .btn--primary { display: inline-flex; align-items: center; gap: var(--inline-gap); }
 
-/* Hamburger della pagina risultati: solo icona, senza cornice. */
+/* Hamburger della pagina risultati: solo icona, senza cornice.
+   `display: none` in base come per `.landing__menu` qui sopra, per la stessa
+   fessura fra i due blocchi mobile/desktop: senza, alle larghezze che non
+   sono né sotto i 900 né sopra i 901 il pulsante non aveva nessun `display`
+   dichiarato, e cadeva sul default del `<button>` — visibile, e senza uno
+   stile a coprirlo. */
 .topbar__menu {
+  display: none;
   border-color: transparent;
   background: transparent;
   padding: 0;
