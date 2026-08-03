@@ -34,16 +34,16 @@ elementi galleggianti che si contendono l'unico angolo dove arriva il pollice.
 
 ```
 ┌──────────────────────────────┐
-│ ☰   [🔍 Cerca una meta…]  [Filtri²] │
+│ 🗼  [🔍 Cerca una meta…]  [Filtri²] │
 │ Punteggio · Costo · Nome     │
 └──────────────────────────────┘
 ```
 
-- **Riga 1:** hamburger, campo di ricerca, pulsante «Filtri» col badge dei
-  filtri attivi. Il marchio e il collegamento al codice **spariscono dai
-  risultati**: il marchio ha già il suo posto in cima alla barra laterale, e
-  «Codice» è raggiungibile da lì e dal piede della pagina. In una schermata
-  dove si guarda una classifica, il nome del prodotto non è informazione.
+- **Riga 1:** il marchio (`LogoMark`), campo di ricerca, pulsante «Filtri» col
+  badge dei filtri attivi. La scritta «Beacon» e il collegamento al codice
+  **spariscono dai risultati**: in una schermata dove si guarda una classifica
+  il nome del prodotto non è informazione, e «Codice» resta nel piede della
+  pagina.
 - **Riga 2:** i tre tab di ordinamento, compatti, quello attivo sottolineato.
 
 La barra è **chiara** (`--surface` con hairline in basso), come già è quella
@@ -51,10 +51,24 @@ della schermata di ricerca. La navy sparisce — è la stessa correzione
 descritta al §2 dell'altra spec, e qui vale a maggior ragione perché la barra
 diventa permanente invece che scorrevole.
 
-**Chiara e sticky, non scura e scorrevole.** Oggi la topbar scorre via
-portandosi dietro l'hamburger, che a metà pagina diventa irraggiungibile — è
-il limite noto del §7 dell'altra spec. Fondendo le due barre il problema si
-chiude da solo: l'hamburger vive nella barra che resta.
+### Niente hamburger, su nessuna schermata
+
+Sotto i 901px il pulsante del menu **sparisce ovunque**, e con lui la barra
+laterale: non è raggiungibile, quindi non deve esistere. Il suo contenitore e
+il suo velo vanno nascosti sotto quella soglia, non lasciati montati e
+irraggiungibili — un cassetto che nessuno può aprire è una trappola per il
+focus da tastiera, non un elemento invisibile.
+
+Ogni voce che conteneva ha un posto, e li elenca il §6. Il percorso che
+sembrava restare scoperto — raggiungere la cronologia **dai risultati** — si
+chiude da sé: il «+» riporta alla schermata di ricerca, dove la cronologia è
+in linea sotto il campo.
+
+Questo cancella anche il limite noto del §7 dell'altra spec, che accettava un
+hamburger irraggiungibile a metà pagina perché la topbar scorreva via. Non è
+più irraggiungibile: non c'è.
+
+Su desktop la barra laterale resta esattamente com'è.
 
 ---
 
@@ -151,22 +165,30 @@ che servono.
 
 ### Sparisce l'hamburger, arriva il faro
 
-La barra della home mobile perde il pulsante del menu e sostituisce la scritta
-«Beacon» con il **marchio** (`LogoMark`). Le due cose vanno insieme: il faro
-vive in cima alla barra laterale, e senza hamburger quella barra non si apre —
-il marchio resterebbe irraggiungibile su mobile. Portandolo nella barra si
-recupera, e il commento di `App.jsx` che vietava di ripetere marchio e nome a
-due centimetri di distanza resta rispettato, perché adesso ce n'è uno solo.
+La barra della home mobile perde il pulsante del menu — come tutte le
+schermate, §2 — e sostituisce la scritta «Beacon» con il **marchio**
+(`LogoMark`). Le due cose vanno insieme: il faro vive in cima alla barra
+laterale, e senza hamburger quella barra non si apre — il marchio resterebbe
+irraggiungibile su mobile. Portandolo nella barra si recupera, e il commento
+di `App.jsx` che vietava di ripetere marchio e nome a due centimetri di
+distanza resta rispettato, perché adesso ce n'è uno solo.
 
 ### Dove vanno le voci del menu
+
+Vale per **entrambe** le schermate: sotto i 901px la barra laterale non
+esiste, quindi ogni sua voce deve avere un altro posto o sparire.
 
 | voce del menu laterale | su mobile, dopo |
 |---|---|
 | Nuova ricerca | il «+» al centro della dock |
 | Impostazioni | lo slot «Impostazioni» della dock |
 | **Scopri le destinazioni** | lo slot «Elenco» della dock — stesso posto d'arrivo |
-| **Cronologia** | in linea sotto il composer (sotto) |
-| **Logout** | dentro il pannello Impostazioni |
+| **Cronologia** | in linea sotto il composer della home |
+| **Azzera i dati** | dentro il pannello Impostazioni |
+
+Dai risultati la cronologia si raggiunge in due tocchi — «+» e poi la voce —
+invece del tocco solo che ha chi è già sulla home. È il costo accettato per
+non avere un sesto slot né un menu.
 
 Sullo slot «Elenco» servono due precisazioni. Prende **l'icona della barra
 laterale** (`IconPin`, `SideRail.jsx:152`) al posto di `IconList`: è la stessa
@@ -175,7 +197,7 @@ sulla home deve essere **acceso anche senza ranking** — lì significa «sfogli
 tutto», che è il percorso `onSkip` e non ha bisogno di risultati preesistenti.
 Nei risultati resta legato a `hasResults` come oggi.
 
-Il «logout» non è un logout: `azzera()` cancella tutto ciò che è salvato su
+L'azzeramento non è un logout: `azzera()` cancella tutto ciò che è salvato su
 questa macchina — criteri, preferiti, cronologia. Sta nel pannello
 Impostazioni perché è configurazione, ed è l'unica azione distruttiva
 dell'applicazione: va dove la si cerca apposta, non dove ci si inciampa.
