@@ -1,4 +1,4 @@
-import { IconHeart, IconList, IconPlus, IconScale, IconSettings } from './Icons.jsx'
+import { IconHeart, IconPin, IconPlus, IconScale, IconSettings } from './Icons.jsx'
 
 /**
  * La barra inferiore, identica nelle due schermate.
@@ -13,10 +13,16 @@ import { IconHeart, IconList, IconPlus, IconScale, IconSettings } from './Icons.
  * freccia sta nel composer, dove qualunque interfaccia a prompt la mette.
  *
  * `hasResults` è falso solo alla prima apertura, prima che una ricerca esista:
- * Elenco, Preferiti e Confronta lavorano tutti sul ranking, e senza ranking non
- * hanno niente da mostrare. Restano visibili e spenti invece di sparire —
- * una dock che cambia forma fra le due schermate non sarebbe più la stessa
- * dock, che è tutto il motivo per cui esiste così.
+ * Preferiti e Confronta lavorano sul ranking, e senza ranking non hanno
+ * niente da mostrare. Restano visibili e spenti invece di sparire — una dock
+ * che cambia forma fra le due schermate non sarebbe più la stessa dock, che è
+ * tutto il motivo per cui esiste così.
+ *
+ * Elenco no: nei risultati porta all'elenco che già c'è, sulla home a
+ * sfogliarlo tutto senza frase — un percorso che non ha bisogno di un
+ * ranking preesistente, quindi resta acceso anche a `hasResults` falso.
+ * Stessa icona della voce omonima nella barra laterale (`IconPin`): sono la
+ * stessa azione raggiunta da due strade.
  */
 export default function BottomNav({
   onlyFavourites, favouritesCount, compareCount, hasResults = true,
@@ -27,7 +33,7 @@ export default function BottomNav({
   // `filled` a tutte le icone lo faceva finire come attributo sull'`svg`, e
   // React lo segnalava a ogni render.
   const sinistra = [
-    { key: 'list', label: 'Elenco', Icon: IconList, active: hasResults && !onlyFavourites, disabled: !hasResults, onClick: onList },
+    { key: 'list', label: 'Elenco', Icon: IconPin, active: hasResults && !onlyFavourites, onClick: onList },
     { key: 'fav', label: 'Preferiti', Icon: IconHeart, fillable: true, active: hasResults && onlyFavourites, badge: favouritesCount, disabled: !hasResults, onClick: onFavourites },
   ]
   const destra = [

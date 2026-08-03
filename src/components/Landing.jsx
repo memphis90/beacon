@@ -497,7 +497,12 @@ export default function Landing({
         }}
         /* Niente da azzerare: campo vuoto e nessun ranking alle spalle. */
         newDisabled={!text.trim() && !hasResults}
-        onList={onList}
+        /* «Elenco» qui è sempre acceso (vedi BottomNav), ma senza un ranking
+           `onList` porterebbe a risultati che non esistono ancora: quando
+           `hasResults` è falso il percorso giusto è `onSkip`, lo stesso
+           "sfoglia tutto senza frase" della barra laterale. Con un ranking
+           già in piedi resta `onList`, che ci torna dentro. */
+        onList={hasResults ? onList : onSkip}
         onFavourites={onFavourites}
         onCompare={onCompare}
         onSettings={() => setMobilePanel('parametri')}

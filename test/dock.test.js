@@ -124,12 +124,14 @@ describe('BottomNav — cinque slot, e il centro ricomincia', () => {
     expect(dock()).toContain('bottomnav__new')
   })
 
-  it('senza risultati i tre slot di vista sono disattivi, gli altri due no', () => {
+  it('senza risultati Preferiti e Confronta sono disattivi, Elenco no', () => {
     const html = dock({ hasResults: false })
-    expect(spento(html, 'Elenco')).toBe(true)
+    // Elenco ha sempre una destinazione — l'elenco esistente o "sfogliali
+    // tutti" — quindi resta acceso anche senza un ranking dietro.
+    expect(spento(html, 'Elenco')).toBe(false)
     expect(spento(html, 'Preferiti')).toBe(true)
     expect(spento(html, 'Confronta')).toBe(true)
-    // Il centro e le impostazioni sono le uniche due cose che in quel momento
+    // Il centro e le impostazioni sono le altre due cose che in quel momento
     // si possono fare davvero.
     expect(spento(html, 'Nuova')).toBe(false)
     expect(spento(html, 'Impostazioni')).toBe(false)
@@ -148,6 +150,16 @@ describe('BottomNav — cinque slot, e il centro ricomincia', () => {
   })
 })
 
+/**
+ * `onFavourites` (`App.jsx`) chiude compare/parametri/dettaglio come già fa
+ * `onList`, così anche Preferiti è una via d'uscita dalle pagine che coprono
+ * i risultati. Non c'è una prova per questo qui: `renderToStaticMarkup` non
+ * esegue i gestori, quindi non c'è modo di osservare da fuori cosa chiude un
+ * `onClick` — solo che è presente. Una prova che leggesse la stringa del
+ * codice sorgente delle due funzioni certificherebbe la forma del testo, non
+ * il comportamento, ed è il tipo di prova finta che questo lavoro vuole
+ * evitare.
+ */
 describe('risultati — la dock c’è, e il centro riporta alla frase', () => {
   it('la schermata dei risultati monta la dock col centro', () => {
     const html = renderToStaticMarkup(createElement(App, { startedInitially: true }))
@@ -166,8 +178,10 @@ describe('ricerca — la stessa dock, e l’invio sta nel composer', () => {
   it('la home monta la dock, spenta dove non c’è ancora niente', () => {
     const html = renderToStaticMarkup(createElement(App))
     expect(html).toContain('bottomnav__new')
-    // Nessun ranking esiste ancora: i tre slot che ci lavorano sopra sono spenti.
-    expect(spento(html, 'Elenco')).toBe(true)
+    // Nessun ranking esiste ancora: Preferiti e Confronta lavorano sul
+    // ranking e sono spenti. Elenco no: sulla home vergine porta a
+    // "sfoglia tutto", che non ha bisogno di un ranking preesistente.
+    expect(spento(html, 'Elenco')).toBe(false)
     expect(spento(html, 'Preferiti')).toBe(true)
     expect(spento(html, 'Confronta')).toBe(true)
     expect(spento(html, 'Impostazioni')).toBe(false)

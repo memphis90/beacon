@@ -687,8 +687,16 @@ export default function App({ startedInitially = false }) {
            accanto, che serve a quello. Un tab che si spegne premendolo due
            volte porterebbe dove porta già il suo vicino. Il toggle
            nell'intestazione dei risultati resta dov'è: lì è un filtro fra i
-           filtri, non uno slot di navigazione. */
-        onFavourites={() => setOnlyFavourites(true)}
+           filtri, non uno slot di navigazione.
+           Chiude le stesse coperture di `onList`, per la stessa ragione:
+           senza, premuta sopra Confronta o Parametri non succedeva niente di
+           visibile — uno slot morto insegna a non fidarsi della barra. */
+        onFavourites={() => {
+          setOnlyFavourites(true)
+          setDetailId(null)
+          setCompareOpen(false)
+          setParametri(false)
+        }}
         onCompare={() => setCompareOpen(true)}
         onSettings={() => setMobilePanel('parametri')}
       />
