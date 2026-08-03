@@ -14,7 +14,7 @@ import { parseQuery } from '../lib/parseQuery.js'
 import {
   activeProfile, agentIsReady, interpretWithModel, isLocalEndpoint, profileLabel,
 } from '../lib/agent.js'
-import { addToHistory, loadHistory } from '../lib/history.js'
+import { addToHistory, loadHistory, timeAgo } from '../lib/history.js'
 import { countryName } from '../lib/format.js'
 
 /**
@@ -385,17 +385,47 @@ export default function Landing({
             </p>
           )}
 
-          <div className="landing__suggest">
-            <p className="landing__suggesttitle">Oppure prova con</p>
-            <div className="landing__grid">
-              {ESEMPI.map(({ Icon, text: esempio }) => (
-                <button key={esempio} type="button" onClick={() => setText(esempio)}>
-                  <Icon width="20" height="20" />
-                  <span>“{esempio}”</span>
-                </button>
-              ))}
+          {/* Le frasi d'esempio sono il caso vuoto, non un blocco fisso: chi ha
+              già cercato non ha bisogno di uno spunto, ha le sue frasi vere.
+              Sotto i 900px questo è l'unica strada rimasta per ritoccarne
+              una — il menu laterale lì è un cassetto, non una colonna — ma lo
+              scambio non guarda la larghezza: sopra i 901px la cronologia
+              resta com'era, nella colonna permanente, e qui semplicemente non
+              compare (vedi `.landing__recent` in app.css, spenta di default e
+              riaccesa solo dentro `@media (max-width: 900px)`). */}
+          {history.length === 0 ? (
+            <div className="landing__suggest">
+              <p className="landing__suggesttitle">Oppure prova con</p>
+              <div className="landing__grid">
+                {ESEMPI.map(({ Icon, text: esempio }) => (
+                  <button key={esempio} type="button" onClick={() => setText(esempio)}>
+                    <Icon width="20" height="20" />
+                    <span>“{esempio}”</span>
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="landing__recent">
+              <p className="landing__suggesttitle">Le tue ricerche recenti</p>
+              <ul className="landing__recentlist">
+                {history.map((entry) => (
+                  <li key={entry.id}>
+                    {/* `riprendi` è la stessa funzione del menu laterale: riempie
+                        il campo e lascia ritoccare, non rilancia da sola. */}
+                    <button
+                      type="button"
+                      className="landing__recentitem"
+                      onClick={() => riprendi(entry)}
+                    >
+                      <span className="landing__recenttext">{entry.text}</span>
+                      <span className="landing__recentmeta">{timeAgo(entry.at)}</span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </main>
 
         <footer className="landing__foot">
@@ -475,13 +505,14 @@ export default function Landing({
 
       {/* Lo stesso pannello, senza schede: qui ci arrivano il menu laterale e
           il «configura» del selettore, due strade che esistono anche su
-          desktop. Vedi il commento su `onOpenSettings`. */}
+          desktop. Vedi il commento su `onOpenSettings`. Niente `onReset` per
+          lo stesso motivo: sopra i 901px questo È il pannello, non una sua
+          variante mobile, e l'azzeramento lì non c'è mai stato. */}
       {settingsOpen && (
         <SettingsModal
           config={agent}
           onChange={applyAgent}
           onClose={() => setSettingsOpen(false)}
-          onReset={onLogout}
         />
       )}
 

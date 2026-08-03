@@ -11,6 +11,7 @@ import Landing from '../src/components/Landing.jsx'
 import { emptyAgentConfig } from '../src/lib/agent.js'
 import { mergedDestinations } from '../src/lib/store.js'
 import { LogoMark } from '../src/components/Logo.jsx'
+import { HISTORY_KEY } from '../src/lib/history.js'
 
 /**
  * Due difese copiate da render.test.js, e servono entrambe dal Task 2 in poi,
@@ -422,5 +423,116 @@ describe('Landing — il pannello del menu non è quello della dock', () => {
   it('la stessa schermata, aperta dalla dock, le schede ce le ha', () => {
     expect(landing({ panelInitially: 'modello' })).toContain('paneltabs')
     expect(landing({ panelInitially: 'parametri' })).toContain('paneltabs')
+  })
+
+  /**
+   * Correzione (giro 1 di revisione): l'azzeramento era finito anche in
+   * questo montaggio, raggiungibile sopra i 901px dove la barra laterale è la
+   * colonna permanente — non un ripiego mobile. `onLogout` qui sotto è una
+   * funzione vera (non `nulla` per caso: serve proprio a dimostrare che
+   * l'assenza non è perché la prop manca, ma perché questo montaggio non la
+   * passa più a `SettingsModal`).
+   *
+   * Il montaggio gemello di `App.jsx` (`settingsOpen`, riga 620) ha la stessa
+   * correzione ma non ha una prova equivalente: a differenza di `Landing`,
+   * `App` non espone un `panelInitially` (o analogo) che apra `settingsOpen`
+   * da un render statico — è sempre `false` alla prima resa. Verificarlo da
+   * qui richiederebbe un nuovo appiglio per le prove in `App.jsx`, che non è
+   * stato aggiunto: si dichiara la lacuna invece di girarci intorno.
+   */
+  it('il percorso «menu laterale → Impostazioni» non porta l’azzeramento', () => {
+    const html = landing({ panelInitially: 'impostazioni', onLogout: () => {} })
+    expect(html).toContain('Modelli configurati')
+    expect(html).not.toContain('section--danger')
+    expect(html).not.toContain('Azzera tutti i dati salvati qui')
+  })
+
+  it('lo stesso pannello, aperto dalla dock, lo conserva', () => {
+    const html = landing({ panelInitially: 'modello', onLogout: () => {} })
+    expect(html).toContain('section--danger')
+    expect(html).toContain('Azzera tutti i dati salvati qui')
+  })
+})
+
+/**
+ * Task 3 (hamburger): la cronologia in linea sotto il composer.
+ *
+ * Senza il menu laterale, su mobile, questa è l'unica strada rimasta per
+ * ritoccare una frase già cercata — il centro della dock la azzera, non la
+ * ripropone. Le quattro frasi d'esempio diventano il caso vuoto: spariscono
+ * dal markup appena la cronologia esiste, sostituite dall'elenco vero.
+ *
+ * `HISTORY_KEY` va scritta e ripulita a mano: `Landing` la legge da
+ * `localStorage` tramite `loadHistory` all'inizializzazione dello stato, e lo
+ * shim in cima al file non isola le chiavi fra una prova e l'altra.
+ */
+describe('Landing — la cronologia in linea prende il posto degli esempi', () => {
+  const ESEMPIO = 'un’isola a settembre con mare balneabile e buon cibo'
+  const FRASE_STORICA = 'weekend a Lisbona a novembre con voli economici'
+
+  const landing = (over = {}) =>
+    renderToStaticMarkup(
+      createElement(Landing, {
+        destinations: mergedDestinations({}),
+        agent: emptyAgentConfig(),
+        overrides: { destinations: {} },
+        onAgentChange: nulla, onOverridesChange: nulla,
+        onApply: nulla, onSkip: nulla, onLogout: nulla,
+        onList: nulla, onFavourites: nulla, onCompare: nulla,
+        ...over,
+      }),
+    )
+
+  it('cronologia vuota: compaiono gli esempi, non l’elenco', () => {
+    localStorage.removeItem(HISTORY_KEY)
+    const html = landing()
+    expect(html).toContain(ESEMPIO)
+    expect(html).not.toContain('landing__recentlist')
+  })
+
+  it('cronologia piena: compare l’elenco con la frase e il tempo, non gli esempi', () => {
+    const entry = {
+      id: 'storia-1',
+      text: FRASE_STORICA,
+      patch: {},
+      source: 'regole',
+      // Cinque minuti fa: dentro la soglia dei "min" di `timeAgo`, non "poco fa".
+      at: Date.now() - 5 * 60000,
+    }
+    localStorage.setItem(HISTORY_KEY, JSON.stringify([entry]))
+    try {
+      const html = landing()
+      expect(html).toContain(FRASE_STORICA)
+      expect(html).toContain('5 min')
+      expect(html).not.toContain(ESEMPIO)
+      expect(html).not.toContain('landing__grid')
+    } finally {
+      // Senza questo la voce resterebbe in `localStorage` e contaminerebbe
+      // le prove successive, che assumono una cronologia vuota di partenza.
+      localStorage.removeItem(HISTORY_KEY)
+    }
+  })
+
+  /**
+   * Non verificabile da qui: `renderToStaticMarkup` non esegue `onClick`,
+   * quindi non c'è modo di osservare che toccare una voce chiami `riprendi` e
+   * riempia il campo. Si vede solo che il bottone e il suo testo esistono nel
+   * markup (prova sopra) — non che il gesto funzioni.
+   */
+
+  it('la regola che accende l’elenco in linea vive dentro il blocco mobile', () => {
+    // Se questa fallisce per prima, il foglio non è stato spaccato: le due
+    // asserzioni sotto su `cssMobile`/`cssResto` non direbbero niente.
+    expect(cssMobile).not.toBe('')
+    expect(cssMobile).toMatch(/\.landing__recent\s*\{[^}]*display:\s*block/)
+  })
+
+  it('sopra i 901px l’elenco in linea resta spento: il vincolo del progetto', () => {
+    // Fuori dal blocco mobile la dichiarazione è `display: none`: sopra i
+    // 901px, dove la cronologia vive già nella colonna permanente, l'elenco
+    // in linea non deve comparire — qui non si legge una larghezza, si legge
+    // che la regola che lo terrebbe spento non è stata tolta dal resto del
+    // foglio.
+    expect(cssResto).toMatch(/\.landing__recent\s*\{[^}]*display:\s*none/)
   })
 })

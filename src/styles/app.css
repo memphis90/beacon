@@ -2028,6 +2028,40 @@ input[type='range']:disabled { opacity: 0.45; }
 .landing__grid button:hover { border-color: var(--primary); background: var(--surface-2); color: var(--ink); }
 .landing__grid button:hover svg { color: var(--primary); }
 
+/* La cronologia in linea, sotto il composer: prende il posto degli esempi
+   quando la cronologia non è vuota. Spenta di default — sopra i 901px la
+   colonna permanente della barra laterale già la mostra, e ripeterla qui
+   sarebbe la stessa informazione due volte. La riaccende solo il blocco
+   mobile qui sotto: è la regola che vale il vincolo del progetto, sopra i
+   901px non cambia niente perché questa dichiarazione resta quella che conta. */
+.landing__recent { display: none; margin-top: var(--container-margin); }
+.landing__recentlist {
+  list-style: none; margin: 0; padding: 0;
+  max-height: 240px; overflow-y: auto;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--surface-container-lowest);
+}
+.landing__recentlist li + li { border-top: 1px solid var(--border); }
+.landing__recentitem {
+  display: flex; flex-direction: column; gap: 2px;
+  width: 100%; padding: 10px var(--card-inset);
+  border: 0; background: none; text-align: left; color: var(--ink);
+}
+.landing__recentitem:hover { background: var(--surface-2); }
+.landing__recenttext {
+  font-size: 14px; line-height: 20px; color: var(--ink);
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.landing__recentmeta { font-size: 11px; color: var(--ink-3); }
+
+/* Qui, e non nel blocco esistente più in basso: quella accensione deve stare
+   vicino alla dichiarazione che spegne, altrimenti il vincolo "sopra i 901px
+   non cambia niente" si verifica solo leggendo tutto il foglio da cima a
+   fondo. */
+@media (max-width: 900px) {
+  .landing__recent { display: block; }
+}
+
 .landing__foot {
   border-top: 1px solid var(--border);
   padding: calc(var(--container-margin) * 1.5) var(--container-margin);
