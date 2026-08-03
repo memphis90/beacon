@@ -1489,24 +1489,16 @@ input[type='range']:disabled { opacity: 0.45; }
   }
 }
 
-/* ==========================================================================
-   Topbar: ricerca al centro, menu in un drawer a destra
-   ========================================================================== */
-
-.topbar__menu {
-  display: inline-flex; align-items: center; gap: var(--inline-gap);
-  height: 38px; padding: 0 14px;
-  border: 1px solid var(--border-strong); border-radius: var(--radius-sm);
-  background: var(--surface); color: var(--ink);
-  font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.02em; /* label-md */
-}
-.topbar__menu:hover { background: var(--surface-2); }
-
-@media (max-width: 900px) {
-  /* Su mobile le stesse voci stanno già nella bottom nav: un secondo accesso
-     allo stesso posto è solo un bersaglio in più da sbagliare. */
-  .topbar__menu { display: none; }
-}
+/* Residuo di un disegno abbandonato — "ricerca al centro, menu in un drawer a
+   destra" — che qui dichiarava una `.topbar__menu` di un'altra epoca: cornice,
+   sfondo, 38px di altezza, nascosta sotto i 900px con la stessa ragione della
+   bottom nav di oggi. Il nome della classe è sopravvissuto al disegno che lo
+   giustificava: quella vera, l'hamburger icona-sola dei risultati, è più
+   sotto (`.topbar__menu` verso la fine del file) e non ne ha mai avuto
+   bisogno. Verificato che nessun'altra regola dipendesse da questo blocco
+   prima di toglierlo: la sola proprietà che non veniva già ridichiarata
+   altrove — `display` — non serve più a nessuno ora che il pulsante resta
+   nascosto a ogni larghezza (vedi più sotto). */
 
 /* ---------- Drawer ---------- */
 
@@ -1685,6 +1677,13 @@ input[type='range']:disabled { opacity: 0.45; }
    resta solo il colore, che sulla barra chiara della home è quello del
    marchio e non il testo ereditato. */
 .landing__brand { color: var(--primary); }
+
+/* Il marchio in due pezzi, sempre nel markup: sopra i 901px conta la
+   scritta, sotto conta il faro. La regola che sceglie fra i due vive nel
+   blocco mobile qui sotto, non qui — stesso schema di `.landing__recent`:
+   la dichiarazione fuori dal blocco è quella che vale sopra i 901px, e vale
+   il vincolo del progetto lì. */
+.landing__brandmark { display: none; }
 .landing__phase {
   padding: 2px 8px; border-radius: var(--radius-pill);
   background: var(--surface-3); color: var(--ink-2);
@@ -1702,9 +1701,12 @@ input[type='range']:disabled { opacity: 0.45; }
 .landing__bar .topbar__repo { color: var(--ink-2); }
 .landing__bar .topbar__repo:hover { background: var(--surface-2); color: var(--ink); }
 
-/* Hamburger della home: stesso gesto dei risultati, stesso lato. Qui però resta
-   visibile anche sotto i 900px — la home non ha la bottom nav che altrove
-   rende il doppione inutile. */
+/* Hamburger della home, stesso gesto dei risultati, stesso lato — ma non più
+   in servizio a nessuna larghezza: la bottom nav (in fondo a questa stessa
+   schermata) copre già le stesse voci, e senza cassetto da aprire non
+   avrebbe più niente da fare. Nascosto sotto i 900px come sopra i 901px: la
+   regola che lo tiene invisibile a ogni larghezza vive più sotto, accanto a
+   quella gemella di `.topbar__menu`. */
 .landing__menu {
   display: inline-flex; align-items: center; justify-content: center;
   flex: none; width: 40px; height: 40px; padding: 0;
@@ -2085,6 +2087,13 @@ input[type='range']:disabled { opacity: 0.45; }
    fondo. */
 @media (max-width: 900px) {
   .landing__recent { display: block; }
+
+  /* Il marchio si scambia con la scritta, non le si affianca: sotto i 901px
+     il faro prende il posto di "Beacon", perché senza cassetto la barra
+     laterale — dove il faro vive — non si apre più, e resterebbe
+     irraggiungibile. */
+  .landing__brandtext { display: none; }
+  .landing__brandmark { display: inline-flex; color: var(--primary); }
 }
 
 .landing__foot {
@@ -2414,32 +2423,40 @@ input[type='range']:disabled { opacity: 0.45; }
 
 .hside__head .panel__close { margin-left: auto; }
 
-/* Sotto i 900px la rail torna un cassetto: 64px di colonna su uno schermo
-   stretto sono un decimo della larghezza, e lì le stesse voci stanno già nella
-   bottom nav. Chiusa esce di scena del tutto. */
+/* Sotto i 900px il cassetto e i due hamburger che lo aprivano spariscono del
+   tutto — non più un cassetto fuori schermo da far scorrere, un pannello che
+   non esce mai più.
+   `display: none`, non più `transform`/`visibility`: quel meccanismo esisteva
+   per farlo scorrere dentro e fuori a comando, e senza un pulsante che lo
+   comandi non ha più senso tenerlo. È anche l'unico modo onesto di toglierlo
+   dal flusso della tastiera: un pannello montato ma solo scorso fuori quadro
+   resta raggiungibile col tab (`transform`/`visibility` non tolgono un nodo
+   dall'albero di accessibilità), e diventerebbe una trappola per il focus
+   invece di un elemento invisibile. `display: none` sì: è la stessa garanzia
+   per cui il resto del foglio la usa già per nascondere `.drawer-scrim` sopra
+   i 901px, qui sotto. Non verificato a schermo — non è compito di questo
+   giro — ma è comportamento di piattaforma, non un'assunzione mia. */
 @media (max-width: 900px) {
-  /* Fuori schermo, e sopra il contenuto quando entra: su uno schermo stretto
-     stringere la pagina non lascerebbe niente da leggere. */
-  .hside--rail {
-    width: min(300px, 88vw);
-    z-index: 80;
-    transform: translateX(-100%);
-    visibility: hidden;
-    transition: transform 220ms cubic-bezier(0.22, 0.61, 0.36, 1), visibility 0s linear 220ms;
+  .hside--rail,
+  .drawer-scrim {
+    display: none;
   }
-  .hside--rail.hside--open {
-    transform: none; visibility: visible;
-    box-shadow: var(--shadow-3);
-    transition: transform 220ms cubic-bezier(0.22, 0.61, 0.36, 1), visibility 0s;
+
+  /* Le stesse voci stanno già nella bottom nav e nella dock (task
+     precedenti): senza un cassetto da aprire, i due pulsanti non avrebbero
+     più niente da fare. */
+  .topbar__menu,
+  .landing__menu {
+    display: none;
   }
 }
 
-/* Sopra i 900px la barra sposta il contenuto, quindi il velo non serve: c'è
-   ancora tutto da vedere e da cliccare. */
+/* Sopra i 901px non cambia niente: il velo non serve perché la barra sposta
+   il contenuto invece di coprirlo, e i due hamburger restano quello che sono
+   sempre stati qui — un doppione del faro, che è lì accanto e fa la stessa
+   cosa. Questa regola esisteva già prima di oggi: non l'ho toccata. */
 @media (min-width: 901px) {
   .drawer-scrim { display: none; }
-  /* L'hamburger della barra in alto è un doppione del faro, che è lì accanto
-     e fa la stessa cosa. */
   .topbar__menu,
   .landing__menu { display: none; }
 }

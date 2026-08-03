@@ -218,9 +218,17 @@ export default function Landing({
           <span className="visually-hidden">Apri cronologia e menu</span>
         </button>
 
-        {/* Come nei risultati: qui il nome, il faro in cima alla barra
-            laterale. La pastiglia della fase sta accanto al faro, non qui. */}
-        <div className="landing__brand">Beacon</div>
+        {/* Sopra i 901px, il nome: il faro sta in cima alla barra laterale,
+            che lì è la colonna permanente e resta raggiungibile.
+            Sotto i 901px il cassetto non c'è più (vedi app.css), e con lui
+            sparisce l'unico modo di raggiungere quel faro: il marchio prende
+            il posto della scritta, non le sta accanto. I due, testo e
+            marchio, sono sempre nel markup — la CSS sceglie quale mostrare,
+            come per `.landing__recent`/gli esempi qui sotto. */}
+        <div className="landing__brand">
+          <span className="landing__brandtext">Beacon</span>
+          <LogoMark className="landing__brandmark" width="26" height="26" />
+        </div>
 
         {/* Anche qui, non solo nei risultati: è la prima schermata che vede
             chi arriva, ed è dove la domanda "cos'è questa cosa" si pone. */}

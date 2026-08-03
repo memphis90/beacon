@@ -624,3 +624,83 @@ describe('Landing — la cronologia in linea sa anche togliere e svuotare', () =
     }
   })
 })
+
+/**
+ * Task 4 (hamburger): via l'hamburger e la barra laterale.
+ *
+ * Qui si nasconde in CSS, non in JSX: `.topbar__menu`, `.landing__menu`,
+ * `.hside--rail` e `.drawer-scrim` restano montati in entrambe le schermate,
+ * e il foglio di stile decide se si vedono. Per questo `renderToStaticMarkup`
+ * non basta — non vede il CSS — e le prove sotto leggono `cssMobile`/
+ * `cssResto` invece del markup, con `spaccaCss()`.
+ *
+ * Il marchio (testo/faro) è l'eccezione: entrambi i pezzi sono sempre nel
+ * markup (si vede da una prova sul markup, sotto), ed è di nuovo il foglio a
+ * scegliere quale mostrare — stessa ragione, stessa tecnica.
+ */
+describe('via l’hamburger — il cassetto e i due pulsanti spariscono per CSS', () => {
+  it('sotto i 900px il cassetto e il velo sono tolti dal flusso', () => {
+    expect(cssMobile).not.toBe('')
+    expect(cssMobile).toMatch(/\.hside--rail,\s*\.drawer-scrim\s*\{\s*display:\s*none;\s*\}/)
+  })
+
+  it('sotto i 900px i due hamburger sono tolti dal flusso', () => {
+    expect(cssMobile).toMatch(/\.topbar__menu,\s*\.landing__menu\s*\{\s*display:\s*none;\s*\}/)
+  })
+
+  it('sopra i 901px il velo e i due hamburger restano nascosti come già erano', () => {
+    // Regola preesistente: non l'ho toccata, e il vincolo del progetto è che
+    // sopra i 901px non cambi niente. Il cassetto stesso (`.hside--rail`) non
+    // ha bisogno di una regola qui: sopra i 901px non era mai stato spento.
+    expect(cssResto).toMatch(/\.drawer-scrim\s*\{\s*display:\s*none;\s*\}/)
+    expect(cssResto).toMatch(/\.topbar__menu,\s*\n\s*\.landing__menu\s*\{\s*display:\s*none;\s*\}/)
+  })
+
+  it('il blocco morto del vecchio disegno non dichiara più una sua `.topbar__menu`', () => {
+    // Il commento che racconta perché è sparito può ancora nominare il
+    // vecchio disegno — è storia, non codice morto. Quello che non deve
+    // esserci più è la REGOLA: la `.topbar__menu` a cornice/38px di altezza
+    // che quel blocco dichiarava, ridondante con l'icona-sola più sotto.
+    expect(cssResto).not.toMatch(/\.topbar__menu\s*\{\s*display:\s*inline-flex/)
+  })
+})
+
+/**
+ * Il marchio: sopra i 901px la scritta, sotto il faro — perché senza
+ * cassetto la barra laterale (dove il faro vive) non si apre più su mobile.
+ */
+describe('Landing — il marchio si scambia con la scritta sotto i 901px', () => {
+  const landing = (over = {}) =>
+    renderToStaticMarkup(
+      createElement(Landing, {
+        destinations: mergedDestinations({}),
+        agent: emptyAgentConfig(),
+        overrides: { destinations: {} },
+        onAgentChange: nulla, onOverridesChange: nulla,
+        onApply: nulla, onSkip: nulla, onLogout: nulla,
+        onList: nulla, onFavourites: nulla, onCompare: nulla,
+        ...over,
+      }),
+    )
+
+  it('la scritta e il faro sono entrambi nel markup', () => {
+    const html = landing()
+    expect(html).toContain('landing__brandtext')
+    expect(html).toContain('landing__brandmark')
+    expect(html).toContain('logo__light')
+    // "Beacon" sta nel testo, non nel faro: la ricerca è ristretta al primo,
+    // o la prova passerebbe anche se il nome fosse finito nel posto sbagliato.
+    const testo = html.slice(html.indexOf('landing__brandtext'), html.indexOf('landing__brandmark'))
+    expect(testo).toContain('Beacon')
+  })
+
+  it('sotto i 900px il faro sostituisce la scritta', () => {
+    expect(cssMobile).not.toBe('')
+    expect(cssMobile).toMatch(/\.landing__brandtext\s*\{\s*display:\s*none;\s*\}/)
+    expect(cssMobile).toMatch(/\.landing__brandmark\s*\{[^}]*display:\s*inline-flex/)
+  })
+
+  it('sopra i 901px resta la scritta: il faro è spento fuori dal blocco mobile', () => {
+    expect(cssResto).toMatch(/\.landing__brandmark\s*\{\s*display:\s*none;\s*\}/)
+  })
+})
