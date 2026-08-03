@@ -19,7 +19,7 @@ import { REPO_URL } from './lib/project.js'
 import { emptyWeights } from './lib/axes.js'
 import { axesFromThemes } from './lib/themes.js'
 import { rankDestinations, scoreDestination, tripCost, costRange } from './lib/scoring.js'
-import { loadAgentConfig, saveAgentConfig } from './lib/agent.js'
+import { agentIsReady, loadAgentConfig, saveAgentConfig } from './lib/agent.js'
 import { loadHistory } from './lib/history.js'
 import { useDismiss } from './lib/useDismiss.js'
 import { useToasts } from './lib/useToasts.js'
@@ -113,6 +113,9 @@ export default function App({ startedInitially = false }) {
   const [filtersOpen, setFiltersOpen] = useState(false)
   const [railOpen, setRailOpen] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
+  /* Quale scheda del pannello mobile è aperta: 'parametri' | 'modello' | null.
+     Su desktop resta sempre null — la dock che lo apre non esiste. */
+  const [mobilePanel, setMobilePanel] = useState(null)
   const [agent, setAgent] = useState(loadAgentConfig)
   const [history, setHistory] = useState(loadHistory)
   /**
@@ -586,10 +589,18 @@ export default function App({ startedInitially = false }) {
         onlyFavourites={onlyFavourites}
         favouritesCount={favourites.length}
         compareCount={compareIds.length}
-        onSearch={() => { setOnlyFavourites(false); setDetailId(null) }}
+        hasResults
+        /* Nei risultati il modello ha già risposto: l'etichetta resta quella
+           di chi risponderebbe se ripremessi, che è anche chi ha risposto. */
+        askLabel={agentIsReady(agent) ? 'Chiedi' : 'Cerca'}
+        /* Riapre il composer con dentro la frase che ha prodotto questi
+           risultati: `phrase` non viene toccata, e Landing la ripesca. Dopo
+           aver letto un elenco si corregge il budget, non si ricomincia. */
+        onAsk={() => setStarted(false)}
+        onList={() => { setOnlyFavourites(false); setDetailId(null) }}
         onFavourites={() => setOnlyFavourites(!onlyFavourites)}
         onCompare={() => setCompareOpen(true)}
-        onEditor={() => setEditor({ id: null })}
+        onSettings={() => setMobilePanel('parametri')}
       />
 
     </div>

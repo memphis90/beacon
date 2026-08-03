@@ -2,6 +2,7 @@ import { describe, it, expect, beforeAll, vi } from 'vitest'
 import { createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import BottomNav from '../src/components/BottomNav.jsx'
+import App from '../src/App.jsx'
 
 /**
  * Due difese copiate da render.test.js, e servono entrambe dal Task 2 in poi,
@@ -94,5 +95,14 @@ describe('BottomNav — cinque slot, il centro è l’azione', () => {
   it('i badge compaiono solo se c’è qualcosa da contare', () => {
     expect(dock({ favouritesCount: 3, compareCount: 2 })).toContain('bottomnav__badge')
     expect(dock()).not.toContain('bottomnav__badge')
+  })
+})
+
+describe('risultati — la dock c’è e il centro riapre la frase', () => {
+  it('la schermata dei risultati monta la dock col centro', () => {
+    const html = renderToStaticMarkup(createElement(App, { startedInitially: true }))
+    expect(html).toContain('bottomnav__ask')
+    expect(html).toContain('Impostazioni')
+    expect(html).toContain('Elenco')
   })
 })
