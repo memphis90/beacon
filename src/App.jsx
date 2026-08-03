@@ -145,6 +145,17 @@ export default function App({ startedInitially = false }) {
    * esattamente la ricerca di prima.
    */
   const [started, setStarted] = useState(startedInitially)
+  /**
+   * Se si è già "entrati" almeno una volta — via `onSkip` o via `onApply` —
+   * e mai più tornato a `false`.
+   *
+   * `phrase` non basta: `onSkip` la azzera esplicitamente (è la modalità
+   * "sfoglia tutto", senza frase), eppure porta a un ranking vero, con
+   * preferiti e confronto che possono accumularsi da lì in poi. Un `hasResults`
+   * legato a `phrase` spegnerebbe Elenco/Preferiti/Confronta nella home
+   * riaperta dai risultati anche quando dietro c'è già tutto quel lavoro.
+   */
+  const [hasEntered, setHasEntered] = useState(false)
   const { items: toasts, push: pushToast, dismiss: dismissToast } = useToasts()
 
   useEffect(() => { localStorage.setItem(CRITERIA_KEY, JSON.stringify(criteria)) }, [criteria])
@@ -270,10 +281,10 @@ export default function App({ startedInitially = false }) {
         compareCount={compareIds.length}
         // `ranking.hasRanking` da solo è vero già alla primissima apertura:
         // i pesi di default sono tutti a 5, non a zero, perché la modalità
-        // "sfoglia tutto" è una ricerca valida. Senza `phrase` a fare da
-        // guardia, Elenco e Preferiti si accenderebbero prima ancora che una
-        // frase sia stata inviata.
-        hasResults={Boolean(phrase) && ranking.hasRanking}
+        // "sfoglia tutto" è una ricerca valida. `hasEntered` è la guardia
+        // giusta, non `phrase`: resta vera anche quando si torna qui da una
+        // ricerca fatta con `onSkip`, che la frase la azzera apposta.
+        hasResults={hasEntered && ranking.hasRanking}
         onList={() => { setOnlyFavourites(false); setStarted(true) }}
         onFavourites={() => { setOnlyFavourites(true); setStarted(true) }}
         onCompare={() => { setCompareOpen(true); setStarted(true) }}
@@ -286,11 +297,13 @@ export default function App({ startedInitially = false }) {
           // Entrare senza frase vuol dire anche azzerarla: se prima avevi
           // cercato, quella vecchia resterebbe attaccata ai risultati nuovi.
           setPhrase('')
+          setHasEntered(true)
           setStarted(true)
         }}
         onLogout={azzera}
         onApply={(patch, text) => {
           setPhrase(text || '')
+          setHasEntered(true)
           // Se la frase nomina degli interessi, contano SOLO quelli: partire
           // da tutti a 5 e alzarne due annacquerebbe ciò che hai chiesto.
           // Se non ne nomina nessuno, restano i predefiniti, altrimenti si
