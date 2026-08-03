@@ -72,6 +72,12 @@ Nessuno di questi gestori è mai stato eseguito.
       una ricerca: il faro resta **acceso e fermo**, non invisibile.
 - [ ] **15.** In entrambe le schermate, l'ultimo elemento della pagina non
       finisce sotto la barra inferiore.
+- [ ] **15-bis.** Dal piede della pagina apri **Privacy** o **Termini**: su
+      mobile ora sono **a tutto schermo** invece che alte 80vh col velo sopra e
+      sotto. È un effetto collaterale accettato consapevolmente — allineare le
+      due schede del pannello ha richiesto di togliere il tetto a
+      `.panel--info`, che quelle pagine condividono. Guarda che si leggano bene
+      e che la `×` sia raggiungibile.
 
 ## Desktop — quello che NON deve essere cambiato
 

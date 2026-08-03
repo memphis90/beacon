@@ -45,7 +45,17 @@ Nei risultati il comportamento resta legato a `hasResults` come oggi.
 
 Sulla home vergine, `Elenco` non dev'essere spento. È l'inverso di una prova esistente, che va aggiornata invece che affiancata.
 
-- [ ] **Step 4: `npm test` verde, poi commit**
+- [ ] **Step 4: Anche «Preferiti» diventa una via d'uscita**
+
+Deciso dal committente, e non c'entra con l'hamburger: sta qui perché tocca lo stesso file e la stessa idea.
+
+`App.jsx:691` fa `onFavourites={() => setOnlyFavourites(true)}`. Come già fa `onList` (`App.jsx:680-685`), deve anche chiudere ciò che copre i risultati: `setCompareOpen(false)`, `setParametri(false)`, `setDetailId(null)`. Oggi premuto sopra la pagina Confronta o Parametri non produce niente di visibile — uno slot morto insegna a non fidarsi della barra.
+
+Non toccare il toggle nell'intestazione dei risultati (`App.jsx:476`): resta dov'è e continua a commutare.
+
+**La prova:** che `onFavourites` e `onList` chiudano lo stesso insieme di cose. Se non è verificabile dal render statico, dillo invece di scrivere un'asserzione che finge.
+
+- [ ] **Step 5: `npm test` verde, poi commit**
 
 ---
 
