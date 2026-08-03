@@ -618,11 +618,15 @@ export default function App({ startedInitially = false }) {
       )}
 
       {settingsOpen && (
+        // Niente `onReset` qui: questo montaggio è raggiungibile dal menu
+        // laterale anche sopra i 901px, dove la barra è la colonna permanente
+        // e non un cassetto — vedi il commento su `onOpenSettings` più sopra.
+        // L'azzeramento in questo pannello è roba del montaggio della dock,
+        // qualche riga più sotto, che sopra i 901px non esiste nel layout.
         <SettingsModal
           config={agent}
           onChange={applyAgent}
           onClose={() => setSettingsOpen(false)}
-          onReset={azzera}
         />
       )}
 
