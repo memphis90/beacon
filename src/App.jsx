@@ -349,9 +349,12 @@ export default function App({ startedInitially = false }) {
     // ogni regola debba sapere se la barra è aperta.
     <div className={`shell${railOpen ? ' is-railopen' : ''}`}>
       <header className="topbar">
-        {/* Su desktop apre il faro in cima alla barra laterale; qui l'hamburger
-            resta solo sotto i 900px, dove la barra è un cassetto fuori
-            schermo e il suo comando sarebbe irraggiungibile. */}
+        {/* Spento a ogni larghezza (vedi app.css): il cassetto che apriva non
+            c'è più, né sotto i 900px — le stesse voci sono nella bottom nav e
+            nella dock — né sopra i 901px, dove il faro in cima alla barra
+            laterale fa la stessa cosa. Resta nel markup, con la CSS che lo
+            nasconde: toglierlo cambierebbe la strada già dichiarata delle
+            prove (vedi dock.test.js) — un debito registrato, non chiuso qui. */}
         <button
           type="button"
           className="topbar__menu"

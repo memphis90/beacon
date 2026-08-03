@@ -17,12 +17,19 @@ import { activeProfile, agentIsReady, profileLabel } from '../lib/agent.js'
  * dietro un hamburger, cioè invisibili finché non le cercavi. Una riga di
  * icone costa 64px e le tiene sotto il pollice.
  *
- * Sotto i 900px torna un cassetto: 64px di colonna su uno schermo stretto sono
- * un decimo della larghezza, e lì le stesse voci stanno già nella bottom nav.
+ * Sotto i 900px non torna più un cassetto: sparisce, `display: none` in
+ * `app.css`. Un cassetto che si apre scorrendo resta raggiungibile col tab
+ * anche a riposo; uno che non esiste non lo è. Le stesse voci stanno già
+ * nella bottom nav e nella dock, e senza un hamburger che lo comandi — spento
+ * anche lui, sempre in `app.css` — non ci sarebbe comunque modo di aprirlo.
  *
- * Il marchio sta in cima alla barra; il nome "Beacon" no — quello vive nella
- * barra in alto, accanto all'hamburger. Sono la stessa cosa in due pezzi, e
- * l'angolo in alto a sinistra li rimette insieme.
+ * Il marchio sta in cima alla barra; il nome "Beacon" no. Sopra i 901px, e
+ * nei risultati a ogni larghezza, "Beacon" vive nella barra in alto: sono la
+ * stessa cosa in due pezzi, e l'angolo in alto a sinistra li rimette insieme.
+ * Sulla home, sotto i 901px, quell'angolo non ha più un hamburger accanto a
+ * cui stare: il faro prende il posto della scritta invece di affiancarla
+ * (vedi `Landing.jsx`), o resterebbe irraggiungibile insieme al resto della
+ * barra.
  */
 export default function SideRail({
   open = false,
