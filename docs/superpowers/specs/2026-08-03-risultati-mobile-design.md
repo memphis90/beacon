@@ -1,7 +1,7 @@
 # Schermata risultati su mobile — Design
 
-> Riguarda **solo il mobile** (sotto i 901px), e solo la schermata dei
-> risultati. Sopra quella soglia non cambia niente.
+> Riguarda **solo il mobile** (sotto i 901px): la schermata dei risultati e,
+> dal §6, quella di ricerca. Sopra quella soglia non cambia niente.
 >
 > Va letta insieme a `2026-08-03-dock-mobile-e-attesa-design.md`, che ha
 > introdotto la barra inferiore: alcuni problemi qui sotto esistono **perché**
@@ -143,7 +143,65 @@ del §1 e la densità delle card del §4.
 
 ---
 
-## 6. Fuori perimetro
+## 6. La home su mobile
+
+Deciso il 2026-08-03, insieme al resto. Riguarda `Landing`, non i risultati, ma
+nasce dallo stesso problema — troppa cromatura, e un menu che nasconde le cose
+che servono.
+
+### Sparisce l'hamburger, arriva il faro
+
+La barra della home mobile perde il pulsante del menu e sostituisce la scritta
+«Beacon» con il **marchio** (`LogoMark`). Le due cose vanno insieme: il faro
+vive in cima alla barra laterale, e senza hamburger quella barra non si apre —
+il marchio resterebbe irraggiungibile su mobile. Portandolo nella barra si
+recupera, e il commento di `App.jsx` che vietava di ripetere marchio e nome a
+due centimetri di distanza resta rispettato, perché adesso ce n'è uno solo.
+
+### Dove vanno le voci del menu
+
+| voce del menu laterale | su mobile, dopo |
+|---|---|
+| Nuova ricerca | il «+» al centro della dock |
+| Impostazioni | lo slot «Impostazioni» della dock |
+| **Scopri le destinazioni** | lo slot «Elenco» della dock — stesso posto d'arrivo |
+| **Cronologia** | in linea sotto il composer (sotto) |
+| **Logout** | dentro il pannello Impostazioni |
+
+Sullo slot «Elenco» servono due precisazioni. Prende **l'icona della barra
+laterale** (`IconPin`, `SideRail.jsx:152`) al posto di `IconList`: è la stessa
+azione, e due icone diverse per la stessa cosa sono due cose per chi guarda. E
+sulla home deve essere **acceso anche senza ranking** — lì significa «sfoglia
+tutto», che è il percorso `onSkip` e non ha bisogno di risultati preesistenti.
+Nei risultati resta legato a `hasResults` come oggi.
+
+Il «logout» non è un logout: `azzera()` cancella tutto ciò che è salvato su
+questa macchina — criteri, preferiti, cronologia. Sta nel pannello
+Impostazioni perché è configurazione, ed è l'unica azione distruttiva
+dell'applicazione: va dove la si cerca apposta, non dove ci si inciampa.
+
+### La cronologia prende il posto dei suggerimenti
+
+Sotto il composer la home mostra oggi quattro frasi d'esempio. Diventano il
+**caso vuoto**: appena esiste una cronologia, al loro posto compare l'elenco
+verticale scorrevole delle ricerche recenti, ognuna toccabile per riprenderla —
+lo stesso gesto di `riprendi()` (`Landing.jsx:172`), che riempie il campo
+lasciandoti ritoccare.
+
+| stato | sotto il composer |
+|---|---|
+| cronologia vuota | le quattro frasi d'esempio |
+| cronologia piena | le ricerche recenti, scorrevoli |
+
+**Perché questo chiude un debito invece di aprirne uno.** Il §4 dell'altra spec
+accettava un prezzo: dal momento che il «+» azzera, ritoccare una frase passa
+dalla cronologia, cioè da tre tocchi attraverso un menu che scorre via. Con la
+cronologia in linea quel percorso torna a **un tocco solo**, e senza rimettere
+l'invio al centro. Il prezzo dichiarato lì è pagato qui.
+
+---
+
+## 7. Fuori perimetro
 
 Il desktop in ogni sua parte. La logica del suggeritore (quando parte, cosa
 chiede al modello, come sanifica la risposta): cambia **dove** compare e a
