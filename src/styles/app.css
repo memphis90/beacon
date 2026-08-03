@@ -1188,11 +1188,20 @@ input[type='range']:disabled { opacity: 0.45; }
      passate a mtools e alla bottom nav. Tenerla fissa vorrebbe dire spendere
      56px di viewport permanentemente per un titolo. Scorre via, e al suo posto
      resta ancorata la barra che serve davvero. */
+  /* Chiara come su desktop, e come la barra della home — che è già chiara e
+     lo dichiara più in basso. La navy era eredità di un mockup: teneva le due
+     schermate mobile con due intestazioni di colore diverso. */
   .topbar {
     position: static;
     height: 48px;
     padding: 0 var(--container-margin);
+    background: var(--surface);
+    color: var(--primary);
+    border-bottom: 1px solid var(--border);
   }
+  .topbar__brand { color: var(--primary); }
+  .topbar__repo { color: var(--ink-2); }
+  .topbar__repo:hover { background: var(--surface-2); color: var(--ink); }
   /* Sotto i 900px il nome rimpicciolisce in ENTRAMBE le schermate, o
      tornerebbe a essere di due taglie diverse proprio dove lo spazio è poco. */
   .topbar__brand,
@@ -1379,8 +1388,9 @@ input[type='range']:disabled { opacity: 0.45; }
    ==========================================================================
    Sopra i 900px la topbar passa da scura a chiara e la sidebar dei filtri
    diventa un pannello a piena altezza senza carta: i quattro schermi
-   desktop del mockup (Ricerca, Dettaglio, Confronto, Editor). Il mobile,
-   sopra, non cambia: resta la topbar scura con la bottom nav. */
+   desktop del mockup (Ricerca, Dettaglio, Confronto, Editor). Il mobile ha
+   ormai la stessa topbar chiara: qui restano solo le differenze di altezza e
+   di bordo. */
 
 @media (min-width: 901px) {
   /* ---- Topbar: da scura a chiara ---- */
