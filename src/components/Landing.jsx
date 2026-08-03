@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import BottomNav from './BottomNav.jsx'
+import EditorPanel from './EditorPanel.jsx'
 import InterpreterPicker from './InterpreterPicker.jsx'
+import PanelTabs from './PanelTabs.jsx'
 import SettingsModal from './SettingsModal.jsx'
 import SideRail from './SideRail.jsx'
 import {
@@ -56,11 +58,14 @@ export default function Landing({
   destinations, agent, onAgentChange, onApply, onSkip, onLogout,
   phrase = '', favouritesCount = 0, compareCount = 0, hasResults = false,
   onList, onFavourites, onCompare,
+  overrides = {}, onOverridesChange = () => {},
 }) {
   // Arrivando dai risultati il campo è già pieno: è il centro della dock che
   // ha riportato qui, e il gesto che segue è correggere, non riscrivere.
   const [text, setText] = useState(phrase)
-  const [settingsOpen, setSettingsOpen] = useState(false)
+  /* Quale scheda del pannello è aperta: 'parametri' | 'modello' | null.
+     Come in App: è la dock ad aprirlo, e la dock è la stessa. */
+  const [mobilePanel, setMobilePanel] = useState(null)
   const [history, setHistory] = useState(loadHistory)
   const [railOpen, setRailOpen] = useState(false)
   // Il controller della chiamata in corso: serve anche come "sta elaborando",
@@ -220,7 +225,7 @@ export default function Landing({
           },
         }}
         agent={agent}
-        onOpenSettings={() => { setRailOpen(false); setSettingsOpen(true) }}
+        onOpenSettings={() => { setRailOpen(false); setMobilePanel('modello') }}
         onSkipToFilters={() => { setRailOpen(false); onSkip() }}
         onLogout={onLogout}
       />
@@ -247,7 +252,7 @@ export default function Landing({
                 <InterpreterPicker
                   agent={agent}
                   onChange={applyAgent}
-                  onConfigure={() => setSettingsOpen(true)}
+                  onConfigure={() => setMobilePanel('modello')}
                 />
 
                 {/* Freccia sola: l'etichetta la dà il tooltip. Il gesto è
@@ -386,11 +391,23 @@ export default function Landing({
         </div>
       )}
 
-      {settingsOpen && (
+      {mobilePanel === 'parametri' && (
+        <EditorPanel
+          merged={destinations}
+          overrides={overrides}
+          onOverridesChange={onOverridesChange}
+          initialId={null}
+          onClose={() => setMobilePanel(null)}
+          tabs={<PanelTabs active="parametri" onPick={setMobilePanel} />}
+        />
+      )}
+
+      {mobilePanel === 'modello' && (
         <SettingsModal
           config={agent}
           onChange={applyAgent}
-          onClose={() => setSettingsOpen(false)}
+          onClose={() => setMobilePanel(null)}
+          tabs={<PanelTabs active="modello" onPick={setMobilePanel} />}
         />
       )}
 
@@ -411,7 +428,7 @@ export default function Landing({
         onList={onList}
         onFavourites={onFavourites}
         onCompare={onCompare}
-        onSettings={() => setSettingsOpen(true)}
+        onSettings={() => setMobilePanel('parametri')}
       />
     </div>
   )

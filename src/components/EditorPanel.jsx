@@ -296,7 +296,7 @@ export function ParametersPage({ merged, overrides, onOverridesChange, onPick, o
 }
 
 /** La modifica vera: una destinazione per volta, in una modale. */
-export default function EditorPanel({ merged, overrides, onOverridesChange, initialId, onClose }) {
+export default function EditorPanel({ merged, overrides, onOverridesChange, initialId, onClose, tabs }) {
   const [message, setMessage] = useState(null)
 
   const destination = merged.find((d) => d.id === initialId)
@@ -331,6 +331,8 @@ export default function EditorPanel({ merged, overrides, onOverridesChange, init
           </div>
           <button type="button" className="panel__close" onClick={onClose} aria-label="Chiudi">×</button>
         </header>
+
+        {tabs}
 
         <div className="panel__body">
           {message && (

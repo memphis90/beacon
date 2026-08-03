@@ -2419,3 +2419,19 @@ input[type='range']:disabled { opacity: 0.45; }
  * Tolta la ricerca dalla barra, la griglia a tre zone dichiarata in cima basta
  * da sola e non serve nessun correttivo. */
 .topbar__menu { flex: none; }
+
+/* Le due schede del pannello mobile delle impostazioni. */
+.paneltabs {
+  display: flex; gap: 4px;
+  padding: 0 var(--container-margin) 8px;
+  border-bottom: 1px solid var(--border);
+}
+.paneltabs__tab {
+  padding: 8px 14px;
+  border: 0; border-bottom: 2px solid transparent; background: none;
+  color: var(--ink-2); font-size: 14px; font-weight: 500;
+}
+.paneltabs__tab.is-active {
+  color: var(--primary); font-weight: 700;
+  border-bottom-color: var(--primary);
+}

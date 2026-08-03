@@ -8,6 +8,7 @@ import DetailPanel from './components/DetailPanel.jsx'
 import EditorPanel, { ParametersPage } from './components/EditorPanel.jsx'
 import FilterPanel from './components/FilterPanel.jsx'
 import Landing from './components/Landing.jsx'
+import PanelTabs from './components/PanelTabs.jsx'
 import RankingCritique from './components/RankingCritique.jsx'
 import ResultsHeader from './components/ResultsHeader.jsx'
 import SettingsModal from './components/SettingsModal.jsx'
@@ -597,6 +598,28 @@ export default function App({ startedInitially = false }) {
           config={agent}
           onChange={applyAgent}
           onClose={() => setSettingsOpen(false)}
+        />
+      )}
+
+      {/* Il pannello che la dock apre: una cosa sola con due schede, invece
+          delle due voci separate che su desktop stanno in due posti diversi. */}
+      {mobilePanel === 'parametri' && (
+        <EditorPanel
+          merged={merged}
+          overrides={overrides}
+          onOverridesChange={applyOverrides}
+          initialId={null}
+          onClose={() => setMobilePanel(null)}
+          tabs={<PanelTabs active="parametri" onPick={setMobilePanel} />}
+        />
+      )}
+
+      {mobilePanel === 'modello' && (
+        <SettingsModal
+          config={agent}
+          onChange={applyAgent}
+          onClose={() => setMobilePanel(null)}
+          tabs={<PanelTabs active="modello" onPick={setMobilePanel} />}
         />
       )}
 

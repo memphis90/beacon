@@ -2,6 +2,7 @@ import { describe, it, expect, beforeAll, vi } from 'vitest'
 import { createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import BottomNav from '../src/components/BottomNav.jsx'
+import PanelTabs from '../src/components/PanelTabs.jsx'
 import App from '../src/App.jsx'
 
 /**
@@ -127,5 +128,16 @@ describe('ricerca — la stessa dock, e un invio solo', () => {
 
   it('il composer ha di nuovo la sua freccia', () => {
     expect(renderToStaticMarkup(createElement(App))).toContain('landing__send')
+  })
+})
+
+describe('PanelTabs — le due schede del pannello mobile', () => {
+  it('disegna le due voci e segna quella attiva', () => {
+    const html = renderToStaticMarkup(
+      createElement(PanelTabs, { active: 'parametri', onPick: nulla }),
+    )
+    expect(html).toContain('Parametri')
+    expect(html).toContain('Modello')
+    expect(html).toContain('aria-selected="true"')
   })
 })

@@ -26,7 +26,7 @@ const chiaviDove = {
   groq: 'https://console.groq.com/keys',
 }
 
-export default function SettingsModal({ config, onChange, onClose }) {
+export default function SettingsModal({ config, onChange, onClose, tabs }) {
   const [draft, setDraft] = useState(() => normaliseAgentConfig(config))
   // Quale riga si sta modificando. È indipendente da `activeId`: si aggiusta
   // un profilo senza per questo metterlo in uso.
@@ -158,6 +158,8 @@ export default function SettingsModal({ config, onChange, onClose }) {
           <h2>Modelli configurati</h2>
           <button type="button" className="panel__close" onClick={onClose} aria-label="Chiudi">×</button>
         </header>
+
+        {tabs}
 
         <div className="panel__body">
           <div className="section">
