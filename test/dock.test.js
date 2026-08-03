@@ -536,3 +536,91 @@ describe('Landing — la cronologia in linea prende il posto degli esempi', () =
     expect(cssResto).toMatch(/\.landing__recent\s*\{[^}]*display:\s*none/)
   })
 })
+
+/**
+ * Task 4 (hamburger), buco scoperto durante l'inventario: `clearHistory` e
+ * `removeFromHistory` vivevano solo dentro `SideRail`, che sta per sparire da
+ * mobile. L'elenco in linea (task precedente) sapeva solo riprendere una
+ * voce, non toglierla né svuotarsi — su mobile sarebbero diventate azioni
+ * senza nessuna strada.
+ *
+ * Non si prova che il tocco cancelli davvero: `renderToStaticMarkup` non
+ * esegue `onClick`. Si vede solo che i due bottoni compaiono nel markup, con
+ * l'aggancio giusto (aria-label con la frase, per la ×; il testo, per
+ * «Svuota»), non che il gestore faccia la cosa giusta.
+ */
+describe('Landing — la cronologia in linea sa anche togliere e svuotare', () => {
+  const FRASE_STORICA = 'weekend a Lisbona a novembre con voli economici'
+
+  const landing = (over = {}) =>
+    renderToStaticMarkup(
+      createElement(Landing, {
+        destinations: mergedDestinations({}),
+        agent: emptyAgentConfig(),
+        overrides: { destinations: {} },
+        onAgentChange: nulla, onOverridesChange: nulla,
+        onApply: nulla, onSkip: nulla, onLogout: nulla,
+        onList: nulla, onFavourites: nulla, onCompare: nulla,
+        ...over,
+      }),
+    )
+
+  it('ogni voce ha la sua ×, con la frase nell’aria-label', () => {
+    const entry = {
+      id: 'storia-1', text: FRASE_STORICA, patch: {}, source: 'regole',
+      at: Date.now() - 5 * 60000,
+    }
+    localStorage.setItem(HISTORY_KEY, JSON.stringify([entry]))
+    try {
+      const html = landing()
+      expect(html).toContain('landing__recentremove')
+      expect(html).toContain(`Rimuovi &quot;${FRASE_STORICA}&quot; dalla cronologia`)
+    } finally {
+      localStorage.removeItem(HISTORY_KEY)
+    }
+  })
+
+  it('la lista chiude con «Svuota la cronologia»', () => {
+    const entry = {
+      id: 'storia-1', text: FRASE_STORICA, patch: {}, source: 'regole',
+      at: Date.now() - 5 * 60000,
+    }
+    localStorage.setItem(HISTORY_KEY, JSON.stringify([entry]))
+    try {
+      const html = landing()
+      expect(html).toContain('landing__recentclear')
+      expect(html).toContain('Svuota la cronologia')
+      // In coda: dopo l'ultima voce vera, non prima.
+      expect(html.indexOf(FRASE_STORICA)).toBeLessThan(html.indexOf('Svuota la cronologia'))
+    } finally {
+      localStorage.removeItem(HISTORY_KEY)
+    }
+  })
+
+  it('cronologia vuota: né la ×, né «Svuota» — l’intero elenco non c’è', () => {
+    localStorage.removeItem(HISTORY_KEY)
+    const html = landing()
+    expect(html).not.toContain('landing__recentremove')
+    expect(html).not.toContain('landing__recentclear')
+  })
+
+  it('la × è un bersaglio suo: non dentro il bottone che riprende la ricerca', () => {
+    // Isola il markup del bottone `landing__recentitem`, dalla sua apertura
+    // alla sua PRIMA chiusura: se la × fosse annidata lì dentro invece che
+    // sua sorella nella `<li>`, comparirebbe già qui.
+    const entry = {
+      id: 'storia-1', text: FRASE_STORICA, patch: {}, source: 'regole',
+      at: Date.now() - 5 * 60000,
+    }
+    localStorage.setItem(HISTORY_KEY, JSON.stringify([entry]))
+    try {
+      const html = landing()
+      const inizio = html.indexOf('landing__recentitem')
+      const fine = html.indexOf('</button>', inizio)
+      expect(inizio).toBeGreaterThan(-1)
+      expect(html.slice(inizio, fine)).not.toContain('landing__recentremove')
+    } finally {
+      localStorage.removeItem(HISTORY_KEY)
+    }
+  })
+})

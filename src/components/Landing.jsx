@@ -14,7 +14,7 @@ import { parseQuery } from '../lib/parseQuery.js'
 import {
   activeProfile, agentIsReady, interpretWithModel, isLocalEndpoint, profileLabel,
 } from '../lib/agent.js'
-import { addToHistory, loadHistory, timeAgo } from '../lib/history.js'
+import { addToHistory, clearHistory, loadHistory, removeFromHistory, timeAgo } from '../lib/history.js'
 import { countryName } from '../lib/format.js'
 
 /**
@@ -421,8 +421,38 @@ export default function Landing({
                       <span className="landing__recenttext">{entry.text}</span>
                       <span className="landing__recentmeta">{timeAgo(entry.at)}</span>
                     </button>
+                    {/* Bersaglio suo, accanto al bottone che riprende la
+                        ricerca — non dentro: annidare i due vorrebbe dire che
+                        un tocco impreciso cancella invece di riprendere, o il
+                        contrario. Stessa funzione di `SideRail`, non
+                        riscritta: lo stato risultante si tratta allo stesso
+                        modo, `setHistory` invece di `onHistoryChange`. */}
+                    <button
+                      type="button"
+                      className="landing__recentremove"
+                      onClick={() => setHistory(removeFromHistory(history, entry.id))}
+                      aria-label={`Rimuovi "${entry.text}" dalla cronologia`}
+                    >
+                      ×
+                    </button>
                   </li>
                 ))}
+                <li>
+                  {/* In coda alla lista, come un'altra voce: non un pulsante
+                      separato fuori dall'elenco. Nessuna conferma: cancella
+                      solo la cronologia — non i criteri, non i preferiti, non
+                      le modifiche dell'editor — ed è la stessa azione che
+                      `SideRail` fa già senza chiederla. Chi la vuole più
+                      cauta ha comunque l'azzeramento totale, che la conferma
+                      ce l'ha. */}
+                  <button
+                    type="button"
+                    className="landing__recentclear"
+                    onClick={() => setHistory(clearHistory())}
+                  >
+                    Svuota la cronologia
+                  </button>
+                </li>
               </ul>
             </div>
           )}

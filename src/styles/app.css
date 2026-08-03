@@ -2042,9 +2042,14 @@ input[type='range']:disabled { opacity: 0.45; }
   background: var(--surface-container-lowest);
 }
 .landing__recentlist li + li { border-top: 1px solid var(--border); }
+/* Riga come coppia di bersagli, non uno dentro l'altro: la × prende la sua
+   colonna accanto al testo, non sopra. Vedi il commento in Landing.jsx sul
+   perché non sono annidati. */
+.landing__recentlist li { display: flex; align-items: stretch; }
 .landing__recentitem {
+  flex: 1; min-width: 0;
   display: flex; flex-direction: column; gap: 2px;
-  width: 100%; padding: 10px var(--card-inset);
+  padding: 10px var(--card-inset);
   border: 0; background: none; text-align: left; color: var(--ink);
 }
 .landing__recentitem:hover { background: var(--surface-2); }
@@ -2053,6 +2058,26 @@ input[type='range']:disabled { opacity: 0.45; }
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
 }
 .landing__recentmeta { font-size: 11px; color: var(--ink-3); }
+
+/* La ×: sempre visibile, non solo al passaggio del mouse come `.hside__remove`
+   nella barra laterale — qui il tocco non ha un'anteprima hover che la
+   riveli, quindi nascosta di default resterebbe nascosta e basta. */
+.landing__recentremove {
+  flex: none; width: 44px;
+  display: grid; place-items: center;
+  border: 0; background: none; color: var(--ink-3);
+  font-size: 20px; line-height: 1;
+}
+.landing__recentremove:hover { background: var(--surface-2); color: var(--crit); }
+
+/* In coda alla lista: stessa riga delle altre voci, non un bottone a parte
+   fuori dall'elenco. */
+.landing__recentclear {
+  width: 100%; padding: 10px var(--card-inset);
+  border: 0; background: none; text-align: left;
+  color: var(--ink-2); font-size: 13px; font-weight: 600;
+}
+.landing__recentclear:hover { background: var(--surface-2); color: var(--crit); }
 
 /* Qui, e non nel blocco esistente più in basso: quella accensione deve stare
    vicino alla dichiarazione che spegne, altrimenti il vincolo "sopra i 901px
