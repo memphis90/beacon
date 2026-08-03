@@ -1,8 +1,9 @@
-import { describe, it, expect, beforeAll, vi } from 'vitest'
+import { describe, it, expect, beforeAll, afterEach, vi } from 'vitest'
 import { createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import BottomNav from '../src/components/BottomNav.jsx'
 import App from '../src/App.jsx'
+import { AGENT_KEY } from '../src/lib/agent.js'
 
 /**
  * Due difese copiate da render.test.js, e servono entrambe dal Task 2 in poi,
@@ -104,5 +105,35 @@ describe('risultati — la dock c’è e il centro riapre la frase', () => {
     expect(html).toContain('bottomnav__ask')
     expect(html).toContain('Impostazioni')
     expect(html).toContain('Elenco')
+  })
+
+  /**
+   * L'unica cosa che il Task 2 ha introdotto e che sia osservabile nel markup
+   * statico: prima del diff `App` non passava `askLabel` a `BottomNav`, quindi
+   * valeva sempre il default `'Cerca'`. Ora lo calcola da `agentIsReady(agent)`
+   * — con un profilo locale acceso e utilizzabile deve leggersi «Chiedi», non
+   * «Cerca». Scrivo e rimuovo la chiave dentro la prova stessa: le altre
+   * prove del file montano `App` senza aspettarsi un agente configurato, e non
+   * devono trovarne uno lasciato in giro da questa.
+   */
+  describe('col profilo locale pronto', () => {
+    afterEach(() => {
+      try { localStorage.removeItem(AGENT_KEY) } catch { /* niente da fare */ }
+    })
+
+    it('il centro dice «Chiedi», non «Cerca»', () => {
+      localStorage.setItem(AGENT_KEY, JSON.stringify({
+        enabled: true,
+        activeId: 'm1',
+        profiles: [{
+          id: 'm1', label: '', preset: 'ollama',
+          baseUrl: 'http://localhost:11434/v1', model: 'llama3.2', apiKey: '',
+        }],
+        debug: false,
+      }))
+      const html = renderToStaticMarkup(createElement(App, { startedInitially: true }))
+      expect(bottone(html, 'Chiedi')).not.toBe('')
+      expect(bottone(html, 'Cerca')).toBe('')
+    })
   })
 })
