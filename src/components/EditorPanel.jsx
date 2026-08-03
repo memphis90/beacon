@@ -98,7 +98,7 @@ const COST_ROWS = [
  * la modifica vera, che invece È un'operazione: si apre su una destinazione,
  * si cambia, si chiude.
  */
-export function ParametersPage({ merged, overrides, onOverridesChange, onPick, onClose, tabs }) {
+export function ParametersPage({ merged, overrides, onOverridesChange, onPick, onClose, tabs, overlay }) {
   const [filtro, setFiltro] = useState('')
   const [newName, setNewName] = useState('')
   const [message, setMessage] = useState(null)
@@ -169,21 +169,30 @@ export function ParametersPage({ merged, overrides, onOverridesChange, onPick, o
     event.target.value = ''
   }
 
-  return (
-    <section className="page" aria-label="Parametri delle destinazioni">
-      <header className="page__head">
-        <div>
-          <h2>Parametri delle destinazioni</h2>
-          <p>
-            Punteggi, costi e clima del catalogo. Le modifiche restano in un layer separato:
-            <code> data/destinations.json</code> non viene mai riscritto dall’app.
-          </p>
-        </div>
-        <button type="button" className="btn" onClick={onClose}>Torna ai risultati</button>
-      </header>
+  /*
+   * La testata, il corpo e il piede sono condivisi fra le due presentazioni:
+   * pagina in flusso (su desktop, dove `App` la monta al posto dei
+   * risultati) e overlay a tutto schermo (dove la monta il pannello mobile
+   * delle impostazioni, accanto a `SettingsModal`). Cambia solo il
+   * contenitore che li avvolge — mai il contenuto — così le due schede del
+   * pannello mobile restano la stessa superficie, senza toccare la pagina
+   * desktop che già esisteva.
+   */
+  const testata = (
+    <>
+      <div>
+        <h2>Parametri delle destinazioni</h2>
+        <p>
+          Punteggi, costi e clima del catalogo. Le modifiche restano in un layer separato:
+          <code> data/destinations.json</code> non viene mai riscritto dall’app.
+        </p>
+      </div>
+      <button type="button" className="btn" onClick={onClose}>Torna ai risultati</button>
+    </>
+  )
 
-      {tabs}
-
+  const corpo = (
+    <>
       {message && (
         <div className={`notice${message.tone === 'warn' ? ' notice--warn' : ''}`}>{message.text}</div>
       )}
@@ -283,16 +292,46 @@ export function ParametersPage({ merged, overrides, onOverridesChange, onPick, o
       {elenco.length === 0 && (
         <p className="hside__empty">Nessuna destinazione corrisponde a “{filtro.trim()}”.</p>
       )}
+    </>
+  )
 
-      <div className="page__foot">
-        <button type="button" className="btn btn--primary" onClick={() => downloadOverrides(overrides)}>
-          Esporta overrides.json
-        </button>
-        <button type="button" className="btn" onClick={() => fileInput.current?.click()}>
-          Importa…
-        </button>
-        <input ref={fileInput} type="file" accept="application/json,.json" hidden onChange={importFile} />
+  const piede = (
+    <>
+      <button type="button" className="btn btn--primary" onClick={() => downloadOverrides(overrides)}>
+        Esporta overrides.json
+      </button>
+      <button type="button" className="btn" onClick={() => fileInput.current?.click()}>
+        Importa…
+      </button>
+      <input ref={fileInput} type="file" accept="application/json,.json" hidden onChange={importFile} />
+    </>
+  )
+
+  if (overlay) {
+    return (
+      <div className="overlay overlay--center" onClick={onClose} role="presentation">
+        <section
+          className="panel panel--modal"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Parametri delle destinazioni"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <header className="panel__head">{testata}</header>
+          {tabs}
+          <div className="panel__body">{corpo}</div>
+          <footer className="panel__foot">{piede}</footer>
+        </section>
       </div>
+    )
+  }
+
+  return (
+    <section className="page" aria-label="Parametri delle destinazioni">
+      <header className="page__head">{testata}</header>
+      {tabs}
+      {corpo}
+      <div className="page__foot">{piede}</div>
     </section>
   )
 }

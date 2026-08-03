@@ -403,6 +403,7 @@ export default function Landing({
           onPick={(id) => setEditor({ id })}
           onClose={() => setMobilePanel(null)}
           tabs={<PanelTabs active="parametri" onPick={setMobilePanel} />}
+          overlay
         />
       )}
 

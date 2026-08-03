@@ -170,3 +170,42 @@ describe('ParametersPage — la scheda «Parametri» mostra l’elenco vero', ()
     expect(html).toContain(merged[0].name)
   })
 })
+
+/**
+ * Le due schede del pannello mobile devono essere la stessa superficie:
+ * `SettingsModal` è sempre un overlay a tutto schermo, e prima di questa
+ * modifica `ParametersPage` era sempre una pagina in flusso — passando da una
+ * scheda all'altra il tipo di contenitore cambiava sotto gli occhi. `overlay`
+ * è la prop esplicita che sceglie il contenitore, senza toccare né il corpo
+ * né la pagina desktop che la monta senza questa prop.
+ */
+describe('ParametersPage — `overlay` sceglie il contenitore, non il contenuto', () => {
+  const monta = (overlay) =>
+    renderToStaticMarkup(
+      createElement(ParametersPage, {
+        merged: mergedDestinations({}),
+        overrides: { destinations: {} },
+        onOverridesChange: nulla,
+        onPick: nulla,
+        onClose: nulla,
+        tabs: createElement(PanelTabs, { active: 'parametri', onPick: nulla }),
+        overlay,
+      }),
+    )
+
+  it('con `overlay` disegna lo stesso guscio di SettingsModal: overlay, panel, dialog', () => {
+    const html = monta(true)
+    expect(html).toContain('overlay overlay--center')
+    expect(html).toContain('panel panel--modal')
+    expect(html).toContain('role="dialog"')
+    expect(html).toContain('aria-modal="true"')
+    expect(html).not.toContain('class="page"')
+  })
+
+  it('senza `overlay` resta la pagina in flusso di sempre', () => {
+    const html = monta(false)
+    expect(html).toContain('class="page"')
+    expect(html).not.toContain('overlay overlay--center')
+    expect(html).not.toContain('role="dialog"')
+  })
+})

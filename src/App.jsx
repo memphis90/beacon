@@ -611,6 +611,7 @@ export default function App({ startedInitially = false }) {
           onPick={(id) => setEditor({ id })}
           onClose={() => setMobilePanel(null)}
           tabs={<PanelTabs active="parametri" onPick={setMobilePanel} />}
+          overlay
         />
       )}
 
