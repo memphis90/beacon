@@ -3,10 +3,13 @@
 > Questo file è la base di contesto del progetto. Leggilo prima di scrivere codice.
 > Se una decisione qui è marcata **[APERTA]**, non implementarla di iniziativa: chiedi.
 >
-> **Stato:** le decisioni aperte del §8 sono state sciolte con l'utente il 2026-07-30.
+> **Stato:** le decisioni aperte del §8 sono state sciolte con l'utente il 2026-07-30,
+> tranne la §8.2 (normalizzazione), sciolta il 2026-08-03, e la §8.5 (aeroporto di
+> partenza), tuttora **rimandata** alla Fase 2.
 > Le risoluzioni, e le divergenze approvate rispetto a questo documento, sono in
-> `docs/superpowers/specs/2026-07-30-destination-finder-design.md`.
-> Questo file resta la fonte dei vincoli; la spec è la fonte delle scelte.
+> `docs/superpowers/specs/2026-07-30-destination-finder-design.md` e in
+> `docs/superpowers/specs/2026-08-03-normalizzazione-e-raggio-design.md`.
+> Questo file resta la fonte dei vincoli; le spec sono la fonte delle scelte.
 
 ---
 
@@ -112,6 +115,11 @@ vede la regione che ci interessa.
 - **Il raggio è la decisione vera, e non è stata presa.** Con 300 km, il giorno della prova
   nessuna delle 21 destinazioni risultava toccata — ma l'incendio in Portogallo era a ~510 km
   dall'Algarve. Il seed ha già `radius_km` per destinazione: è lì che va tarato.
+  > **Aggiornamento 2026-08-03:** `radius_km` è stato deciso *per i punteggi* (§5) e non
+  > serve a questo. Quello che serve qui è un raggio di **portata** — «un evento a X tocca
+  > chi sta qui?» — che è una domanda diversa e resta aperta. Quando il §3-bis verrà
+  > aperto, la strada probabile è il campo separato `reach_km` valutato e scartato nella
+  > spec del 2026-08-03, scartato perché prematuro allora, non perché sbagliato.
 - **Basta una chiamata sola**, non 21: EONET restituisce tutti gli eventi e l'abbinamento si fa
   in locale con l'haversine già in `scoring.js`.
 
@@ -231,7 +239,7 @@ Applicati **prima** dello scoring:
 - **Budget:** costo stimato totale sopra il massimo → esclusa
 - **Tempo di volo** massimo dall'origine
 
-### Problema noto: normalizzazione [APERTA]
+### Problema noto: normalizzazione [APERTA → risolta]
 
 Il conteggio assoluto dei musei premia le capitali e schiaccia i centri minori.
 La densità per abitante fa il contrario. La somma dei sitelink Wikipedia è un buon proxy di
@@ -241,8 +249,27 @@ Nessuna soluzione è corretta a priori. Da decidere guardando output reali in Fa
 Ipotesi da testare: combinazione di rilevanza (top-N attrazioni per sitelink) e densità,
 con l'asse `offbeat` a fare da correttivo esplicito.
 
-> **Non applicabile in Fase 0:** i punteggi sono manuali, quindi non c'è nulla da
-> normalizzare. La questione si ripresenta in Fase 1, quando arrivano i punteggi derivati.
+> **Risolta il 2026-08-03** guardando output reali su 157 destinazioni —
+> dettaglio, misure e alternative scartate in
+> `docs/superpowers/specs/2026-08-03-normalizzazione-e-raggio-design.md`.
+>
+> **Metodo: somma dei sitelink Wikipedia dei primi cinque POI per rilevanza**
+> (Spearman 0.90 contro il giudizio umano). Scartati il conteggio assoluto
+> (0.38 — misura il raggio, non il posto) e la densità (0.59 — inverte il
+> difetto invece di correggerlo). **Scartata anche l'ipotesi qui sopra**:
+> rilevanza × densità si ferma a 0.63, e il valore migliore che mostrava in una
+> prima misura era un artefatto da POI non deduplicati.
+>
+> Il correttivo `offbeat` resta come previsto, esplicito e visibile: il bias
+> verso il turismo di massa è reale e va lasciato leggibile, non compensato
+> dentro la formula.
+>
+> **Attribuzione dei POI:** un POI conta per la sola destinazione del catalogo
+> che gli sta più vicina, e solo se rientra nel suo raggio. Senza questa regola
+> Ischia, Capri e Procida ottengono gli identici monumenti di Napoli e battono
+> Napoli stessa. Conseguenza: i punteggi derivati sono relativi al catalogo, e
+> **ogni ampliamento richiede di rilanciare lo scoring su tutte** le
+> destinazioni, non solo sulle nuove.
 
 ---
 
@@ -328,7 +355,9 @@ Preferenze, non vincoli assoluti — se hai una ragione forte per divergere, pro
 Da risolvere con l'utente, non da assumere. **Risolte il 2026-07-30**, tranne dove indicato.
 
 1. **Granularità delle destinazioni** — ibrido a tre tipi: `city` | `area` | `island`
-2. **Metodo di normalizzazione dei punteggi** — **ancora aperta**, non applicabile in Fase 0
+2. **Metodo di normalizzazione dei punteggi** — **risolta il 2026-08-03**: somma dei
+   sitelink dei primi cinque POI, con attribuzione di ogni POI alla destinazione più
+   vicina. Vedi §5 e la spec del 2026-08-03
 3. **Set degli assi di interesse** — otto: `nature`, `culture`, `sea`, `food`, `nightlife`,
    `outdoor`, `family`, `offbeat`. `walkability` rimosso
 4. **Ambito geografico iniziale** — Europa intera, nessun vincolo di distanza
