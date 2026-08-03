@@ -1327,6 +1327,29 @@ input[type='range']:disabled { opacity: 0.45; }
     font-size: 9px; font-weight: 700;
   }
 
+  /* Il centro non è un tab: è l'azione, e lo dice sporgendo.
+     `overflow: visible` sulla barra è obbligatorio — senza, il disco viene
+     tagliato dal bordo superiore ed è il modo più silenzioso di far fallire
+     tutto questo. */
+  .bottomnav { overflow: visible; }
+
+  .bottomnav__ask {
+    flex: 1; min-height: 44px;
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+    gap: 2px; padding-bottom: 6px;
+    border: 0; background: none; color: var(--primary);
+    font-size: 11px; line-height: 14px; font-weight: 700;
+  }
+  .bottomnav__askdisc {
+    display: grid; place-items: center;
+    width: 56px; height: 56px;
+    margin-top: -26px;               /* quanto sporge sopra la barra */
+    border-radius: var(--radius-pill);
+    background: var(--primary); color: var(--on-primary);
+    box-shadow: 0 12px 24px rgb(0 22 42 / 18%);
+  }
+  .bottomnav__ask:disabled { opacity: 0.45; }
+
   /* I tab di .mtools SOSTITUISCONO il .segctl di ordinamento: tenerli entrambi
      significa due controlli per la stessa cosa, che possono anche divergere
      visivamente. Resta solo il toggle griglia/lista. */

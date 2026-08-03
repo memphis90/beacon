@@ -109,8 +109,9 @@ describe('render — l’app si disegna senza riferimenti penzolanti', () => {
     })
     await renderizza('../src/components/ScoreBreakdown.jsx', { scoring: entry.scoring })
     await renderizza('../src/components/BottomNav.jsx', {
-      onlyFavourites: false, favouritesCount: 0, compareCount: 0,
-      onSearch: nulla, onFavourites: nulla, onCompare: nulla, onEditor: nulla,
+      onlyFavourites: false, favouritesCount: 0, compareCount: 0, hasResults: true,
+      askLabel: 'Cerca', askDisabled: false,
+      onAsk: nulla, onList: nulla, onFavourites: nulla, onCompare: nulla, onSettings: nulla,
     })
   })
 
