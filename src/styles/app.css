@@ -1116,8 +1116,9 @@ input[type='range']:disabled { opacity: 0.45; }
 }
 
 /* ---------- Bottom nav (mobile) ---------- */
-/* Sostituisce le azioni della topbar sotto i 900px: ricerca, preferiti,
-   confronto, editor. Nascosta su desktop. */
+/* La navigazione principale sotto i 900px, identica nelle due schermate:
+   elenco, preferiti, «+ nuova ricerca», confronto, impostazioni. Nascosta su
+   desktop, dove quelle voci stanno nella barra laterale e nell'intestazione. */
 
 .bottomnav { display: none; }
 
@@ -1354,14 +1355,14 @@ input[type='range']:disabled { opacity: 0.45; }
      tutto questo. */
   .bottomnav { overflow: visible; }
 
-  .bottomnav__ask {
+  .bottomnav__new {
     flex: 1; min-height: 44px;
     display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
     gap: 2px; padding-bottom: 6px;
     border: 0; background: none; color: var(--primary);
     font-size: 11px; line-height: 14px; font-weight: 700;
   }
-  .bottomnav__askdisc {
+  .bottomnav__newdisc {
     display: grid; place-items: center;
     width: 56px; height: 56px;
     margin-top: -26px;               /* quanto sporge sopra la barra */
@@ -1369,7 +1370,7 @@ input[type='range']:disabled { opacity: 0.45; }
     background: var(--primary); color: var(--on-primary);
     box-shadow: 0 12px 24px color-mix(in srgb, var(--primary) 18%, transparent);
   }
-  .bottomnav__ask:disabled { opacity: 0.45; }
+  .bottomnav__new:disabled { opacity: 0.45; }
 
   /* I tab di .mtools SOSTITUISCONO il .segctl di ordinamento: tenerli entrambi
      significa due controlli per la stessa cosa, che possono anche divergere
@@ -1956,7 +1957,7 @@ input[type='range']:disabled { opacity: 0.45; }
 /* La lanterna respira: opacità e alone, ciclo lento. Nessuna rotazione — un
    raggio che gira si legge come spinner, e uno spinner promette avanzamento.
    È lo stesso motivo per cui la frase d'attesa è ferma e non scorre. */
-.attesa__faro .logo__light { animation: faro 2s ease-in-out infinite; transform-origin: 16px 12.2px; }
+.attesa__faro .logo__light { animation: faro 2s ease-in-out infinite; }
 .attesa__faro .logo__beams { animation: faro-fasci 2s ease-in-out infinite; }
 
 @keyframes faro {

@@ -95,7 +95,7 @@ const spaccaCss = () => {
 
 const { mobile: cssMobile, resto: cssResto } = spaccaCss()
 
-describe('BottomNav — cinque slot, il centro è l’azione', () => {
+describe('BottomNav — cinque slot, e il centro ricomincia', () => {
   it('disegna le cinque voci, con Impostazioni al posto di Parametri', () => {
     const html = dock()
     for (const voce of ['Elenco', 'Preferiti', 'Nuova', 'Confronta', 'Impostazioni']) {
@@ -121,7 +121,7 @@ describe('BottomNav — cinque slot, il centro è l’azione', () => {
    * classe su cui poggia tutta la regola CSS che lo fa sporgere.
    */
   it('il centro ha la sua classe e non è un tab come gli altri', () => {
-    expect(dock()).toContain('bottomnav__ask')
+    expect(dock()).toContain('bottomnav__new')
   })
 
   it('senza risultati i tre slot di vista sono disattivi, gli altri due no', () => {
@@ -148,10 +148,10 @@ describe('BottomNav — cinque slot, il centro è l’azione', () => {
   })
 })
 
-describe('risultati — la dock c’è e il centro riapre la frase', () => {
+describe('risultati — la dock c’è, e il centro riporta alla frase', () => {
   it('la schermata dei risultati monta la dock col centro', () => {
     const html = renderToStaticMarkup(createElement(App, { startedInitially: true }))
-    expect(html).toContain('bottomnav__ask')
+    expect(html).toContain('bottomnav__new')
     expect(html).toContain('Impostazioni')
     expect(html).toContain('Elenco')
   })
@@ -162,10 +162,10 @@ describe('risultati — la dock c’è e il centro riapre la frase', () => {
   })
 })
 
-describe('ricerca — la stessa dock, e un invio solo', () => {
+describe('ricerca — la stessa dock, e l’invio sta nel composer', () => {
   it('la home monta la dock, spenta dove non c’è ancora niente', () => {
     const html = renderToStaticMarkup(createElement(App))
-    expect(html).toContain('bottomnav__ask')
+    expect(html).toContain('bottomnav__new')
     // Nessun ranking esiste ancora: i tre slot che ci lavorano sopra sono spenti.
     expect(spento(html, 'Elenco')).toBe(true)
     expect(spento(html, 'Preferiti')).toBe(true)

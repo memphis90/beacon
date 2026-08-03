@@ -414,7 +414,7 @@ export default function Landing({
           Il riquadro bianco è sparito: il faro acceso dice già tutto quello
           che una scatola diceva col bordo. */}
       {inCorso && (
-        <div className="overlay overlay--center overlay--veil attesa" role="presentation">
+        <div className="overlay overlay--center overlay--veil" role="presentation">
           <div className="attesa__box" role="dialog" aria-modal="true" aria-label="Interpretazione in corso">
             <LogoMark className="attesa__faro" width="72" height="72" />
 

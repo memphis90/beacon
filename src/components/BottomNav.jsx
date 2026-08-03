@@ -57,11 +57,11 @@ export default function BottomNav({
 
       <button
         type="button"
-        className="bottomnav__ask"
+        className="bottomnav__new"
         disabled={newDisabled}
         onClick={onNew}
       >
-        <span className="bottomnav__askdisc">
+        <span className="bottomnav__newdisc">
           <IconPlus width="26" height="26" />
         </span>
         Nuova
