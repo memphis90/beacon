@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState } from 'react'
+import BottomNav from './BottomNav.jsx'
 import InterpreterPicker from './InterpreterPicker.jsx'
 import SettingsModal from './SettingsModal.jsx'
 import SideRail from './SideRail.jsx'
-import { IconArrowUp, IconEuro, IconGitHub, IconMenu, IconMountain, IconScale, IconWave } from './Icons.jsx'
+import { IconEuro, IconGitHub, IconMenu, IconMountain, IconScale, IconWave } from './Icons.jsx'
 import { REPO_URL } from '../lib/project.js'
 import { parseQuery } from '../lib/parseQuery.js'
 import {
@@ -49,8 +50,14 @@ const ESEMPI = [
   { Icon: IconEuro, text: 'dove vado a giugno con 400 € e voglio il mare' },
 ]
 
-export default function Landing({ destinations, agent, onAgentChange, onApply, onSkip, onLogout }) {
-  const [text, setText] = useState('')
+export default function Landing({
+  destinations, agent, onAgentChange, onApply, onSkip, onLogout,
+  phrase = '', favouritesCount = 0, compareCount = 0, hasResults = false,
+  onList, onFavourites, onCompare,
+}) {
+  // Arrivando dai risultati il campo è già pieno: è il centro della dock che
+  // ha riportato qui, e il gesto che segue è correggere, non riscrivere.
+  const [text, setText] = useState(phrase)
   const [settingsOpen, setSettingsOpen] = useState(false)
   const [history, setHistory] = useState(loadHistory)
   const [railOpen, setRailOpen] = useState(false)
@@ -101,8 +108,8 @@ export default function Landing({ destinations, agent, onAgentChange, onApply, o
    * regole invece restano in tempo reale — sono istantanee e non costano
    * niente, quindi l'anteprima sotto il campo continua a esserci.
    */
-  const submit = async (event) => {
-    event.preventDefault()
+  const submit = async (e) => {
+    e?.preventDefault?.()
     if (inCorso || !text.trim()) return
     setErroreModello('')
 
@@ -240,19 +247,6 @@ export default function Landing({ destinations, agent, onAgentChange, onApply, o
                   onChange={applyAgent}
                   onConfigure={() => setSettingsOpen(true)}
                 />
-
-                {/* Freccia sola: l'etichetta la dà il tooltip. Il gesto è
-                    quello di qualunque campo prompt, e non ha bisogno di
-                    essere spiegato ogni volta che guardi la schermata. */}
-                <button
-                  type="submit"
-                  className="btn btn--primary landing__send"
-                  title="Invia prompt"
-                  aria-label="Invia prompt"
-                  disabled={conModello ? !text.trim() : parsed.empty}
-                >
-                  <IconArrowUp width="20" height="20" />
-                </button>
               </div>
             </div>
 
@@ -384,6 +378,23 @@ export default function Landing({ destinations, agent, onAgentChange, onApply, o
           onClose={() => setSettingsOpen(false)}
         />
       )}
+
+      <BottomNav
+        onlyFavourites={false}
+        favouritesCount={favouritesCount}
+        compareCount={compareCount}
+        hasResults={hasResults}
+        askLabel={conModello ? 'Chiedi' : 'Cerca'}
+        /* Gli stessi criteri della freccia che sostituisce: col modello serve
+           del testo, con le regole serve che le regole ci abbiano capito
+           qualcosa. */
+        askDisabled={conModello ? !text.trim() : parsed.empty}
+        onAsk={submit}
+        onList={onList}
+        onFavourites={onFavourites}
+        onCompare={onCompare}
+        onSettings={() => setSettingsOpen(true)}
+      />
     </div>
   )
 }

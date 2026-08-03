@@ -265,6 +265,23 @@ export default function App({ startedInitially = false }) {
         destinations={merged}
         agent={agent}
         onAgentChange={applyAgent}
+        phrase={phrase}
+        favouritesCount={favourites.length}
+        compareCount={compareIds.length}
+        // `ranking.hasRanking` da solo è vero già alla primissima apertura:
+        // i pesi di default sono tutti a 5, non a zero, perché la modalità
+        // "sfoglia tutto" è una ricerca valida. Senza `phrase` a fare da
+        // guardia, Elenco e Preferiti si accenderebbero prima ancora che una
+        // frase sia stata inviata.
+        hasResults={Boolean(phrase) && ranking.hasRanking}
+        onList={() => { setOnlyFavourites(false); setStarted(true) }}
+        onFavourites={() => { setOnlyFavourites(true); setStarted(true) }}
+        onCompare={() => { setCompareOpen(true); setStarted(true) }}
+        /* Servono al Task 4: il pannello delle impostazioni ha una scheda
+           Parametri anche qui, e senza questi due sarebbe una scheda morta.
+           `merged` la home ce l'ha già, si chiama `destinations`. */
+        overrides={overrides}
+        onOverridesChange={applyOverrides}
         onSkip={() => {
           // Entrare senza frase vuol dire anche azzerarla: se prima avevi
           // cercato, quella vecchia resterebbe attaccata ai risultati nuovi.

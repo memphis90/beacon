@@ -137,3 +137,23 @@ describe('risultati — la dock c’è e il centro riapre la frase', () => {
     })
   })
 })
+
+describe('ricerca — la stessa dock, e un invio solo', () => {
+  it('la home monta la dock, spenta dove non c’è ancora niente', () => {
+    const html = renderToStaticMarkup(createElement(App))
+    expect(html).toContain('bottomnav__ask')
+    // Nessun ranking esiste ancora: i tre slot che ci lavorano sopra sono spenti.
+    expect(spento(html, 'Elenco')).toBe(true)
+    expect(spento(html, 'Preferiti')).toBe(true)
+    expect(spento(html, 'Confronta')).toBe(true)
+    expect(spento(html, 'Impostazioni')).toBe(false)
+  })
+
+  /**
+   * La freccia del composer deve sparire, o l'invio resta in due posti a un
+   * centimetro di distanza. `landing__send` era la sua classe.
+   */
+  it('il composer non ha più la sua freccia', () => {
+    expect(renderToStaticMarkup(createElement(App))).not.toContain('landing__send')
+  })
+})

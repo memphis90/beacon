@@ -1268,6 +1268,10 @@ input[type='range']:disabled { opacity: 0.45; }
     padding: var(--stack-gap) var(--container-margin) 0;
   }
 
+  /* La dock è fissa: senza questo, l'ultima riga della home ci finisce sotto.
+     È lo stesso rimedio già applicato ai risultati. */
+  .landing__body { padding-bottom: calc(var(--bottomnav-h) + var(--container-margin)); }
+
   /* ---- Filtri: da sidebar a foglio a comparsa ---- */
   .filters {
     position: fixed; inset: 0; z-index: 70;
