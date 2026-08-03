@@ -98,7 +98,7 @@ const COST_ROWS = [
  * la modifica vera, che invece È un'operazione: si apre su una destinazione,
  * si cambia, si chiude.
  */
-export function ParametersPage({ merged, overrides, onOverridesChange, onPick, onClose }) {
+export function ParametersPage({ merged, overrides, onOverridesChange, onPick, onClose, tabs }) {
   const [filtro, setFiltro] = useState('')
   const [newName, setNewName] = useState('')
   const [message, setMessage] = useState(null)
@@ -181,6 +181,8 @@ export function ParametersPage({ merged, overrides, onOverridesChange, onPick, o
         </div>
         <button type="button" className="btn" onClick={onClose}>Torna ai risultati</button>
       </header>
+
+      {tabs}
 
       {message && (
         <div className={`notice${message.tone === 'warn' ? ' notice--warn' : ''}`}>{message.text}</div>

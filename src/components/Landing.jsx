@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import BottomNav from './BottomNav.jsx'
-import EditorPanel from './EditorPanel.jsx'
+import EditorPanel, { ParametersPage } from './EditorPanel.jsx'
 import InterpreterPicker from './InterpreterPicker.jsx'
 import PanelTabs from './PanelTabs.jsx'
 import SettingsModal from './SettingsModal.jsx'
@@ -66,6 +66,10 @@ export default function Landing({
   /* Quale scheda del pannello è aperta: 'parametri' | 'modello' | null.
      Come in App: è la dock ad aprirlo, e la dock è la stessa. */
   const [mobilePanel, setMobilePanel] = useState(null)
+  // La scheda di una singola destinazione, sopra l'elenco dei parametri: come
+  // in App, scegliere una voce dall'elenco apre questa, indipendente dalla
+  // scheda del pannello mobile che resta 'parametri' sotto.
+  const [editor, setEditor] = useState(null)
   const [history, setHistory] = useState(loadHistory)
   const [railOpen, setRailOpen] = useState(false)
   // Il controller della chiamata in corso: serve anche come "sta elaborando",
@@ -392,13 +396,26 @@ export default function Landing({
       )}
 
       {mobilePanel === 'parametri' && (
+        <ParametersPage
+          merged={destinations}
+          overrides={overrides}
+          onOverridesChange={onOverridesChange}
+          onPick={(id) => setEditor({ id })}
+          onClose={() => setMobilePanel(null)}
+          tabs={<PanelTabs active="parametri" onPick={setMobilePanel} />}
+        />
+      )}
+
+      {/* La scheda della singola destinazione, sopra l'elenco: stesso
+          meccanismo di App, qui locale perché la home non ha altrove uno
+          stato che apra l'editor di una destinazione. */}
+      {editor && (
         <EditorPanel
           merged={destinations}
           overrides={overrides}
           onOverridesChange={onOverridesChange}
-          initialId={null}
-          onClose={() => setMobilePanel(null)}
-          tabs={<PanelTabs active="parametri" onPick={setMobilePanel} />}
+          initialId={editor.id}
+          onClose={() => setEditor(null)}
         />
       )}
 

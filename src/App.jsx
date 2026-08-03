@@ -604,11 +604,11 @@ export default function App({ startedInitially = false }) {
       {/* Il pannello che la dock apre: una cosa sola con due schede, invece
           delle due voci separate che su desktop stanno in due posti diversi. */}
       {mobilePanel === 'parametri' && (
-        <EditorPanel
+        <ParametersPage
           merged={merged}
           overrides={overrides}
           onOverridesChange={applyOverrides}
-          initialId={null}
+          onPick={(id) => setEditor({ id })}
           onClose={() => setMobilePanel(null)}
           tabs={<PanelTabs active="parametri" onPick={setMobilePanel} />}
         />

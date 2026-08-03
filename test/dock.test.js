@@ -3,7 +3,9 @@ import { createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import BottomNav from '../src/components/BottomNav.jsx'
 import PanelTabs from '../src/components/PanelTabs.jsx'
+import { ParametersPage } from '../src/components/EditorPanel.jsx'
 import App from '../src/App.jsx'
+import { mergedDestinations } from '../src/lib/store.js'
 
 /**
  * Due difese copiate da render.test.js, e servono entrambe dal Task 2 in poi,
@@ -139,5 +141,32 @@ describe('PanelTabs — le due schede del pannello mobile', () => {
     expect(html).toContain('Parametri')
     expect(html).toContain('Modello')
     expect(html).toContain('aria-selected="true"')
+  })
+})
+
+/**
+ * La scheda «Parametri» del pannello mobile monta `ParametersPage`, non
+ * `EditorPanel` con un `initialId` inesistente: quest'ultimo tornava `null` e
+ * disegnava un pannello vuoto — vuoto anche nella striscia delle schede, dato
+ * che `tabs` sta dentro lo stesso `return null`. Questa prova naviga proprio
+ * il caso che l'avrebbe superata senza farsi notare: verifica che compaia
+ * l'elenco vero delle destinazioni, non solo la striscia sopra di esso.
+ */
+describe('ParametersPage — la scheda «Parametri» mostra l’elenco vero', () => {
+  it('disegna una riga per destinazione insieme alle schede', () => {
+    const merged = mergedDestinations({})
+    const html = renderToStaticMarkup(
+      createElement(ParametersPage, {
+        merged,
+        overrides: { destinations: {} },
+        onOverridesChange: nulla,
+        onPick: nulla,
+        onClose: nulla,
+        tabs: createElement(PanelTabs, { active: 'parametri', onPick: nulla }),
+      }),
+    )
+    expect(html).toContain('paneltabs')
+    expect(html).toContain('destlist__pick')
+    expect(html).toContain(merged[0].name)
   })
 })
