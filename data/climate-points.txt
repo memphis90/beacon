@@ -15,6 +15,25 @@
 #
 # Serve solo per le destinazioni in cui le due cose divergono. Per una città il
 # baricentro è la città, e non c'è niente da correggere.
+#
+# ---- La stessa cosa, ma per il mare -----------------------------------------
+#
+# Il difetto ha una seconda faccia, trovata il 2026-08-04: il baricentro di una
+# regione costiera cade nell'ENTROTERRA, e lì la griglia marina risponde "punto
+# di terra". Il Gargano — Vieste, Peschici, le Tremiti — non aveva nessuna
+# temperatura del mare perché la si chiedeva alla Foresta Umbra. Non è un
+# dettaglio: senza `sea_temp` la rampa stagionale azzera l'asse mare per QUALUNQUE
+# mese, e una delle aree balneari migliori d'Italia spariva da ogni ricerca sul
+# mare con una data. Un punto costiero qui sotto risolve terra e mare insieme.
+#
+# Quando invece è solo il mare a non tornare — un fiordo stretto, una laguna, un
+# golfo interno che la griglia non risolve — si dichiara un punto per il solo
+# mare col suffisso `#mare`, e il clima di terra resta dov'è. Spostare anche
+# quello significherebbe misurare un altro posto.
+
+gargano      | 41.8824 |  16.1758 | Vieste, non la Foresta Umbra: il mare del Gargano è lì
+bretagna     | 47.8736 |  -3.9186 | Concarneau, non il centro della penisola
+oslo    #mare| 59.6640 |  10.6300 | Drøbak: la griglia non risolve il fiordo interno, nemmeno a Huk
 
 madeira      | 32.6669 | -16.9241 | Funchal, non Pico Ruivo (1862 m)
 creta        | 35.5138 |  24.0180 | Chania, non lo Psiloritis (2456 m)

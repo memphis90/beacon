@@ -512,7 +512,7 @@
       "scores": {
         "nature": 35,
         "culture": 72,
-        "sea": 20,
+        "sea": 0,
         "food": 75,
         "nightlife": 82,
         "outdoor": 35,
@@ -558,7 +558,7 @@
       "scores": {
         "nature": 40,
         "culture": 85,
-        "sea": 15,
+        "sea": 0,
         "food": 62,
         "nightlife": 88,
         "outdoor": 45,
@@ -1043,7 +1043,7 @@
       "scores": {
         "nature": 30,
         "culture": 97,
-        "sea": 45,
+        "sea": 35,
         "food": 85,
         "nightlife": 82,
         "outdoor": 32,
@@ -1373,7 +1373,7 @@
       "scores": {
         "nature": 35,
         "culture": 88,
-        "sea": 72,
+        "sea": 62,
         "food": 85,
         "nightlife": 90,
         "outdoor": 45,
@@ -2361,7 +2361,7 @@
       "scores": {
         "nature": 45,
         "culture": 78,
-        "sea": 45,
+        "sea": 35,
         "food": 92,
         "nightlife": 62,
         "outdoor": 50,
@@ -2906,76 +2906,76 @@
       "image_credit": "CC BY-SA 3.0",
       "climate": {
         "1": {
-          "temp_avg": 6,
-          "temp_max": 9,
-          "rain_days": 12,
-          "sea_temp": null
-        },
-        "2": {
           "temp_avg": 7,
           "temp_max": 10,
-          "rain_days": 11,
-          "sea_temp": null
+          "rain_days": 15,
+          "sea_temp": 11
+        },
+        "2": {
+          "temp_avg": 8,
+          "temp_max": 10,
+          "rain_days": 13,
+          "sea_temp": 10
         },
         "3": {
-          "temp_avg": 8,
+          "temp_avg": 9,
           "temp_max": 12,
-          "rain_days": 14,
-          "sea_temp": null
+          "rain_days": 15,
+          "sea_temp": 11
         },
         "4": {
-          "temp_avg": 10,
+          "temp_avg": 11,
           "temp_max": 15,
-          "rain_days": 10,
-          "sea_temp": null
+          "rain_days": 11,
+          "sea_temp": 12
         },
         "5": {
-          "temp_avg": 13,
+          "temp_avg": 14,
           "temp_max": 18,
           "rain_days": 12,
-          "sea_temp": null
+          "sea_temp": 15
         },
         "6": {
           "temp_avg": 17,
           "temp_max": 21,
-          "rain_days": 10,
-          "sea_temp": null
+          "rain_days": 12,
+          "sea_temp": 17
         },
         "7": {
           "temp_avg": 18,
-          "temp_max": 23,
-          "rain_days": 8,
-          "sea_temp": null
+          "temp_max": 22,
+          "rain_days": 11,
+          "sea_temp": 17
         },
         "8": {
           "temp_avg": 18,
-          "temp_max": 23,
-          "rain_days": 9,
-          "sea_temp": null
+          "temp_max": 22,
+          "rain_days": 12,
+          "sea_temp": 18
         },
         "9": {
           "temp_avg": 16,
           "temp_max": 20,
-          "rain_days": 9,
-          "sea_temp": null
+          "rain_days": 11,
+          "sea_temp": 18
         },
         "10": {
-          "temp_avg": 13,
-          "temp_max": 17,
-          "rain_days": 12,
-          "sea_temp": null
+          "temp_avg": 14,
+          "temp_max": 16,
+          "rain_days": 15,
+          "sea_temp": 16
         },
         "11": {
           "temp_avg": 10,
-          "temp_max": 12,
-          "rain_days": 12,
-          "sea_temp": null
+          "temp_max": 13,
+          "rain_days": 14,
+          "sea_temp": 14
         },
         "12": {
-          "temp_avg": 8,
-          "temp_max": 10,
-          "rain_days": 13,
-          "sea_temp": null
+          "temp_avg": 9,
+          "temp_max": 11,
+          "rain_days": 16,
+          "sea_temp": 12
         }
       },
       "scores": {
@@ -7452,76 +7452,76 @@
       "image_credit": null,
       "climate": {
         "1": {
-          "temp_avg": 4,
-          "temp_max": 7,
+          "temp_avg": 10,
+          "temp_max": 12,
           "rain_days": 11,
-          "sea_temp": null
+          "sea_temp": 14
         },
         "2": {
-          "temp_avg": 5,
-          "temp_max": 9,
-          "rain_days": 10,
-          "sea_temp": null
+          "temp_avg": 11,
+          "temp_max": 13,
+          "rain_days": 9,
+          "sea_temp": 13
         },
         "3": {
-          "temp_avg": 7,
-          "temp_max": 11,
+          "temp_avg": 12,
+          "temp_max": 15,
           "rain_days": 12,
-          "sea_temp": null
+          "sea_temp": 14
         },
         "4": {
-          "temp_avg": 10,
-          "temp_max": 15,
-          "rain_days": 11,
-          "sea_temp": null
+          "temp_avg": 15,
+          "temp_max": 17,
+          "rain_days": 9,
+          "sea_temp": 16
         },
         "5": {
-          "temp_avg": 15,
-          "temp_max": 19,
-          "rain_days": 13,
-          "sea_temp": null
+          "temp_avg": 19,
+          "temp_max": 21,
+          "rain_days": 9,
+          "sea_temp": 19
         },
         "6": {
-          "temp_avg": 20,
-          "temp_max": 24,
-          "rain_days": 9,
-          "sea_temp": null
+          "temp_avg": 24,
+          "temp_max": 26,
+          "rain_days": 6,
+          "sea_temp": 24
         },
         "7": {
-          "temp_avg": 23,
-          "temp_max": 28,
-          "rain_days": 6,
-          "sea_temp": null
+          "temp_avg": 27,
+          "temp_max": 29,
+          "rain_days": 3,
+          "sea_temp": 28
         },
         "8": {
-          "temp_avg": 22,
-          "temp_max": 27,
-          "rain_days": 8,
-          "sea_temp": null
+          "temp_avg": 27,
+          "temp_max": 29,
+          "rain_days": 5,
+          "sea_temp": 29
         },
         "9": {
-          "temp_avg": 18,
-          "temp_max": 22,
-          "rain_days": 10,
-          "sea_temp": null
+          "temp_avg": 23,
+          "temp_max": 25,
+          "rain_days": 9,
+          "sea_temp": 26
         },
         "10": {
-          "temp_avg": 14,
-          "temp_max": 18,
-          "rain_days": 9,
-          "sea_temp": null
+          "temp_avg": 19,
+          "temp_max": 21,
+          "rain_days": 8,
+          "sea_temp": 22
         },
         "11": {
-          "temp_avg": 9,
-          "temp_max": 12,
-          "rain_days": 12,
-          "sea_temp": null
+          "temp_avg": 15,
+          "temp_max": 17,
+          "rain_days": 11,
+          "sea_temp": 18
         },
         "12": {
-          "temp_avg": 6,
-          "temp_max": 9,
-          "rain_days": 9,
-          "sea_temp": null
+          "temp_avg": 12,
+          "temp_max": 14,
+          "rain_days": 10,
+          "sea_temp": 15
         }
       },
       "scores": {
@@ -7651,7 +7651,7 @@
       "scores": {
         "nature": 40,
         "culture": 75,
-        "sea": 55,
+        "sea": 30,
         "food": 85,
         "nightlife": 55,
         "outdoor": 40,
@@ -8147,7 +8147,7 @@
       "scores": {
         "nature": 97,
         "culture": 48,
-        "sea": 25,
+        "sea": 0,
         "food": 58,
         "nightlife": 15,
         "outdoor": 92,
@@ -9228,7 +9228,7 @@
       "scores": {
         "nature": 35,
         "culture": 95,
-        "sea": 45,
+        "sea": 25,
         "food": 90,
         "nightlife": 70,
         "outdoor": 35,
@@ -9596,7 +9596,7 @@
       "scores": {
         "nature": 35,
         "culture": 90,
-        "sea": 62,
+        "sea": 40,
         "food": 70,
         "nightlife": 58,
         "outdoor": 35,
@@ -10340,7 +10340,7 @@
       "scores": {
         "nature": 40,
         "culture": 82,
-        "sea": 60,
+        "sea": 40,
         "food": 82,
         "nightlife": 60,
         "outdoor": 35,
@@ -10510,7 +10510,7 @@
       "scores": {
         "nature": 40,
         "culture": 85,
-        "sea": 65,
+        "sea": 40,
         "food": 88,
         "nightlife": 85,
         "outdoor": 45,
@@ -12733,7 +12733,7 @@
       "scores": {
         "nature": 65,
         "culture": 95,
-        "sea": 40,
+        "sea": 5,
         "food": 65,
         "nightlife": 15,
         "outdoor": 42,
@@ -13105,7 +13105,7 @@
       "scores": {
         "nature": 45,
         "culture": 90,
-        "sea": 55,
+        "sea": 35,
         "food": 95,
         "nightlife": 72,
         "outdoor": 35,
@@ -13477,7 +13477,7 @@
       "scores": {
         "nature": 82,
         "culture": 82,
-        "sea": 55,
+        "sea": 0,
         "food": 68,
         "nightlife": 42,
         "outdoor": 65,
@@ -13529,73 +13529,73 @@
           "temp_avg": -3,
           "temp_max": 0,
           "rain_days": 12,
-          "sea_temp": null
+          "sea_temp": 1
         },
         "2": {
           "temp_avg": -1,
           "temp_max": 2,
           "rain_days": 11,
-          "sea_temp": null
+          "sea_temp": 1
         },
         "3": {
           "temp_avg": 1,
           "temp_max": 5,
           "rain_days": 9,
-          "sea_temp": null
+          "sea_temp": 3
         },
         "4": {
           "temp_avg": 6,
           "temp_max": 11,
           "rain_days": 8,
-          "sea_temp": null
+          "sea_temp": 6
         },
         "5": {
           "temp_avg": 12,
           "temp_max": 16,
           "rain_days": 12,
-          "sea_temp": null
+          "sea_temp": 13
         },
         "6": {
           "temp_avg": 17,
           "temp_max": 21,
           "rain_days": 12,
-          "sea_temp": null
+          "sea_temp": 18
         },
         "7": {
           "temp_avg": 18,
           "temp_max": 22,
           "rain_days": 13,
-          "sea_temp": null
+          "sea_temp": 20
         },
         "8": {
           "temp_avg": 17,
           "temp_max": 20,
           "rain_days": 13,
-          "sea_temp": null
+          "sea_temp": 19
         },
         "9": {
           "temp_avg": 13,
           "temp_max": 17,
           "rain_days": 11,
-          "sea_temp": null
+          "sea_temp": 16
         },
         "10": {
           "temp_avg": 8,
           "temp_max": 10,
           "rain_days": 12,
-          "sea_temp": null
+          "sea_temp": 12
         },
         "11": {
           "temp_avg": 3,
           "temp_max": 5,
           "rain_days": 12,
-          "sea_temp": null
+          "sea_temp": 7
         },
         "12": {
           "temp_avg": -1,
           "temp_max": 1,
           "rain_days": 13,
-          "sea_temp": null
+          "sea_temp": 4
         }
       },
       "scores": {
@@ -15956,7 +15956,7 @@
       "scores": {
         "nature": 32,
         "culture": 78,
-        "sea": 55,
+        "sea": 30,
         "food": 90,
         "nightlife": 85,
         "outdoor": 32,
@@ -18465,7 +18465,7 @@
       "scores": {
         "nature": 45,
         "culture": 72,
-        "sea": 45,
+        "sea": 30,
         "food": 72,
         "nightlife": 50,
         "outdoor": 45,
@@ -18589,7 +18589,7 @@
       "scores": {
         "nature": 92,
         "culture": 52,
-        "sea": 18,
+        "sea": 0,
         "food": 62,
         "nightlife": 48,
         "outdoor": 88,

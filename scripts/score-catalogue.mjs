@@ -26,6 +26,24 @@
  * **Cosa NON significano.** Non sono misure e non c'è una fonte: sono
  * un'opinione informata su come un posto si comporta rispetto agli altri del
  * catalogo. Il punto della Fase 0 è che tu li contraddica dove li conosci.
+ *
+ * **L'asse `mare` ha una regola, imparata sbagliandola.** Vale il bagno che ci
+ * si fa, non il mare che si vede: la prima tornata leggeva la definizione
+ * dell'asse — che allora diceva anche «vita di costa» — come un permesso a
+ * premiare la prossimità, e sei città portuali finivano sopra al cancello di
+ * `primary`. Genova e Salonicco comparivano in una ricerca sul mare accanto
+ * alla Sardegna. Tre domande, in quest'ordine:
+ *
+ *   1. Ci si fa il bagno **entro il raggio della destinazione**? Un porto, una
+ *      passeggiata sul lungomare e una spiaggia a un'ora d'auto non contano.
+ *   2. Quel mare **è già un'altra scheda** del catalogo? Il mare di Lecce è
+ *      `salento`, quello di Napoli è Ischia e Capri, quello della Valletta è
+ *      `malta`: contarlo due volte gonfia la scheda sbagliata.
+ *   3. Esiste una **`sea_temp` nel clima**? Senza, la rampa stagionale azzera
+ *      l'asse per ogni mese e il punteggio è una promessa che l'app non
+ *      mantiene — o il punteggio è di troppo, o manca il dato.
+ *
+ * `test/coste.test.js` tiene ferme la seconda e la terza sui dati veri.
  */
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
@@ -42,16 +60,16 @@ const PUNTEGGI = {
   // --- Italia ------------------------------------------------------------
   firenze:            [30, 96,  0, 88, 55, 30, 58, 5],
   venezia:            [45, 95, 30, 78, 50, 25, 55, 8],
-  napoli:             [45, 90, 55, 95, 72, 35, 50, 35],
+  napoli:             [45, 90, 35, 95, 72, 35, 50, 35],
   torino:             [42, 82,  0, 88, 65, 40, 58, 45],
   bologna:            [30, 82,  0, 95, 75, 28, 58, 30],
   palermo:            [42, 88, 62, 92, 62, 38, 50, 45],
   verona:             [35, 82,  0, 80, 55, 35, 62, 25],
   siena:              [55, 88,  0, 82, 35, 45, 60, 30],
   matera:             [50, 90,  0, 72, 32, 45, 45, 62],
-  lecce:              [40, 82, 60, 82, 60, 35, 55, 55],
-  trieste:            [45, 72, 45, 72, 50, 45, 55, 62],
-  genova:             [40, 75, 55, 85, 55, 40, 55, 50],
+  lecce:              [40, 82, 40, 82, 60, 35, 55, 55],
+  trieste:            [45, 72, 30, 72, 50, 45, 55, 62],
+  genova:             [40, 75, 30, 85, 55, 40, 55, 50],
   'val-d-orcia':      [92, 62,  0, 88, 15, 62, 60, 35],
   'cinque-terre':     [85, 60, 70, 75, 25, 72, 50, 12],
   salento:            [55, 55, 88, 82, 65, 40, 68, 42],
@@ -68,7 +86,7 @@ const PUNTEGGI = {
   siviglia:           [35, 92,  0, 88, 82, 32, 60, 18],
   granada:            [58, 95,  0, 82, 70, 62, 55, 25],
   valencia:           [40, 75, 72, 85, 78, 48, 70, 25],
-  bilbao:             [45, 78, 45, 92, 62, 50, 58, 42],
+  bilbao:             [45, 78, 35, 92, 62, 50, 58, 42],
   porto:              [42, 85, 35, 88, 78, 40, 58, 30],
   ibiza:              [50, 35, 85, 65, 98, 45, 40, 5],
   tenerife:           [82, 35, 78, 62, 60, 82, 78, 20],
@@ -88,7 +106,7 @@ const PUNTEGGI = {
   // --- Europa centrale ---------------------------------------------------
   berlino:            [35, 88,  0, 78, 95, 35, 55, 30],
   'monaco-di-baviera':[42, 80,  0, 82, 78, 45, 68, 22],
-  amburgo:            [35, 72, 20, 75, 82, 35, 58, 35],
+  amburgo:            [35, 72, 0, 75, 82, 35, 58, 35],
   dresda:             [40, 85,  0, 65, 55, 35, 58, 45],
   salisburgo:         [62, 88,  0, 72, 45, 55, 68, 25],
   innsbruck:          [80, 68,  0, 68, 52, 88, 70, 30],
@@ -113,8 +131,8 @@ const PUNTEGGI = {
   'f-r-er':           [97, 35, 15, 45, 10, 88, 40, 92],
 
   // --- Sud-est e Mediterraneo --------------------------------------------
-  atene:              [30, 97, 45, 85, 82, 32, 52, 15],
-  salonicco:          [32, 78, 55, 90, 85, 32, 52, 45],
+  atene:              [30, 97, 35, 85, 82, 32, 52, 15],
+  salonicco:          [32, 78, 30, 90, 85, 32, 52, 45],
   spalato:            [55, 78, 82, 72, 68, 58, 58, 25],
   zara:               [52, 72, 82, 68, 60, 55, 58, 40],
   cattaro:            [80, 72, 70, 60, 45, 70, 52, 55],
@@ -122,7 +140,7 @@ const PUNTEGGI = {
   belgrado:           [32, 65,  0, 72, 92, 35, 48, 58],
   sofia:              [58, 68,  0, 68, 65, 68, 52, 65],
   bucarest:           [30, 65,  0, 72, 82, 30, 45, 62],
-  'la-valletta':      [35, 90, 62, 70, 58, 35, 55, 30],
+  'la-valletta':      [35, 90, 40, 70, 58, 35, 55, 30],
   rodi:               [55, 78, 88, 70, 65, 50, 68, 22],
   corfu:              [72, 65, 85, 70, 62, 55, 68, 30],
   malta:              [42, 85, 75, 68, 62, 45, 62, 28],
@@ -167,7 +185,7 @@ const PUNTEGGI = {
   strasburgo:         [42, 88,  0, 88, 58, 40, 65, 35],
   annecy:             [88, 62,  0, 80, 45, 82, 72, 32],
   carcassonne:        [50, 90,  0, 75, 30, 48, 62, 38],
-  'mont-saint-michel':[65, 95, 40, 65, 15, 42, 60, 20],
+  'mont-saint-michel':[65, 95, 5, 65, 15, 42, 60, 20],
   corsica:            [90, 55, 88, 75, 35, 85, 68, 52],
   camargue:           [88, 52, 62, 72, 20, 68, 60, 62],
 
@@ -175,7 +193,7 @@ const PUNTEGGI = {
   londra:             [35, 95,  0, 85, 92, 32, 68, 5],
   bath:               [55, 90,  0, 72, 45, 48, 60, 32],
   cornovaglia:        [85, 55, 62, 75, 32, 78, 72, 42],
-  highlands:          [97, 48, 25, 58, 15, 92, 55, 68],
+  highlands:          [97, 48, 0, 58, 15, 92, 55, 68],
   galway:             [68, 68, 45, 72, 82, 62, 58, 55],
 
   // --- Arco alpino --------------------------------------------------------
@@ -187,7 +205,7 @@ const PUNTEGGI = {
 
   // --- Nord ---------------------------------------------------------------
   bergen:             [88, 68, 20, 70, 55, 82, 62, 42],
-  troms:           [92, 52, 18, 62, 48, 88, 55, 72],
+  troms:           [92, 52, 0, 62, 48, 88, 55, 72],
   goteborg:         [58, 68, 35, 78, 68, 52, 68, 45],
   aarhus:             [52, 72, 35, 78, 68, 50, 68, 52],
 
@@ -198,7 +216,7 @@ const PUNTEGGI = {
   bled:               [92, 62,  0, 68, 25, 82, 78, 35],
   'parco-nazionale-dei-laghi-di-plitvice': [97, 30, 0, 55, 8, 82, 72, 32],
   mostar:             [65, 85,  0, 72, 35, 58, 52, 62],
-  'comune-di-ocrida':             [82, 82, 55, 68, 42, 65, 62, 72],
+  'comune-di-ocrida':             [82, 82, 0, 68, 42, 65, 62, 72],
   plovdiv:            [52, 85,  0, 78, 68, 55, 55, 68],
 
   // --- Turchia ------------------------------------------------------------

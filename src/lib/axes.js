@@ -10,7 +10,7 @@
 export const AXES = [
   { key: 'nature',    label: 'Natura',     color: '#2a78d6', hint: 'Paesaggio, verde, panorami. La natura come cosa da guardare.' },
   { key: 'culture',   label: 'Cultura',    color: '#eb6834', hint: 'Musei, monumenti, centri storici, patrimonio.' },
-  { key: 'sea',       label: 'Mare',       color: '#1baf7a', hint: 'Spiagge, balneabilità, vita di costa.' },
+  { key: 'sea',       label: 'Mare',       color: '#1baf7a', hint: 'Spiagge e balneabilità. Il bagno che ci si fa, non il mare che si vede.' },
   { key: 'food',      label: 'Cibo',       color: '#eda100', hint: 'Cucina locale, mercati, qualità e varietà.' },
   { key: 'nightlife', label: 'Vita notturna', color: '#e87ba4', hint: 'Locali, concerti, movida.' },
   { key: 'outdoor',   label: 'Outdoor',    color: '#008300', hint: 'Trekking, sci, bici, sport acquatici. La natura come cosa da fare.' },

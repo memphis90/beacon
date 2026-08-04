@@ -175,17 +175,60 @@ const doc = JSON.parse(readFileSync(SOURCE, 'utf8'))
  * era sbagliata. Vedi data/climate-points.txt.
  */
 const riferimenti = new Map()
+
+/**
+ * E dove chiedere il MARE, quando è solo quello a non tornare.
+ *
+ * La griglia marina è larga una manciata di chilometri, e un fiordo stretto,
+ * una laguna o un golfo interno le passano fra le maglie: su Oslo — che sul
+ * suo fiordo ci nuota — l'API risponde "punto di terra" anche stando in
+ * acqua, a Huk. Spostare per questo il punto del clima **terrestre** sarebbe
+ * una cura peggiore del male: il clima di Oslo è quello di Oslo, e prenderlo
+ * trenta chilometri più a valle vuol dire misurare un altro posto.
+ *
+ * Quindi due punti distinti, e solo dove serve: `id #mare` nel file dichiara
+ * dove chiedere l'acqua, lasciando la terra al suo posto.
+ */
+const riferimentiMare = new Map()
+
 try {
   for (const riga of readFileSync(PUNTI, 'utf8').split(/\r?\n/)) {
     const pulita = riga.trim()
     if (!pulita || pulita.startsWith('#')) continue
-    const [id, lat, lon] = pulita.split('|').map((p) => p.trim())
-    if (id && Number.isFinite(Number(lat)) && Number.isFinite(Number(lon))) {
-      riferimenti.set(id, { lat: Number(lat), lon: Number(lon) })
-    }
+    const [etichetta, lat, lon] = pulita.split('|').map((p) => p.trim())
+    if (!etichetta || !Number.isFinite(Number(lat)) || !Number.isFinite(Number(lon))) continue
+
+    const soloMare = etichetta.endsWith('#mare')
+    const id = soloMare ? etichetta.slice(0, -'#mare'.length).trim() : etichetta
+    const punto = { lat: Number(lat), lon: Number(lon) }
+    if (soloMare) riferimentiMare.set(id, punto)
+    else riferimenti.set(id, punto)
   }
-  if (riferimenti.size) console.log(`${riferimenti.size} punti di riferimento climatico dichiarati.\n`)
+  const totale = riferimenti.size + riferimentiMare.size
+  if (totale) {
+    const dettaglio = riferimentiMare.size ? `, di cui ${riferimentiMare.size} per il solo mare` : ''
+    console.log(`${totale} punti di riferimento climatico dichiarati${dettaglio}.\n`)
+  }
 } catch { /* il file è facoltativo */ }
+
+/**
+ * Filtro facoltativo: `node scripts/fetch-climate.mjs gargano bretagna`.
+ *
+ * Serve quando si corregge un punto di riferimento e si vuole rimisurare
+ * quella destinazione soltanto. Senza, la correzione di tre schede costerebbe
+ * trecentosedici chiamate a un servizio gratuito e un diff di
+ * centocinquantotto climi da rileggere per trovarci dentro le tre che
+ * contano.
+ */
+const soloQuesti = new Set(process.argv.slice(2).filter((a) => !a.startsWith('-')))
+if (soloQuesti.size) {
+  const ignoti = [...soloQuesti].filter((id) => !doc.destinations.some((d) => d.id === id))
+  if (ignoti.length) {
+    console.error(`ID inesistenti: ${ignoti.join(', ')}`)
+    process.exit(1)
+  }
+  console.log(`Solo: ${[...soloQuesti].join(', ')}\n`)
+}
 
 /**
  * Ripartenza: quello che è già in staging non si richiede.
@@ -220,6 +263,8 @@ let fermate = 0
 for (const d of doc.destinations) {
   const etichetta = d.name.padEnd(22)
 
+  if (soloQuesti.size && !soloQuesti.has(d.id)) { saltate += 1; continue }
+
   if (changes[d.id]) { saltate += 1; continue }
 
   if (d.climate_source === 'manual') {
@@ -245,7 +290,8 @@ for (const d of doc.destinations) {
     continue
   }
 
-  const acqua = await mare(punto.lat, punto.lon)
+  const puntoMare = riferimentiMare.get(d.id) || punto
+  const acqua = await mare(puntoMare.lat, puntoMare.lon)
 
   /**
    * La misura aggiorna i numeri del mare, non decide SE il mare c'è.
@@ -260,11 +306,20 @@ for (const d of doc.destinations) {
    * aveva mare, non ne acquista uno. Per le destinazioni nuove non c'è un
    * verdetto da rispettare — entrano comunque come "da valutare", e chi
    * assegna i punteggi guarderà anche questo.
+   *
+   * **Salvo che il punto sia dichiarato.** Il "verdetto precedente" del
+   * Gargano era un no ottenuto chiedendo alla Foresta Umbra, venti chilometri
+   * dentro terra: non un giudizio da rispettare, lo stesso difetto di prima
+   * cristallizzato in un dato. Una riga in `climate-points.txt` è una persona
+   * che ha scelto dove chiedere, ed è esattamente l'atto umano che la guardia
+   * pretende — la guardia esiste per impedire che a decidere sia la griglia
+   * per conto suo, non per impedire a noi di correggere la domanda.
    */
+  const dichiarato = riferimenti.has(d.id) || riferimentiMare.has(d.id)
   const avevaClima = Boolean(d.climate?.['7'])
   const avevaMare = avevaClima
     && Object.values(d.climate).some((m) => m?.sea_temp != null)
-  const accettaMare = avevaClima ? avevaMare : true
+  const accettaMare = dichiarato || (avevaClima ? avevaMare : true)
 
   const climate = {}
   for (let m = 1; m <= 12; m += 1) {
