@@ -598,6 +598,8 @@ export default function App({ startedInitially = false }) {
             entry={detailEntry}
             criteria={criteria}
             closing={detailClosing}
+            inCompare={compareIds.includes(detailEntry.destination.id)}
+            onCompare={() => toggleCompare(detailEntry.destination.id)}
             catalogo={merged}
             aggiunte={compareIds
               .filter((id) => id !== detailEntry.destination.id)

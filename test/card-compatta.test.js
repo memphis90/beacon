@@ -37,6 +37,20 @@ const destinazione = {
   climate: { 10: { temp_avg: 19, temp_max: 23, sea_temp: 20, rain_days: 9 } },
 }
 
+/**
+ * Il dettaglio, a differenza della card, legge anche la tabella dei costi per
+ * voce: la destinazione della card da sola lo fa esplodere.
+ */
+const conCosti = () => ({
+  ...destinazione,
+  costs: {
+    accommodation: { low: 55, mid: 92, high: 150 },
+    food_per_day: { low: 20, mid: 35, high: 58 },
+    transport_local_day: { low: 4, mid: 8, high: 14 },
+    currency: 'EUR',
+  },
+})
+
 const punteggio = (extra = {}) => ({
   total: 88.4,
   base: 88.4,
@@ -103,28 +117,19 @@ describe('card compatta — la coda della riga del paese', () => {
 describe('il dettaglio ospita il selettore del confronto', () => {
   it('DetailPanel disegna i chip e il campo', async () => {
     const { default: DetailPanel } = await import('../src/components/DetailPanel.jsx')
-    // Il dettaglio, a differenza della card, legge anche la tabella dei costi
-    // per voce: la destinazione della card non basta.
-    const conCosti = {
-      ...destinazione,
-      costs: {
-        accommodation: { low: 55, mid: 92, high: 150 },
-        food_per_day: { low: 20, mid: 35, high: 58 },
-        transport_local_day: { low: 4, mid: 8, high: 14 },
-        currency: 'EUR',
-      },
-    }
     const html = renderToStaticMarkup(
       createElement(DetailPanel, {
         entry: {
-          destination: conCosti,
+          destination: conCosti(),
           scoring: punteggio(),
           cost: { low: 92, high: 150 },
         },
         criteria: { nights: 5, month: 10, sortBy: 'score' },
         onClose: () => {},
         onEdit: () => {},
-        catalogo: [conCosti],
+        inCompare: false,
+        onCompare: () => {},
+        catalogo: [conCosti()],
         aggiunte: [],
         onAggiungiAlConfronto: () => {},
         onTogliDalConfronto: () => {},
@@ -135,8 +140,28 @@ describe('il dettaglio ospita il selettore del confronto', () => {
     expect(html).toContain('Aggiungi una destinazione')
   })
 
-  it('il vecchio bottone «Aggiungi al confronto» non c’è più', async () => {
-    const { default: App } = await import('../src/App.jsx')
-    expect(renderToStaticMarkup(createElement(App))).not.toContain('Aggiungi al confronto')
+  /**
+   * Le due forme del comando convivono nel markup e si escludono nel CSS: il
+   * selettore vive sotto i 901px, il bottone del piede sopra. È lo stesso
+   * schema del chip del tipo e della sua coda sulla riga del paese, e come
+   * quello non è provabile con `renderToStaticMarkup` — che il CSS non lo
+   * applica. Qui si prova che ci siano tutte e due e che portino le classi
+   * giuste; quale delle due si veda è nella lista a occhio.
+   */
+  it('le due forme del comando convivono, marcate per larghezza', async () => {
+    const { default: DetailPanel } = await import('../src/components/DetailPanel.jsx')
+    const html = renderToStaticMarkup(
+      createElement(DetailPanel, {
+        entry: { destination: conCosti(), scoring: punteggio(), cost: { low: 92, high: 150 } },
+        criteria: { nights: 5, month: 10, sortBy: 'score' },
+        onClose: () => {}, onEdit: () => {},
+        inCompare: false, onCompare: () => {},
+        catalogo: [conCosti()], aggiunte: [],
+        onAggiungiAlConfronto: () => {}, onTogliDalConfronto: () => {}, onApriConfronto: () => {},
+      }),
+    )
+    expect(html).toContain('section--solomobile')
+    expect(html).toContain('btn--solodesktop')
+    expect(html).toContain('Aggiungi al confronto')
   })
 })

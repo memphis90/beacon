@@ -17,6 +17,7 @@ const COST_ROWS = [
 
 export default function DetailPanel({
   entry, criteria, onClose, onEdit, closing = false,
+  inCompare, onCompare,
   catalogo, aggiunte, onAggiungiAlConfronto, onTogliDalConfronto, onApriConfronto,
 }) {
   const { destination, scoring, cost } = entry
@@ -246,8 +247,14 @@ export default function DetailPanel({
             </div>
           )}
           {/* Il selettore sta nel corpo e non nel piede: il piede è una riga
-              orizzontale di bottoni, e questa è una sezione alta. */}
-          <div className="section">
+              orizzontale di bottoni, e questa è una sezione alta.
+
+              Esiste solo sotto i 901px. Sopra, il confronto si aggiunge dal
+              bottone sulla card — che lì c'è ancora — e il piede tiene il suo
+              "Aggiungi al confronto" di sempre. Le due forme sono mutuamente
+              esclusive nel CSS, come il chip del tipo e la sua coda sulla
+              riga del paese. */}
+          <div className="section section--solomobile">
             <ComparePicker
               corrente={destination}
               aggiunte={aggiunte}
@@ -263,6 +270,17 @@ export default function DetailPanel({
         <footer className="panel__foot">
           <button type="button" className="btn btn--primary" onClick={onEdit}>
             Modifica punteggi
+          </button>
+          {/* Solo sopra i 901px: sotto, il confronto si compone col selettore
+              qui sopra, e due comandi per la stessa cosa nella stessa
+              schermata sono due cose per chi guarda. */}
+          <button
+            type="button"
+            className="btn btn--solodesktop"
+            aria-pressed={inCompare}
+            onClick={onCompare}
+          >
+            {inCompare ? 'Nel confronto' : 'Aggiungi al confronto'}
           </button>
           <button type="button" className="btn" style={{ marginLeft: 'auto' }} onClick={onClose}>
             Chiudi

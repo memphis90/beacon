@@ -123,11 +123,25 @@ risultato.
 
 ---
 
-## 4. Due scelte dichiarate, non chieste
+## 4. Il selettore esiste solo sotto i 901px
 
-**L'autocomplete c'è anche sopra i 901px.** Aggiunge una strada senza toglierne
-nessuna: le card desktop tengono il loro «Confronta». È l'unica cosa di questo
-lavoro che si vede su desktop, ed è un'aggiunta, non una modifica.
+> **Corretto il 2026-08-05**, poco dopo l'implementazione. La prima versione di
+> questa sezione lo metteva a ogni larghezza, dichiarandolo come aggiunta
+> innocua. Non lo era: su desktop diventava il **terzo** modo di aggiungere al
+> confronto, accanto al bottone sulla card e a quello nel piede del dettaglio.
+
+Sotto i 901px vive il selettore. Sopra, restano i due comandi di sempre — il
+bottone «Confronta» sulla card e «Aggiungi al confronto» nel piede del
+dettaglio — ed è esattamente com'era prima di questo lavoro.
+
+Le due forme convivono nel markup e si escludono nel CSS, con le classi
+`section--solomobile` e `btn--solodesktop`. È lo stesso schema del chip del
+tipo e della sua coda sulla riga del paese: due forme dello stesso comando, mai
+visibili insieme.
+
+> **Conseguenza da non perdere di vista:** il piede del dettaglio riprende il
+> bottone che questo lavoro gli aveva tolto. Sopra i 901px il dettaglio torna
+> quindi identico a prima, selettore a parte — che lì non c'è.
 
 **Lo slot «Confronta» della dock resta com'è**: apre il pannello, spento finché
 il confronto è vuoto.

@@ -926,9 +926,11 @@ textarea.control { height: auto; padding: 8px 10px; resize: vertical; }
 }
 
 /* ---------- Selettore del confronto, dentro il dettaglio ---------- */
-/* Vale a ogni larghezza: la sezione esiste su desktop e su mobile. È l'unica
-   cosa di questo lavoro che si vede sopra i 901px, ed è un'aggiunta — le card
-   desktop tengono il loro bottone "Confronta". */
+/* Esiste SOLO sotto i 901px. Sopra, il confronto si aggiunge dal bottone sulla
+   card — che lì c'è ancora — e dal "Aggiungi al confronto" nel piede del
+   dettaglio. Le due forme nascono qui mutuamente esclusive: la sezione spenta
+   e il bottone acceso, e il blocco mobile inverte tutti e due. */
+.section--solomobile { display: none; }
 
 .cpick { display: flex; flex-direction: column; gap: var(--inline-gap); }
 .cpick__title {
@@ -1517,7 +1519,13 @@ input[type='range']:disabled { opacity: 0.45; }
      starebbe dentro 56px di colonna: qui vale quella sulla riga del paese. */
   .card__themebonus { display: none; }
 
-  /* ---- Selettore del confronto: target toccabili ---- */
+  /* ---- Selettore del confronto ---- */
+  /* Qui si inverte la coppia: il selettore si accende e il bottone del piede
+     si spegne. Due comandi per la stessa cosa nella stessa schermata sono due
+     cose per chi guarda. */
+  .section--solomobile { display: block; }
+  .btn--solodesktop { display: none; }
+
   .cpick__list button { min-height: 44px; }
   .chip__x { width: 28px; height: 28px; }
 
