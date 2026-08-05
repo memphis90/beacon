@@ -10,6 +10,7 @@ const typeLabel = (key) => DESTINATION_TYPES.find((t) => t.key === key)?.label |
 
 export default function DestinationCard({
   entry, rank, criteria, isFavourite, onToggleFavourite, inCompare, onToggleCompare, onOpen,
+  aperta = false, onApri = () => {},
 }) {
   const { destination, scoring, cost } = entry
   const month = climateSummary(destination, criteria.month)
@@ -18,7 +19,26 @@ export default function DestinationCard({
   const annuale = month.scope === 'year'
 
   return (
-    <article className={`card${inCompare ? ' card--selected' : ''}`}>
+    <article
+      className={`card${inCompare ? ' card--selected' : ''}${aperta ? ' card--aperta' : ''}`}
+    >
+      {/* Il tocco che apre la card è un bottone vero, non un gestore appiccicato
+          all'articolo: così esiste anche per la tastiera e si annuncia da sé con
+          aria-expanded. Copre la card, sta sotto il cuore e sotto i due bottoni
+          delle azioni, e sopra i 901px non esiste — lì le azioni sono già a
+          vista e non c'è niente da aprire. */}
+      <button
+        type="button"
+        className="card__apri"
+        aria-expanded={aperta}
+        aria-label={
+          aperta
+            ? `Chiudi le azioni di ${destination.name}`
+            : `Mostra le azioni di ${destination.name}`
+        }
+        onClick={onApri}
+      />
+
       <div className="card__media">
         <DestinationImage destination={destination} />
 
@@ -45,7 +65,7 @@ export default function DestinationCard({
           className="card__fav"
           aria-pressed={isFavourite}
           aria-label={isFavourite ? `Togli ${destination.name} dai preferiti` : `Salva ${destination.name} nei preferiti`}
-          onClick={onToggleFavourite}
+          onClick={(e) => { e.stopPropagation(); onToggleFavourite() }}
         >
           <IconHeart filled={isFavourite} />
         </button>
