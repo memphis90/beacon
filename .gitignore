@@ -14,6 +14,12 @@ dist/
 # `scripts/resolve-images.mjs`.
 data/staging/
 
+# Scaricati delle fonti esterne. Il §7 impone di cacharli su disco per non
+# ribattere le stesse richieste a un servizio gratuito, ma sono rigenerabili
+# dall'URL che lo script porta scritto in cima: versionarli significherebbe
+# mettere in git dodici megabyte di roba di qualcun altro.
+data/cache/
+
 # Report di copertura dei test.
 coverage/
 
