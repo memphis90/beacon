@@ -68,22 +68,17 @@ const card = (props = {}, extraPunteggio = {}) =>
     }),
   )
 
-describe('card compatta — lo stato aperto sta nel markup', () => {
-  it('senza «aperta» la card non porta la classe', () => {
-    expect(card()).not.toContain('card--aperta')
+describe('card compatta — il tocco apre la scheda', () => {
+  it('la card non ha più uno stato aperto', () => {
+    const html = card()
+    expect(html).not.toContain('card--aperta')
+    expect(html).not.toContain('aria-expanded')
   })
 
-  it('con «aperta» la card porta la classe', () => {
-    expect(card({ aperta: true })).toContain('card--aperta')
-  })
-
-  it('il bottone di apertura dichiara lo stato a chi non vede', () => {
-    expect(card()).toContain('aria-expanded="false"')
-    expect(card({ aperta: true })).toContain('aria-expanded="true"')
-  })
-
-  it('il bottone di apertura c’è anche senza che gli si passi onApri', () => {
-    expect(card()).toContain('card__apri')
+  it('il bottone sovrapposto dice che apre la scheda', () => {
+    const html = card()
+    expect(html).toContain('card__apri')
+    expect(html).toContain('Apri la scheda di Lisbona')
   })
 })
 
@@ -102,13 +97,5 @@ describe('card compatta — la coda della riga del paese', () => {
     const conBonus = card({}, { themeBonus: 2, base: 86.4, matchedThemes: ['mare'] })
     expect(conBonus).toContain('card__metabonus')
     expect(conBonus).toContain('+2 tema')
-  })
-})
-
-describe('card compatta — App non ne apre nessuna da sola', () => {
-  it('al primo render non c’è nessuna card aperta', async () => {
-    const { default: App } = await import('../src/App.jsx')
-    const html = renderToStaticMarkup(createElement(App))
-    expect(html).not.toContain('card--aperta')
   })
 })

@@ -109,11 +109,6 @@ export default function App({ startedInitially = false }) {
   // di filtro preferiti: dopo una ricerca nuova, restare a novanta card
   // aperte è la coda della ricerca precedente.
   const [mostrate, setMostrate] = useState(PAGINA)
-  // Quale card mostra le sue azioni. Sta qui e non nella card perché "una sola
-  // aperta per volta" è una proprietà della lista: con cinque card a vista, due
-  // righe di bottoni aperte insieme sposterebbero le altre sotto il pollice
-  // mentre le si guarda, e la densità appena guadagnata se ne andrebbe.
-  const [apertaId, setApertaId] = useState(null)
   const [parametri, setParametri] = useState(false)
   const [editor, setEditor] = useState(null)
   const [filtersOpen, setFiltersOpen] = useState(false)
@@ -165,10 +160,7 @@ export default function App({ startedInitially = false }) {
   const { items: toasts, push: pushToast, dismiss: dismissToast } = useToasts()
 
   useEffect(() => { localStorage.setItem(CRITERIA_KEY, JSON.stringify(criteria)) }, [criteria])
-  // Stesso innesco, stessa ragione: quando la lista si riordina, una card
-  // rimasta aperta lo resterebbe in una posizione che nel frattempo è di
-  // un'altra destinazione.
-  useEffect(() => { setMostrate(PAGINA); setApertaId(null) }, [criteria, onlyFavourites])
+  useEffect(() => { setMostrate(PAGINA) }, [criteria, onlyFavourites])
   useEffect(() => { localStorage.setItem(FAVOURITES_KEY, JSON.stringify(favourites)) }, [favourites])
 
   const applyOverrides = (next) => { setOverrides(next); saveOverrides(next) }
@@ -561,10 +553,6 @@ export default function App({ startedInitially = false }) {
                     inCompare={compareIds.includes(entry.destination.id)}
                     onToggleCompare={() => toggleCompare(entry.destination.id)}
                     onOpen={() => setDetailId(entry.destination.id)}
-                    aperta={apertaId === entry.destination.id}
-                    onApri={() =>
-                      setApertaId((id) => (id === entry.destination.id ? null : entry.destination.id))
-                    }
                   />
                 ))}
               </div>

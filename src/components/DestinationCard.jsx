@@ -10,7 +10,6 @@ const typeLabel = (key) => DESTINATION_TYPES.find((t) => t.key === key)?.label |
 
 export default function DestinationCard({
   entry, rank, criteria, isFavourite, onToggleFavourite, inCompare, onToggleCompare, onOpen,
-  aperta = false, onApri = () => {},
 }) {
   const { destination, scoring, cost } = entry
   const month = climateSummary(destination, criteria.month)
@@ -19,24 +18,16 @@ export default function DestinationCard({
   const annuale = month.scope === 'year'
 
   return (
-    <article
-      className={`card${inCompare ? ' card--selected' : ''}${aperta ? ' card--aperta' : ''}`}
-    >
-      {/* Il tocco che apre la card è un bottone vero, non un gestore appiccicato
-          all'articolo: così esiste anche per la tastiera e si annuncia da sé con
-          aria-expanded. Copre la card, sta sotto il cuore e sotto i due bottoni
-          delle azioni, e sopra i 901px non esiste — lì le azioni sono già a
-          vista e non c'è niente da aprire. */}
+    <article className={`card${inCompare ? ' card--selected' : ''}`}>
+      {/* Il tocco che apre la scheda è un bottone vero, non un gestore
+          appiccicato all'articolo: così esiste anche per la tastiera e si
+          annuncia a un lettore di schermo. Copre la card e sta sotto il cuore.
+          Sopra i 901px non esiste: lì la card ha il suo bottone "Dettaglio". */}
       <button
         type="button"
         className="card__apri"
-        aria-expanded={aperta}
-        aria-label={
-          aperta
-            ? `Chiudi le azioni di ${destination.name}`
-            : `Mostra le azioni di ${destination.name}`
-        }
-        onClick={onApri}
+        aria-label={`Apri la scheda di ${destination.name}`}
+        onClick={onOpen}
       />
 
       <div className="card__media">

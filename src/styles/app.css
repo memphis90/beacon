@@ -1418,9 +1418,6 @@ input[type='range']:disabled { opacity: 0.45; }
     gap: 12px;
   }
 
-  /* Aperta cresce: l'altezza fissa vale solo da chiusa. */
-  .card--aperta { height: auto; }
-
   /* Su un dispositivo touch non c'è passaggio del mouse, e con cinque card
      affiancate il sollevamento di un pixel diventa rumore quando il dito
      sfiora. */
@@ -1550,38 +1547,15 @@ input[type='range']:disabled { opacity: 0.45; }
   }
   .card__interestlabel { display: none; }
 
-  /* ---- Lo stato aperto ---- */
-  /* Da chiusa la card mostra solo ciò che serve a scartare: identità, prezzo,
-     punteggio. Le azioni e il perché del punteggio arrivano al tocco. Il costo
-     è dichiarato nella spec: il dettaglio passa da uno a due tocchi, ed è il
-     prezzo della densità. */
+  /* I due bottoni in fondo non servono più su mobile: "Dettaglio" duplica il
+     tocco sulla card, e "Confronta" si compone dal dettaglio. L'asse guida
+     resta spento qui e vive nel dettaglio — è una perdita dichiarata nella
+     spec del confronto, perché è la riga che il §5 del planning usa per
+     identificare l'asse responsabile di un totale. */
   .card__actions,
   .card__interests .segbar__caption {
     display: none;
   }
-
-  .card--aperta .card__actions {
-    display: flex;
-    position: absolute;
-    left: 12px; right: 12px; bottom: 12px;
-    z-index: 2;
-  }
-
-  /* L'asse guida è ciò che il §5 del planning usa per capire quale asse ha
-     prodotto il totale: senza, la barra da sola non basta — lo dice il
-     commento in cima a ScoreBreakdown.jsx. Sta qui e non sulla card chiusa
-     perché in 86px non entra, e chi apre una card vuole esattamente questo. */
-  .card--aperta .card__interests {
-    position: static;
-    width: auto;
-    margin-top: 4px;
-  }
-  .card--aperta .card__interests .segbar__caption {
-    display: block;
-    font-size: 11px; line-height: 14px;
-  }
-
-  .card--aperta { padding-bottom: 68px; }
   /* Il pomello dello slider è già 24px: coincide con un target trascinabile
      comodo, non serve gonfiare l'hit-box invisibile con min-height. */
 
