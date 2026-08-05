@@ -1,6 +1,7 @@
 import DestinationImage from './DestinationImage.jsx'
 import DetailMap from './DetailMap.jsx'
 import ScoreBreakdown from './ScoreBreakdown.jsx'
+import ComparePicker from './ComparePicker.jsx'
 import { DESTINATION_TYPES, MONTHS } from '../lib/axes.js'
 import { climateSummary } from '../lib/scoring.js'
 import { themeLabel } from '../lib/themes.js'
@@ -14,7 +15,10 @@ const COST_ROWS = [
   ['transport_local_day', 'Trasporti locali', 'al giorno'],
 ]
 
-export default function DetailPanel({ entry, criteria, onClose, onEdit, onCompare, inCompare, closing = false }) {
+export default function DetailPanel({
+  entry, criteria, onClose, onEdit, closing = false,
+  catalogo, aggiunte, onAggiungiAlConfronto, onTogliDalConfronto, onApriConfronto,
+}) {
   const { destination, scoring, cost } = entry
   const monthClimate = climateSummary(destination, criteria.month)
   const isApprox = destination.climate_source === 'seed_approx'
@@ -241,14 +245,24 @@ export default function DetailPanel({ entry, criteria, onClose, onEdit, onCompar
               <p style={{ margin: 0, color: 'var(--ink-2)' }}>{destination.notes}</p>
             </div>
           )}
+          {/* Il selettore sta nel corpo e non nel piede: il piede è una riga
+              orizzontale di bottoni, e questa è una sezione alta. */}
+          <div className="section">
+            <ComparePicker
+              corrente={destination}
+              aggiunte={aggiunte}
+              catalogo={catalogo}
+              max={4}
+              onAggiungi={onAggiungiAlConfronto}
+              onTogli={onTogliDalConfronto}
+              onApri={onApriConfronto}
+            />
+          </div>
         </div>
 
         <footer className="panel__foot">
           <button type="button" className="btn btn--primary" onClick={onEdit}>
             Modifica punteggi
-          </button>
-          <button type="button" className="btn" aria-pressed={inCompare} onClick={onCompare}>
-            {inCompare ? 'Nel confronto' : 'Aggiungi al confronto'}
           </button>
           <button type="button" className="btn" style={{ marginLeft: 'auto' }} onClick={onClose}>
             Chiudi

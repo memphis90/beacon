@@ -99,3 +99,44 @@ describe('card compatta — la coda della riga del paese', () => {
     expect(conBonus).toContain('+2 tema')
   })
 })
+
+describe('il dettaglio ospita il selettore del confronto', () => {
+  it('DetailPanel disegna i chip e il campo', async () => {
+    const { default: DetailPanel } = await import('../src/components/DetailPanel.jsx')
+    // Il dettaglio, a differenza della card, legge anche la tabella dei costi
+    // per voce: la destinazione della card non basta.
+    const conCosti = {
+      ...destinazione,
+      costs: {
+        accommodation: { low: 55, mid: 92, high: 150 },
+        food_per_day: { low: 20, mid: 35, high: 58 },
+        transport_local_day: { low: 4, mid: 8, high: 14 },
+        currency: 'EUR',
+      },
+    }
+    const html = renderToStaticMarkup(
+      createElement(DetailPanel, {
+        entry: {
+          destination: conCosti,
+          scoring: punteggio(),
+          cost: { low: 92, high: 150 },
+        },
+        criteria: { nights: 5, month: 10, sortBy: 'score' },
+        onClose: () => {},
+        onEdit: () => {},
+        catalogo: [conCosti],
+        aggiunte: [],
+        onAggiungiAlConfronto: () => {},
+        onTogliDalConfronto: () => {},
+        onApriConfronto: () => {},
+      }),
+    )
+    expect(html).toContain('cpick')
+    expect(html).toContain('Aggiungi una destinazione')
+  })
+
+  it('il vecchio bottone «Aggiungi al confronto» non c’è più', async () => {
+    const { default: App } = await import('../src/App.jsx')
+    expect(renderToStaticMarkup(createElement(App))).not.toContain('Aggiungi al confronto')
+  })
+})

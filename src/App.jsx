@@ -598,8 +598,28 @@ export default function App({ startedInitially = false }) {
             entry={detailEntry}
             criteria={criteria}
             closing={detailClosing}
-            inCompare={compareIds.includes(detailEntry.destination.id)}
-            onCompare={() => toggleCompare(detailEntry.destination.id)}
+            catalogo={merged}
+            aggiunte={compareIds
+              .filter((id) => id !== detailEntry.destination.id)
+              .map((id) => merged.find((d) => d.id === id))
+              .filter(Boolean)}
+            onAggiungiAlConfronto={(id) => {
+              // La scheda aperta entra nel confronto insieme alla prima
+              // aggiunta, non all'apertura del dettaglio: prima di allora un
+              // confronto con se stessa non esiste, e infilarcela subito
+              // riempirebbe il pannello di destinazioni soltanto guardate.
+              setCompareIds((current) => {
+                const base = current.includes(detailEntry.destination.id)
+                  ? current
+                  : [...current, detailEntry.destination.id]
+                if (base.includes(id) || base.length >= MAX_COMPARE) return base
+                return [...base, id]
+              })
+            }}
+            onTogliDalConfronto={(id) =>
+              setCompareIds((current) => current.filter((x) => x !== id))
+            }
+            onApriConfronto={() => { dismissDetail(); setCompareOpen(true) }}
             onEdit={() => { setEditor({ id: detailEntry.destination.id }); dismissDetail() }}
             onClose={dismissDetail}
           />
