@@ -569,6 +569,11 @@ textarea.control { height: auto; padding: 8px 10px; resize: vertical; }
   font-size: 11px; line-height: 14px; font-weight: 500; color: var(--ink-2); /* caption */
 }
 
+/* La coda della riga del paese — tipo e bonus di tema — è roba della sola card
+   compatta: sopra i 901px il tipo è il chip sulla foto e il bonus sta nella
+   pillola del punteggio. Nasce spenta, e il blocco mobile la accende. */
+.card__meta { display: none; }
+
 /* Prezzo e clima affiancati con divisore, come nel mockup desktop: una fascia
    con bordo sopra e sotto, prezzo a sinistra, le due temperature a destra
    separate a loro volta da un divisore verticale. */
@@ -1461,6 +1466,22 @@ input[type='range']:disabled { opacity: 0.45; }
   /* Il tipo non sparisce: si accorpa alla riga del paese. Il chip sovrapposto
      all'immagine non ha più senso su una miniatura di 80px. */
   .card__type { display: none; }
+  .card__meta { display: inline; }
+
+  /* Il bonus tematico non può stare sotto la barra: costerebbe ~14px a tutte
+     le card per servirne poche, e ne farebbe entrare una di meno. Va in coda
+     al paese, dove lo spazio a destra c'è già.
+     `--accent-dark` e non `--accent`: l'ambra piena su fondo bianco non arriva
+     al contrasto richiesto per un testo di 11px. */
+  .card__metabonus {
+    color: var(--accent-dark);
+    font-style: normal; font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* La pillola del punteggio porta la sua copia del bonus, che su mobile
+     starebbe dentro 56px di colonna: qui vale quella sulla riga del paese. */
+  .card__themebonus { display: none; }
 
   /* La fascia con i bordi sopra e sotto era la riga prezzo + clima: senza il
      clima non è più una fascia, è solo il prezzo. */

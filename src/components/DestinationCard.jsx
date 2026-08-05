@@ -76,6 +76,20 @@ export default function DestinationCard({
           <h3>{destination.name}</h3>
           <p className="card__where">
             {countryFlag(destination.country)} {countryName(destination.country)}
+            {/* La coda della riga esiste solo sotto i 901px, dove il chip del
+                tipo sovrapposto alla foto non ha più senso su una miniatura di
+                80px e il "+N tema" non entra nella colonna del punteggio.
+                Il tipo finisce così scritto due volte nel markup — qui e nel
+                chip — ed è il prezzo per non toccare il desktop: le due forme
+                sono mutuamente esclusive nel CSS, mai visibili insieme. */}
+            <span className="card__meta">
+              {' · '}{typeLabel(destination.type).toLowerCase()}
+              {scoring.themeBonus > 0 && (
+                <em className="card__metabonus">
+                  {' · '}+{scoring.themeBonus} tema
+                </em>
+              )}
+            </span>
           </p>
         </div>
 

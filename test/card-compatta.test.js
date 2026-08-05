@@ -87,6 +87,24 @@ describe('card compatta — lo stato aperto sta nel markup', () => {
   })
 })
 
+describe('card compatta — la coda della riga del paese', () => {
+  it('il tipo si accoda al paese, oltre a restare nel chip', () => {
+    const html = card()
+    expect(html).toContain('card__meta')
+    // Due forme dello stesso dato: il chip per il desktop, la coda per il
+    // mobile. Il CSS le rende mutuamente esclusive.
+    expect(html).toContain('card__type')
+    expect(html).toContain('· città')
+  })
+
+  it('il «+N tema» è nel markup solo quando c’è un bonus', () => {
+    expect(card()).not.toContain('card__metabonus')
+    const conBonus = card({}, { themeBonus: 2, base: 86.4, matchedThemes: ['mare'] })
+    expect(conBonus).toContain('card__metabonus')
+    expect(conBonus).toContain('+2 tema')
+  })
+})
+
 describe('card compatta — App non ne apre nessuna da sola', () => {
   it('al primo render non c’è nessuna card aperta', async () => {
     const { default: App } = await import('../src/App.jsx')
