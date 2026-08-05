@@ -925,6 +925,43 @@ textarea.control { height: auto; padding: 8px 10px; resize: vertical; }
   margin-left: auto; font-size: 11px; line-height: 14px; font-weight: 500; color: var(--ink-2); /* caption */
 }
 
+/* ---------- Selettore del confronto, dentro il dettaglio ---------- */
+/* Vale a ogni larghezza: la sezione esiste su desktop e su mobile. È l'unica
+   cosa di questo lavoro che si vede sopra i 901px, ed è un'aggiunta — le card
+   desktop tengono il loro bottone "Confronta". */
+
+.cpick { display: flex; flex-direction: column; gap: var(--inline-gap); }
+.cpick__title {
+  margin: 0;
+  font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.02em;
+  color: var(--ink-2); /* label-md */
+}
+.cpick__chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+/* Il chip della destinazione aperta si distingue perché non si può togliere:
+   se sembrasse uguale agli altri, la × mancante sembrerebbe un difetto. */
+.cpick__chips .chip--fisso { background: var(--brand-tint); border-color: var(--brand-600); }
+.chip__x {
+  margin-left: 4px; padding: 0; width: 18px; height: 18px;
+  border: 0; background: none; color: var(--ink-2);
+  font-size: 14px; line-height: 1; cursor: pointer;
+}
+.chip__x:hover { color: var(--crit); }
+
+.cpick__list { margin: 0; padding: 0; list-style: none; max-height: 180px; overflow-y: auto; }
+.cpick__list button {
+  display: flex; flex-direction: column; gap: 1px;
+  width: 100%; padding: 7px 9px;
+  border: 0; border-radius: var(--radius-sm);
+  background: none; text-align: left; cursor: pointer;
+}
+.cpick__list button:hover { background: var(--surface-3); }
+.cpick__list b { font-size: 13px; line-height: 17px; font-weight: 600; }
+.cpick__list span { font-size: 11px; line-height: 14px; color: var(--ink-2); /* caption */ }
+.cpick__vuoto, .cpick__pieno {
+  margin: 0; padding: 7px 0;
+  font-size: 11px; line-height: 14px; color: var(--ink-2); /* caption */
+}
+
 /* ---------- Confronto ---------- */
 /* La tabella scorre orizzontalmente insieme al corpo del pannello
    (.panel--modal .panel__body sopra); la colonna dei criteri resta ancorata
@@ -1479,6 +1516,10 @@ input[type='range']:disabled { opacity: 0.45; }
   /* La pillola del punteggio porta la sua copia del bonus, che su mobile
      starebbe dentro 56px di colonna: qui vale quella sulla riga del paese. */
   .card__themebonus { display: none; }
+
+  /* ---- Selettore del confronto: target toccabili ---- */
+  .cpick__list button { min-height: 44px; }
+  .chip__x { width: 28px; height: 28px; }
 
   /* La fascia con i bordi sopra e sotto era la riga prezzo + clima: senza il
      clima non è più una fascia, è solo il prezzo. */
