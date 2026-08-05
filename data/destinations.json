@@ -15,7 +15,11 @@
       "wikidata_id": "Q25319",
       "wikipedia_title": "Aarhus",
       "wikipedia_title_en": "Aarhus",
-      "airports": [],
+      "airports": [
+        "AAR",
+        "ODE",
+        "BLL"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -124,7 +128,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "adalia",
@@ -139,7 +144,9 @@
       "wikidata_id": "Q6487",
       "wikipedia_title": "Adalia",
       "wikipedia_title_en": "Antalya",
-      "airports": [],
+      "airports": [
+        "AYT"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -248,7 +255,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "algarve",
@@ -413,7 +421,8 @@
       "image_credit": "Arne Müseler · CC BY-SA 3.0 de",
       "themes": [
         "balneare"
-      ]
+      ],
+      "airports_source": "manual"
     },
     {
       "id": "amburgo",
@@ -428,7 +437,10 @@
       "wikidata_id": "Q1055",
       "wikipedia_title": "Amburgo",
       "wikipedia_title_en": "Hamburg",
-      "airports": [],
+      "airports": [
+        "HAM",
+        "LBC"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -537,7 +549,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "amsterdam",
@@ -696,7 +709,8 @@
       "image_credit": "Andrés Barrios · CC BY-SA 4.0",
       "themes": [
         "gotico"
-      ]
+      ],
+      "airports_source": "manual"
     },
     {
       "id": "annecy",
@@ -711,7 +725,11 @@
       "wikidata_id": "Q50189",
       "wikipedia_title": "Annecy",
       "wikipedia_title_en": "Annecy",
-      "airports": [],
+      "airports": [
+        "GVA",
+        "LYS",
+        "NCY"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -820,7 +838,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "assisi",
@@ -835,7 +854,9 @@
       "wikidata_id": "Q20103",
       "wikipedia_title": "Assisi",
       "wikipedia_title_en": "Assisi",
-      "airports": [],
+      "airports": [
+        "PEG"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -944,7 +965,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "atene",
@@ -959,7 +981,9 @@
       "wikidata_id": "Q1524",
       "wikipedia_title": "Atene",
       "wikipedia_title_en": "Athens",
-      "airports": [],
+      "airports": [
+        "ATH"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -1068,7 +1092,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "azzorre",
@@ -1083,7 +1108,11 @@
       "wikidata_id": "Q25263",
       "wikipedia_title": "Azzorre",
       "wikipedia_title_en": "Azores",
-      "airports": [],
+      "airports": [
+        "SJZ",
+        "PIX",
+        "GRW"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -1192,7 +1221,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "baia-di-kotor",
@@ -1352,7 +1382,8 @@
       "image_credit": "kallerna · CC BY-SA 4.0",
       "themes": [
         "medievale"
-      ]
+      ],
+      "airports_source": "manual"
     },
     {
       "id": "barcellona",
@@ -1518,7 +1549,8 @@
       "themes": [
         "gastronomico",
         "balneare"
-      ]
+      ],
+      "airports_source": "manual"
     },
     {
       "id": "bath",
@@ -1533,7 +1565,11 @@
       "wikidata_id": "Q22889",
       "wikipedia_title": "Bath",
       "wikipedia_title_en": "Bath, Somerset",
-      "airports": [],
+      "airports": [
+        "BRS",
+        "CWL",
+        "BOH"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -1642,7 +1678,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "baviera",
@@ -1657,7 +1694,11 @@
       "wikidata_id": "Q980",
       "wikipedia_title": "Baviera",
       "wikipedia_title_en": "Bavaria",
-      "airports": [],
+      "airports": [
+        "NUE",
+        "MUC",
+        "FMM"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -1766,7 +1807,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "belgrado",
@@ -1781,7 +1823,9 @@
       "wikidata_id": "Q3711",
       "wikipedia_title": "Belgrado",
       "wikipedia_title_en": "Belgrade",
-      "airports": [],
+      "airports": [
+        "BEG"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -1890,7 +1934,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "bergamo",
@@ -1905,7 +1950,11 @@
       "wikidata_id": "Q628",
       "wikipedia_title": "Bergamo",
       "wikipedia_title_en": "Bergamo",
-      "airports": [],
+      "airports": [
+        "BGY",
+        "LIN",
+        "MXP"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -2014,7 +2063,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "bergen",
@@ -2029,7 +2079,10 @@
       "wikidata_id": "Q26793",
       "wikipedia_title": "Bergen",
       "wikipedia_title_en": "Bergen",
-      "airports": [],
+      "airports": [
+        "BGO",
+        "SRP"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -2138,7 +2191,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "berlino",
@@ -2153,7 +2207,9 @@
       "wikidata_id": "Q64",
       "wikipedia_title": "Berlino",
       "wikipedia_title_en": "Berlin",
-      "airports": [],
+      "airports": [
+        "BER"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -2262,7 +2318,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "bilbao",
@@ -2277,7 +2334,11 @@
       "wikidata_id": "Q8692",
       "wikipedia_title": "Bilbao",
       "wikipedia_title_en": "Bilbao",
-      "airports": [],
+      "airports": [
+        "BIO",
+        "VIT",
+        "SDR"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -2386,7 +2447,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "bled",
@@ -2401,7 +2463,11 @@
       "wikidata_id": "Q202852",
       "wikipedia_title": "Bled",
       "wikipedia_title_en": "Bled",
-      "airports": [],
+      "airports": [
+        "LJU",
+        "KLU",
+        "TRS"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -2510,7 +2576,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "bologna",
@@ -2525,7 +2592,11 @@
       "wikidata_id": "Q1891",
       "wikipedia_title": "Bologna",
       "wikipedia_title_en": "Bologna",
-      "airports": [],
+      "airports": [
+        "BLQ",
+        "FLR",
+        "FRL"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -2634,7 +2705,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "bordeaux",
@@ -2649,7 +2721,9 @@
       "wikidata_id": "Q1479",
       "wikipedia_title": "Bordeaux",
       "wikipedia_title_en": "Bordeaux",
-      "airports": [],
+      "airports": [
+        "BOD"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -2758,7 +2832,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "bratislava",
@@ -2773,7 +2848,10 @@
       "wikidata_id": "Q1780",
       "wikipedia_title": "Bratislava",
       "wikipedia_title_en": "Bratislava",
-      "airports": [],
+      "airports": [
+        "BTS",
+        "VIE"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -2882,7 +2960,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "bretagna",
@@ -2897,7 +2976,11 @@
       "wikidata_id": "Q327",
       "wikipedia_title": "Bretagna",
       "wikipedia_title_en": "Brittany",
-      "airports": [],
+      "airports": [
+        "BES",
+        "LRT",
+        "DNR"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -3006,7 +3089,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "brno",
@@ -3021,7 +3105,9 @@
       "wikidata_id": "Q14960",
       "wikipedia_title": "Brno",
       "wikipedia_title_en": "Brno",
-      "airports": [],
+      "airports": [
+        "BRQ"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -3130,7 +3216,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "bruges",
@@ -3145,7 +3232,10 @@
       "wikidata_id": "Q12994",
       "wikipedia_title": "Bruges",
       "wikipedia_title_en": "Bruges",
-      "airports": [],
+      "airports": [
+        "OST",
+        "LIL"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -3254,7 +3344,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "bucarest",
@@ -3269,7 +3360,10 @@
       "wikidata_id": "Q19660",
       "wikipedia_title": "Bucarest",
       "wikipedia_title_en": "Bucharest",
-      "airports": [],
+      "airports": [
+        "BBU",
+        "OTP"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -3378,7 +3472,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "budapest",
@@ -3545,7 +3640,8 @@
         "gotico",
         "termale",
         "imperiale"
-      ]
+      ],
+      "airports_source": "manual"
     },
     {
       "id": "camargue",
@@ -3560,7 +3656,11 @@
       "wikidata_id": "Q218151",
       "wikipedia_title": "Camargue",
       "wikipedia_title_en": "Camargue",
-      "airports": [],
+      "airports": [
+        "MPL",
+        "MRS",
+        "FNI"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -3669,7 +3769,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "cappadocia",
@@ -3684,7 +3785,10 @@
       "wikidata_id": "Q217265",
       "wikipedia_title": "Cappadocia",
       "wikipedia_title_en": "Cappadocia",
-      "airports": [],
+      "airports": [
+        "NAV",
+        "ASR"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -3793,7 +3897,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "carcassonne",
@@ -3808,7 +3913,11 @@
       "wikidata_id": "Q6582",
       "wikipedia_title": "Carcassonne",
       "wikipedia_title_en": "Carcassonne",
-      "airports": [],
+      "airports": [
+        "CCF",
+        "DCM",
+        "PGF"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -3917,7 +4026,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "cefalonia",
@@ -3932,7 +4042,11 @@
       "wikidata_id": "Q178488",
       "wikipedia_title": "Cefalonia",
       "wikipedia_title_en": "Cephalonia",
-      "airports": [],
+      "airports": [
+        "EFL",
+        "ZTH",
+        "PVK"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -4041,7 +4155,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "chamonix-mont-blanc",
@@ -4056,7 +4171,11 @@
       "wikidata_id": "Q83236",
       "wikipedia_title": "Chamonix-Mont-Blanc",
       "wikipedia_title_en": "Chamonix",
-      "airports": [],
+      "airports": [
+        "GVA",
+        "NCY",
+        "CMF"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -4165,7 +4284,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "cilento",
@@ -4180,7 +4300,11 @@
       "wikidata_id": "Q842184",
       "wikipedia_title": "Cilento",
       "wikipedia_title_en": "Cilento",
-      "airports": [],
+      "airports": [
+        "NAP",
+        "QSR",
+        "FOG"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -4289,7 +4413,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "cinque-terre",
@@ -4304,7 +4429,11 @@
       "wikidata_id": "Q275639",
       "wikipedia_title": "Cinque Terre",
       "wikipedia_title_en": "Cinque Terre",
-      "airports": [],
+      "airports": [
+        "PSA",
+        "GOA",
+        "FLR"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -4413,7 +4542,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "cipro",
@@ -4428,7 +4558,11 @@
       "wikidata_id": "Q229",
       "wikipedia_title": "Cipro",
       "wikipedia_title_en": "Cyprus",
-      "airports": [],
+      "airports": [
+        "ECN",
+        "PFO",
+        "LCA"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -4537,7 +4671,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "copenaghen",
@@ -4552,7 +4687,11 @@
       "wikidata_id": "Q1748",
       "wikipedia_title": "Copenaghen",
       "wikipedia_title_en": "Copenhagen",
-      "airports": [],
+      "airports": [
+        "CPH",
+        "MMX",
+        "RKE"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -4661,7 +4800,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "cordova",
@@ -4676,7 +4816,9 @@
       "wikidata_id": "Q5818",
       "wikipedia_title": "Cordova",
       "wikipedia_title_en": "Córdoba, Spain",
-      "airports": [],
+      "airports": [
+        "ODB"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -4785,7 +4927,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "corfu",
@@ -4800,7 +4943,11 @@
       "wikidata_id": "Q121378",
       "wikipedia_title": "Corfù",
       "wikipedia_title_en": "Corfu",
-      "airports": [],
+      "airports": [
+        "CFU",
+        "IOA",
+        "PVK"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -4909,7 +5056,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "cornovaglia",
@@ -4924,7 +5072,10 @@
       "wikidata_id": "Q23148",
       "wikipedia_title": "Cornovaglia",
       "wikipedia_title_en": "Cornwall",
-      "airports": [],
+      "airports": [
+        "NQY",
+        "EXT"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -5033,7 +5184,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "corsica",
@@ -5048,7 +5200,11 @@
       "wikidata_id": "Q14112",
       "wikipedia_title": "Corsica",
       "wikipedia_title_en": "Corsica",
-      "airports": [],
+      "airports": [
+        "BIA",
+        "FSC",
+        "AJA"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -5157,7 +5313,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "costa-azzurra",
@@ -5172,7 +5329,11 @@
       "wikidata_id": "Q182822",
       "wikipedia_title": "Costa Azzurra",
       "wikipedia_title_en": "French Riviera",
-      "airports": [],
+      "airports": [
+        "NCE",
+        "MRS",
+        "TLN"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -5281,7 +5442,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "costiera-amalfitana",
@@ -5447,7 +5609,8 @@
       "themes": [
         "balneare",
         "romantico"
-      ]
+      ],
+      "airports_source": "manual"
     },
     {
       "id": "cracovia",
@@ -5462,7 +5625,10 @@
       "wikidata_id": "Q31487",
       "wikipedia_title": "Cracovia",
       "wikipedia_title_en": "Kraków",
-      "airports": [],
+      "airports": [
+        "KRK",
+        "KTW"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -5571,7 +5737,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "creta",
@@ -5738,7 +5905,8 @@
       "themes": [
         "archeologico",
         "balneare"
-      ]
+      ],
+      "airports_source": "manual"
     },
     {
       "id": "danzica",
@@ -5753,7 +5921,9 @@
       "wikidata_id": "Q1792",
       "wikipedia_title": "Danzica",
       "wikipedia_title_en": "Gdańsk",
-      "airports": [],
+      "airports": [
+        "GDN"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -5862,7 +6032,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "dolomiti",
@@ -6029,7 +6200,8 @@
       "image_credit": "kallerna · CC BY-SA 4.0",
       "themes": [
         "alpino"
-      ]
+      ],
+      "airports_source": "manual"
     },
     {
       "id": "dresda",
@@ -6044,7 +6216,9 @@
       "wikidata_id": "Q1731",
       "wikipedia_title": "Dresda",
       "wikipedia_title_en": "Dresden",
-      "airports": [],
+      "airports": [
+        "DRS"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -6153,7 +6327,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "dublino",
@@ -6168,7 +6343,9 @@
       "wikidata_id": "Q1761",
       "wikipedia_title": "Dublino",
       "wikipedia_title_en": "Dublin",
-      "airports": [],
+      "airports": [
+        "DUB"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -6277,7 +6454,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "dubrovnik",
@@ -6436,7 +6614,8 @@
       "image_credit": "Zysko serhii · CC BY-SA 4.0",
       "themes": [
         "medievale"
-      ]
+      ],
+      "airports_source": "manual"
     },
     {
       "id": "edimburgo",
@@ -6451,7 +6630,11 @@
       "wikidata_id": "Q23436",
       "wikipedia_title": "Edimburgo",
       "wikipedia_title_en": "Edinburgh",
-      "airports": [],
+      "airports": [
+        "EDI",
+        "GLA",
+        "DND"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -6560,7 +6743,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "f-r-er",
@@ -6575,7 +6759,9 @@
       "wikidata_id": "Q4628",
       "wikipedia_title": "Fær Øer",
       "wikipedia_title_en": "Faroe Islands",
-      "airports": [],
+      "airports": [
+        "FAE"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -6684,7 +6870,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "ferrara",
@@ -6699,7 +6886,11 @@
       "wikidata_id": "Q13362",
       "wikipedia_title": "Ferrara",
       "wikipedia_title_en": "Ferrara",
-      "airports": [],
+      "airports": [
+        "BLQ",
+        "VRN",
+        "FRL"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -6808,7 +6999,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "firenze",
@@ -6823,7 +7015,11 @@
       "wikidata_id": "Q2044",
       "wikipedia_title": "Firenze",
       "wikipedia_title_en": "Florence",
-      "airports": [],
+      "airports": [
+        "FLR",
+        "PSA",
+        "BLQ"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -6932,7 +7128,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "foresta-nera",
@@ -6947,7 +7144,11 @@
       "wikidata_id": "Q4204",
       "wikipedia_title": "Foresta Nera",
       "wikipedia_title_en": "Black Forest",
-      "airports": [],
+      "airports": [
+        "SXB",
+        "FKB",
+        "STR"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -7056,7 +7257,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "formentera",
@@ -7071,7 +7273,9 @@
       "wikidata_id": "Q52626",
       "wikipedia_title": "Formentera",
       "wikipedia_title_en": "Formentera",
-      "airports": [],
+      "airports": [
+        "IBZ"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -7180,7 +7384,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "galway",
@@ -7195,7 +7400,10 @@
       "wikidata_id": "Q129610",
       "wikipedia_title": "Galway",
       "wikipedia_title_en": "Galway",
-      "airports": [],
+      "airports": [
+        "SNN",
+        "NOC"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -7304,7 +7512,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "gand",
@@ -7319,7 +7528,11 @@
       "wikidata_id": "Q1296",
       "wikipedia_title": "Gand",
       "wikipedia_title_en": "Ghent",
-      "airports": [],
+      "airports": [
+        "BRU",
+        "OST",
+        "LIL"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -7428,7 +7641,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "gargano",
@@ -7443,7 +7657,11 @@
       "wikidata_id": "Q763332",
       "wikipedia_title": "Gargano",
       "wikipedia_title_en": "Gargano",
-      "airports": [],
+      "airports": [
+        "BRI",
+        "FOG",
+        "QSR"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -7552,7 +7770,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "genova",
@@ -7567,7 +7786,9 @@
       "wikidata_id": "Q1449",
       "wikipedia_title": "Genova",
       "wikipedia_title_en": "Genoa",
-      "airports": [],
+      "airports": [
+        "GOA"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -7676,7 +7897,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "goteborg",
@@ -7691,7 +7913,10 @@
       "wikidata_id": "Q25287",
       "wikipedia_title": "Göteborg",
       "wikipedia_title_en": "Gothenburg",
-      "airports": [],
+      "airports": [
+        "GOT",
+        "THN"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -7800,7 +8025,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "granada",
@@ -7815,7 +8041,9 @@
       "wikidata_id": "Q8810",
       "wikipedia_title": "Granada",
       "wikipedia_title_en": "Granada",
-      "airports": [],
+      "airports": [
+        "GRX"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -7924,7 +8152,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "helsinki",
@@ -7939,7 +8168,10 @@
       "wikidata_id": "Q1757",
       "wikipedia_title": "Helsinki",
       "wikipedia_title_en": "Helsinki",
-      "airports": [],
+      "airports": [
+        "HEL",
+        "TLL"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -8048,7 +8280,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "highlands",
@@ -8063,7 +8296,11 @@
       "wikidata_id": "Q106652",
       "wikipedia_title": "Highlands",
       "wikipedia_title_en": "Scottish Highlands",
-      "airports": [],
+      "airports": [
+        "GLA",
+        "INV",
+        "DND"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -8172,7 +8409,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "ibiza",
@@ -8187,7 +8425,9 @@
       "wikidata_id": "Q52631",
       "wikipedia_title": "Ibiza (isola)",
       "wikipedia_title_en": "Ibiza",
-      "airports": [],
+      "airports": [
+        "IBZ"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -8296,7 +8536,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "innsbruck",
@@ -8311,7 +8552,9 @@
       "wikidata_id": "Q1735",
       "wikipedia_title": "Innsbruck",
       "wikipedia_title_en": "Innsbruck",
-      "airports": [],
+      "airports": [
+        "INN"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -8420,7 +8663,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "interlaken",
@@ -8435,7 +8679,9 @@
       "wikidata_id": "Q68103",
       "wikipedia_title": "Interlaken",
       "wikipedia_title_en": "Interlaken",
-      "airports": [],
+      "airports": [
+        "BRN"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -8544,7 +8790,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "islanda-sud",
@@ -8710,7 +8957,8 @@
       "themes": [
         "vulcanico",
         "artico"
-      ]
+      ],
+      "airports_source": "manual"
     },
     {
       "id": "isola-d-elba",
@@ -8725,7 +8973,11 @@
       "wikidata_id": "Q45328",
       "wikipedia_title": "Isola d'Elba",
       "wikipedia_title_en": "Elba",
-      "airports": [],
+      "airports": [
+        "BIA",
+        "PSA",
+        "EBA"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -8834,7 +9086,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "isola-d-ischia",
@@ -8849,7 +9102,10 @@
       "wikidata_id": "Q189387",
       "wikipedia_title": "Isola d'Ischia",
       "wikipedia_title_en": "Ischia",
-      "airports": [],
+      "airports": [
+        "NAP",
+        "QSR"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -8958,7 +9214,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "isola-di-capri",
@@ -8973,7 +9230,10 @@
       "wikidata_id": "Q173292",
       "wikipedia_title": "Isola di Capri",
       "wikipedia_title_en": "Capri",
-      "airports": [],
+      "airports": [
+        "NAP",
+        "QSR"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -9082,7 +9342,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "isole-eolie",
@@ -9097,7 +9358,10 @@
       "wikidata_id": "Q179883",
       "wikipedia_title": "Isole Eolie",
       "wikipedia_title_en": "Aeolian Islands",
-      "airports": [],
+      "airports": [
+        "CTA",
+        "REG"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -9206,7 +9470,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "istanbul",
@@ -9373,7 +9638,8 @@
       "themes": [
         "imperiale",
         "gastronomico"
-      ]
+      ],
+      "airports_source": "manual"
     },
     {
       "id": "istria",
@@ -9388,7 +9654,11 @@
       "wikidata_id": "Q639912",
       "wikipedia_title": "Istria",
       "wikipedia_title_en": "Istria",
-      "airports": [],
+      "airports": [
+        "PUY",
+        "RJK",
+        "TRS"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -9497,7 +9767,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "la-valletta",
@@ -9512,7 +9783,9 @@
       "wikidata_id": "Q23800",
       "wikipedia_title": "La Valletta",
       "wikipedia_title_en": "Valletta",
-      "airports": [],
+      "airports": [
+        "MLA"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -9621,7 +9894,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "parco-nazionale-dei-laghi-di-plitvice",
@@ -9636,7 +9910,11 @@
       "wikidata_id": "Q189849",
       "wikipedia_title": "Parco nazionale dei laghi di Plitvice",
       "wikipedia_title_en": "Plitvice Lakes National Park",
-      "airports": [],
+      "airports": [
+        "ZAD",
+        "RJK",
+        "ZAG"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -9745,7 +10023,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "lago-di-como",
@@ -9760,7 +10039,11 @@
       "wikidata_id": "Q15523",
       "wikipedia_title": "Lago di Como",
       "wikipedia_title_en": "Lake Como",
-      "airports": [],
+      "airports": [
+        "BGY",
+        "MXP",
+        "LIN"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -9869,7 +10152,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "langhe",
@@ -9884,7 +10168,11 @@
       "wikidata_id": "Q19865",
       "wikipedia_title": "Langhe",
       "wikipedia_title_en": "Langhe",
-      "airports": [],
+      "airports": [
+        "TRN",
+        "GOA",
+        "NCE"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -9993,7 +10281,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "lanzarote",
@@ -10008,7 +10297,10 @@
       "wikidata_id": "Q182432",
       "wikipedia_title": "Lanzarote",
       "wikipedia_title_en": "Lanzarote",
-      "airports": [],
+      "airports": [
+        "ACE",
+        "FUE"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -10117,7 +10409,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "lapponia",
@@ -10132,7 +10425,11 @@
       "wikidata_id": "Q62132",
       "wikipedia_title": "Lapponia",
       "wikipedia_title_en": "Sápmi",
-      "airports": [],
+      "airports": [
+        "KRN",
+        "EVE",
+        "BDU"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -10241,7 +10538,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "lecce",
@@ -10256,7 +10554,9 @@
       "wikidata_id": "Q13386",
       "wikipedia_title": "Lecce",
       "wikipedia_title_en": "Lecce",
-      "airports": [],
+      "airports": [
+        "BDS"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -10365,7 +10665,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "lione",
@@ -10380,7 +10681,11 @@
       "wikidata_id": "Q456",
       "wikipedia_title": "Lione",
       "wikipedia_title_en": "Lyon",
-      "airports": [],
+      "airports": [
+        "LYS",
+        "GNB",
+        "CMF"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -10489,7 +10794,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "lisbona",
@@ -10648,7 +10954,8 @@
       "image_credit": "Vitor Oliveira from Torres Vedras, PORTUGAL · CC BY-SA 2.0",
       "themes": [
         "gastronomico"
-      ]
+      ],
+      "airports_source": "manual"
     },
     {
       "id": "lofoten",
@@ -10816,7 +11123,8 @@
       "themes": [
         "artico",
         "nordico"
-      ]
+      ],
+      "airports_source": "manual"
     },
     {
       "id": "londra",
@@ -10831,7 +11139,11 @@
       "wikidata_id": "Q84",
       "wikipedia_title": "Londra",
       "wikipedia_title_en": "London",
-      "airports": [],
+      "airports": [
+        "LHR",
+        "LGW",
+        "LTN"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -10940,7 +11252,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "lubiana",
@@ -10955,7 +11268,11 @@
       "wikidata_id": "Q437",
       "wikipedia_title": "Lubiana",
       "wikipedia_title_en": "Ljubljana",
-      "airports": [],
+      "airports": [
+        "LJU",
+        "KLU",
+        "TRS"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -11064,7 +11381,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "lucerna",
@@ -11079,7 +11397,11 @@
       "wikidata_id": "Q4191",
       "wikipedia_title": "Lucerna",
       "wikipedia_title_en": "Lucerne",
-      "airports": [],
+      "airports": [
+        "ZRH",
+        "BSL",
+        "BRN"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -11188,7 +11510,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "madeira",
@@ -11353,7 +11676,8 @@
       "image_credit": "Dr. Thomas Liptak · CC BY-SA 4.0",
       "themes": [
         "vulcanico"
-      ]
+      ],
+      "airports_source": "manual"
     },
     {
       "id": "madrid",
@@ -11368,7 +11692,9 @@
       "wikidata_id": "Q2807",
       "wikipedia_title": "Madrid",
       "wikipedia_title_en": "Madrid",
-      "airports": [],
+      "airports": [
+        "MAD"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -11477,7 +11803,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "maiorca",
@@ -11642,7 +11969,8 @@
       "image_credit": "Top Cat 14 · Public domain",
       "themes": [
         "balneare"
-      ]
+      ],
+      "airports_source": "manual"
     },
     {
       "id": "malaga",
@@ -11657,7 +11985,10 @@
       "wikidata_id": "Q8851",
       "wikipedia_title": "Malaga",
       "wikipedia_title_en": "Málaga",
-      "airports": [],
+      "airports": [
+        "AGP",
+        "GRX"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -11766,7 +12097,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "malta",
@@ -11781,7 +12113,9 @@
       "wikidata_id": "Q193896",
       "wikipedia_title": "Malta (isola)",
       "wikipedia_title_en": "Malta (island)",
-      "airports": [],
+      "airports": [
+        "MLA"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -11890,7 +12224,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "mantova",
@@ -11905,7 +12240,11 @@
       "wikidata_id": "Q6247",
       "wikipedia_title": "Mantova",
       "wikipedia_title_en": "Mantua",
-      "airports": [],
+      "airports": [
+        "VRN",
+        "BLQ",
+        "VBS"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -12014,7 +12353,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "marsiglia",
@@ -12029,7 +12369,11 @@
       "wikidata_id": "Q23482",
       "wikipedia_title": "Marsiglia",
       "wikipedia_title_en": "Marseille",
-      "airports": [],
+      "airports": [
+        "MRS",
+        "TLN",
+        "AVN"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -12138,7 +12482,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "matera",
@@ -12153,7 +12498,9 @@
       "wikidata_id": "Q13616",
       "wikipedia_title": "Matera",
       "wikipedia_title_en": "Matera",
-      "airports": [],
+      "airports": [
+        "BRI"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -12262,7 +12609,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "milano",
@@ -12277,7 +12625,11 @@
       "wikidata_id": "Q490",
       "wikipedia_title": "Milano",
       "wikipedia_title_en": "Milan",
-      "airports": [],
+      "airports": [
+        "LIN",
+        "MXP",
+        "BGY"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -12386,7 +12738,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "minorca",
@@ -12401,7 +12754,9 @@
       "wikidata_id": "Q52636",
       "wikipedia_title": "Minorca",
       "wikipedia_title_en": "Menorca",
-      "airports": [],
+      "airports": [
+        "MAH"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -12510,7 +12865,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "monaco-di-baviera",
@@ -12525,7 +12881,9 @@
       "wikidata_id": "Q1726",
       "wikipedia_title": "Monaco di Baviera",
       "wikipedia_title_en": "Munich",
-      "airports": [],
+      "airports": [
+        "MUC"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -12634,7 +12992,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "mont-saint-michel",
@@ -12649,7 +13008,11 @@
       "wikidata_id": "Q20883",
       "wikipedia_title": "Mont Saint-Michel",
       "wikipedia_title_en": null,
-      "airports": [],
+      "airports": [
+        "DNR",
+        "RNS",
+        "JER"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -12758,7 +13121,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "mostar",
@@ -12773,7 +13137,10 @@
       "wikidata_id": "Q93347",
       "wikipedia_title": "Mostar",
       "wikipedia_title_en": "Mostar",
-      "airports": [],
+      "airports": [
+        "OMO",
+        "SJJ"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -12882,7 +13249,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "mykonos",
@@ -12897,7 +13265,10 @@
       "wikidata_id": "Q190210",
       "wikipedia_title": "Mykonos",
       "wikipedia_title_en": "Mykonos",
-      "airports": [],
+      "airports": [
+        "JTR",
+        "JMK"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -13006,7 +13377,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "napoli",
@@ -13021,7 +13393,10 @@
       "wikidata_id": "Q2634",
       "wikipedia_title": "Napoli",
       "wikipedia_title_en": "Naples",
-      "airports": [],
+      "airports": [
+        "NAP",
+        "QSR"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -13130,7 +13505,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "nasso",
@@ -13145,7 +13521,10 @@
       "wikidata_id": "Q188527",
       "wikipedia_title": "Nasso (isola)",
       "wikipedia_title_en": "Naxos",
-      "airports": [],
+      "airports": [
+        "JTR",
+        "JMK"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -13254,7 +13633,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "nizza",
@@ -13269,7 +13649,9 @@
       "wikidata_id": "Q33959",
       "wikipedia_title": "Nizza",
       "wikipedia_title_en": "Nice",
-      "airports": [],
+      "airports": [
+        "NCE"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -13378,7 +13760,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "comune-di-ocrida",
@@ -13393,7 +13776,9 @@
       "wikidata_id": "Q1125333",
       "wikipedia_title": "Ocrida",
       "wikipedia_title_en": "Ohrid Municipality",
-      "airports": [],
+      "airports": [
+        "OHD"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -13502,7 +13887,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "oslo",
@@ -13517,7 +13903,9 @@
       "wikidata_id": "Q585",
       "wikipedia_title": "Oslo",
       "wikipedia_title_en": "Oslo",
-      "airports": [],
+      "airports": [
+        "OSL"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -13626,7 +14014,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "palermo",
@@ -13641,7 +14030,10 @@
       "wikidata_id": "Q2656",
       "wikipedia_title": "Palermo",
       "wikipedia_title_en": "Palermo",
-      "airports": [],
+      "airports": [
+        "PMO",
+        "TPS"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -13750,7 +14142,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "parigi",
@@ -13918,7 +14311,8 @@
         "gotico",
         "romantico",
         "gastronomico"
-      ]
+      ],
+      "airports_source": "manual"
     },
     {
       "id": "paro",
@@ -13933,7 +14327,10 @@
       "wikidata_id": "Q201272",
       "wikipedia_title": "Paro (Grecia)",
       "wikipedia_title_en": "Paros",
-      "airports": [],
+      "airports": [
+        "JTR",
+        "JMK"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -14042,7 +14439,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "peloponneso",
@@ -14057,7 +14455,11 @@
       "wikidata_id": "Q78967",
       "wikipedia_title": "Peloponneso",
       "wikipedia_title_en": "Peloponnese",
-      "airports": [],
+      "airports": [
+        "KLX",
+        "GPA",
+        "ZTH"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -14166,7 +14568,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "perugia",
@@ -14181,7 +14584,9 @@
       "wikidata_id": "Q3437",
       "wikipedia_title": "Perugia",
       "wikipedia_title_en": "Perugia",
-      "airports": [],
+      "airports": [
+        "PEG"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -14290,7 +14695,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "plovdiv",
@@ -14305,7 +14711,9 @@
       "wikidata_id": "Q459",
       "wikipedia_title": "Plovdiv",
       "wikipedia_title_en": "Plovdiv",
-      "airports": [],
+      "airports": [
+        "PDV"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -14414,7 +14822,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "porto",
@@ -14429,7 +14838,11 @@
       "wikidata_id": "Q36433",
       "wikipedia_title": "Porto (Portogallo)",
       "wikipedia_title_en": "Porto",
-      "airports": [],
+      "airports": [
+        "OPO",
+        "VRL",
+        "VSE"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -14538,7 +14951,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "praga",
@@ -14698,7 +15112,8 @@
       "themes": [
         "gotico",
         "medievale"
-      ]
+      ],
+      "airports_source": "manual"
     },
     {
       "id": "procida",
@@ -14713,7 +15128,10 @@
       "wikidata_id": "Q72432",
       "wikipedia_title": "Procida",
       "wikipedia_title_en": "Procida",
-      "airports": [],
+      "airports": [
+        "NAP",
+        "QSR"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -14822,7 +15240,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "provenza",
@@ -14837,7 +15256,11 @@
       "wikidata_id": "Q101081",
       "wikipedia_title": "Provenza",
       "wikipedia_title_en": "Provence",
-      "airports": [],
+      "airports": [
+        "MRS",
+        "NCE",
+        "AVN"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -14946,7 +15369,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "ravenna",
@@ -14961,7 +15385,11 @@
       "wikidata_id": "Q13364",
       "wikipedia_title": "Ravenna",
       "wikipedia_title_en": "Ravenna",
-      "airports": [],
+      "airports": [
+        "RMI",
+        "BLQ",
+        "FRL"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -15070,7 +15498,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "reykjavik",
@@ -15085,7 +15514,10 @@
       "wikidata_id": "Q1764",
       "wikipedia_title": "Reykjavík",
       "wikipedia_title_en": "Reykjavík",
-      "airports": [],
+      "airports": [
+        "KEF",
+        "RKV"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -15194,7 +15626,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "riga",
@@ -15209,7 +15642,9 @@
       "wikidata_id": "Q1773",
       "wikipedia_title": "Riga",
       "wikipedia_title_en": "Riga",
-      "airports": [],
+      "airports": [
+        "RIX"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -15318,7 +15753,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "rodi",
@@ -15333,7 +15769,11 @@
       "wikidata_id": "Q43048",
       "wikipedia_title": "Rodi",
       "wikipedia_title_en": "Rhodes",
-      "airports": [],
+      "airports": [
+        "RHO",
+        "DLM",
+        "KGS"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -15442,7 +15882,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "roma",
@@ -15609,7 +16050,8 @@
       "themes": [
         "archeologico",
         "romantico"
-      ]
+      ],
+      "airports_source": "manual"
     },
     {
       "id": "salento",
@@ -15624,7 +16066,10 @@
       "wikidata_id": "Q735628",
       "wikipedia_title": "Salento",
       "wikipedia_title_en": "Salento",
-      "airports": [],
+      "airports": [
+        "BDS",
+        "BRI"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -15733,7 +16178,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "salisburgo",
@@ -15748,7 +16194,9 @@
       "wikidata_id": "Q34713",
       "wikipedia_title": "Salisburgo",
       "wikipedia_title_en": "Salzburg",
-      "airports": [],
+      "airports": [
+        "SZG"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -15857,7 +16305,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "salonicco",
@@ -15872,7 +16321,9 @@
       "wikidata_id": "Q17151",
       "wikipedia_title": "Salonicco",
       "wikipedia_title_en": "Thessaloniki",
-      "airports": [],
+      "airports": [
+        "SKG"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -15981,7 +16432,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "san-sebastian",
@@ -16142,7 +16594,8 @@
       "themes": [
         "gastronomico",
         "balneare"
-      ]
+      ],
+      "airports_source": "manual"
     },
     {
       "id": "santiago-di-compostela",
@@ -16157,7 +16610,11 @@
       "wikidata_id": "Q14314",
       "wikipedia_title": "Santiago di Compostela",
       "wikipedia_title_en": "Santiago de Compostela",
-      "airports": [],
+      "airports": [
+        "SCQ",
+        "LCG",
+        "VGO"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -16266,7 +16723,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "santorini",
@@ -16426,7 +16884,8 @@
       "themes": [
         "vulcanico",
         "romantico"
-      ]
+      ],
+      "airports_source": "manual"
     },
     {
       "id": "sarajevo",
@@ -16441,7 +16900,11 @@
       "wikidata_id": "Q11194",
       "wikipedia_title": "Sarajevo",
       "wikipedia_title_en": "Sarajevo",
-      "airports": [],
+      "airports": [
+        "SJJ",
+        "TZL",
+        "OMO"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -16550,7 +17013,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "sardegna",
@@ -16565,7 +17029,11 @@
       "wikidata_id": "Q1462",
       "wikipedia_title": "Sardegna",
       "wikipedia_title_en": "Sardinia",
-      "airports": [],
+      "airports": [
+        "CAG",
+        "OLB",
+        "AHO"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -16674,7 +17142,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "sicilia",
@@ -16689,7 +17158,11 @@
       "wikidata_id": "Q1460",
       "wikipedia_title": "Sicilia",
       "wikipedia_title_en": "Sicily",
-      "airports": [],
+      "airports": [
+        "CTA",
+        "PMO",
+        "CIY"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -16798,7 +17271,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "siena",
@@ -16813,7 +17287,9 @@
       "wikidata_id": "Q2751",
       "wikipedia_title": "Siena",
       "wikipedia_title_en": "Siena",
-      "airports": [],
+      "airports": [
+        "FLR"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -16922,7 +17398,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "sintra",
@@ -16937,7 +17414,10 @@
       "wikidata_id": "Q190187",
       "wikipedia_title": "Sintra",
       "wikipedia_title_en": "Sintra",
-      "airports": [],
+      "airports": [
+        "LIS",
+        "CAT"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -17046,7 +17526,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "siviglia",
@@ -17061,7 +17542,10 @@
       "wikidata_id": "Q8717",
       "wikipedia_title": "Siviglia",
       "wikipedia_title_en": "Seville",
-      "airports": [],
+      "airports": [
+        "SVQ",
+        "XRY"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -17170,7 +17654,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "sofia",
@@ -17185,7 +17670,9 @@
       "wikidata_id": "Q472",
       "wikipedia_title": "Sofia",
       "wikipedia_title_en": "Sofia",
-      "airports": [],
+      "airports": [
+        "SOF"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -17294,7 +17781,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "spalato",
@@ -17309,7 +17797,10 @@
       "wikidata_id": "Q1663",
       "wikipedia_title": "Spalato",
       "wikipedia_title_en": "Split, Croatia",
-      "airports": [],
+      "airports": [
+        "SPU",
+        "BWK"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -17418,7 +17909,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "stoccolma",
@@ -17433,7 +17925,10 @@
       "wikidata_id": "Q1754",
       "wikipedia_title": "Stoccolma",
       "wikipedia_title_en": "Stockholm",
-      "airports": [],
+      "airports": [
+        "ARN",
+        "BMA"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -17542,7 +18037,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "strasburgo",
@@ -17557,7 +18053,10 @@
       "wikidata_id": "Q6602",
       "wikipedia_title": "Strasburgo",
       "wikipedia_title_en": "Strasbourg",
-      "airports": [],
+      "airports": [
+        "SXB",
+        "FKB"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -17666,7 +18165,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "tallinn",
@@ -17826,7 +18326,8 @@
       "themes": [
         "medievale",
         "nordico"
-      ]
+      ],
+      "airports_source": "manual"
     },
     {
       "id": "tenerife",
@@ -17841,7 +18342,11 @@
       "wikidata_id": "Q40846",
       "wikipedia_title": "Tenerife",
       "wikipedia_title_en": "Tenerife",
-      "airports": [],
+      "airports": [
+        "TFS",
+        "TFN",
+        "SPC"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -17950,7 +18455,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "toledo",
@@ -17965,7 +18471,9 @@
       "wikidata_id": "Q5836",
       "wikipedia_title": "Toledo",
       "wikipedia_title_en": "Toledo, Spain",
-      "airports": [],
+      "airports": [
+        "MAD"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -18074,7 +18582,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "torino",
@@ -18089,7 +18598,10 @@
       "wikidata_id": "Q495",
       "wikipedia_title": "Torino",
       "wikipedia_title_en": "Turin",
-      "airports": [],
+      "airports": [
+        "TRN",
+        "CUF"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -18198,7 +18710,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "transilvania",
@@ -18366,7 +18879,8 @@
       "themes": [
         "gotico",
         "medievale"
-      ]
+      ],
+      "airports_source": "manual"
     },
     {
       "id": "trieste",
@@ -18381,7 +18895,11 @@
       "wikidata_id": "Q546",
       "wikipedia_title": "Trieste",
       "wikipedia_title_en": "Trieste",
-      "airports": [],
+      "airports": [
+        "TRS",
+        "RJK",
+        "LJU"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -18490,7 +19008,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "troms",
@@ -18505,7 +19024,11 @@
       "wikidata_id": "Q26087",
       "wikipedia_title": "Tromsø",
       "wikipedia_title_en": "Tromsø Municipality",
-      "airports": [],
+      "airports": [
+        "TOS",
+        "BDU",
+        "SOJ"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -18614,7 +19137,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "urbino",
@@ -18629,7 +19153,11 @@
       "wikidata_id": "Q2759",
       "wikipedia_title": "Urbino",
       "wikipedia_title_en": "Urbino",
-      "airports": [],
+      "airports": [
+        "RMI",
+        "PEG",
+        "AOI"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -18738,7 +19266,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "val-d-orcia",
@@ -18753,7 +19282,11 @@
       "wikidata_id": "Q217449",
       "wikipedia_title": "Val d'Orcia",
       "wikipedia_title_en": "Val d'Orcia",
-      "airports": [],
+      "airports": [
+        "PEG",
+        "FLR",
+        "PSA"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -18862,7 +19395,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "val-gardena",
@@ -18877,7 +19411,11 @@
       "wikidata_id": "Q384885",
       "wikipedia_title": "Val Gardena",
       "wikipedia_title_en": "Val Gardena",
-      "airports": [],
+      "airports": [
+        "INN",
+        "TSF",
+        "VCE"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -18986,7 +19524,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "valencia",
@@ -19001,7 +19540,9 @@
       "wikidata_id": "Q8818",
       "wikipedia_title": "Valencia",
       "wikipedia_title_en": "Valencia",
-      "airports": [],
+      "airports": [
+        "VLC"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -19110,7 +19651,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "valle-d-aosta",
@@ -19125,7 +19667,11 @@
       "wikidata_id": "Q1222",
       "wikipedia_title": "Valle d'Aosta",
       "wikipedia_title_en": "Aosta Valley",
-      "airports": [],
+      "airports": [
+        "TRN",
+        "MXP",
+        "GVA"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -19234,7 +19780,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "varsavia",
@@ -19249,7 +19796,10 @@
       "wikidata_id": "Q270",
       "wikipedia_title": "Varsavia",
       "wikipedia_title_en": "Warsaw",
-      "airports": [],
+      "airports": [
+        "WAW",
+        "WMI"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -19358,7 +19908,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "venezia",
@@ -19373,7 +19924,10 @@
       "wikidata_id": "Q641",
       "wikipedia_title": "Venezia",
       "wikipedia_title_en": "Venice",
-      "airports": [],
+      "airports": [
+        "VCE",
+        "TSF"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -19482,7 +20036,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "verona",
@@ -19497,7 +20052,10 @@
       "wikidata_id": "Q2028",
       "wikipedia_title": "Verona",
       "wikipedia_title_en": "Verona",
-      "airports": [],
+      "airports": [
+        "VRN",
+        "VBS"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -19606,7 +20164,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "vienna",
@@ -19766,7 +20325,8 @@
       "themes": [
         "imperiale",
         "gotico"
-      ]
+      ],
+      "airports_source": "manual"
     },
     {
       "id": "vilnius",
@@ -19781,7 +20341,10 @@
       "wikidata_id": "Q216",
       "wikipedia_title": "Vilnius",
       "wikipedia_title_en": "Vilnius",
-      "airports": [],
+      "airports": [
+        "VNO",
+        "KUN"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -19890,7 +20453,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "zagabria",
@@ -19905,7 +20469,10 @@
       "wikidata_id": "Q1435",
       "wikipedia_title": "Zagabria",
       "wikipedia_title_en": "Zagreb",
-      "airports": [],
+      "airports": [
+        "ZAG",
+        "MBX"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -20014,7 +20581,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "zante",
@@ -20029,7 +20597,11 @@
       "wikidata_id": "Q144880",
       "wikipedia_title": "Zante",
       "wikipedia_title_en": "Zakynthos",
-      "airports": [],
+      "airports": [
+        "ZTH",
+        "EFL",
+        "GPA"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -20138,7 +20710,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "zara",
@@ -20153,7 +20726,9 @@
       "wikidata_id": "Q3370",
       "wikipedia_title": "Zara",
       "wikipedia_title_en": "Zadar",
-      "airports": [],
+      "airports": [
+        "ZAD"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -20262,7 +20837,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     },
     {
       "id": "zermatt",
@@ -20277,7 +20853,9 @@
       "wikidata_id": "Q27494",
       "wikipedia_title": "Zermatt",
       "wikipedia_title_en": "Zermatt",
-      "airports": [],
+      "airports": [
+        "GVA"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -20386,7 +20964,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "manual"
     },
     {
       "id": "zurigo",
@@ -20401,7 +20980,11 @@
       "wikidata_id": "Q72",
       "wikipedia_title": "Zurigo",
       "wikipedia_title_en": "Zurich",
-      "airports": [],
+      "airports": [
+        "ZRH",
+        "FDH",
+        "BSL"
+      ],
       "scores_source": "assistant",
       "climate_source": "open-meteo",
       "pois": [],
@@ -20510,7 +21093,8 @@
         },
         "currency": "EUR"
       },
-      "costs_source": "assistant"
+      "costs_source": "assistant",
+      "airports_source": "derived"
     }
   ]
 }

@@ -207,7 +207,13 @@ Note sullo schema:
 
 - `scores` sono **0-100**, sempre. Nessun punteggio grezzo (conteggi, densità) nel file finale
 - `scores_source` traccia se il punteggio è manuale o derivato: serve per non sovrascrivere
-  override umani durante i re-import
+  override umani durante i re-import. Stessa funzione per `climate_source`, `costs_source` e
+  `airports_source`
+- `airports` è stato ricavato per 134 destinazioni il 2026-08-05 da OurAirports
+  (`scripts/resolve-airports.mjs`), con la regola scelta misurandola contro le 23 curate a
+  mano: raggio della destinazione più 60 km, primi tre, grande prima di medio. Ne ritrova il
+  91%. Zermatt è l'unica scelta a mano — nel suo raggio non c'era nulla, e in linea d'aria
+  Milano batte Ginevra ma ha le Alpi in mezzo
 - `climate` è indicizzato per mese (`"1"`–`"12"`)
 - I costi sono **per persona, per notte/giorno**, fascia media
 
@@ -285,6 +291,7 @@ Tutte gratuite. **Nessuna API commerciale a pagamento in nessuna fase.**
 | Descrizioni testuali | Wikivoyage | API MediaWiki, licenza CC |
 | Clima mensile e temperatura mare | Open-Meteo | API gratuita, storico incluso |
 | Anagrafica geografica | GeoNames | Dump scaricabile |
+| Aeroporti (IATA, tipo, voli di linea) | OurAirports | CSV di dominio pubblico, `davidmegginson.github.io/ourairports-data/airports.csv` |
 | Costo della vita | Numbeo / Eurostat | Qualità variabile — vedi sotto |
 | Fasce prezzo voli | Travelpayouts Data API | Account affiliato gratuito |
 
