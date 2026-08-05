@@ -64,6 +64,12 @@ di adesso, e soddisfa il requisito dei tre punteggi insieme con margine largo.
 Le **due caselle del clima** — temperatura dell'aria e del mare
 (`DestinationCard.jsx:74-87`). Sono l'unica cosa che si toglie.
 
+Si toglie **dalla vista mobile, con il CSS**, non dal markup: sopra i 901px le
+caselle restano quelle di oggi. `display: none` le leva anche dall'albero di
+accessibilità, quindi non è una sparizione solo visiva. La conseguenza pratica
+è che le prove non possono affermare «il markup non contiene il clima» — la
+verifica di questo punto è a occhio, e sta nel §5.
+
 > **Il costo, dichiarato.** Il mare è un filtro duro del §5 del planning: una
 > destinazione di mare entra in classifica *perché* a quel mese l'acqua è
 > abbastanza calda. Tolta la casella, il motivo per cui ci è entrata non si
@@ -168,12 +174,30 @@ nessuna.
 
 | file | cosa |
 |---|---|
-| `DestinationCard.jsx` | struttura riscritta; niente `card__media` a fascia, niente `card__climate`; nuove props `aperta` / `onApri` |
+| `DestinationCard.jsx` | **aggiunte**, non riscrittura: le props `aperta` / `onApri`, la classe `card--aperta`, il gestore sul contenitore |
 | `App.jsx` (`:546`, dove monta la lista) | tiene l'id della card aperta e lo azzera quando cambiano criteri o ordinamento |
-| `app.css` | un blocco nuovo dentro `@media (max-width: 900px)`; sopra i 901px non si tocca niente |
+| `app.css` | un blocco nuovo dentro `@media (max-width: 900px)`; sopra i 901px non si tocca **nessuna** regola |
 
 Dentro quel media query oggi c'è una regola sola (`app.css:1393`): non c'è
 nessuna sovrascrittura da smontare prima.
+
+### Perché il markup non si riscrive
+
+Riscrivere la struttura obbligherebbe a rifare anche il CSS desktop che la
+impagina, e il desktop non ha nessuna prova che lo protegga: si romperebbe a
+occhio, o non si romperebbe per fortuna. Non è un rischio che questo lavoro
+debba correre.
+
+Non serve. Gli elementi che devono cambiare posto — `card__rank`,
+`card__scorepill`, `card__fav`, `card__type` — sono **già in posizionamento
+assoluto** dentro una `.card` che è già `position: relative` (`app.css:492`).
+Su mobile si ri-ancorano dove li vuole il §2 con il solo CSS. Il resto è
+mettere `.card` in riga, ridurre `.card__media` a 80×80, nascondere il clima, e
+portare in colonna destra la barra dei contributi.
+
+Con la card a **altezza fissa** il posizionamento assoluto è la scelta giusta e
+non un espediente: le posizioni sono note in anticipo perché l'altezza non
+dipende dal contenuto.
 
 ### Token, non valori
 
@@ -199,15 +223,26 @@ I test montano con `renderToStaticMarkup` e **non c'è jsdom, e non va
 aggiunto** — è la stessa regola del lavoro del 2026-08-03. Si prova quindi
 quale markup esce, non cosa succede al tocco:
 
-- la card chiusa contiene nome, `paese · tipo`, fascia, nota, punteggio, barra
-- la card chiusa **non** contiene le caselle del clima né i due bottoni
-- la card aperta contiene la riga dell'asse guida e i due bottoni
+- la card senza `aperta` **non** ha la classe `card--aperta`; con `aperta` ce l'ha
+- la card continua a contenere nome, fascia, nota, punteggio e barra in tutti e
+  due gli stati — la differenza fra chiusa e aperta è di CSS, non di markup
 - il badge del rango c'è con `sortBy === 'score'` e non c'è con `cost_asc`
-- il `+N tema` compare sulla riga del paese quando `themeBonus > 0`
+- il `+N tema` è nel markup quando `themeBonus > 0` e assente quando è 0
+- `App` passa a ogni card un `aperta` coerente: vero per una sola, falso per le
+  altre
 
-L'apertura al tocco, la chiusura dell'altra card e il cuore che non propaga
-vanno nella lista di verifica a mano, insieme ai punti ancora da spuntare di
-`docs/superpowers/plans/2026-08-03-verifica-a-schermo.md`.
+Quello che le prove **non** possono coprire, e che va guardato a occhio a
+390×844 — perché è tutto CSS, e `renderToStaticMarkup` non applica il CSS:
+
+- le cinque card intere con la sesta quasi tutta
+- il clima sparito su mobile e ancora presente sopra i 901px
+- rango, punteggio, cuore e barra atterrati dove li vuole il §2
+- il `+N tema` in coda alla riga del paese, non altrove
+- l'apertura al tocco, la chiusura dell'altra card, il cuore che non propaga
+- **il desktop identico a prima**, che è il rischio principale di questo lavoro
+
+Vanno in coda a `docs/superpowers/plans/2026-08-03-verifica-a-schermo.md`,
+insieme ai punti di quel piano ancora da spuntare.
 
 ---
 
