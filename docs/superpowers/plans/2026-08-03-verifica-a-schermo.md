@@ -145,29 +145,30 @@ Quelli **senza** esito non sono mai stati eseguiti da nessuno.
       punteggio, 0 con costo)*
 - [x] **27.** «Santiago di Compostela» **tronca coi puntini e non passa sotto
       il punteggio**. *(misurato: nome fino a 297px, punteggio da 305px)*
-- [x] **28.** Tocca una card: compaiono l'asse guida e i due bottoni, e la card
-      sale a ~200px. *(misurato: 204px, azioni `flex`, didascalia `block`)*
-- [x] **29.** Tocca una seconda card: **la prima si chiude**. Mai due aperte.
-      *(verificato: sempre una sola `.card--aperta`)*
-- [x] **30.** Tocca il cuore: il preferito cambia e **la card non si apre**.
-      *(verificato: `aria-pressed` passa a true, l'aperta resta l'altra)*
-- [x] **31.** Con una card aperta, cambia l'ordinamento: **si richiude**.
-      *(verificato: da 1 aperta a 0)*
+> **I punti 28-31 non ci sono più.** Riguardavano la fisarmonica — la card che
+> al tocco mostrava l'asse guida e i due bottoni — rimossa lo stesso giorno con
+> `2026-08-05-confronto-dal-dettaglio-design.md`: il tocco sulla card apre il
+> dettaglio, e il confronto si compone da lì. I controlli che li sostituiscono
+> sono nella sezione seguente. La numerazione non è stata compattata: i numeri
+> vecchi restano vuoti apposta, così un appunto scritto su carta continua a
+> puntare alla cosa giusta.
+
 - [x] **32.** **Sopra i 901px la card è identica a prima**: foto a fascia alta
-      192px, chip ISOLA/AREA/CITTÀ, clima, asse guida, due bottoni sempre
-      visibili, e il bottone di apertura assente. *(misurato: card 468px,
-      `.card__apri` `display: none`, clima e azioni presenti)*
+      192px, chip ISOLA/AREA/CITTÀ, clima, due bottoni sempre visibili, e il
+      bottone di apertura assente. *(misurato il 2026-08-05 dopo la rimozione
+      della fisarmonica: card 468px, `.card__media` 192px, `.card__climate` e
+      `.card__actions` presenti, `.card__apri` `display: none`,
+      `.card__meta` `display: none`)*
 
 Questi invece **restano da fare a mano**, perché nessuno strumento qui li
 raggiunge:
 
-- [ ] **33.** Su un **dispositivo touch vero**: il bottone che apre la card
-      risponde al dito su tutta la sua superficie, e non ruba il tocco al
-      cuore né ai due bottoni quando la card è aperta.
-- [ ] **34.** Con la **tastiera**: il Tab arriva sul bottone di apertura, Invio
-      lo apre, e il Tab successivo entra su «Dettaglio» — non lo scavalca.
-- [ ] **35.** Con un **lettore di schermo**: aprendo la card, l'`aria-expanded`
-      viene annunciato, e le due caselle del clima **non** vengono lette
+- [ ] **33.** Su un **dispositivo touch vero**: il bottone che apre la scheda
+      risponde al dito su tutta la sua superficie, e non ruba il tocco al cuore.
+- [ ] **34.** Con la **tastiera**: il Tab arriva sul bottone che apre la scheda,
+      Invio la apre, e da lì il Tab entra nel selettore del confronto.
+- [ ] **35.** Con un **lettore di schermo**: il bottone si annuncia come «Apri
+      la scheda di …», e le due caselle del clima **non** vengono lette
       (`display: none` le toglie dall'albero, ma va sentito).
 - [ ] **36.** Una destinazione con **bonus tematico** in classifica mostra
       `+N tema` in ambra accanto al tipo. La prova automatica copre il markup;
@@ -177,6 +178,46 @@ raggiunge:
       assoluto della colonna destra regge anche in fondo alla lista.
 
 ---
+
+## Il confronto si compone dal dettaglio
+
+Aggiunta il 2026-08-05, insieme alla rimozione della fisarmonica. Vale a
+**tutte le larghezze**: il selettore esiste anche sopra i 901px.
+
+- [x] **38.** Il tocco sulla card apre il dettaglio, **a un tocco**.
+      *(verificato a 390×844: `.card__apri` porta «Apri la scheda di …» e apre
+      il pannello)*
+- [x] **39.** La card compatta **non ha più bottoni in fondo**, ed è ancora
+      alta 110px. *(misurato: `.card__actions` `display: none`, card 110px)*
+- [x] **40.** Nel dettaglio c'è «Confronta», col chip della destinazione
+      aperta **senza ×**. *(verificato: un chip solo, nessun `.chip__x`)*
+- [x] **41.** Scrivere filtra la lista; sceglierne una aggiunge il chip con la
+      × e **svuota il campo**. *(verificato: «creta» → un suggerimento →
+      due chip, campo vuoto)*
+- [x] **42.** La × toglie il chip, e il campo ricompare se era sparito.
+      *(verificato: da tre chip a due, campo di nuovo presente)*
+- [x] **43.** Al quarto, il campo lascia il posto a «Il confronto è pieno: 4
+      destinazioni. Togline una per cambiarla.» *(verificato: `#cpick-q`
+      assente)*
+- [x] **44.** «Apri il confronto» è **spento** con la sola destinazione aperta,
+      acceso da due in su, e porta al pannello chiudendo il dettaglio.
+      *(verificato: `disabled` true→false; il pannello mostra le tre colonne
+      giuste)*
+- [x] **45.** **Sopra i 901px** il selettore c'è, e il vecchio bottone
+      «Aggiungi al confronto» **non** c'è più da nessuna parte.
+      *(verificato a 2133px)*
+
+Da fare a mano:
+
+- [ ] **46.** Con la **tastiera**: dal campo, il Tab scende sui suggerimenti,
+      Invio ne sceglie uno, e il fuoco non si perde quando la lista si
+      accorcia sotto le dita.
+- [ ] **47.** Con un **lettore di schermo**: il campo si annuncia con la sua
+      etichetta nascosta, e i suggerimenti come bottoni. **Non deve** essere
+      annunciato come combobox: se lo fosse, qualcuno ha aggiunto un `role`
+      che la spec vieta.
+- [ ] **48.** Con **molti chip** (quattro nomi lunghi): i chip vanno a capo e
+      non sfondano il pannello.
 
 ## Se qualcosa non torna
 
