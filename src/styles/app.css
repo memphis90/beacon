@@ -1396,6 +1396,72 @@ input[type='range']:disabled { opacity: 0.45; }
      scendono a 30px, sotto il minimo comodo da toccare. */
   .segctl button { min-height: 44px; }
   .card__fav { width: 44px; height: 44px; }
+
+  /* ---- La card della classifica: 110px, tre colonne ---- */
+  /* Il §1 della spec del 5 agosto: qui dentro c'era una regola sola — quella
+     del cuore, sopra — e la card mobile era la card desktop da ~450px, cioè
+     una e mezza a schermo. L'altezza è FISSA, ed è ciò che rende lecito il
+     posizionamento assoluto più sotto: le posizioni sono note in anticipo
+     perché non dipendono dal contenuto. */
+  .grid { gap: 8px; }
+
+  .card {
+    flex-direction: row;
+    align-items: flex-start;
+    height: 110px;
+    padding: 12px;
+    gap: 12px;
+  }
+
+  /* Aperta cresce: l'altezza fissa vale solo da chiusa. */
+  .card--aperta { height: auto; }
+
+  /* Su un dispositivo touch non c'è passaggio del mouse, e con cinque card
+     affiancate il sollevamento di un pixel diventa rumore quando il dito
+     sfiora. */
+  .card:hover { transform: none; }
+
+  .card__apri {
+    display: block;
+    position: absolute; inset: 0;
+    z-index: 1;
+    padding: 0; border: 0; background: none;
+    border-radius: var(--radius);
+  }
+
+  .card__media {
+    width: 80px; height: 80px;
+    flex: none;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+
+  .card__body {
+    padding: 0;
+    gap: 2px;
+    padding-right: 64px;   /* la colonna del punteggio */
+    min-width: 0;
+  }
+
+  /* Il clima esce dalla card ed è l'unica perdita di questo lavoro. È
+     dichiarata nella spec: il mare è un filtro duro del §5 del planning,
+     quindi il motivo per cui una meta di mare è in classifica resta solo nel
+     dettaglio. `display: none` la toglie anche dall'albero di accessibilità,
+     quindi non è una sparizione soltanto visiva.
+     Sopra i 901px le due caselle restano quelle di sempre. */
+  .card__climate { display: none; }
+
+  /* Il tipo non sparisce: si accorpa alla riga del paese. Il chip sovrapposto
+     all'immagine non ha più senso su una miniatura di 80px. */
+  .card__type { display: none; }
+
+  /* La fascia con i bordi sopra e sotto era la riga prezzo + clima: senza il
+     clima non è più una fascia, è solo il prezzo. */
+  .card__head { padding: 0; border: 0; }
+  .card__tilelabel { display: none; }
+  .card__ident h3 { font-size: 18px; line-height: 22px; margin: 0; }
+  .card__price { font-size: 16px; line-height: 20px; }
+  .card__pricenote { font-size: 10px; line-height: 13px; }
   /* Il pomello dello slider è già 24px: coincide con un target trascinabile
      comodo, non serve gonfiare l'hit-box invisibile con min-height. */
 
