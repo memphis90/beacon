@@ -1429,7 +1429,14 @@ input[type='range']:disabled { opacity: 0.45; }
     border-radius: var(--radius);
   }
 
+  /* `position: static` è la riga che fa funzionare tutto il resto. La
+     miniatura è `relative` nel CSS base (:505), quindi è lei il contenitore di
+     rango, punteggio, tipo e cuore: lasciandola così, quei quattro restano
+     inchiodati a un quadrato di 80px e il punteggio finisce tagliato sotto la
+     foto. Resa statica, il contenitore torna a essere `.card`, che è
+     `relative` dalla riga 493. */
   .card__media {
+    position: static;
     width: 80px; height: 80px;
     flex: none;
     border-radius: var(--radius-sm);
@@ -1462,6 +1469,98 @@ input[type='range']:disabled { opacity: 0.45; }
   .card__ident h3 { font-size: 18px; line-height: 22px; margin: 0; }
   .card__price { font-size: 16px; line-height: 20px; }
   .card__pricenote { font-size: 10px; line-height: 13px; }
+
+  /* Con un nome lungo — Santiago de Compostela — il nome deve troncare, mai
+     passare sotto il punteggio. Il padding-right del corpo, sopra, è l'altra
+     metà della difesa. */
+  .card__ident h3 {
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+
+  /* ---- La colonna destra: cuore, punteggio, barra ---- */
+  /* Nessuno di questi elementi cambia posto nel markup. Erano sovrapposti
+     all'immagine perché l'immagine era una fascia alta 192px; ora l'immagine è
+     un quadrato di 80px e loro si ri-ancorano alla card, che è già relative.
+     È il motivo per cui questo lavoro non riscrive il JSX e quindi non può
+     rompere il desktop. */
+
+  .card__fav {
+    top: 4px; right: 4px;
+    bottom: auto; left: auto;
+    z-index: 2;
+  }
+
+  /* Le coordinate sono quelle della card, non più quelle della foto: la foto
+     occupa il quadrato 12..92 su tutti e due gli assi, e il rango va nel suo
+     angolo. */
+  .card__rank {
+    top: 16px; left: 16px;
+    bottom: auto; right: auto;
+  }
+
+  /* `font-size: 0` spegne la parola "Punteggio" senza toglierla dal markup: in
+     56px di larghezza non ci sta, e sotto c'è il numero che la rende comunque
+     leggibile. Il <b> si riprende la sua dimensione. */
+  /* `font-size: 0` spegne la parola "Punteggio" senza toglierla dal markup: in
+     56px di larghezza non ci sta, e sotto c'è il numero che la rende comunque
+     leggibile. Serve anche `line-height: 0`, altrimenti il nodo di testo vuoto
+     lascia la sua riga e la pillola cresce fino a 51px, andando a sovrapporsi
+     alla barra. L'altezza è fissata perché sotto ci va la barra a coordinata
+     nota. */
+  .card__scorepill {
+    top: 46px; right: 12px;
+    bottom: auto; left: auto;
+    width: 56px; height: 32px;
+    padding: 0; gap: 0;
+    background: none; box-shadow: none; border: 0;
+    display: flex; flex-direction: column; align-items: flex-end;
+    font-size: 0; line-height: 0;
+  }
+  .card__scorepill b {
+    font-size: 28px; line-height: 30px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .card__interests {
+    position: absolute;
+    top: 82px; right: 12px;
+    width: 56px;
+    gap: 0;
+  }
+  .card__interestlabel { display: none; }
+
+  /* ---- Lo stato aperto ---- */
+  /* Da chiusa la card mostra solo ciò che serve a scartare: identità, prezzo,
+     punteggio. Le azioni e il perché del punteggio arrivano al tocco. Il costo
+     è dichiarato nella spec: il dettaglio passa da uno a due tocchi, ed è il
+     prezzo della densità. */
+  .card__actions,
+  .card__interests .segbar__caption {
+    display: none;
+  }
+
+  .card--aperta .card__actions {
+    display: flex;
+    position: absolute;
+    left: 12px; right: 12px; bottom: 12px;
+    z-index: 2;
+  }
+
+  /* L'asse guida è ciò che il §5 del planning usa per capire quale asse ha
+     prodotto il totale: senza, la barra da sola non basta — lo dice il
+     commento in cima a ScoreBreakdown.jsx. Sta qui e non sulla card chiusa
+     perché in 86px non entra, e chi apre una card vuole esattamente questo. */
+  .card--aperta .card__interests {
+    position: static;
+    width: auto;
+    margin-top: 4px;
+  }
+  .card--aperta .card__interests .segbar__caption {
+    display: block;
+    font-size: 11px; line-height: 14px;
+  }
+
+  .card--aperta { padding-bottom: 68px; }
   /* Il pomello dello slider è già 24px: coincide con un target trascinabile
      comodo, non serve gonfiare l'hit-box invisibile con min-height. */
 
