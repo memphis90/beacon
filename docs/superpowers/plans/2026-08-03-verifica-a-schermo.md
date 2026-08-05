@@ -119,6 +119,65 @@ Il vincolo dichiarato è che sopra i 901px non cambi niente. Una regressione qui
 
 ---
 
+## Mobile — la card compatta della classifica
+
+Aggiunta il 2026-08-05. A differenza di tutto il resto di questo file, **una
+parte di questi controlli è già stata eseguita**: il 2026-08-05 l'app è stata
+aperta a 390×844 dentro un iframe servito dal dev server, e le posizioni sono
+state misurate sul DOM vero, non stimate. I punti già verificati portano
+l'esito fra parentesi; restano nella lista perché una regressione futura li
+riguarda comunque.
+
+Quelli **senza** esito non sono mai stati eseguiti da nessuno.
+
+- [x] **21.** La card è alta **110px** da chiusa. *(misurato: 110)*
+- [x] **22.** Si vedono **quattro card intere e la quinta quasi tutta**.
+      *(misurato: 4 intere, 1 parziale; 543px utili, passo 118px)*
+- [x] **23.** **Il clima non c'è**: nessun termometro, nessuna temperatura.
+      *(`.card__climate` risulta `display: none`)*
+- [x] **24.** Foto 80×80 a sinistra, rango sul suo angolo, cuore in alto a
+      destra della card, punteggio grande e barra sotto di lui.
+      *(misurato: foto 13,13 · rango 17,17 · cuore 292,5 · punteggio 272,46 ·
+      barra 272,82)*
+- [x] **25.** La riga del paese porta il tipo: `Italia · isola`. *(verificato)*
+- [x] **26.** Ordina per **Costo**: il badge del rango sparisce da tutte le
+      foto. Torna su **Punteggio**: riappare. *(misurato: 24 badge con
+      punteggio, 0 con costo)*
+- [x] **27.** «Santiago di Compostela» **tronca coi puntini e non passa sotto
+      il punteggio**. *(misurato: nome fino a 297px, punteggio da 305px)*
+- [x] **28.** Tocca una card: compaiono l'asse guida e i due bottoni, e la card
+      sale a ~200px. *(misurato: 204px, azioni `flex`, didascalia `block`)*
+- [x] **29.** Tocca una seconda card: **la prima si chiude**. Mai due aperte.
+      *(verificato: sempre una sola `.card--aperta`)*
+- [x] **30.** Tocca il cuore: il preferito cambia e **la card non si apre**.
+      *(verificato: `aria-pressed` passa a true, l'aperta resta l'altra)*
+- [x] **31.** Con una card aperta, cambia l'ordinamento: **si richiude**.
+      *(verificato: da 1 aperta a 0)*
+- [x] **32.** **Sopra i 901px la card è identica a prima**: foto a fascia alta
+      192px, chip ISOLA/AREA/CITTÀ, clima, asse guida, due bottoni sempre
+      visibili, e il bottone di apertura assente. *(misurato: card 468px,
+      `.card__apri` `display: none`, clima e azioni presenti)*
+
+Questi invece **restano da fare a mano**, perché nessuno strumento qui li
+raggiunge:
+
+- [ ] **33.** Su un **dispositivo touch vero**: il bottone che apre la card
+      risponde al dito su tutta la sua superficie, e non ruba il tocco al
+      cuore né ai due bottoni quando la card è aperta.
+- [ ] **34.** Con la **tastiera**: il Tab arriva sul bottone di apertura, Invio
+      lo apre, e il Tab successivo entra su «Dettaglio» — non lo scavalca.
+- [ ] **35.** Con un **lettore di schermo**: aprendo la card, l'`aria-expanded`
+      viene annunciato, e le due caselle del clima **non** vengono lette
+      (`display: none` le toglie dall'albero, ma va sentito).
+- [ ] **36.** Una destinazione con **bonus tematico** in classifica mostra
+      `+N tema` in ambra accanto al tipo. La prova automatica copre il markup;
+      nessuna delle destinazioni in vista durante la verifica aveva un bonus,
+      quindi **a schermo non è mai stato visto**.
+- [ ] **37.** A **scroll lungo** (novanta risultati): il posizionamento
+      assoluto della colonna destra regge anche in fondo alla lista.
+
+---
+
 ## Se qualcosa non torna
 
 Annota il numero del controllo e cosa hai visto. I punti 4, 6, 7 e 8 sono

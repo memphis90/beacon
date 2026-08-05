@@ -55,9 +55,26 @@ l'asse responsabile. Confrontare 88, 85 e 91 richiede di vederli insieme.
 
 Tutte e tre stanno negli 86px disponibili.
 
-**Quante se ne vedono.** Con `gap` di 8px fra le card, sei card occupano 700px
-contro i ~680 disponibili: **cinque intere e la sesta quasi tutta**. È il triplo
-di adesso, e soddisfa il requisito dei tre punteggi insieme con margine largo.
+**Quante se ne vedono.** Misurato a schermo il 2026-08-05, non stimato:
+**quattro intere e la quinta quasi tutta**.
+
+| misura | valore |
+|---|---|
+| altezza della finestra | 844 |
+| cromatura sopra la prima card | 237 |
+| area utile fino alla dock | 543 |
+| passo di una card (110 + gap 8) | 118 |
+
+> **Correzione al §1.** Il conto iniziale diceva cinque intere, perché stimava
+> la fascia in alto a ~100px. Sono 237: oltre alla barra di ricerca e ai tab
+> c'è `.results__head` — «158 destinazioni su 158 · 5 notti a agosto» più il
+> pulsante «Preferiti» — che il lavoro del 2026-08-03 ha lasciato al suo posto
+> e che quel conto non aveva contato.
+>
+> Il requisito del §9 del planning resta soddisfatto con margine: servivano tre
+> punteggi leggibili insieme, e ce ne stanno quattro. Ma se un giorno se ne
+> volesse una quinta, i 50px da recuperare sono lì, non nella card — ed è fuori
+> dal perimetro di questa spec.
 
 ### Cosa esce dalla card
 
