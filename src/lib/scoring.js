@@ -9,6 +9,7 @@
 import { AXES, AXIS_KEYS } from './axes.js'
 import { THEME_BONUS, THEME_BONUS_MAX } from './themes.js'
 import { countryName } from './format.js'
+import { matchesQuery } from './search.js'
 
 export const FILTER = {
   QUERY: 'query',
@@ -201,7 +202,6 @@ export function applyHardFilters(destinations, criteria) {
     .map((v) => String(v || '').trim().toLowerCase())
     .filter(Boolean)
 
-  const normalisedQuery = query.trim().toLowerCase()
   /**
    * Il filtro mare è governato da una scelta ESPLICITA, non dal peso.
    *
@@ -276,19 +276,11 @@ export function applyHardFilters(destinations, criteria) {
       }
     }
 
-    if (normalisedQuery) {
-      // Il nome del paese per esteso, non solo il codice ISO: cercando
-      // "croazia" ci si aspetta Dubrovnik, non zero risultati perché nel
-      // dato c'è scritto "HR".
-      const haystack = [
-        destination.name,
-        destination.country,
-        countryName(destination.country),
-      ].join(' ').toLowerCase()
-      if (!haystack.includes(normalisedQuery)) {
-        excluded.push({ destination, filter: FILTER.QUERY, detail: `non corrisponde a "${query.trim()}"` })
-        continue
-      }
+    // La regola sta in `search.js` perché il dettaglio ne ha bisogno uguale:
+    // due copie divergerebbero senza che niente lo segnali.
+    if (!matchesQuery(destination, query)) {
+      excluded.push({ destination, filter: FILTER.QUERY, detail: `non corrisponde a "${query.trim()}"` })
+      continue
     }
 
     if (allowedTypes && !allowedTypes.includes(destination.type)) {
